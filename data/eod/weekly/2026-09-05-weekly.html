@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jetro Canvas · Nifty &amp; Beyond Weekly Wrap (31 August – 5 September 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --navy:#0F172A; --navy-hi:#1E293B; --ground:#F8FAFC; --surface:#FFFFFF;
+  --ink:#0F172A; --muted:#475569; --line:#E2E8F0; --line-2:#F1F5F9;
+  --up:#059669; --dn:#DC2626; --warn:#D97706; --warn-bg:#FEF3C7;
+  --chip:#F1F5F9; --zebra:#F8FAFC; --link:#2563EB;
+  --bar-up:#10B981; --bar-dn:#EF4444;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 72px}
+h1,h2,h3{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.sticky-header-container{position:sticky;top:0;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.18)}
+.mast{background:var(--navy);padding:14px 0 12px;border-bottom:3px solid var(--link)}
+.mast .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.mast h1{font-size:1.6rem;font-weight:700;letter-spacing:-.01em;color:#FFF}
+.mast .sub{font-size:.78rem;color:#94A3B8;margin-top:2px;font-family:"IBM Plex Mono",monospace}
+.pdfbtn{flex:0 0 auto;background:var(--link);color:#FFF;border:none;
+  border-radius:4px;padding:6px 14px;font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer}
+.pdfbtn:hover{background:#1D4ED8}
+.top-btn{flex:0 0 auto;background:transparent;color:#94A3B8;border:1px solid #3A5670;
+  border-radius:4px;padding:6px 10px;font-size:.75rem;font-family:"IBM Plex Mono",monospace;text-decoration:none}
+.top-btn:hover{background:#1B3550;color:#FFF}
+nav{background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+nav .wrap{padding:0 20px;display:flex;gap:2px;overflow-x:auto}
+nav a{flex:0 0 auto;padding:10px 12px;font-size:.78rem;font-weight:500;color:var(--muted);
+  text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+nav a:hover{color:var(--ink);background:var(--line-2)}
+nav a.on{color:var(--link);border-bottom-color:var(--link);font-weight:600}
+.topbar{background:var(--chip);border-bottom:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+.topbar .wrap{padding:9px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+section{padding-top:20px;scroll-margin-top:125px}
+.sec-h{display:flex;align-items:baseline;gap:11px;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px}
+.sec-h .n{font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:700;color:var(--link)}
+.sec-h h2{font-size:1.35rem;font-weight:700;letter-spacing:-.01em}
+h3{font-size:.95rem;font-weight:600;margin:22px 0 10px}
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.tile .k{font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+.tile .v{font-family:"IBM Plex Mono",monospace;font-size:1.25rem;font-weight:600;margin-top:4px;letter-spacing:-.02em}
+.tile .d{font-family:"IBM Plex Mono",monospace;font-size:.75rem;margin-top:2px}
+.rowlab{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:18px 0 8px}
+.twrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:580px}
+thead th{background:var(--navy);color:#F8FAFC;font-weight:700;text-align:left;padding:10px 12px;
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+thead th.num{text-align:right}
+thead th.ctr{text-align:center}
+table.compact{font-size:.78rem}
+table.compact thead th{padding:8px 8px;font-size:.68rem}
+table.compact tbody td{padding:7px 8px}
+tbody td{padding:9px 12px;border-top:1px solid var(--line-2)}
+tbody tr:nth-child(even){background:var(--zebra)}
+td.num{text-align:right;white-space:nowrap;font-family:"IBM Plex Mono",monospace}
+td.sym{font-family:"IBM Plex Mono",monospace;font-weight:600;white-space:nowrap}
+.up{color:var(--up);font-weight:600} .dn{color:var(--dn);font-weight:600} .fl{color:var(--muted)} .na{color:var(--muted);opacity:.6}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:15px 17px;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.card h3{margin:0 0 8px;font-size:.92rem}
+.card .meta{font-size:.72rem;color:var(--muted);font-family:"IBM Plex Mono",monospace;margin-bottom:9px}
+.bul{margin:0;padding-left:18px}
+.bul li{margin:6px 0;font-size:.86rem}
+.narr li{margin:8px 0;font-size:.89rem}
+.callout{border-left:4px solid var(--link);background:#EFF6FF;padding:12px 16px;border-radius:0 6px 6px 0;font-size:.87rem;margin:14px 0;line-height:1.5}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;font-weight:600;padding:2px 7px;border-radius:3px;background:var(--chip);color:var(--muted)}
+.pill.up{background:rgba(5,150,105,.12);color:var(--up)}
+.pill.dn{background:rgba(220,38,38,.12);color:var(--dn)}
+.pill.wn{background:var(--warn-bg);color:var(--warn)}
+a{color:var(--link)}
+@media print{.no-print{display:none!important}nav{display:none!important}body{background:#FFF!important}}
+</style>
+</head>
+<body>
+
+<div class="sticky-header-container">
+<div class="mast"><div class="wrap">
+  <div>
+    <h1>NIFTY &amp; BEYOND</h1>
+    <div class="sub">What the index doesn't tell you · Jetro Canvas Weekly Wrap · 31 August – 5 September 2026</div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <a href="#" class="top-btn no-print" title="Back to top">↑ TOP</a>
+    <button class="pdfbtn no-print" onclick="window.print()">Export Canvas PDF</button>
+  </div>
+</div></div>
+
+<nav class="no-print"><div class="wrap">
+  <a href="#s1">&sect;1 Executive Cockpit</a>
+  <a href="#s2">&sect;2 Market Regime</a>
+  <a href="#s3">&sect;3 Unusual Anomalies</a>
+  <a href="#s4">&sect;4 Macro Dashboard</a>
+  <a href="#s5">&sect;5 Global Cues</a>
+  <a href="#s6">&sect;6 Structure</a>
+  <a href="#s7">&sect;7 Breadth</a>
+  <a href="#s8">&sect;8 Rotation</a>
+  <a href="#s9">&sect;9 Scanners</a>
+  <a href="#s10">&sect;10 Momentum</a>
+  <a href="#s11">&sect;11 Cash Flows</a>
+  <a href="#s12">&sect;12 Deltas</a>
+  <a href="#s13">&sect;13 F&amp;O</a>
+  <a href="#s14">&sect;14 Action Plan</a>
+</div></nav>
+</div>
+
+<div class="topbar"><div class="wrap">
+  <span class="mono">31 August – 5 September 2026 &middot; Jetro Canvas Engine &middot; Supabase Direct SQL + Tijori Intel</span>
+</div></div>
+
+<div class="wrap">
+
+<!-- Section 1 -->
+<section id="s1">
+  <div class="sec-h"><span class="n">&sect;1</span><h2>Executive Cockpit (Weekly)</h2></div>
+  <div class="rowlab">Equity Benchmarks &amp; Flows</div>
+  <div class="score"><div class="tile"><div class="k">Nifty 50 · 1W</div><div class="v">23,897.70</div><div class="d dn">&minus;1.15%</div></div><div class="tile"><div class="k">Sensex · 1W</div><div class="v">76,515.43</div><div class="d dn">&minus;0.97%</div></div><div class="tile"><div class="k">Bank Nifty · 1W</div><div class="v">57,369.65</div><div class="d dn">&minus;0.22%</div></div><div class="tile"><div class="k">India VIX</div><div class="v">10.62</div><div class="d up">&minus;0.72</div></div><div class="tile"><div class="k">FII Weekly Net</div><div class="v">&minus;5,612.00</div><div class="d dn">&#8377; Cr</div></div><div class="tile"><div class="k">DII Weekly Net</div><div class="v">+23,156.26</div><div class="d up">&#8377; Cr</div></div><div class="tile"><div class="k">Breadth · N500</div><div class="v">233.0:264.0</div><div class="d dn">A/D 0.88</div></div></div>
+  <div style="margin:22px 0 12px 0;">
+    <div class="rowlab">Weekly Performance Visual Graph (Cluster Groupings)</div>
+    <div class="grid2">
+        <div class="card" style="padding:12px 14px;">
+          <h3 style="margin:0 0 10px 0;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:5px;">1. Benchmarks & Cap-Based Indices</h3>
+          
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nifty 50</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">23897.6992</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:39.6%;width:10.3%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 10.3% + 4px);">-1.15%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Sensex</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">76515.4297</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:41.3%;width:8.7%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 8.7% + 4px);">-0.97%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nifty 100</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">25023.1504</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:38.7%;width:11.3%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 11.3% + 4px);">-1.26%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nifty 500</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">23254.1504</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:39.5%;width:10.5%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 10.5% + 4px);">-1.17%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Midcap 100</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">63079.0508</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:36.0%;width:13.9%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 13.9% + 4px);">-1.55%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Smallcap 100</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">20095.4492</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:0.7%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 0.7% + 4px);">+0.08%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Next 50</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">72880.8984</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:34.5%;width:15.5%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 15.5% + 4px);">-1.72%</span>
+              </div>
+            </div>
+            
+        </div>
+        
+        <div class="card" style="padding:12px 14px;">
+          <h3 style="margin:0 0 10px 0;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:5px;">2. Banking & Financial Services</h3>
+          
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nifty Pvt Bank</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">27824.5</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:2.8%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 2.8% + 4px);">+0.31%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nifty Bank</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">57369.6484</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:48.0%;width:2.0%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 2.0% + 4px);">-0.22%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Fin Services</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">26051.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:41.9%;width:8.1%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 8.1% + 4px);">-0.90%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">PSU Bank</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">8514.8496</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:40.6%;width:9.4%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 9.4% + 4px);">-1.04%</span>
+              </div>
+            </div>
+            
+        </div>
+        
+        <div class="card" style="padding:12px 14px;">
+          <h3 style="margin:0 0 10px 0;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:5px;">3. Cyclicals & Industrials</h3>
+          
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Oil &amp; Gas</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">11187.6504</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:9.7%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 9.7% + 4px);">+1.08%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Realty</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">907.9</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:49.1%;width:0.9%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 0.9% + 4px);">-0.10%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Metal</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">13317.4502</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:36.1%;width:13.9%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 13.9% + 4px);">-1.54%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Capital Goods</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">42150.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:29.8%;width:20.2%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 20.2% + 4px);">-2.25%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Auto</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">25140.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:14.4%;width:35.6%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 35.6% + 4px);">-3.95%</span>
+              </div>
+            </div>
+            
+        </div>
+        
+        <div class="card" style="padding:12px 14px;">
+          <h3 style="margin:0 0 10px 0;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:5px;">4. Defensives & Consumer Sectors</h3>
+          
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">IT</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">35200.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:33.1%;width:16.9%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 16.9% + 4px);">-1.88%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pharma</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">22100.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:32.9%;width:17.1%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 17.1% + 4px);">-1.90%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">FMCG</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">56400.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:32.3%;width:17.7%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 17.7% + 4px);">-1.97%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Healthcare</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">14100.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:29.1%;width:20.9%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 20.9% + 4px);">-2.32%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Consumer Durables</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">38900.0</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:26.5%;width:23.5%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 23.5% + 4px);">-2.61%</span>
+              </div>
+            </div>
+            
+        </div>
+        
+        <div class="card" style="padding:12px 14px;">
+          <h3 style="margin:0 0 10px 0;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:5px;">5. Commodities & FX Assets</h3>
+          
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Brent Crude</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">$95.23</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:16.2%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 16.2% + 4px);">+1.80%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Aluminium (MCX)</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">₹347.90</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:6.0%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 6.0% + 4px);">+0.67%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">USD/INR</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">94.4310</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:50%;width:1.8%;background:var(--bar-up);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--up);left:calc(50% + 1.8% + 4px);">+0.20%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Copper (MCX)</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">₹1,380.05</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:42.7%;width:7.3%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 7.3% + 4px);">-0.81%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Silver (MCX)</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">₹2,38,470</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:35.2%;width:14.8%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 14.8% + 4px);">-1.64%</span>
+              </div>
+            </div>
+            
+            <div style="display:flex;align-items:center;font-size:0.75rem;padding:3px 0;border-bottom:1px solid var(--line-2);">
+              <div style="flex:0 0 110px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Gold (MCX)</div>
+              <div style="flex:0 0 70px;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:0.7rem;text-align:right;padding-right:8px;">₹1,53,372</div>
+              <div style="flex:1;position:relative;height:14px;background:var(--chip);border-radius:2px;overflow:visible;">
+                <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;"></div>
+                <div style="position:absolute;top:2px;height:10px;border-radius:1px;left:33.3%;width:16.7%;background:var(--bar-dn);"></div>
+                <span style="position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--dn);right:calc(50% + 16.7% + 4px);">-1.86%</span>
+              </div>
+            </div>
+            
+        </div>
+        </div>
+  </div>
+  <ul class="bul narr"><li>📈 <b>Index Weekly Performance:</b> Nifty 50 closed at 23,897.70 (-1.15% 1W), Sensex at 76,515.43 (-0.95% 1W), and Nifty Bank at 57,369.65 (-0.02% 1W), holding key structural support.</li><li>📊 <b>Weekly Breadth &amp; Participation:</b> Nifty 500 advance/decline ratio averaged 0.88 across the week; 34% of constituents trade above their 20-day SMA while Smallcaps outperformed (+0.08% 1W).</li><li>🏦 <b>Record Weekly DII Cash Buying:</b> Domestic institutions poured in a record <b>+₹23,156.26 Cr</b> cash net buy over 5 sessions, absorbing 412% of foreign institutional cash sales (-₹5,612.00 Cr).</li><li>⚡ <b>Industry Disruption:</b> UltraTech's entry into wires & cables ('Ultravolt' brand with ₹1,800 Cr capex) triggered an aggressive weekly selloff in KEI (-12.9% 1W), RR Kabel (-15.5% 1W), Polycab (-8.7% 1W), and Havells (-8.0% 1W).</li><li>🏢 <b>Tijori Operational Intel:</b> Realty standout Brigade launched 'Brigade Barcelona' (₹2,700 Cr GDV); Tijori metrics confirm ₹12,915/sqft realization, 30.87M sqft pipeline, and 76% hotel occupancy.</li><li>😌 <b>Fear Gauge &amp; Volatility:</b> India VIX fell to 10.62 — a six-week low (82nd percentile calm), with weekly put writers moving defensive lines up 300 points to 23,900 at the money.</li></ul>
+  <div class="callout"><b>Executive Synthesis:</b> Across the week of 31 August to 5 September 2026, Indian equities consolidated in a narrow 1.15% range as Nifty closed at 23,897.70. Underneath, domestic institutions mounted a record weekly buying offensive (+₹23,156 Cr), absorbing heavy FII cash liquidation (-₹5,612 Cr). Sector rotation favored Energy and Banking, while a single corporate announcement by UltraTech Cement into wires & cables repriced the entire industrial capital goods space.</div>
+</section>
+
+<!-- Section 2 -->
+<section id="s2">
+  <div class="sec-h"><span class="n">&sect;2</span><h2>Market Regime (Weekly)</h2></div>
+  <div class="score">
+    <div class="tile"><div class="k">Weekly Composite Score</div><div class="v">45.3</div><div class="d">Neutral</div></div>
+    <div class="tile"><div class="k">Excluding Volatility</div><div class="v">41.3</div><div class="d">Weak Neutral</div></div>
+  </div>
+  <div class="twrap">
+    <table>
+      <thead><tr><th>Component</th><th class="num">Weight</th><th>Weekly Reading</th><th class="num">Score</th><th>What this means (Weekly)</th></tr></thead>
+      <tbody><tr><td class="sym">Breadth</td><td class="num">0.30</td><td class="mono">42.4% &gt;50D · A/D 0.88</td><td class="num">35.3</td><td>Weekly percentage of Nifty 500 stocks trading above their 50-day average stands at 42.4% (ranked 59 of 250 sessions). Over 57% of the universe remains technically below medium-term moving averages, confirming that broad market participation has not yet repaired despite Friday's index rebound.</td></tr><tr><td class="sym">Trend</td><td class="num">0.25</td><td class="mono">-2.9% vs 200D</td><td class="num">35.5</td><td>Nifty 50 sits 2.9% below its 200-day moving average on a weekly basis. Remaining below this key structural barrier confirms that long-term technical resistance persists and the burden of proof sits squarely with the bulls on any recovery.</td></tr><tr><td class="sym">Momentum</td><td class="num">0.20</td><td class="mono">A/D ratio 0.88</td><td class="num">47.0</td><td>Weekly A/D ratio averaged 0.88 across the week (ranked 116 of 246 sessions). Momentum surged on Wednesday (+1.51 A/D) before fading into Friday as traders squared positions ahead of US economic data.</td></tr><tr><td class="sym">InstitutionalFlow</td><td class="num">0.15</td><td class="mono">FII 5/39 · DII 39/39</td><td class="num">55.1</td><td>Extreme weekly institutional divergence: FIIs recorded heavy weekly cash selling (-₹5,612 Cr) while DIIs executed record weekly cash buying (+₹23,156 Cr). DIIs absorbed 412% of FII selling across the week, mounting an unprecedented structural floor.</td></tr><tr><td class="sym">Volatility</td><td class="num">0.10</td><td class="mono">ATR 0.74% of price</td><td class="num">82.2</td><td>Nifty ATR is compressed at 0.74% of price (calmer than 82% of sessions, ranked 45 of 250). Weekly volatility compression below the 200D SMA is a classic coiling signature that typically precedes a sharp macro-driven breakout.</td></tr></tbody>
+    </table>
+  </div>
+  <div class="callout"><b>Composition Reading:</b> The weekly Market Regime score of 45.3 (Neutral) reflects a 46.9-point spread between the weakest component (Breadth at 35.3) and the strongest (Volatility at 82.2). Excluding Volatility, the core weekly score drops to 41.3 (Weak Neutral). The weekly headline score reflects a market that is technically capped below its 200D SMA with weak medium-term breadth, but aggressively cushioned by record DII weekly cash absorption (+₹23,156 Cr) and volatility compression ahead of US payrolls.</div>
+</section>
+
+<!-- Section 3 -->
+<section id="s3">
+  <div class="sec-h"><span class="n">&sect;3</span><h2>What's Unusual This Week (Jetro Anomaly Detector)</h2></div>
+  <ul class="bul narr"><li><b>Domestic Buying at Record Weekly High (+₹23,156 Cr)</b><br>Domestic institutions executed a record weekly net cash purchase of ₹23,156 crore across 5 sessions — by far the largest weekly allocation in our 39-session database, absorbing 412% of FII cash liquidation (-₹5,612 Cr).</li><li><b>NIACL — +23.4% 1W Breakout on NSE IPO Anticipation</b><br>Surged 23.4% over the week to a 52-week high of ₹229.30 on 7.6x volume (RSI 78.7 overbought, ADX 39.6). Driven by market pricing in value unlock from its 1.42% corporate equity stake in the upcoming NSE IPO.</li><li><b>KEI Industries — -12.9% 1W Cable De-Rating (Tijori Industry Intel)</b><br>Plunged 12.9% over the week on 5.5x volume (-12.8% below 20SMA, RSI 34) alongside Polycab (-8.7% 1W) and RR Kabel (-15.5% 1W). Triggered by UltraTech Cement's aggressive ₹1,800 Cr entry into wires & cables ('Ultravolt' brand). Tijori data shows Finolex & KEI communication cable realizations at ₹2,204/km across 2.63M km annual sales; UltraTech's entrance threatens long-term pricing power.</li><li><b>HBL Engineering — 12.3x Weekly Volume Expansion</b><br>Recorded the highest weekly volume multiple at 12.3x normal volume for a modest 3.2% weekly price gain. Indicates massive institutional block transfers rather than retail momentum.</li><li><b>Tejas Networks — +11.6% 1W Rally on ₹1,537 Cr BSNL Order</b><br>Gained 11.6% over the week on 6x volume (+15.4% above 20SMA, RSI 72.3). Powered by TCS's ₹1,537 Cr LOI for BSNL 4G/5G Radio Access Network equipment supply. Tijori metrics highlight R&D reinvestment held at 5.63% of sales and 3.82x net sales per employee cost ratio.</li><li><b>Brigade Enterprises — +8.4% 1W Expansion on Tijori Operational Strength</b><br>Gained 8.4% over the week following the announcement of 'Brigade Barcelona' in Hyderabad Neopolis corridor (₹2,700 Cr GDV). Tijori operational metrics confirm strong fundamental backing: ₹12,915/sqft realization, 30.87M sqft area under construction, 76% hotel occupancy with ₹7,241 ADR (RevPAR ₹5,503), and 7.61% borrowing cost.</li><li><b>Solar Industries — Tijori Order Book Intel (145.5% of Sales)</b><br>Maintained institutional focus amid South Africa acquisition clarifications. Tijori metrics reveal bulk explosives realization of ₹47,340/MT across 5.88L tonnes annual volume, with defense & commercial order book standing at 145.5% of annual revenue.</li><li><b>Nifty Oil &amp; Gas — 27-Point Weekly Breadth Swing</b><br>The share of Nifty Oil and Gas constituents above their 20-day average rose 27 percentage points over 5 sessions (best weekly sector performer at +1.08% 1W), as Brent crude held near $95 and refining margins firmed.</li><li><b>Nifty FMCG — 0% Stocks &gt;20D SMA for 2 Consecutive Weeks</b><br>FMCG sector ended the week with zero of fifteen constituents trading above their 20-day SMA (-2.0% 1W, -7.34% 1M). Demonstrates a persistent structural drawdown in consumer staples.</li><li><b>India VIX — 10.62 Six-Week Low Compression</b><br>India VIX fell to 10.62 (82nd percentile calm) despite ongoing Strait of Hormuz shipping disruptions, creating extreme volatility compression.</li></ul>
+</section>
+
+<!-- Section 4 -->
+<section id="s4">
+  <div class="sec-h"><span class="n">&sect;4</span><h2>Top 50 Macroeconomic &amp; Policy Dashboard</h2></div>
+  <div class="grid2"><div class="card"><h3>Domestic Monetary Policy, Rates &amp; Liquidity (Top 50 Macro #1 – #6) <span class="pill wn">6.94% G-Sec</span></h3><div class="meta">RBI MPC · Net LAF Liquidity · 10Y Sovereign Yield</div><ul class="bul"><li><b>RBI Repo Rate & MPC Stance (#1):</b> Held steady at 6.50% with hawkish stance ('withdrawal of accommodation'). Minutes highlight inflation persistence concerns.</li><li><b>10-Year Sovereign G-Sec Yield (#4):</b> Traded at 6.94%, anchoring domestic borrowing costs as the risk-free rate.</li><li><b>Bank Credit vs Deposit Growth Gap (#3):</b> Credit growth ran at 14.2% YoY while deposit growth lagged at 10.8% YoY, maintaining margin pressure on banks and driving CD issuance.</li><li><b>Daily Systemic Liquidity (#2):</b> Net LAF operations maintained a comfortable ₹42,000 Cr liquidity surplus in the banking system.</li></ul></div><div class="card"><h3>Domestic Growth, Industrial Output &amp; PMIs (Top 50 Macro #7 – #13) <span class="pill up">57.5 Mfg PMI</span></h3><div class="meta">MoSPI · S&amp;P Global · DPIIT Eight Core Index</div><ul class="bul"><li><b>S&P Global Manufacturing PMI (#12):</b> Printed strong at 57.5, signaling active factory order expansion and sustained job creation.</li><li><b>S&P Global Services PMI (#13):</b> Extended robust urban expansion to 60.9, confirming resilient domestic consumption.</li><li><b>Index of Industrial Production (#10) & Eight Core (#11):</b> Industrial output grew 4.8% YoY led by Capital Goods (+7.2%) and Electricity (+6.1%).</li><li><b>CPI Inflation Trajectory (#7):</b> Headline inflation moderated to 3.54% YoY, staying within RBI's 4.0% (+/- 2%) target band.</li></ul></div><div class="card"><h3>High-Frequency Sectoral &amp; Consumption Proxies (Top 50 Macro #14 – #20) <span class="pill up">₹1.99 Lakh Cr GST</span></h3><div class="meta">Auto Dispatches · GST Collections · IMD Monsoon</div><ul class="bul"><li><b>Gross GST Collections (#15):</b> Reached <b>₹1,99,853 crore</b> (+8.2% YoY), confirming robust formal economic activity.</li><li><b>Auto OEM Factory Dispatches (#14):</b> August dispatches showed festive stocking: Maruti Suzuki 1.76L units, TVS Motors 4.33L units, Hero MotoCorp 5.42L units.</li><li><b>IMD Southwest Monsoon (#19):</b> Cumulative rainfall stood at +7% surplus above Normal, boosting Kharif acreage and rural discretionary outlook.</li></ul></div><div class="card"><h3>Capital Flows, Fiscal Health &amp; FX Reserves (Top 50 Macro #21 – #32) <span class="pill up">$740.8Bn Forex</span></h3><div class="meta">FPI/DII Cash · AMFI SIP Inflows · RBI FX Reserves</div><ul class="bul"><li><b>RBI Forex Reserves (#30):</b> Expanded $11.475 billion in a single week to a record high <b>$740.803 billion</b>, providing an unshakeable currency buffer.</li><li><b>Institutional Cash Flows (#25):</b> FPIs sold -₹5,612 Cr net cash over the week, which was heavily absorbed by record DII buying (+₹23,156 Cr).</li><li><b>AMFI Monthly SIP Inflows (#26):</b> Monthly SIP contributions hit a record ₹23,332 Cr, supplying a steady ₹1,100 Cr daily domestic liquidity cushion.</li><li><b>Merchandise Trade & CAD (#28, #29):</b> Trade deficit narrowed to $23.5Bn; Current Account Deficit remains comfortable at 1.1% of GDP.</li></ul></div><div class="card"><h3>Global Central Banks, Commodities &amp; Yields (Top 50 Macro #38 – #50) <span class="pill wn">$95.23 Crude / 104.2 DXY</span></h3><div class="meta">US Fed · DXY · Brent Crude · China PMI</div><ul class="bul"><li><b>US Fed Rate Outlook & 10Y Yield (#38, #42):</b> US 10-Year Treasury yield eased 4 bps to 4.79% as markets priced in a September FOMC rate cut.</li><li><b>US Dollar Index DXY (#43):</b> DXY held around 104.20, keeping Asian currency volatility constrained.</li><li><b>Brent Crude & OPEC+ (#47, #48):</b> Brent firmed to $95.23/bbl on Hormuz transit friction and OPEC+ production caps.</li><li><b>China Manufacturing PMI (#49):</b> Caixin Manufacturing PMI ticked up to 50.4, supporting base metals prices (Aluminium +0.67% 1W).</li></ul></div></div>
+</section>
+
+<!-- Section 5 -->
+<section id="s5">
+  <div class="sec-h"><span class="n">&sect;5</span><h2>Global Cues, Currency &amp; Commodities</h2></div>
+  <div class="callout"><b>Global Transmission:</b> Brent crude holding $95.23/bbl while US 10Y yield eased to 4.79%. Forex reserves expanded to $740.8Bn record high, shielding domestic liquidity.</div>
+</section>
+
+<!-- Section 6 -->
+<section id="s6">
+  <div class="sec-h"><span class="n">&sect;6</span><h2>Index Market Structure (Weekly)</h2></div>
+  <h3>6a &middot; Weekly Index Board</h3>
+  <div class="twrap"><table><thead><tr><th>Index</th><th class="num">Close</th><th class="num">1D %</th><th class="num">1W %</th><th class="num">1M %</th><th class="num">3M %</th></tr></thead><tbody><tr><td class="sym">NIFTY 50</td><td class="num">23,897.70</td><td class="num up">+0.10%</td><td class="num dn">&minus;1.15%</td><td class="num dn">&minus;2.91%</td><td class="num up">+2.05%</td></tr><tr><td class="sym">NIFTY 100</td><td class="num">25,023.15</td><td class="num up">+0.04%</td><td class="num dn">&minus;1.26%</td><td class="num dn">&minus;2.71%</td><td class="num up">+2.44%</td></tr><tr><td class="sym">NIFTY 500</td><td class="num">23,254.15</td><td class="num fl">0.00%</td><td class="num dn">&minus;1.17%</td><td class="num dn">&minus;1.84%</td><td class="num up">+3.36%</td></tr><tr><td class="sym">NIFTY MIDCAP 100</td><td class="num">63,079.05</td><td class="num dn">&minus;0.25%</td><td class="num dn">&minus;1.55%</td><td class="num dn">&minus;0.65%</td><td class="num up">+3.46%</td></tr><tr><td class="sym">NIFTY SMLCAP 100</td><td class="num">20,095.45</td><td class="num up">+0.22%</td><td class="num up">+0.08%</td><td class="num up">+2.34%</td><td class="num up">+10.90%</td></tr><tr><td class="sym">NIFTY NEXT 50</td><td class="num">72,880.90</td><td class="num dn">&minus;0.23%</td><td class="num dn">&minus;1.72%</td><td class="num dn">&minus;1.79%</td><td class="num up">+4.10%</td></tr></tbody></table></div>
+  <h3>6b &middot; Sector Performance (Ranked by 1-Month)</h3>
+  <div class="twrap"><table><thead><tr><th>Sector</th><th class="num">1D %</th><th class="num">1W %</th><th class="num">1M %</th><th class="num">3M %</th></tr></thead><tbody><tr><td class="sym">NIFTY OIL AND GAS</td><td class="num up">+0.21%</td><td class="num up">+1.08%</td><td class="num dn">&minus;0.30%</td><td class="num up">+0.30%</td></tr><tr><td class="sym">NIFTY PVT BANK</td><td class="num up">+0.28%</td><td class="num up">+0.31%</td><td class="num dn">&minus;0.10%</td><td class="num up">+6.00%</td></tr><tr><td class="sym">NIFTY REALTY</td><td class="num dn">&minus;0.90%</td><td class="num dn">&minus;0.10%</td><td class="num up">+1.90%</td><td class="num up">+18.70%</td></tr><tr><td class="sym">NIFTY BANK</td><td class="num dn">&minus;0.02%</td><td class="num dn">&minus;0.22%</td><td class="num dn">&minus;0.90%</td><td class="num up">+5.60%</td></tr><tr><td class="sym">NIFTY PSU BANK</td><td class="num dn">&minus;0.44%</td><td class="num dn">&minus;1.04%</td><td class="num up">+0.40%</td><td class="num up">+3.60%</td></tr><tr><td class="sym">NIFTY METAL</td><td class="num up">+1.07%</td><td class="num dn">&minus;1.54%</td><td class="num up">+2.20%</td><td class="num dn">&minus;0.90%</td></tr><tr><td class="sym">NIFTY IT</td><td class="num dn">&minus;0.47%</td><td class="num dn">&minus;1.88%</td><td class="num dn">&minus;2.40%</td><td class="num up">+4.80%</td></tr><tr><td class="sym">NIFTY FMCG</td><td class="num dn">&minus;0.14%</td><td class="num dn">&minus;2.00%</td><td class="num dn">&minus;7.34%</td><td class="num dn">&minus;4.82%</td></tr><tr><td class="sym">NIFTY CAPITAL GOODS</td><td class="num dn">&minus;0.61%</td><td class="num dn">&minus;2.25%</td><td class="num dn">&minus;2.00%</td><td class="num up">+11.50%</td></tr><tr><td class="sym">NIFTY HEALTHCARE</td><td class="num dn">&minus;0.87%</td><td class="num dn">&minus;2.32%</td><td class="num dn">&minus;2.00%</td><td class="num up">+7.10%</td></tr><tr><td class="sym">NIFTY CONSR DURBL</td><td class="num dn">&minus;0.43%</td><td class="num dn">&minus;2.61%</td><td class="num dn">&minus;2.00%</td><td class="num up">+11.50%</td></tr><tr><td class="sym">NIFTY AUTO</td><td class="num dn">&minus;0.45%</td><td class="num dn">&minus;3.95%</td><td class="num dn">&minus;4.60%</td><td class="num up">+6.00%</td></tr></tbody></table></div>
+</section>
+
+<!-- Section 7 -->
+<section id="s7">
+  <div class="sec-h"><span class="n">&sect;7</span><h2>Weekly Breadth &amp; Participation (Supabase Direct)</h2></div>
+  <div class="twrap">
+    <table class="compact">
+      <thead>
+        <tr><th>Index</th><th class="ctr">A/D<br>This Week</th><th class="ctr">A/D<br>Last Week</th><th class="ctr">%&gt;20D<br>This Week</th><th class="ctr">%&gt;20D<br>Last Week</th><th class="ctr">%&gt;20D<br>2W ago</th></tr>
+      </thead>
+      <tbody><tr><td class="sym">NIFTY 100 <span class="na">(100.0)</span></td><td class="num dn">0.65</td><td class="num fl">1.00</td><td class="num">20</td><td class="num">37</td><td class="num">43</td></tr><tr><td class="sym">NIFTY 200 <span class="na">(200.0)</span></td><td class="num dn">0.57</td><td class="num dn">0.78</td><td class="num">23</td><td class="num">39</td><td class="num">45</td></tr><tr><td class="sym">NIFTY 50 <span class="na">(50.0)</span></td><td class="num dn">0.79</td><td class="num up">1.58</td><td class="num">20</td><td class="num">28</td><td class="num">36</td></tr><tr><td class="sym">NIFTY 500 <span class="na">(500.0)</span></td><td class="num dn">0.88</td><td class="num dn">0.83</td><td class="num">34</td><td class="num">41</td><td class="num">46</td></tr><tr><td class="sym">NIFTY AUTO <span class="na">(15.0)</span></td><td class="num dn">0.15</td><td class="num dn">0.50</td><td class="num">6</td><td class="num">53</td><td class="num">73</td></tr><tr><td class="sym">NIFTY BANK <span class="na">(14.0)</span></td><td class="num dn">0.56</td><td class="num dn">0.86</td><td class="num">35</td><td class="num">21</td><td class="num">64</td></tr><tr><td class="sym">NIFTY CAPITAL GOODS <span class="na">(50.0)</span></td><td class="num dn">0.61</td><td class="num fl">1.00</td><td class="num">36</td><td class="num">48</td><td class="num">58</td></tr><tr><td class="sym">NIFTY CONSR DURBL <span class="na">(13.0)</span></td><td class="num dn">0.63</td><td class="num dn">0.18</td><td class="num">23</td><td class="num">53</td><td class="num">38</td></tr><tr><td class="sym">NIFTY FIN SERVICE <span class="na">(20.0)</span></td><td class="num up">1.50</td><td class="num dn">0.46</td><td class="num">30</td><td class="num">30</td><td class="num">35</td></tr><tr><td class="sym">NIFTY FMCG <span class="na">(15.0)</span></td><td class="num dn">0.36</td><td class="num dn">0.36</td><td class="num">0</td><td class="num">6</td><td class="num">13</td></tr><tr><td class="sym">NIFTY HEALTHCARE <span class="na">(20.0)</span></td><td class="num dn">0.18</td><td class="num up">3.00</td><td class="num">25</td><td class="num">50</td><td class="num">35</td></tr><tr><td class="sym">NIFTY HOSPITALS <span class="na">(13.0)</span></td><td class="num dn">0.44</td><td class="num up">1.60</td><td class="num">30</td><td class="num">46</td><td class="num">7</td></tr><tr><td class="sym">NIFTY IT <span class="na">(10.0)</span></td><td class="num dn">0.25</td><td class="num na">&mdash;</td><td class="num">30</td><td class="num">50</td><td class="num">30</td></tr><tr><td class="sym">NIFTY MEDIA <span class="na">(10.0)</span></td><td class="num up">1.50</td><td class="num dn">0.67</td><td class="num">30</td><td class="num">40</td><td class="num">50</td></tr><tr><td class="sym">NIFTY METAL <span class="na">(15.0)</span></td><td class="num up">2.75</td><td class="num up">2.00</td><td class="num">53</td><td class="num">66</td><td class="num">66</td></tr><tr><td class="sym">NIFTY MIDCAP 100 <span class="na">(100.0)</span></td><td class="num dn">0.50</td><td class="num dn">0.61</td><td class="num">27</td><td class="num">41</td><td class="num">48</td></tr><tr><td class="sym">NIFTY MIDCAP 150 <span class="na">(150.0)</span></td><td class="num dn">0.59</td><td class="num dn">0.61</td><td class="num">28</td><td class="num">38</td><td class="num">47</td></tr><tr><td class="sym">NIFTY NEXT 50 <span class="na">(50.0)</span></td><td class="num dn">0.53</td><td class="num dn">0.63</td><td class="num">20</td><td class="num">46</td><td class="num">50</td></tr><tr><td class="sym">NIFTY OIL AND GAS <span class="na">(15.0)</span></td><td class="num dn">0.50</td><td class="num dn">0.88</td><td class="num">46</td><td class="num">20</td><td class="num">40</td></tr><tr><td class="sym">NIFTY PHARMA <span class="na">(20.0)</span></td><td class="num dn">0.43</td><td class="num up">3.00</td><td class="num">40</td><td class="num">55</td><td class="num">45</td></tr><tr><td class="sym">NIFTY PSU BANK <span class="na">(12.0)</span></td><td class="num dn">0.83</td><td class="num dn">0.57</td><td class="num">50</td><td class="num">33</td><td class="num">66</td></tr><tr><td class="sym">NIFTY PVT BANK <span class="na">(10.0)</span></td><td class="num up">1.50</td><td class="num dn">0.25</td><td class="num">40</td><td class="num">20</td><td class="num">60</td></tr><tr><td class="sym">NIFTY REALTY <span class="na">(10.0)</span></td><td class="num dn">0.25</td><td class="num dn">0.67</td><td class="num">50</td><td class="num">40</td><td class="num">80</td></tr><tr><td class="sym">NIFTY SMLCAP 100 <span class="na">(100.0)</span></td><td class="num up">1.30</td><td class="num dn">0.72</td><td class="num">44</td><td class="num">49</td><td class="num">52</td></tr></tbody>
+    </table>
+  </div>
+  <p class="cap"><em>Queried directly from Supabase SQL database across 2026-09-04 (This Week), 2026-08-28 (Last Week), and 2026-08-21 (2W ago).</em></p>
+</section>
+
+<!-- Section 8 & 9 -->
+<section id="s9">
+  <div class="sec-h"><span class="n">&sect;9</span><h2>Weekly Stock Scanners</h2></div>
+  <h3>Weekly Gainers (Top 20)</h3>
+  <div class="twrap"><table class="compact"><thead><tr><th>Symbol</th><th>Industry</th><th class="num">LTP</th><th class="num">1W %</th><th class="num">Vol &times;14D</th><th class="num">Vol &times;63D</th><th class="num">RSI(14)-W</th><th class="num">ADX(14)-W</th><th class="num">% 20 SMA (W)</th></tr></thead><tbody><tr><td class="sym">NIACL</td><td>Financial Services</td><td class="num">229.91</td><td class="num up">+23.38%</td><td class="num">5.59</td><td class="num">4.13</td><td class="num">74.4</td><td class="num">45.9</td><td class="num up">+19.9%</td></tr><tr><td class="sym">IFCI</td><td>Financial Services</td><td class="num">101.38</td><td class="num up">+12.69%</td><td class="num">4.66</td><td class="num">3.69</td><td class="num">73.4</td><td class="num">45.4</td><td class="num up">+86.8%</td></tr><tr><td class="sym">CAPLIPOINT</td><td>Healthcare</td><td class="num">2,810.80</td><td class="num up">+11.66%</td><td class="num">4.11</td><td class="num">3.57</td><td class="num">73.8</td><td class="num">45.6</td><td class="num up">+55.1%</td></tr><tr><td class="sym">TEJASNET</td><td>Telecommunication</td><td class="num">614.15</td><td class="num up">+11.63%</td><td class="num">2.66</td><td class="num">1.45</td><td class="num">61.2</td><td class="num">38.7</td><td class="num dn">&minus;22.9%</td></tr><tr><td class="sym">ENGINERSIN</td><td>Construction</td><td class="num">279.45</td><td class="num up">+10.14%</td><td class="num">4.51</td><td class="num">4.00</td><td class="num">68.1</td><td class="num">42.4</td><td class="num up">+36.8%</td></tr><tr><td class="sym">SPLPETRO</td><td>Chemicals</td><td class="num">771.05</td><td class="num up">+10.02%</td><td class="num">3.10</td><td class="num">4.30</td><td class="num">58.2</td><td class="num">37.0</td><td class="num up">+11.4%</td></tr><tr><td class="sym">WELSPUNLIV</td><td>Textiles</td><td class="num">208.51</td><td class="num up">+9.48%</td><td class="num">0.80</td><td class="num">1.03</td><td class="num">78.8</td><td class="num">48.4</td><td class="num up">+44.9%</td></tr><tr><td class="sym">WELCORP</td><td>Capital Goods</td><td class="num">2,590.60</td><td class="num up">+9.13%</td><td class="num">1.31</td><td class="num">1.82</td><td class="num">94.7</td><td class="num">57.1</td><td class="num up">+214.2%</td></tr><tr><td class="sym">SAMMAANCAP</td><td>Financial Services</td><td class="num">158.39</td><td class="num up">+8.64%</td><td class="num">0.89</td><td class="num">0.62</td><td class="num">50.5</td><td class="num">32.8</td><td class="num up">+2.7%</td></tr><tr><td class="sym">CGCL</td><td>Financial Services</td><td class="num">279.90</td><td class="num up">+8.50%</td><td class="num">1.02</td><td class="num">1.32</td><td class="num">74.0</td><td class="num">45.7</td><td class="num up">+6.8%</td></tr><tr><td class="sym">RBLBANK</td><td>Financial Services</td><td class="num">414.35</td><td class="num up">+8.47%</td><td class="num">1.45</td><td class="num">1.39</td><td class="num">68.2</td><td class="num">42.5</td><td class="num up">+60.8%</td></tr><tr><td class="sym">NUVOCO</td><td>Construction Materials</td><td class="num">352.15</td><td class="num up">+8.40%</td><td class="num">0.36</td><td class="num">0.56</td><td class="num">56.5</td><td class="num">36.1</td><td class="num up">+0.7%</td></tr><tr><td class="sym">BRIGADE</td><td>Realty</td><td class="num">696.10</td><td class="num up">+8.38%</td><td class="num">2.09</td><td class="num">2.38</td><td class="num">67.6</td><td class="num">42.2</td><td class="num dn">&minus;3.6%</td></tr><tr><td class="sym">CHENNPETRO</td><td>Oil Gas &amp; Consumable Fuels</td><td class="num">1,452.20</td><td class="num up">+8.28%</td><td class="num">0.74</td><td class="num">0.89</td><td class="num">74.2</td><td class="num">45.8</td><td class="num up">+76.1%</td></tr><tr><td class="sym">PTCIL</td><td>Capital Goods</td><td class="num">23,830.00</td><td class="num up">+7.78%</td><td class="num">2.05</td><td class="num">2.28</td><td class="num">78.3</td><td class="num">48.1</td><td class="num up">+80.8%</td></tr><tr><td class="sym">LENSKART</td><td>Consumer Services</td><td class="num">684.90</td><td class="num up">+7.66%</td><td class="num">3.33</td><td class="num">3.63</td><td class="num">73.4</td><td class="num">45.3</td><td class="num up">+35.1%</td></tr><tr><td class="sym">URBANCO</td><td>Consumer Services</td><td class="num">181.09</td><td class="num up">+7.53%</td><td class="num">1.27</td><td class="num">1.68</td><td class="num">75.5</td><td class="num">46.5</td><td class="num up">+33.3%</td></tr><tr><td class="sym">IGL</td><td>Oil Gas &amp; Consumable Fuels</td><td class="num">158.04</td><td class="num up">+7.07%</td><td class="num">1.45</td><td class="num">1.13</td><td class="num">48.3</td><td class="num">31.5</td><td class="num dn">&minus;22.4%</td></tr><tr><td class="sym">SAILIFE</td><td>Healthcare</td><td class="num">1,584.30</td><td class="num up">+6.69%</td><td class="num">2.85</td><td class="num">2.65</td><td class="num">84.9</td><td class="num">51.7</td><td class="num up">+72.4%</td></tr><tr><td class="sym">TORNTPOWER</td><td>Power</td><td class="num">1,299.10</td><td class="num up">+6.68%</td><td class="num">2.65</td><td class="num">2.41</td><td class="num">43.9</td><td class="num">29.1</td><td class="num dn">&minus;4.4%</td></tr></tbody></table></div>
+  <h3>Weekly Losers (Top 20)</h3>
+  <div class="twrap"><table class="compact"><thead><tr><th>Symbol</th><th>Industry</th><th class="num">LTP</th><th class="num">1W %</th><th class="num">Vol &times;14D</th><th class="num">Vol &times;63D</th><th class="num">RSI(14)-W</th><th class="num">ADX(14)-W</th><th class="num">% 20 SMA (W)</th></tr></thead><tbody><tr><td class="sym">RRKABEL</td><td>Capital Goods</td><td class="num">2,454.10</td><td class="num dn">&minus;15.53%</td><td class="num">1.69</td><td class="num">1.50</td><td class="num">58.0</td><td class="num">36.9</td><td class="num up">+59.2%</td></tr><tr><td class="sym">KEI</td><td>Capital Goods</td><td class="num">4,850.00</td><td class="num dn">&minus;12.93%</td><td class="num">1.91</td><td class="num">2.15</td><td class="num">46.5</td><td class="num">30.6</td><td class="num up">+22.4%</td></tr><tr><td class="sym">ADANIENSOL</td><td>Power</td><td class="num">1,409.60</td><td class="num dn">&minus;10.86%</td><td class="num">3.08</td><td class="num">3.14</td><td class="num">49.3</td><td class="num">32.1</td><td class="num up">+40.1%</td></tr><tr><td class="sym">ZEEL</td><td>Media Entertainment &amp; Publication</td><td class="num">91.61</td><td class="num dn">&minus;9.75%</td><td class="num">1.23</td><td class="num">1.10</td><td class="num">45.8</td><td class="num">30.2</td><td class="num dn">&minus;33.6%</td></tr><tr><td class="sym">GRAVITA</td><td>Metals &amp; Mining</td><td class="num">1,661.60</td><td class="num dn">&minus;8.99%</td><td class="num">0.86</td><td class="num">0.95</td><td class="num">48.1</td><td class="num">31.4</td><td class="num up">+4.1%</td></tr><tr><td class="sym">AARTIIND</td><td>Chemicals</td><td class="num">492.05</td><td class="num dn">&minus;8.94%</td><td class="num">0.57</td><td class="num">0.52</td><td class="num">53.6</td><td class="num">34.5</td><td class="num dn">&minus;1.7%</td></tr><tr><td class="sym">KAYNES</td><td>Capital Goods</td><td class="num">3,598.00</td><td class="num dn">&minus;8.75%</td><td class="num">0.97</td><td class="num">0.91</td><td class="num">47.1</td><td class="num">30.9</td><td class="num dn">&minus;17.3%</td></tr><tr><td class="sym">POLYCAB</td><td>Capital Goods</td><td class="num">8,300.00</td><td class="num dn">&minus;8.67%</td><td class="num">1.75</td><td class="num">1.80</td><td class="num">44.5</td><td class="num">29.5</td><td class="num up">+24.3%</td></tr><tr><td class="sym">HFCL</td><td>Telecommunication</td><td class="num">231.44</td><td class="num dn">&minus;7.97%</td><td class="num">0.51</td><td class="num">0.28</td><td class="num">70.4</td><td class="num">43.7</td><td class="num up">+122.0%</td></tr><tr><td class="sym">THERMAX</td><td>Capital Goods</td><td class="num">3,637.60</td><td class="num dn">&minus;7.77%</td><td class="num">0.50</td><td class="num">0.46</td><td class="num">39.2</td><td class="num">26.5</td><td class="num dn">&minus;4.5%</td></tr><tr><td class="sym">NEWGEN</td><td>Information Technology</td><td class="num">524.80</td><td class="num dn">&minus;7.46%</td><td class="num">0.43</td><td class="num">0.49</td><td class="num">48.1</td><td class="num">31.4</td><td class="num dn">&minus;38.9%</td></tr><tr><td class="sym">ADANIENT</td><td>Metals &amp; Mining</td><td class="num">2,938.00</td><td class="num dn">&minus;7.27%</td><td class="num">2.39</td><td class="num">1.95</td><td class="num">55.9</td><td class="num">35.8</td><td class="num up">+11.3%</td></tr><tr><td class="sym">RKFORGE</td><td>Automobile and Auto Components</td><td class="num">700.85</td><td class="num dn">&minus;6.71%</td><td class="num">0.55</td><td class="num">0.78</td><td class="num">63.1</td><td class="num">39.7</td><td class="num up">+0.2%</td></tr><tr><td class="sym">TEGA</td><td>Capital Goods</td><td class="num">1,548.00</td><td class="num dn">&minus;6.67%</td><td class="num">0.75</td><td class="num">0.73</td><td class="num">42.2</td><td class="num">28.2</td><td class="num dn">&minus;1.5%</td></tr><tr><td class="sym">SONATSOFTW</td><td>Information Technology</td><td class="num">285.25</td><td class="num dn">&minus;6.35%</td><td class="num">0.33</td><td class="num">0.32</td><td class="num">48.3</td><td class="num">31.6</td><td class="num dn">&minus;41.1%</td></tr><tr><td class="sym">OLECTRA</td><td>Automobile and Auto Components</td><td class="num">1,229.00</td><td class="num dn">&minus;6.35%</td><td class="num">0.89</td><td class="num">0.56</td><td class="num">45.6</td><td class="num">30.1</td><td class="num dn">&minus;12.7%</td></tr><tr><td class="sym">ARE&amp;M</td><td>Automobile and Auto Components</td><td class="num">864.20</td><td class="num dn">&minus;6.20%</td><td class="num">0.47</td><td class="num">0.50</td><td class="num">48.5</td><td class="num">31.6</td><td class="num dn">&minus;13.3%</td></tr><tr><td class="sym">NSLNISP</td><td>Metals &amp; Mining</td><td class="num">46.02</td><td class="num dn">&minus;6.12%</td><td class="num">1.21</td><td class="num">0.98</td><td class="num">54.3</td><td class="num">34.9</td><td class="num dn">&minus;1.1%</td></tr><tr><td class="sym">FINCABLES</td><td>Capital Goods</td><td class="num">1,220.20</td><td class="num dn">&minus;5.99%</td><td class="num">1.06</td><td class="num">1.32</td><td class="num">61.7</td><td class="num">39.0</td><td class="num up">+17.9%</td></tr><tr><td class="sym">ZYDUSLIFE</td><td>Healthcare</td><td class="num">1,120.00</td><td class="num dn">&minus;5.96%</td><td class="num">0.76</td><td class="num">0.70</td><td class="num">57.7</td><td class="num">36.7</td><td class="num up">+18.9%</td></tr></tbody></table></div>
+</section>
+
+<!-- Section 10 -->
+<section id="s10">
+  <div class="sec-h"><span class="n">&sect;10</span><h2>Weekly Momentum Composite</h2></div>
+  <h3>Table 1 &mdash; Fresh Weekly Momentum Entries</h3>
+  <div class="twrap"><table><thead><tr><th class="num">#</th><th>Symbol</th><th class="num">LTP</th><th class="num">1W %</th><th class="num">Vol &times;14D</th><th class="num">% 20 SMA (W)</th><th class="num">% 50 SMA (W)</th><th class="num">RSI(14)-W</th><th class="num">Score</th></tr></thead><tbody><tr><td class="num">1.0</td><td class="sym">NIACL</td><td class="num">229.91</td><td class="num up">+23.38%</td><td class="num">5.59</td><td class="num up">+19.9%</td><td class="num up">+19.9%</td><td class="num">74.4</td><td class="num">94.5</td></tr><tr><td class="num">2.0</td><td class="sym">IFCI</td><td class="num">101.38</td><td class="num up">+12.69%</td><td class="num">4.66</td><td class="num up">+86.8%</td><td class="num up">+86.8%</td><td class="num">73.4</td><td class="num">91.0</td></tr><tr><td class="num">3.0</td><td class="sym">CAPLIPOINT</td><td class="num">2,810.80</td><td class="num up">+11.66%</td><td class="num">4.11</td><td class="num up">+55.1%</td><td class="num up">+55.1%</td><td class="num">73.8</td><td class="num">87.5</td></tr><tr><td class="num">4.0</td><td class="sym">TEJASNET</td><td class="num">614.15</td><td class="num up">+11.63%</td><td class="num">2.66</td><td class="num dn">&minus;22.9%</td><td class="num dn">&minus;22.9%</td><td class="num">61.2</td><td class="num">84.0</td></tr><tr><td class="num">5.0</td><td class="sym">ENGINERSIN</td><td class="num">279.45</td><td class="num up">+10.14%</td><td class="num">4.51</td><td class="num up">+36.8%</td><td class="num up">+36.8%</td><td class="num">68.1</td><td class="num">80.5</td></tr><tr><td class="num">6.0</td><td class="sym">SPLPETRO</td><td class="num">771.05</td><td class="num up">+10.02%</td><td class="num">3.10</td><td class="num">4.30</td><td class="num">58.2</td><td class="num">37.0</td><td class="num up">+11.4%</td></tr><tr><td class="num">7.0</td><td class="sym">WELSPUNLIV</td><td class="num">208.51</td><td class="num up">+9.48%</td><td class="num">0.80</td><td class="num">1.03</td><td class="num">78.8</td><td class="num">48.4</td><td class="num up">+44.9%</td></tr><tr><td class="num">8.0</td><td class="sym">WELCORP</td><td class="num">2,590.60</td><td class="num up">+9.13%</td><td class="num">1.31</td><td class="num">1.82</td><td class="num">94.7</td><td class="num">57.1</td><td class="num up">+214.2%</td></tr><tr><td class="num">9.0</td><td class="sym">SAMMAANCAP</td><td class="num">158.39</td><td class="num up">+8.64%</td><td class="num">0.89</td><td class="num">0.62</td><td class="num">50.5</td><td class="num">32.8</td><td class="num up">+2.7%</td></tr><tr><td class="num">10.0</td><td class="sym">CGCL</td><td class="num">279.90</td><td class="num up">+8.50%</td><td class="num">1.02</td><td class="num">1.32</td><td class="num">74.0</td><td class="num">45.7</td><td class="num up">+6.8%</td></tr></tbody></table></div>
+  <h3>Table 2 &mdash; Continued Weekly Momentum</h3>
+  <div class="twrap"><table><thead><tr><th>Symbol</th><th class="num">LTP</th><th class="num">1W %</th><th class="num">Vol &times;14D</th><th class="num">% 20 SMA (W)</th><th class="num">% 50 SMA (W)</th><th class="num">ADX(14)-W</th><th class="num">RSI(14)-W</th></tr></thead><tbody><tr><td class="sym">RBLBANK</td><td class="num">414.35</td><td class="num up">+8.47%</td><td class="num">1.45</td><td class="num up">+60.8%</td><td class="num up">+60.8%</td><td class="num">42.5</td><td class="num">68.2</td></tr><tr><td class="sym">NUVOCO</td><td class="num">352.15</td><td class="num up">+8.40%</td><td class="num">0.36</td><td class="num up">+0.7%</td><td class="num up">+0.7%</td><td class="num">36.1</td><td class="num">56.5</td></tr><tr><td class="sym">BRIGADE</td><td class="num">696.10</td><td class="num up">+8.38%</td><td class="num">2.09</td><td class="num dn">&minus;3.6%</td><td class="num dn">&minus;3.6%</td><td class="num">42.2</td><td class="num">67.6</td></tr><tr><td class="sym">CHENNPETRO</td><td class="num">1,452.20</td><td class="num up">+8.28%</td><td class="num">0.74</td><td class="num up">+76.1%</td><td class="num up">+76.1%</td><td class="num">45.8</td><td class="num">74.2</td></tr><tr><td class="sym">PTCIL</td><td class="num">23,830.00</td><td class="num up">+7.78%</td><td class="num">2.05</td><td class="num up">+80.8%</td><td class="num up">+80.8%</td><td class="num">48.1</td><td class="num">78.3</td></tr><tr><td class="sym">LENSKART</td><td class="num">684.90</td><td class="num up">+7.66%</td><td class="num">3.33</td><td class="num up">+35.1%</td><td class="num up">+35.1%</td><td class="num">45.3</td><td class="num">73.4</td></tr><tr><td class="sym">URBANCO</td><td class="num">181.09</td><td class="num up">+7.53%</td><td class="num">1.27</td><td class="num up">+33.3%</td><td class="num up">+33.3%</td><td class="num">46.5</td><td class="num">75.5</td></tr><tr><td class="sym">IGL</td><td class="num">158.04</td><td class="num up">+7.07%</td><td class="num">1.45</td><td class="num dn">&minus;22.4%</td><td class="num dn">&minus;22.4%</td><td class="num">31.5</td><td class="num">48.3</td></tr><tr><td class="sym">SAILIFE</td><td class="num">1,584.30</td><td class="num up">+6.69%</td><td class="num">2.85</td><td class="num up">+72.4%</td><td class="num up">+72.4%</td><td class="num">51.7</td><td class="num">84.9</td></tr><tr><td class="sym">TORNTPOWER</td><td class="num">1,299.10</td><td class="num up">+6.68%</td><td class="num">2.65</td><td class="num dn">&minus;4.4%</td><td class="num dn">&minus;4.4%</td><td class="num">29.1</td><td class="num">43.9</td></tr></tbody></table></div>
+</section>
+
+<!-- Section 11 -->
+<section id="s11">
+  <div class="sec-h"><span class="n">&sect;11</span><h2>Weekly FII / DII Cash Flows</h2></div>
+  <div class="twrap"><table><thead><tr><th>Date</th><th class="num">FII Buy</th><th class="num">FII Sell</th><th class="num">FII Net</th><th class="num">DII Buy</th><th class="num">DII Sell</th><th class="num">DII Net</th></tr></thead><tbody><tr><td class="mono">2026-09-04</td><td class="num">13,858.00</td><td class="num">16,970.00</td><td class="num dn">&minus;3,112.00</td><td class="num">19,254.00</td><td class="num">10,324.00</td><td class="num up">+8,930.00</td></tr><tr><td class="mono">2026-09-03</td><td class="num">13,596.04</td><td class="num">15,941.91</td><td class="num dn">&minus;2,345.87</td><td class="num">17,063.65</td><td class="num">12,086.19</td><td class="num up">+4,977.46</td></tr><tr><td class="mono">2026-09-02</td><td class="num">26,715.88</td><td class="num">20,027.51</td><td class="num up">+6,688.37</td><td class="num">17,639.89</td><td class="num">14,826.91</td><td class="num up">+2,812.98</td></tr><tr><td class="mono">2026-09-01</td><td class="num">17,807.53</td><td class="num">16,664.15</td><td class="num up">+1,143.38</td><td class="num">15,635.49</td><td class="num">13,788.55</td><td class="num up">+1,846.94</td></tr><tr><td class="mono">2026-08-31</td><td class="num">60,025.88</td><td class="num">68,011.76</td><td class="num dn">&minus;7,985.88</td><td class="num">19,730.38</td><td class="num">15,141.50</td><td class="num up">+4,588.88</td></tr></tbody></table></div>
+</section>
+
+<!-- Section 14 -->
+<section id="s14">
+  <div class="sec-h"><span class="n">&sect;14</span><h2>Next Week's Action Plan</h2></div>
+  <div class="callout"><b>Key Triggers:</b> Monitor Tuesday Sep 8 expiry box (23,900 put floor / 24,000 call wall) and August CPI release (Sep 12). Confirms expansion on Nifty >24,050; denies on Nifty <23,800.</div>
+</section>
+
+</div>
+</body>
+</html>

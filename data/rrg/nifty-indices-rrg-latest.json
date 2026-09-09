@@ -1,0 +1,134 @@
+{
+  "asOfDate": "2026-09-08",
+  "benchmark": "NIFTY 50",
+  "periodicity": "Weekly",
+  "trailWeeks": 5,
+  "indices": [
+    {
+      "symbol": "NIFTY OIL & GAS",
+      "name": "Nifty Oil & Gas",
+      "currentQuadrant": "Leading",
+      "rsRatio": 102.8,
+      "rsMomentum": 103.5,
+      "trail": [
+        {"week": "W1", "x": 98.2, "y": 99.5},
+        {"week": "W2", "x": 99.5, "y": 101.2},
+        {"week": "W3", "x": 100.8, "y": 102.1},
+        {"week": "W4", "x": 101.9, "y": 102.9},
+        {"week": "W5", "x": 102.8, "y": 103.5}
+      ]
+    },
+    {
+      "symbol": "NIFTY METAL",
+      "name": "Nifty Metal",
+      "currentQuadrant": "Improving",
+      "rsRatio": 99.1,
+      "rsMomentum": 102.4,
+      "trail": [
+        {"week": "W1", "x": 96.5, "y": 97.2},
+        {"week": "W2", "x": 96.8, "y": 98.8},
+        {"week": "W3", "x": 97.4, "y": 100.5},
+        {"week": "W4", "x": 98.3, "y": 101.8},
+        {"week": "W5", "x": 99.1, "y": 102.4}
+      ]
+    },
+    {
+      "symbol": "NIFTY BANK",
+      "name": "Nifty Bank",
+      "currentQuadrant": "Leading",
+      "rsRatio": 101.4,
+      "rsMomentum": 100.6,
+      "trail": [
+        {"week": "W1", "x": 99.8, "y": 101.5},
+        {"week": "W2", "x": 100.5, "y": 102.0},
+        {"week": "W3", "x": 101.2, "y": 101.8},
+        {"week": "W4", "x": 101.5, "y": 101.1},
+        {"week": "W5", "x": 101.4, "y": 100.6}
+      ]
+    },
+    {
+      "symbol": "NIFTY PHARMA",
+      "name": "Nifty Pharma",
+      "currentQuadrant": "Leading",
+      "rsRatio": 103.2,
+      "rsMomentum": 101.8,
+      "trail": [
+        {"week": "W1", "x": 101.0, "y": 102.5},
+        {"week": "W2", "x": 101.8, "y": 103.0},
+        {"week": "W3", "x": 102.5, "y": 102.8},
+        {"week": "W4", "x": 103.0, "y": 102.2},
+        {"week": "W5", "x": 103.2, "y": 101.8}
+      ]
+    },
+    {
+      "symbol": "NIFTY IT",
+      "name": "Nifty IT",
+      "currentQuadrant": "Weakening",
+      "rsRatio": 101.2,
+      "rsMomentum": 98.4,
+      "trail": [
+        {"week": "W1", "x": 104.5, "y": 103.2},
+        {"week": "W2", "x": 104.0, "y": 101.8},
+        {"week": "W3", "x": 103.2, "y": 100.4},
+        {"week": "W4", "x": 102.1, "y": 99.2},
+        {"week": "W5", "x": 101.2, "y": 98.4}
+      ]
+    },
+    {
+      "symbol": "NIFTY AUTO",
+      "name": "Nifty Auto",
+      "currentQuadrant": "Lagging",
+      "rsRatio": 97.8,
+      "rsMomentum": 97.1,
+      "trail": [
+        {"week": "W1", "x": 102.1, "y": 99.5},
+        {"week": "W2", "x": 100.8, "y": 98.2},
+        {"week": "W3", "x": 99.5, "y": 97.8},
+        {"week": "W4", "x": 98.4, "y": 97.4},
+        {"week": "W5", "x": 97.8, "y": 97.1}
+      ]
+    },
+    {
+      "symbol": "NIFTY FMCG",
+      "name": "Nifty FMCG",
+      "currentQuadrant": "Lagging",
+      "rsRatio": 96.5,
+      "rsMomentum": 96.8,
+      "trail": [
+        {"week": "W1", "x": 99.2, "y": 98.0},
+        {"week": "W2", "x": 98.5, "y": 97.5},
+        {"week": "W3", "x": 97.8, "y": 97.1},
+        {"week": "W4", "x": 97.0, "y": 96.9},
+        {"week": "W5", "x": 96.5, "y": 96.8}
+      ]
+    },
+    {
+      "symbol": "NIFTY REALTY",
+      "name": "Nifty Realty",
+      "currentQuadrant": "Improving",
+      "rsRatio": 98.9,
+      "rsMomentum": 101.5,
+      "trail": [
+        {"week": "W1", "x": 96.0, "y": 96.5},
+        {"week": "W2", "x": 96.5, "y": 98.2},
+        {"week": "W3", "x": 97.2, "y": 99.8},
+        {"week": "W4", "x": 98.0, "y": 100.9},
+        {"week": "W5", "x": 98.9, "y": 101.5}
+      ]
+    },
+    {
+      "symbol": "NIFTY CAPITAL GOODS",
+      "name": "Nifty Capital Goods",
+      "currentQuadrant": "Weakening",
+      "rsRatio": 100.8,
+      "rsMomentum": 99.0,
+      "trail": [
+        {"week": "W1", "x": 103.5, "y": 102.8},
+        {"week": "W2", "x": 102.8, "y": 101.5},
+        {"week": "W3", "x": 102.0, "y": 100.8},
+        {"week": "W4", "x": 101.4, "y": 99.8},
+        {"week": "W5", "x": 100.8, "y": 99.0}
+      ]
+    }
+  ]
+}

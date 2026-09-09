@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nifty &amp; Beyond — What the index doesn't tell you</title>
+  <meta name="description" content="Nifty & Beyond — Unified Financial Intelligence Hub integrating Daily Market Updates, Sector Research Hub, Weekly Wrap, and Weekly Relative Rotation Graph (RRG).">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img src="assets/logo-final.jpg" alt="Nifty & Beyond Logo" class="brand-image">
+      </a>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="tab-hero" id="tab-btn-hero">
+          Daily Market Update
+        </button>
+        <button class="nav-tab" data-tab="tab-weekly" id="tab-btn-weekly">
+          Weekly Wrap
+        </button>
+        <button class="nav-tab" data-tab="tab-sectors" id="tab-btn-sectors">
+          Sector Research Hub
+        </button>
+        <button class="nav-tab" data-tab="tab-rrg" id="tab-btn-rrg">
+          RRG Graph
+        </button>
+        <button class="nav-tab" data-tab="tab-guide" id="tab-btn-guide">
+          Methodology
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <div class="date-selector">
+          <span>REPORT:</span>
+          <select id="report-date-select">
+            <!-- Populated dynamically by data-loader.js -->
+          </select>
+        </div>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme">
+          ☀️
+        </button>
+        <button id="btn-admin-open" class="admin-nav-btn" title="Settings &amp; Upload Reports">
+          ⚙️ Settings
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main>
+
+    <!-- TAB 1: DAILY MARKET UPDATE -->
+    <div id="tab-hero" class="tab-content active">
+      <div class="section-banner">
+        <div>
+          <div class="eyebrow" id="hero-date-tag">AS OF 8 SEPTEMBER 2026</div>
+          <h1>Daily Market Update</h1>
+          <p>Real-time post-market synthesis, regime indicators, and institutional cash flow diagnostics derived from the actual EOD report.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a id="hero-open-standalone-btn" href="data/eod/daily/2026-09-08.html" target="_blank" rel="noopener noreferrer" class="btn-open-tab">
+            ↗ Open Latest EOD Report in Tab
+          </a>
+        </div>
+      </div>
+
+      <!-- Regime Card -->
+      <div class="hero-regime-card">
+        <div class="regime-badge-box">
+          <div class="regime-score-v" id="hero-regime-score">40.3</div>
+          <span class="regime-tag" id="hero-regime-tag">NEUTRAL REGIME</span>
+          <div class="regime-meta" id="hero-regime-meta">Volatility: 83.0 | Trend: 30.6</div>
+        </div>
+        
+        <div class="regime-highlights">
+          <h3>Daily Key Market Insights</h3>
+          <ul id="hero-highlights-list">
+            <!-- Populated dynamically -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Unified Asymmetrical Scorecard -->
+      <div class="scorecard-masonry">
+        <!-- Hero Metrics -->
+        <div class="scorecard-tile span-large">
+          <div class="tile-k">Nifty 50</div>
+          <div class="tile-v" id="sc-nifty-v">23,635.10</div>
+          <div class="tile-d" id="sc-nifty-d">--</div>
+        </div>
+
+        <div class="scorecard-tile span-large">
+          <div class="tile-k">Sensex</div>
+          <div class="tile-v" id="sc-sensex-v">75,577.58</div>
+          <div class="tile-d" id="sc-sensex-d">--</div>
+        </div>
+        
+        <!-- Secondary Metrics -->
+        <div class="scorecard-tile">
+          <div class="tile-k">India VIX</div>
+          <div class="tile-v" id="sc-vix-v">11.23</div>
+          <div class="tile-d" id="sc-vix-d">--</div>
+        </div>
+
+        <div class="scorecard-tile">
+          <div class="tile-k">FII Cash Net</div>
+          <div class="tile-v" id="sc-fii-v">-123.19</div>
+          <div class="tile-d" id="sc-fii-d">₹ Crore</div>
+        </div>
+
+        <div class="scorecard-tile">
+          <div class="tile-k">DII Cash Net</div>
+          <div class="tile-v" id="sc-dii-v">+1,349.64</div>
+          <div class="tile-d" id="sc-dii-d">₹ Crore</div>
+        </div>
+
+        <div class="scorecard-tile">
+          <div class="tile-k">Breadth (N500)</div>
+          <div class="tile-v" id="sc-breadth-v">220:274</div>
+          <div class="tile-d" id="sc-breadth-d">A/D 0.80</div>
+        </div>
+
+        <div class="scorecard-tile span-wide">
+          <div class="tile-k">Brent Crude</div>
+          <div class="tile-v" id="sc-brent-v">$97.40</div>
+          <div class="tile-d" id="sc-brent-d">+1.67%</div>
+        </div>
+
+        <div class="scorecard-tile span-wide">
+          <div class="tile-k">USD/INR</div>
+          <div class="tile-v" id="sc-usdinr-v">94.7900</div>
+          <div class="tile-d" id="sc-usdinr-d">Rupee -0.32%</div>
+        </div>
+      </div>
+
+      <!-- EOD Report Embedded Viewer -->
+      <div class="hero-eod-ref-wrapper" style="display:block; padding:0; overflow:hidden; border-radius:var(--radius-md); border:1px solid var(--border-color); background:var(--bg-card); margin-bottom: 40px; box-shadow:var(--shadow-card);">
+        <div style="padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+          <div>
+            <h3 style="margin:0; font-family:var(--font-disp); font-size:18px; color:var(--text-bright);">Institutional Daily EOD Report</h3>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">Live View</p>
+          </div>
+          <a id="ref-open-latest-btn" href="data/eod/daily/2026-09-08.html" target="_blank" rel="noopener noreferrer" class="btn-open-tab" style="padding: 8px 16px; font-size: 13px;">
+            ↗ Open Fullscreen
+          </a>
+        </div>
+        <iframe id="hero-report-iframe" src="data/eod/daily/2026-09-08.html" width="100%" height="600px" frameborder="0" style="display:block; background:var(--bg-secondary); width:100%;"></iframe>
+      </div>
+
+      <!-- Subhead: All EOD Reports Grid -->
+      <div class="section-subhead">
+        <h2>Daily EOD Reports Archive (Click Any Report to Open in New Tab)</h2>
+        <span class="sector-count-badge" id="daily-reports-count">5 Daily Reports</span>
+      </div>
+
+      <!-- Grid of All Daily EOD Reports -->
+      <div class="daily-reports-grid" id="daily-reports-grid-container">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 2: WEEKLY MARKET REPORT -->
+    <div id="tab-weekly" class="tab-content">
+      <div class="section-banner">
+        <div>
+          <div class="eyebrow">WEEKLY MARKET REPORT</div>
+          <h1>Nifty &amp; Beyond — Weekly Wrap (31 Aug – 5 Sep 2026)</h1>
+          <p>Displaying the actual, complete weekly institutional report with performance visual graphs, macro dashboard, and weekly momentum.</p>
+        </div>
+        <div>
+          <a href="data/eod/weekly/2026-09-05-weekly.html" target="_blank" rel="noopener noreferrer" class="btn-open-tab">
+            ↗ Open Actual Report in Tab
+          </a>
+        </div>
+      </div>
+
+      <!-- Actual Weekly Report Direct Embed -->
+      <div style="width:100%;height:1200px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border-color);box-shadow:var(--shadow-card);background:#ffffff;">
+        <iframe src="data/eod/weekly/2026-09-05-weekly.html" style="width:100%;height:100%;border:none;display:block;" title="Actual Weekly Market Report"></iframe>
+      </div>
+    </div>
+
+    <!-- TAB 3: SECTOR RESEARCH HUB -->
+    <div id="tab-sectors" class="tab-content">
+      <!-- Title: Retaining ONLY "Sector Research Hub" -->
+      <div class="sector-hub-header">
+        <h1>Sector Research Hub</h1>
+      </div>
+
+      <!-- Sector Hub Toolbar: Search, Sort, View Switcher -->
+      <div class="sector-toolbar">
+        <div class="sector-search-box">
+          <span class="sector-search-icon">🔍</span>
+          <input type="text" id="sector-search-input" placeholder="Search by sector or stock (e.g. Apollo, Solar, HAL)..." autocomplete="off">
+          <button class="sector-search-clear" id="sector-search-clear" title="Clear search">&times;</button>
+        </div>
+
+        <div class="sector-toolbar-actions">
+          <div class="sort-selector-wrap">
+            <span>Sort:</span>
+            <select id="sector-sort-select">
+              <option value="sector-az">Sector Name (A–Z)</option>
+              <option value="period-desc">Period (Newest First)</option>
+            </select>
+          </div>
+
+          <div class="view-switcher">
+            <button class="view-btn active" id="btn-view-grid" title="Grid View">
+              <span>⊞</span> Grid
+            </button>
+            <button class="view-btn" id="btn-view-list" title="List View">
+              <span>☰</span> List
+            </button>
+          </div>
+
+          <span class="sector-count-badge" id="sector-count-badge">20 Sectors</span>
+        </div>
+      </div>
+
+      <!-- Sector Grid View -->
+      <div id="sector-grid-container" class="sectors-grid">
+        <!-- Populated dynamically by app.js -->
+      </div>
+
+      <!-- Sector List View -->
+      <div id="sector-list-container" class="sector-list-container" style="display:none;">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 4: RELATIVE ROTATION GRAPH (RRG) -->
+    <div id="tab-rrg" class="tab-content">
+      <div class="section-banner">
+        <div>
+          <div class="eyebrow">LIVE GITHUB INTEGRATION • RAJAN1973/RRG-NIFTY-INDICES</div>
+          <h1>India RRG — Weekly Relative Rotation Graph</h1>
+          <p>Live Supabase integration with Nifty 50/500 benchmarks, stock constituent drill-down, 8-week history slider, user watchlists, and TradingView Lite charts.</p>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <a href="rrg/rrg-user-manual.html" target="_blank" rel="noopener noreferrer" class="view-sector-btn" style="width:auto;padding:8px 14px;text-decoration:none;display:inline-flex;align-items:center;">
+            📖 User Manual ↗
+          </a>
+          <a href="rrg/index.html" target="_blank" rel="noopener noreferrer" class="regime-action-btn" style="text-decoration:none;display:inline-flex;align-items:center;">
+            🚀 Open Full RRG App ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Real Live RRG Application Embed -->
+      <div style="width: 100%; height: 860px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-card); background: #fff;">
+        <iframe src="rrg/index.html" style="width: 100%; height: 100%; border: none;" title="India RRG — Relative Rotation"></iframe>
+      </div>
+    </div>
+
+    <!-- TAB 5: EOD REPORT METHODOLOGY -->
+    <div id="tab-guide" class="tab-content">
+      <div class="section-banner">
+        <div>
+          <div class="eyebrow">DAILY EOD REPORT METHODOLOGY</div>
+          <h1>EOD Report Methodology</h1>
+          <p>Step-by-step institutional framework specifically developed for interpreting the Daily Market Update (EOD) reports, market breadth, and cash flow signals.</p>
+        </div>
+      </div>
+
+      <div style="background:rgba(59, 130, 246, 0.1);border:1px solid rgba(59, 130, 246, 0.3);padding:14px 20px;border-radius:var(--radius-sm);margin-bottom:20px;font-size:13.5px;color:var(--text-main);">
+        ℹ️ <strong>Note:</strong> This 6-step analytical methodology is specific to interpreting the <strong>Daily Market Update (EOD) Reports</strong> and their underlying data indicators, rather than general app navigation.
+      </div>
+
+      <div class="guide-card">
+        <h2>6-Step Analytical Order (EOD Market Reports)</h2>
+        <div class="guide-step-grid">
+          <div class="guide-step">
+            <div class="guide-step-num">Step 1</div>
+            <h3>Start with Participation, Not Index</h3>
+            <p>Check the percentage of stocks above their 20-day SMA. This reveals the market's true direction of travel underneath the headline.</p>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">Step 2</div>
+            <h3>Check Index Against Participation</h3>
+            <p>If the Nifty rises while participation falls, it signals narrow index management driven by a few heavyweights.</p>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">Step 3</div>
+            <h3>Read Sector Leadership Across Time</h3>
+            <p>Compare 1-day, 1-week, and 1-month returns. A sector strong on all three frame intervals is in a true trend.</p>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">Step 4</div>
+            <h3>Cross-Check Sector Breadth</h3>
+            <p>Verify if a rising sector is supported by rising internal participation rather than single-stock distortions.</p>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">Step 5</div>
+            <h3>Scan Stock Anomalies</h3>
+            <p>Review high volume multiples (&gt;3x 63D baseline) to spot institutional accumulation or distribution.</p>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">Step 6</div>
+            <h3>Verify Cash Flow Alignment</h3>
+            <p>Compare FII/DII cash market purchases against derivative positioning to confirm institutional conviction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Large Pop-Up Report Modal (90% screen size) -->
+  <div class="modal-overlay" id="report-modal">
+    <div class="modal-content-box">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="sector-period-pill" id="modal-report-period">Q1 FY27</span>
+          <div class="modal-title" id="modal-report-title">Report Title</div>
+        </div>
+        <div class="modal-header-actions">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="modal-newtab-btn" id="modal-newtab-btn">
+            ↗ Open in New Tab
+          </a>
+          <button class="modal-close-btn" id="modal-close-btn" title="Close modal">&times;</button>
+        </div>
+      </div>
+      <iframe class="modal-iframe" id="modal-report-frame" src="about:blank" title="Report Viewer"></iframe>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div class="modal-overlay" id="admin-login-modal">
+    <div class="admin-modal-box">
+      <div class="modal-header">
+        <div class="modal-title">🔐 Settings &amp; Admin Login</div>
+        <button class="modal-close-btn" id="admin-login-close">&times;</button>
+      </div>
+      <div class="admin-body">
+        <div id="admin-login-alert" class="admin-alert"></div>
+        <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+          <div class="admin-form-group">
+            <label for="admin-username">Username</label>
+            <input type="text" id="admin-username" class="admin-input" placeholder="Enter username (e.g. admin)" required autocomplete="username">
+          </div>
+          <div class="admin-form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" class="admin-input" placeholder="Enter password (e.g. password123)" required autocomplete="current-password">
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
+            <span style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">Credentials: admin / password123</span>
+            <button type="submit" class="admin-btn-primary">Sign In ➔</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Upload Panel Modal -->
+  <div class="modal-overlay" id="admin-panel-modal">
+    <div class="admin-modal-box" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ Admin Report Upload Portal</div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button id="admin-logout-btn" class="admin-nav-btn" style="padding:4px 8px;font-size:11px;">Logout</button>
+          <button class="modal-close-btn" id="admin-panel-close">&times;</button>
+        </div>
+      </div>
+      <div class="admin-body">
+        <div class="admin-tabs">
+          <button class="admin-tab active" id="tab-btn-upload-daily" onclick="switchAdminUploadTab('daily')">
+            📄 Upload Daily Market Update
+          </button>
+          <button class="admin-tab" id="tab-btn-upload-sector" onclick="switchAdminUploadTab('sector')">
+            🏭 Upload Sector Report
+          </button>
+        </div>
+
+        <div id="admin-upload-alert" class="admin-alert"></div>
+
+        <!-- Form: Daily Report -->
+        <form id="form-upload-daily" onsubmit="handleUploadDaily(event)">
+          <div class="admin-alert" style="display:block; margin-bottom:16px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: var(--text-main);">
+            <strong>Auto-Scraping Active:</strong> Market data (Nifty, Sensex, FII/DII, Breadth, Highlights) will be automatically extracted from the uploaded report.
+          </div>
+
+          <div class="admin-form-group">
+            <label for="daily-up-file">Report HTML File or Path</label>
+            <input type="file" id="daily-up-file" class="admin-input" accept=".html,.htm">
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Or specify file path relative to app (e.g. data/eod/daily/2026-09-09.html)</div>
+            <input type="text" id="daily-up-path" class="admin-input" placeholder="data/eod/daily/..." style="margin-top:6px;">
+          </div>
+
+          <button type="submit" class="admin-btn-primary" style="width:100%;margin-top:10px;">
+            Process &amp; Publish Daily Update ➔
+          </button>
+        </form>
+
+        <!-- Form: Sector Report -->
+        <form id="form-upload-sector" style="display:none;" onsubmit="handleUploadSector(event)">
+          <div class="admin-alert" style="display:block; margin-bottom:16px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: var(--text-main);">
+            <strong>Auto-Scraping Active:</strong> Sector metrics, constituent stocks, and analytical highlights will be automatically extracted from the uploaded report.
+          </div>
+
+          <div class="admin-form-group">
+            <label for="sec-up-file">Report HTML File or Path</label>
+            <input type="file" id="sec-up-file" class="admin-input" accept=".html,.htm">
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Or specify file path relative to app (e.g. data/sectors/...)</div>
+            <input type="text" id="sec-up-path" class="admin-input" placeholder="data/sectors/..." style="margin-top:6px;">
+          </div>
+
+          <button type="submit" class="admin-btn-primary" style="width:100%;margin-top:10px;">
+            Process &amp; Publish Sector Report ➔
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data-loader.js"></script>
+  <script src="js/rrg-chart.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
