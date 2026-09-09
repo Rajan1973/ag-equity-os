@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
     daily: [
       {
+        id: "2026-09-09",
+        date: "2026-09-09",
+        title: "Nifty & Beyond — 9 Sep 2026",
+        file: "data/eod/daily/2026-09-09.html",
+        nifty: "23,431.50",
+        niftyChange: "-203.60 (-0.86%)",
+        sensex: "74,764.23",
+        sensexChange: "-813.35 (-1.08%)",
+        vix: "11.92",
+        vixChange: "+0.69",
+        fii: "-582.99",
+        dii: "+1,509.04",
+        breadth: "157:340 (0.46)",
+        brent: "$98.15 (+0.77%)",
+        usdinr: "94.9250 (-0.14%)",
+        regimeScore: "30.1 BEARISH",
+        highlights: [
+          "Nifty slipped 203.60 pts to 23,431.50 near lows; market regime crossed into Bearish (30.1).",
+          "DIIs provided ₹1,509.04 Cr net buying cushion, absorbing 258.8% of FII sales (-₹582.99 Cr).",
+          "Nifty IT suffered total breadth capitulation (-3.24%, 0% > 20D SMA) and Realty fell 2.23%.",
+          "Graphite India erupted +15.04% on 20.3x volume; Chennai Petro jumped +10.06% on refining margins."
+        ]
+      },
+      {
         id: "2026-09-08",
         date: "2026-09-08",
         title: "Nifty & Beyond — 8 Sep 2026",
