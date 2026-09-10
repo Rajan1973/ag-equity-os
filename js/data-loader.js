@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
     daily: [
       {
+        id: "2026-09-10",
+        date: "2026-09-10",
+        title: "Nifty & Beyond — 10 Sep 2026",
+        file: "data/eod/daily/2026-09-10.html",
+        nifty: "23,477.80",
+        niftyChange: "+46.30 (+0.20%)",
+        sensex: "74,902.59",
+        sensexChange: "+138.37 (+0.19%)",
+        vix: "11.80",
+        vixChange: "-0.12",
+        fii: "-438.24",
+        dii: "+1,025.85",
+        breadth: "191:305 (0.63)",
+        brent: "$98.40 (+0.25%)",
+        usdinr: "94.8850 (+0.04%)",
+        regimeScore: "35.7 NEUTRAL",
+        highlights: [
+          "Nifty rebounded 97 pts from intraday lows to close at 23,477.80 (+0.20%); composite regime returned to Neutral (35.7).",
+          "DIIs deployed ₹1,025.85 Cr net cash buying, absorbing 234.1% of FII selling (-₹438.24 Cr) to anchor market support.",
+          "Swan Energy erupted +7.38% on 29.41x volume; Tata Investment +4.26% on 19.09x volume; Welspun Corp extended its trend (+6.46%).",
+          "Nifty Hospitals led rotation (77% > 20D SMA, +31 pt 5-day swing), while IT and FMCG sit pinned at capitulation floors (0%)."
+        ]
+      },
+      {
         id: "2026-09-09",
         date: "2026-09-09",
         title: "Nifty & Beyond — 9 Sep 2026",
