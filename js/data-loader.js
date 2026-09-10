@@ -594,8 +594,14 @@ window.EquityData = {
     ]
   },
 
+  // Helper method to sort daily reports descending by date
+  sortDailyReports: function() {
+    this.reports.daily.sort((a, b) => (b.date || b.id).localeCompare(a.date || a.id));
+  },
+
   // Helper method to fetch latest daily report
   getLatestDaily: function() {
+    this.sortDailyReports();
     return this.reports.daily[0];
   },
 
@@ -615,9 +621,10 @@ window.EquityData = {
         if (Array.isArray(parsedDaily)) {
           parsedDaily.forEach(report => {
             if (!this.reports.daily.some(r => r.id === report.id)) {
-              this.reports.daily.unshift(report);
+              this.reports.daily.push(report);
             }
           });
+          this.sortDailyReports();
         }
       }
 
