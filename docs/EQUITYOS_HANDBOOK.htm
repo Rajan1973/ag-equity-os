@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EquityOS Official Handbook | Architecture, Operations & Publishing Guide</title>
+    <meta name="description" content="Institutional architecture and operational handbook for EquityOS (Nifty & Beyond) and its upstream report publishing workflows.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #0e1626;
+            --bg-card: #131c31;
+            --bg-glass: rgba(19, 28, 49, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-focus: #3b82f6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-blue: #38bdf8;
+            --accent-indigo: #6366f1;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --code-bg: #090d16;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --border-color: #e2e8f0;
+            --border-focus: #2563eb;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent-blue: #0284c7;
+            --accent-indigo: #4f46e5;
+            --accent-green: #059669;
+            --accent-amber: #d97706;
+            --accent-rose: #e11d48;
+            --code-bg: #f1f5f9;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            font-size: 15px;
+            overflow-x: hidden;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        /* Header Navbar */
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: var(--bg-glass);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--border-focus);
+            background: var(--bg-secondary);
+        }
+
+        .theme-toggle {
+            padding: 6px 10px;
+        }
+
+        /* Layout */
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 290px minmax(0, 1fr);
+            gap: 40px;
+            padding: 2.5rem 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem 1rem;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* Sticky Sidebar TOC */
+        .sidebar {
+            position: sticky;
+            top: 85px;
+            height: calc(100vh - 110px);
+            overflow-y: auto;
+            padding-right: 12px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .toc-header {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .toc-item a {
+            display: block;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-item a:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            border-left-color: var(--accent-blue);
+        }
+
+        .toc-sublist {
+            list-style: none;
+            padding-left: 14px;
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .toc-sublist a {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Content Area */
+        .content-main {
+            min-width: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 768px) {
+            .content-main {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 45px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-blue);
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Alerts & Banners */
+        .doc-alert {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            border-left: 4px solid;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .alert-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-note {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+        .alert-note .alert-icon { color: var(--accent-blue); }
+
+        .alert-tip {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: var(--accent-green);
+            color: var(--text-primary);
+        }
+        .alert-tip .alert-icon { color: var(--accent-green); }
+
+        .alert-warning, .alert-important {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: var(--accent-amber);
+            color: var(--text-primary);
+        }
+        .alert-warning .alert-icon, .alert-important .alert-icon { color: var(--accent-amber); }
+
+        .alert-caution {
+            background: rgba(244, 63, 94, 0.08);
+            border-color: var(--accent-rose);
+            color: var(--text-primary);
+        }
+        .alert-caution .alert-icon { color: var(--accent-rose); }
+
+        /* Code Blocks */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: #cbd5e1;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: #38bdf8;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+        }
+
+        /* Tables */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        thead {
+            background: var(--bg-secondary);
+        }
+
+        th {
+            padding: 10px 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Figures & Images */
+        .handbook-figure {
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .handbook-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover .handbook-img {
+            transform: scale(1.015);
+        }
+
+        .img-overlay {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .img-wrapper:hover .img-overlay {
+            opacity: 1;
+        }
+
+        .zoom-badge {
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        figcaption {
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fig-label {
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 8, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 95vw;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 82vh;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .lightbox-caption {
+            margin-top: 14px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Quick Navigation Bar on Mobile */
+        .mobile-quicknav {
+            display: none;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+            .mobile-quicknav {
+                display: block;
+            }
+        }
+
+        /* Footer */
+        .handbook-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="top-navbar">
+        <a href="#table-of-contents" class="brand">
+            <span class="brand-badge">EquityOS</span>
+            <span class="brand-title">Official Architecture & Operations Handbook</span>
+        </a>
+        <div class="nav-actions">
+            <button class="nav-btn theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                <span id="theme-icon">☀️</span>
+            </button>
+            <a href="https://rajan1973.github.io/ag-equity-os/" target="_blank" class="nav-btn">
+                <span>🌐 Live App</span>
+            </a>
+            <a href="https://github.com/Rajan1973/ag-equity-os" target="_blank" class="nav-btn">
+                <span>📂 GitHub Repo</span>
+            </a>
+            <button class="nav-btn" onclick="window.print()">
+                <span>🖨️ Print / PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="page-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="toc-header">Table of Contents</div>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#1-executive-summary--architectural-vision">1. Executive Summary & Vision</a></li>
+                <li class="toc-item"><a href="#2-upstream-report-generation-pipeline">2. Upstream Report Pipeline</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#21-daily-post-market-brief-daily-brief-skill">2.1 Daily Post-Market Brief</a></li>
+                        <li><a href="#22-institutional-sector-research-rajan-sector-analysis-skill">2.2 Sector Research</a></li>
+                        <li><a href="#23-fundamental-stock-research-cashparency-stock-analyzer-skill">2.3 Fundamental Stocks</a></li>
+                    </ul>
+                </li>
+                <li class="toc-item"><a href="#3-github-repository-architecture--data-topology">3. GitHub Architecture & Data</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#31-repository-structure--asset-map-image-3">3.1 Structure & Map (Fig 3)</a></li>
+                        <li><a href="#32-the-flat-file-static-philosophy-why-it-empowers-equityos">3.2 Flat-File Philosophy</a></li>
+                    </ul>
+                </li>
+                <li class="toc-item"><a href="#4-equityos-web-application-modules-in-depth">4. Web App Modules In-Depth</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#41-hero-section-daily-market-update-image-1">4.1 Hero Section (Fig 1)</a></li>
+                        <li><a href="#42-weekly-wrap-module-image-3">4.2 Weekly Wrap (Fig 3)</a></li>
+                        <li><a href="#43-sector-research-hub-image-2">4.3 Sector Research (Fig 2)</a></li>
+                        <li><a href="#44-universal-search--discovery-engine-image-4">4.4 Universal Search (Fig 4)</a></li>
+                        <li><a href="#45-relative-rotation-graph-rrg-macro-overview-image-2--5">4.5 RRG Macro Overview (Fig 5)</a></li>
+                        <li><a href="#46-rrg-constituent-drill-down--tradingview-technical-drawer-image-1--6">4.6 RRG Drill-Down & Chart (Fig 6)</a></li>
+                    </ul>
+                </li>
+                <li class="toc-item"><a href="#5-settings--dual-mode-report-publishing-pipeline">5. Dual-Mode Publishing</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#51-application-settings--ui-customization">5.1 App Settings & Auth</a></li>
+                        <li><a href="#52-publishing-method-1-in-app-admin-upload-portal">5.2 Method 1: In-App Admin</a></li>
+                        <li><a href="#53-publishing-method-2-antigravity-skill-update-report-to-equityos">5.3 Method 2: Antigravity Skill</a></li>
+                    </ul>
+                </li>
+                <li class="toc-item"><a href="#6-cache-invalidation--edge-deployment-strategy">6. Edge Cache Invalidation</a></li>
+                <li class="toc-item"><a href="#7-operational-cheat-sheet--best-practices">7. Operational Cheat-Sheet</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-main">
+            <h1 id="equityos-handbook-architecture-operations-report-publishing-guide">EquityOS Handbook: Architecture, Operations &amp; Report Publishing Guide</h1>
+<blockquote>
+<p><strong>Platform</strong>: Nifty &amp; Beyond — <em>What the index doesn't tell you</em><br />
+<strong>Live Web Application</strong>: <a href="https://rajan1973.github.io/ag-equity-os/">https://rajan1973.github.io/ag-equity-os/</a><br />
+<strong>GitHub Repository</strong>: <a href="https://github.com/Rajan1973/ag-equity-os">https://github.com/Rajan1973/ag-equity-os</a><br />
+<strong>Primary Workspaces</strong>: <code>D:\Anti Gravity\equity-os</code> &amp; <code>D:\Anti Gravity\post-market-report</code></p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-executive-summary--architectural-vision">Executive Summary &amp; Architectural Vision</a></li>
+<li><a href="#2-upstream-report-generation-pipeline">Upstream Report Generation Pipeline</a></li>
+<li><a href="#21-daily-post-market-brief-daily-brief-skill">2.1 Daily Post-Market Brief (<code>daily-brief</code> Skill)</a></li>
+<li><a href="#22-institutional-sector-research-rajan-sector-analysis-skill">2.2 Institutional Sector Research (<code>rajan-sector-analysis</code> Skill)</a></li>
+<li><a href="#23-fundamental-stock-research-cashparency-stock-analyzer-skill">2.3 Fundamental Stock Research (<code>cashparency-stock-analyzer</code> Skill)</a></li>
+<li><a href="#3-github-repository-architecture--data-topology">GitHub Repository Architecture &amp; Data Topology</a></li>
+<li><a href="#31-repository-structure--asset-map-image-3">3.1 Repository Structure &amp; Asset Map (Image 3)</a></li>
+<li><a href="#32-the-flat-file-static-philosophy-why-it-empowers-equityos">3.2 The Flat-File Static Philosophy: Why It Empowers EquityOS</a></li>
+<li><a href="#4-equityos-web-application-modules-in-depth">EquityOS Web Application Modules In-Depth</a></li>
+<li><a href="#41-hero-section-daily-market-update-image-1">4.1 Hero Section: Daily Market Update (Image 1)</a></li>
+<li><a href="#42-weekly-wrap-module-image-3">4.2 Weekly Wrap Module (Image 3)</a></li>
+<li><a href="#43-sector-research-hub-image-2">4.3 Sector Research Hub (Image 2)</a></li>
+<li><a href="#44-universal-search--discovery-engine-image-4">4.4 Universal Search &amp; Discovery Engine (Image 4)</a></li>
+<li><a href="#45-relative-rotation-graph-rrg-macro-overview-image-2--5">4.5 Relative Rotation Graph (RRG) Macro Overview (Image 2 / 5)</a></li>
+<li><a href="#46-rrg-constituent-drill-down--tradingview-technical-drawer-image-1--6">4.6 RRG Constituent Drill-Down &amp; TradingView Technical Drawer (Image 1 / 6)</a></li>
+<li><a href="#5-settings--dual-mode-report-publishing-pipeline">Settings &amp; Dual-Mode Report Publishing Pipeline</a></li>
+<li><a href="#51-application-settings--ui-customization">5.1 Application Settings &amp; UI Customization</a></li>
+<li><a href="#52-publishing-method-1-in-app-admin-upload-portal">5.2 Publishing Method 1: In-App Admin Upload Portal</a></li>
+<li><a href="#53-publishing-method-2-antigravity-skill-update-report-to-equityos">5.3 Publishing Method 2: Antigravity Skill <code>update-report-to-EquityOS</code></a></li>
+<li><a href="#6-cache-invalidation--edge-deployment-strategy">Cache Invalidation &amp; Edge Deployment Strategy</a></li>
+<li><a href="#7-operational-cheat-sheet--best-practices">Operational Cheat-Sheet &amp; Best Practices</a></li>
+</ol>
+<hr />
+<h2 id="1-executive-summary-architectural-vision">1. Executive Summary &amp; Architectural Vision</h2>
+<p><strong>EquityOS</strong> (hosted as <em>Nifty &amp; Beyond</em>) is an institutional-grade equity intelligence operating system designed to cut through superficial index numbers and surface underlying market mechanics across the Indian capital markets (NSE &amp; BSE).</p>
+<p>Headline indices frequently deceive: an index can rise while 70% of its constituents plunge, or consolidate tightly while rapid, high-volume rotation transfers risk capital into defensive sectors or specialized capex plays. EquityOS aggregates, contextualizes, and visualizes:</p>
+<ol>
+<li><strong>Daily Market Regimes</strong>: Composite regime scoring combining Advance/Decline breadth, distance to the 200-day moving average, realized volatility compression, and institutional cash flow absorption.</li>
+<li><strong>Weekly Rotation Wraps</strong>: Comprehensive multi-session synthesis with capital flow distribution.</li>
+<li><strong>Sector Intelligence Hub</strong>: In-depth quarterly earnings reviews across 20+ specialized industries, benchmarked against management guidance and raw material price cycles.</li>
+<li><strong>Relative Rotation Graphs (RRG)</strong>: Dynamic 4-quadrant momentum tracking measuring relative strength (RS-Ratio) and momentum (RS-Momentum) against the Nifty 50 benchmark with interactive single-stock technical drill-downs.</li>
+</ol>
+<pre><code class="language-mermaid">graph LR
+    subgraph Upstream Generation
+        A1[post-market-report&lt;br&gt;daily-brief skill] --&gt; B[HTML Report]
+        A2[rajan-sector-analysis&lt;br&gt;sector skill] --&gt; B
+        A3[cashparency&lt;br&gt;stock analyzer] --&gt; B
+    end
+
+    subgraph Publishing Engine
+        B --&gt; C{Publishing Mode}
+        C --&gt;|Method 1| D[In-App Admin Portal]
+        C --&gt;|Method 2| E[update-report-to-EquityOS]
+    end
+
+    subgraph ag-equity-os Repository
+        D --&gt; F[(data/ &amp; js/data-loader.js)]
+        E --&gt; F
+        F --&gt; G[Git Commit &amp; Push]
+    end
+
+    subgraph Edge Distribution
+        G --&gt; H[GitHub Pages Build]
+        H --&gt; I[Fastly/Varnish CDN Edge]
+        I --&gt; J[Nifty &amp; Beyond SPA]
+    end
+</code></pre>
+<hr />
+<h2 id="2-upstream-report-generation-pipeline">2. Upstream Report Generation Pipeline</h2>
+<p>EquityOS does not depend on a costly, fragile backend database server. Instead, it ingests self-contained, high-fidelity research documents generated upstream by specialized AI skills operating in paired Antigravity workspaces.</p>
+<h3 id="21-daily-post-market-brief-daily-brief-skill">2.1 Daily Post-Market Brief (<code>daily-brief</code> Skill)</h3>
+<ul>
+<li><strong>Primary Workspace</strong>: <code>D:\Anti Gravity\post-market-report</code></li>
+<li><strong>Output Destination</strong>: <code>data/eod/daily/YYYY-MM-DD.html</code></li>
+<li><strong>Structure</strong>: An institutional 14-section post-market brief:</li>
+<li><strong>Movement A (The Read)</strong>: §1 Executive Scorecard, §2 Market Regime (Composite &amp; Ex-Volatility), §3 What's Unusual Today (10 statistical anomaly ranks).</li>
+<li><strong>Movement B (The Context)</strong>: §4 Macro &amp; Policy Dashboard, §5 Global Cues, Currency &amp; Commodities (MCX spot, Brent, US Treasuries).</li>
+<li><strong>Movement C (The Structure)</strong>: §6 Index Market Structure &amp; Sector Performance, §7 Breadth &amp; Participation (% &gt; 20D SMA ladder), §8 Sector Rotation (Rotating In vs Rotating Out), §9 Stock Scanners (Top 20 Gainers &amp; Losers with 14D/63D volume multiples), §10 Momentum Composite (Fresh entries vs confirmed trends), §11 FII / DII Flows (NSE cash market net purchases and absorption ratios).</li>
+<li><strong>Movement D (The Forward View)</strong>: §12 What Changed Today, §13 F&amp;O &amp; Derivatives Positioning, §14 Tomorrow's Action Plan (confirmation triggers and invalidation levels).</li>
+</ul>
+<h3 id="22-institutional-sector-research-rajan-sector-analysis-skill">2.2 Institutional Sector Research (<code>rajan-sector-analysis</code> Skill)</h3>
+<ul>
+<li><strong>Invocation</strong>: <code>/rajan-sector-analysis &lt;Sector Name&gt;</code> (e.g. <code>/rajan-sector-analysis Cables &amp; Wires</code>)</li>
+<li><strong>Output Destination</strong>: <code>data/sectors/&lt;sector-slug&gt;-&lt;period&gt;.html</code></li>
+<li><strong>Methodology</strong>: Follows a strict 4-phase institutional protocol:</li>
+<li><strong>Universe</strong>: Lists every listed sector constituent categorized by market cap tier (Large, Mid, Small).</li>
+<li><strong>Selection &amp; Data Feed Check</strong>: Validates active data connectivity with <code>tijori-finance-mcp</code> before expending research effort.</li>
+<li><strong>Research</strong>: Gathers audited quarterly earnings, product revenue mix, regional breakdowns, guidance vs delivery track record, and red flags.</li>
+<li><strong>Build</strong>: Compiles a single self-contained HTML document with pure CSS/SVG data visualizations, zero CDN dependencies, and interactive tables.</li>
+</ul>
+<h3 id="23-fundamental-stock-research-cashparency-stock-analyzer-skill">2.3 Fundamental Stock Research (<code>cashparency-stock-analyzer</code> Skill)</h3>
+<ul>
+<li><strong>Focus</strong>: High-conviction fundamental equity analysis covering balance sheet strength, return ratios (ROE/ROCE), debt-to-equity trajectories, free cash flow generation, and management execution.</li>
+<li><strong>Output Destination</strong>: <code>data/stocks/&lt;ticker&gt;-analysis.html</code></li>
+</ul>
+<hr />
+<h2 id="3-github-repository-architecture-data-topology">3. GitHub Repository Architecture &amp; Data Topology</h2>
+<p>The entire platform is hosted publicly at:<br />
+<strong><a href="https://github.com/Rajan1973/ag-equity-os">https://github.com/Rajan1973/ag-equity-os</a></strong></p>
+<h3 id="31-repository-structure-asset-map-image-3">3.1 Repository Structure &amp; Asset Map (Image 3)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/github_repository_structure.png', 'GitHub File Structure &amp; Repository Overview')">
+            <img src="images/github_repository_structure.png" alt="GitHub File Structure &amp; Repository Overview" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/github_repository_structure.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> GitHub File Structure &amp; Repository Overview</figcaption>
+    </figure>
+<pre><code>ag-equity-os/
+├── .agents/
+│   └── skills/
+│       └── update-report-to-EquityOS/      # Automated publishing skill
+│           ├── SKILL.md
+│           └── scripts/
+│               └── publish_to_equity_os.py  # End-to-end publishing script
+├── assets/                                 # Brand assets, high-res logos
+├── css/
+│   └── style.css                           # Unified responsive design system &amp; themes
+├── data/                                   # IMMUTABLE INTELLIGENCE REPOSITORY
+│   ├── eod/
+│   │   ├── daily/                          # Daily post-market briefs (e.g. 2026-09-10.html)
+│   │   └── weekly/                         # Weekly wrap briefs (e.g. 2026-09-05-weekly.html)
+│   ├── sectors/                            # 20+ sector quarterly reports (*-q1fy27.html)
+│   ├── stocks/                             # Single-stock fundamental research notes
+│   └── rrg/
+│       └── nifty-indices-rrg-latest.json    # Weekly RRG matrix (RS-Ratio &amp; RS-Momentum)
+├── docs/
+│   └── EQUITYOS_HANDBOOK.md                # Comprehensive architecture and operations handbook
+├── js/
+│   ├── app.js                              # Main UI controller, router, search, modals
+│   ├── data-loader.js                      # Centralized report registry &amp; sorting service
+│   └── rrg-chart.js                        # HTML5 Canvas Relative Rotation Graph engine
+├── .nojekyll                               # Bypasses Jekyll processing for raw HTML serving
+├── index.html                              # Main SPA Shell &amp; Scorecard Container
+└── README.md
+</code></pre>
+<h4 id="language-distribution">Language Distribution</h4>
+<p>As reflected in the repository metadata:<br />
+- <strong>HTML (91.1%)</strong>: Represents the self-contained post-market reports, sector research notes, and the main SPA container.<br />
+- <strong>JavaScript (4.6%)</strong>: Modular client-side router, search engine, and RRG Canvas engine.<br />
+- <strong>Python (2.2%)</strong>: Automated report ingestion and publishing pipeline scripts.<br />
+- <strong>CSS (2.1%)</strong>: Custom dark/light mode tokens and typography styling.</p>
+<hr />
+<h3 id="32-the-flat-file-static-philosophy-why-it-empowers-equityos">3.2 The Flat-File Static Philosophy: Why It Empowers EquityOS</h3>
+<p>Unlike traditional financial portals requiring database servers (PostgreSQL, MongoDB), application backends (Node/Python servers), and authentication APIs, EquityOS employs a <strong>Flat-File Static Web Architecture</strong>:</p>
+<ol>
+<li><strong>Zero Hosting &amp; Maintenance Cost</strong>: Hosted entirely on GitHub Pages without server upkeep, SQL migrations, or compute overhead.</li>
+<li><strong>Instant Edge CDN Delivery</strong>: GitHub Pages routes requests through Fastly/Varnish global CDNs, delivering sub-millisecond document loading worldwide.</li>
+<li><strong>Immutable Audit Trail</strong>: Every post-market report and sector revision is tracked via Git commits. Market commentary and forecasts remain timestamped and tamper-evident.</li>
+<li><strong>Self-Contained Report Portability</strong>: Every HTML report in <code>data/</code> contains its own styles, fonts, and scripts. Reports can be opened offline, emailed, downloaded as PDFs, or embedded seamlessly inside iframes.</li>
+<li><strong>Decoupled Autonomous Agent Architecture</strong>: Any Antigravity agent or automated script across any machine can push an updated analysis simply by committing a file and updating the registry.</li>
+</ol>
+<hr />
+<h2 id="4-equityos-web-application-modules-in-depth">4. EquityOS Web Application Modules In-Depth</h2>
+<h3 id="41-hero-section-daily-market-update-image-1">4.1 Hero Section: Daily Market Update (Image 1)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/hero_section.png', 'EquityOS Hero Section')">
+            <img src="images/hero_section.png" alt="EquityOS Hero Section" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/hero_section.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> EquityOS Hero Section</figcaption>
+    </figure>
+<p>The <strong>Hero Section</strong> (<code>#tab-hero</code>) serves as the executive cockpit, greeting the user with immediate market diagnostics from the latest session:</p>
+<ol>
+<li><strong>Eyebrow Timestamp (<code>#hero-date-tag</code>)</strong>: Displays session date (e.g. <code>AS OF 10 SEPTEMBER 2026</code>).</li>
+<li><strong>Composite Market Regime Card</strong>:</li>
+<li><strong>Regime Score (<code>#hero-regime-score</code>)</strong>: A weighted composite metric ranging from 0 to 100:<ul>
+<li><code>0.0 – 34.9</code>: <strong>Bearish Regime</strong> (Orange/Red badge)</li>
+<li><code>35.0 – 59.9</code>: <strong>Neutral Regime</strong> (Gold/Yellow badge)</li>
+<li><code>60.0 – 100.0</code>: <strong>Bullish Regime</strong> (Green badge)</li>
+</ul>
+</li>
+<li><strong>Regime Sub-Meta (<code>#hero-regime-meta</code>)</strong>: Displays component scores (e.g. <code>Volatility: 83.0 | Trend: 27.9</code>).</li>
+<li><strong>Key Market Insights List (<code>#hero-highlights-list</code>)</strong>: Bulleted summary highlighting top index moves, DII/FII absorption ratios, sector rotation hubs, and volume breakouts.</li>
+<li><strong>Unified Asymmetrical Scorecard Masonry</strong>:</li>
+<li><strong>Large Tiles</strong>: Nifty 50 (<code>23,477.80</code>, <code>+46.30 (+0.20%)</code>) and Sensex (<code>74,902.59</code>, <code>+138.37 (+0.19%)</code>).</li>
+<li><strong>Core Tiles</strong>: India VIX (<code>11.80</code>), FII Cash Net (<code>-₹438.24 Cr</code>), DII Cash Net (<code>+₹1,025.85 Cr</code>), and Nifty 500 Breadth (<code>191:305</code>, <code>A/D 0.63</code>).</li>
+<li><strong>Wide Macro Tiles</strong>: Brent Crude (<code>$98.40</code>) and USD/INR (<code>94.8850</code>).</li>
+<li><strong>Embedded Institutional Report Viewer (<code>#hero-report-iframe</code>)</strong>:</li>
+<li>Displays the full HTML report in an interactive iframe with an <code>↗ Open Fullscreen</code> standalone tab button.</li>
+<li><strong>Daily EOD Reports Archive Grid (<code>#daily-reports-grid-container</code>)</strong>:</li>
+<li>Chronological archive cards of previous sessions showing date, Nifty close, FII/DII flow totals, and regime tags.</li>
+</ol>
+<h4 id="how-hero-data-is-parsed-and-hydrated">How Hero Data Is Parsed and Hydrated</h4>
+<p>EquityOS uses <strong>Dual-Mode Hydration</strong>:<br />
+- <strong>Static First Paint</strong>: <code>index.html</code> contains static fallback markup of the latest session to eliminate Flash of Unstyled/Empty Content (FOUC).<br />
+- <strong>Dynamic JavaScript Hydration</strong>: On <code>DOMContentLoaded</code>, <code>initData()</code> in <code>js/app.js</code> queries <code>window.EquityData.getLatestDaily()</code>. It dynamically populates the scorecards, highlights, iframe source, and date selector dropdown (<code>#report-date-select</code>).</p>
+<hr />
+<h3 id="42-weekly-wrap-module-image-3">4.2 Weekly Wrap Module (Image 3)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/weekly_wrap.png', 'Weekly Wrap Module')">
+            <img src="images/weekly_wrap.png" alt="Weekly Wrap Module" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/weekly_wrap.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> Weekly Wrap Module</figcaption>
+    </figure>
+<p>Accessible via the <strong>Weekly Wrap</strong> tab (<code>#tab-weekly</code>), this view provides multi-day structural perspective:<br />
+- <strong>Weekly Executive Cockpit</strong>: Aggregates trailing 5-session returns for Nifty 50, Sensex, Bank Nifty, trailing weekly FII/DII totals, and cumulative breadth.<br />
+- <strong>Weekly Performance Visual Graphs</strong>: Cluster groupings comparing Cap-based indices (Large, Mid, Small), Banking &amp; Financials, and Cyclicals vs Defensives.<br />
+- <strong>Embedded Canvas Weekly Note</strong>: Houses the complete weekly wrap document (<code>data/eod/weekly/2026-09-05-weekly.html</code>) with interactive section jump navigation (§1 Cockpit to §8 Rotation).</p>
+<hr />
+<h3 id="43-sector-research-hub-image-2">4.3 Sector Research Hub (Image 2)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/sector_research.png', 'Sector Research Hub')">
+            <img src="images/sector_research.png" alt="Sector Research Hub" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/sector_research.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> Sector Research Hub</figcaption>
+    </figure>
+<p>The <strong>Sector Research Hub</strong> (<code>#tab-sectors</code>) is an institutional directory of Indian listed industries covering Q1 FY27 results:<br />
+- <strong>Sector Cards</strong>:<br />
+  - Category Badge &amp; Period (e.g. <code>Q1 FY27 · AUTOMOTIVE &amp; COMPONENTS</code>).<br />
+  - Sector Title (e.g. <code>Cables &amp; Wires Q1 FY27</code>, <code>Defence Q1 FY27</code>, <code>EMS Q1 FY27</code>).<br />
+  - Stock Constituent Chips: Clickable/searchable tags (e.g. <code>Polycab India</code>, <code>Apar Industries</code>, <code>KEI Industries</code>, <code>RR Kabel</code>).<br />
+  - Financial KPI Metrics: Topline Growth (YoY %) and Average Operating Profit Margin (OPM %).<br />
+  - <strong>Top Buy Pick</strong>: Top-conviction stock recommendation with target price and modeled upside (e.g. <code>Bharat Electronics (Target ₹465, +14.7% Upside)</code>).<br />
+- <strong>Dual-Action Launchers</strong>:<br />
+  - <code>🔍 View 90% Popup</code>: Opens an overlay modal (<code>#report-view-modal</code>) displaying the complete research note within a sandboxed 90vh viewer.<br />
+  - <code>↗ Open in Tab</code>: Opens the raw HTML report directly in a standalone browser tab.</p>
+<hr />
+<h3 id="44-universal-search-discovery-engine-image-4">4.4 Universal Search &amp; Discovery Engine (Image 4)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/search_function.png', 'Universal Search in Action')">
+            <img src="images/search_function.png" alt="Universal Search in Action" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/search_function.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> Universal Search in Action</figcaption>
+    </figure>
+<p>The Universal Search Bar (<code>#sector-search-input</code>) provides <strong>cross-dimensional query matching</strong>:<br />
+- <strong>Multi-Field Real-Time Indexing</strong>: Matches simultaneously against:<br />
+  1. Sector Titles (e.g. <em>"Defence"</em>, <em>"Chemicals"</em>)<br />
+  2. Categories (e.g. <em>"Industrial Capital Goods"</em>, <em>"Aerospace"</em>)<br />
+  3. Constituent Stock Names &amp; Tickers (e.g. typing <code>"bel"</code> immediately matches both <strong>Bharat Electronics</strong> in <em>Defence</em> and <strong>RR Kabel</strong> in <em>Cables &amp; Wires</em>)<br />
+  4. Industry Keywords &amp; Themes (e.g. <em>"solar"</em>, <em>"semiconductor"</em>, <em>"cdmo"</em>)<br />
+- <strong>Active Filter Highlighting</strong>: Matching constituent chips receive glowing golden border highlights.<br />
+- <strong>Live Counter &amp; View Toggles</strong>: Displays filtered count (<code>Showing 2 of 20 Sectors</code>) with instant Grid / List layout switching.</p>
+<hr />
+<h3 id="45-relative-rotation-graph-rrg-macro-overview-image-2-5">4.5 Relative Rotation Graph (RRG) Macro Overview (Image 2 / 5)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/rrg_overview_graph.png', 'Relative Rotation Graph Overview')">
+            <img src="images/rrg_overview_graph.png" alt="Relative Rotation Graph Overview" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/rrg_overview_graph.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> Relative Rotation Graph Overview</figcaption>
+    </figure>
+<p>The <strong>RRG Graph</strong> (<code>#tab-rrg</code>) implements Julius de Kempenaer’s Relative Rotation Graph algorithm natively in an HTML5 Canvas engine (<code>js/rrg-chart.js</code>):</p>
+<h4 id="quadrant-mechanics">Quadrant Mechanics</h4>
+<ul>
+<li><strong>Horizontal Axis (X)</strong>: <strong>RS-Ratio</strong> (Measures relative performance vs Nifty 50 benchmark; &gt;100 is outperforming).</li>
+<li><strong>Vertical Axis (Y)</strong>: <strong>RS-Momentum</strong> (Measures the rate of change of RS-Ratio; &gt;100 is accelerating momentum).</li>
+</ul>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Quadrant</th>
+<th style="text-align: left;">Location</th>
+<th style="text-align: left;">Definition</th>
+<th style="text-align: left;">Institutional Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Leading</strong></td>
+<td style="text-align: left;">Top-Right</td>
+<td style="text-align: left;">Strong relative strength &amp; accelerating momentum</td>
+<td style="text-align: left;">Heavy overweight allocation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Weakening</strong></td>
+<td style="text-align: left;">Bottom-Right</td>
+<td style="text-align: left;">Strong relative strength but decelerating momentum</td>
+<td style="text-align: left;">Profit taking / trim exposure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lagging</strong></td>
+<td style="text-align: left;">Bottom-Left</td>
+<td style="text-align: left;">Weak relative strength &amp; decelerating momentum</td>
+<td style="text-align: left;">Structural underweight / avoid</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Improving</strong></td>
+<td style="text-align: left;">Top-Left</td>
+<td style="text-align: left;">Weak relative strength but accelerating momentum</td>
+<td style="text-align: left;">Watchlist accumulation / reversal bets</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="cockpit-controls">Cockpit Controls</h4>
+<ul>
+<li><strong>Benchmark Selector</strong>: Defaults to <code>NIFTY 50</code> (extensible to Sector benchmarks).</li>
+<li><strong>Tail Length Slider</strong>: Modulates trail history from 1 to 12 weekly nodes.</li>
+<li><strong>8-Week History Scrubber</strong>: Interactive timeline slider allowing users to rewind the market and replay sector rotation trajectories.</li>
+<li><strong>Sector Multi-Select Toggles</strong>: Instant on/off filtering of individual index trails.</li>
+<li><strong>Summary Intelligence Cards</strong>: Four quick-read cards categorized as:</li>
+<li><em>Money Flowing In</em> (e.g. Nifty Oil &amp; Gas)</li>
+<li><em>Building Strength</em> (e.g. Nifty IT)</li>
+<li><em>Losing Momentum</em> (e.g. Nifty Metal)</li>
+<li><em>Underperforming</em> (e.g. Nifty FMCG)</li>
+</ul>
+<hr />
+<h3 id="46-rrg-constituent-drill-down-tradingview-technical-drawer-image-1-6">4.6 RRG Constituent Drill-Down &amp; TradingView Technical Drawer (Image 1 / 6)</h3>
+<figure class="handbook-figure">
+        <div class="img-wrapper" onclick="openLightbox('images/rrg_drilldown_chart.png', 'RRG Drill-Down with Interactive TradingView Technical Chart Drawer')">
+            <img src="images/rrg_drilldown_chart.png" alt="RRG Drill-Down with Interactive TradingView Technical Chart Drawer" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/rrg_drilldown_chart.png';">
+            <div class="img-overlay">
+                <span class="zoom-badge">🔍 Click to Expand</span>
+            </div>
+        </div>
+        <figcaption><span class="fig-label">Figure</span> RRG Drill-Down with Interactive TradingView Technical Chart Drawer</figcaption>
+    </figure>
+<p>A flagship feature of EquityOS is the <strong>Constituent Drill-Down Cockpit</strong>:<br />
+1. <strong>Sectoral Basket Selector (Left Sidebar)</strong>:<br />
+   - Allows users to shift focus from the broad index level (<code>All Nifty Indices</code>) down to specific industry universes such as <strong>Nifty Bank</strong>, <strong>Nifty Auto</strong>, <strong>Nifty IT</strong>, <strong>Nifty Financial Services</strong>, or <strong>Nifty Consumer Durables</strong>.<br />
+2. <strong>Individual Constituent Stock Chips (Top Ribbon)</strong>:<br />
+   - Selecting a sector dynamically populates all constituent stock chips (for example, in <em>Nifty Bank</em>: <code>AXISBANK</code>, <code>HDFCBANK</code>, <code>ICICIBANK</code>, <code>KOTAKBANK</code>, <code>SBIN</code>, <code>AUBANK</code>, <code>BANKBARODA</code>, <code>CANBK</code>, <code>FEDERALBNK</code>, <code>IDFCFIRSTB</code>, <code>INDUSINDBK</code>, <code>PNB</code>, <code>UNIONBANK</code>, <code>YESBANK</code>).<br />
+   - Clicking any stock chip toggles its multi-week rotational trail on the RRG canvas.<br />
+3. <strong>TradingView Lite Slide-Out Technical Drawer</strong>:<br />
+   - Clicking a stock chip launches an integrated <strong>TradingView Lite</strong> drawer on the right pane (e.g. <strong>HDFCBANK</strong>):<br />
+     - <strong>Candlestick Price Action</strong>: High-frequency intraday and daily price bars with 52-week context.<br />
+     - <strong>MACD Indicator (12, 26, 9)</strong>: Real-time MACD line, signal line, and histogram divergence.<br />
+     - <strong>RSI-14 Momentum</strong>: Tracks overbought/oversold boundaries (e.g. RSI 28.76 reflecting deep oversold capitulation).<br />
+     - <strong>Volume Dynamics</strong>: Color-coded volume bars vs moving averages.<br />
+     - <strong>Multi-Timeframe Horizon</strong>: 1m, 30m, 1h, 1D, 1W, YTD, 1Y, 5Y, All.<br />
+   - <strong>Strategic Synthesis</strong>: Bridges top-down macro sector rotation with bottom-up technical execution timing.</p>
+<hr />
+<h2 id="5-settings-dual-mode-report-publishing-pipeline">5. Settings &amp; Dual-Mode Report Publishing Pipeline</h2>
+<p>EquityOS provides two distinct ways to publish newly generated market intelligence notes:</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│                   HOW TO PUBLISH TO EQUITYOS                           │
+├───────────────────────────────────┬────────────────────────────────────┤
+│ METHOD 1: IN-APP ADMIN PORTAL     │ METHOD 2: ANTIGRAVITY SKILL        │
+├───────────────────────────────────┼────────────────────────────────────┤
+│ • Upload via Web Browser UI       │ • Run via Antigravity Prompt/CLI   │
+│ • Local file picker or path       │ • Operates globally across folders │
+│ • Client-side DOMParser scraping  │ • Auto-extracts 15+ metrics        │
+│ • Stores in browser localStorage  │ • Updates data-loader.js &amp; HTML    │
+│ • Ideal for local draft preview   │ • Auto git commit &amp; pushes to web  │
+└───────────────────────────────────┴────────────────────────────────────┘
+</code></pre>
+<h3 id="51-application-settings-ui-customization">5.1 Application Settings &amp; UI Customization</h3>
+<ul>
+<li><strong>Theme Toggle Button (<code>#theme-toggle-btn</code>)</strong>: Seamless switching between Dark Mode (<code>data-theme="dark"</code>) and Light Mode (<code>data-theme="light"</code>).</li>
+<li><strong>Settings Modal Trigger (<code>#settings-btn</code>)</strong>: Prompts for administrative sign-in:</li>
+<li><strong>Username</strong>: <code>admin</code></li>
+<li><strong>Password</strong>: <code>password123</code></li>
+</ul>
+<hr />
+<h3 id="52-publishing-method-1-in-app-admin-upload-portal">5.2 Publishing Method 1: In-App Admin Upload Portal</h3>
+<p>Once signed in via the Settings modal, the <strong>Admin Report Upload Portal</strong> (<code>#admin-panel-modal</code>) opens:</p>
+<ol>
+<li>Select <strong>Daily Market Update</strong> or <strong>Sector Report</strong> tab.</li>
+<li>Choose a local HTML file via the file picker, or enter a relative path (e.g. <code>data/eod/daily/2026-09-10.html</code>).</li>
+<li>Click <strong>Process &amp; Publish Update ➔</strong>.</li>
+<li><strong>Automated Client-Side Scraping</strong>:</li>
+<li>The browser's native <code>DOMParser</code> parses the file.</li>
+<li>Extracts Nifty, Sensex, VIX, FII/DII cash net flows, breadth counts, and executive highlights.</li>
+<li>Calls <code>EquityData.addDailyReport()</code> or <code>EquityData.addSectorReport()</code>.</li>
+<li>Persists the report in <code>localStorage</code> under <code>nb_custom_daily_reports</code>.</li>
+<li>Re-renders the hero scorecard and archive grid immediately.</li>
+</ol>
+<div class="doc-alert alert-note"><div class="alert-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div><div class="alert-body"><strong>NOTE:</strong> Reports uploaded via the in-app portal are active in the local browser session. To publish permanently to the global GitHub Pages site for all users, use **Method 2**.</div></div>
+<hr />
+<h3 id="53-publishing-method-2-antigravity-skill-update-report-to-equityos">5.3 Publishing Method 2: Antigravity Skill <code>update-report-to-EquityOS</code></h3>
+<p>The <strong><code>update-report-to-EquityOS</code></strong> skill is a global automation pipeline available across all Antigravity workspaces (<code>post-market-report</code>, <code>equity-os</code>, etc.).</p>
+<h4 id="step-1-trigger-the-skill">Step 1: Trigger the Skill</h4>
+<p>Immediately after generating a post-market or stock report in chat, prompt:</p>
+<blockquote>
+<p><em>"Run <code>update-report-to-EquityOS</code>"</em> or <em>"Publish this report to EquityOS"</em></p>
+</blockquote>
+<h4 id="step-2-the-skill-prompts-for-report-type">Step 2: The Skill Prompts for Report Type</h4>
+<p>If not already obvious from context, the skill asks:<br />
+- <strong>Daily EOD Report</strong> (Target: <code>data/eod/daily/YYYY-MM-DD.html</code>)<br />
+- <strong>Stock Report</strong> (Target: <code>data/stocks/&lt;ticker&gt;-analysis.html</code>)<br />
+- <strong>Sector Report</strong> (Target: <code>data/sectors/&lt;sector-slug&gt;-&lt;period&gt;.html</code>)</p>
+<h4 id="step-3-fully-automated-execution">Step 3: Fully Automated Execution</h4>
+<p>The bundled automation script (<code>publish_to_equity_os.py</code>) executes:<br />
+1. <strong>File Ingestion</strong>: Copies the report into <code>D:\Anti Gravity\equity-os\data\...</code> with standardized naming.<br />
+2. <strong>Metadata Scraping</strong>: Parses all 15+ scorecard metrics, regime scores, and highlights.<br />
+3. <strong>Data Loader Registry Update</strong>: Updates <code>js/data-loader.js</code>, deduplicating by ID and sorting dates descending.<br />
+4. <strong>Hero Scorecard &amp; Fallback Update</strong>: Updates <code>index.html</code> static fallbacks, standalone tab buttons, and iframe links.<br />
+5. <strong>Cache-Buster Bumping</strong>: Appends an updated query parameter (<code>?v=YYYYMMDD-HHMM</code>) to all CSS and script links.<br />
+6. <strong>Git Commit &amp; Push</strong>: Runs <code>git add</code>, <code>git commit -m "Publish EOD Daily Brief for DD-Mon-YYYY"</code>, and <code>git push origin main</code>.</p>
+<h4 id="direct-cli-execution-syntax">Direct CLI Execution Syntax</h4>
+<pre><code class="language-bash"># Publish Daily Post-Market Brief:
+python &quot;C:\Users\arjun\.gemini\config\skills\update-report-to-EquityOS\scripts\publish_to_equity_os.py&quot; --type daily --file &quot;D:\Anti Gravity\post-market-report\output\2026-09-10.html&quot;
+
+# Publish Stock Fundamental Report:
+python &quot;C:\Users\arjun\.gemini\config\skills\update-report-to-EquityOS\scripts\publish_to_equity_os.py&quot; --type stock --file &quot;path\to\report.html&quot; --ticker &quot;WELCORP&quot;
+
+# Dry-run test without pushing to remote:
+python &quot;C:\Users\arjun\.gemini\config\skills\update-report-to-EquityOS\scripts\publish_to_equity_os.py&quot; --type daily --file &quot;path\to\report.html&quot; --no-push
+</code></pre>
+<hr />
+<h2 id="6-cache-invalidation-edge-deployment-strategy">6. Cache Invalidation &amp; Edge Deployment Strategy</h2>
+<h3 id="the-10-minute-cache-trap">The 10-Minute Cache Trap</h3>
+<p>GitHub Pages serves all static assets (<code>.js</code>, <code>.css</code>, <code>.html</code>) with a <code>Cache-Control: max-age=600</code> header (10 minutes).</p>
+<p>When an author updates <code>data-loader.js</code> and pushes to GitHub, users who previously visited the site will load <code>data-loader.js</code> <strong>from browser disk cache</strong>, continuing to see the previous day's data until the 10-minute cache expires.</p>
+<h3 id="the-equityos-solution-versioned-cache-busting">The EquityOS Solution: Versioned Cache Busting</h3>
+<p><code>publish_to_equity_os.py</code> automatically updates script tags in <code>index.html</code> with a build timestamp:</p>
+<pre><code class="language-html">&lt;!-- Busted cache guarantees instantaneous edge refresh --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css?v=20260910-2324&quot;&gt;
+&lt;script src=&quot;js/data-loader.js?v=20260910-2324&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/rrg-chart.js?v=20260910-2324&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/app.js?v=20260910-2324&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Whenever a new report is published, browsers recognize a new URL query string and immediately download the updated script, completely bypassing stale edge and browser caches.</p>
+<hr />
+<h2 id="7-operational-cheat-sheet-best-practices">7. Operational Cheat-Sheet &amp; Best Practices</h2>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Workflow</th>
+<th style="text-align: left;">Command / Action</th>
+<th style="text-align: left;">Key Files Affected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Generate Daily Brief</strong></td>
+<td style="text-align: left;"><code>/daily-brief</code> in <code>post-market-report</code></td>
+<td style="text-align: left;"><code>output/YYYY-MM-DD.html</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Generate Sector Review</strong></td>
+<td style="text-align: left;"><code>/rajan-sector-analysis &lt;Sector&gt;</code></td>
+<td style="text-align: left;"><code>data/sectors/*.html</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Generate Stock Report</strong></td>
+<td style="text-align: left;"><code>/cashparency-stock-analyzer</code></td>
+<td style="text-align: left;"><code>data/stocks/*.html</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Publish to EquityOS</strong></td>
+<td style="text-align: left;"><code>/update-report-to-EquityOS</code></td>
+<td style="text-align: left;"><code>data/</code>, <code>js/data-loader.js</code>, <code>index.html</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Test Local App</strong></td>
+<td style="text-align: left;">Open <code>d:\Anti Gravity\equity-os\index.html</code> in browser</td>
+<td style="text-align: left;">Verified locally</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Check Live App</strong></td>
+<td style="text-align: left;">Visit <a href="https://rajan1973.github.io/ag-equity-os/">https://rajan1973.github.io/ag-equity-os/</a></td>
+<td style="text-align: left;">Deployed in ~60s</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Verify Git Sync</strong></td>
+<td style="text-align: left;"><code>git status</code> &amp; <code>git log -n 3</code> in <code>equity-os</code></td>
+<td style="text-align: left;"><code>origin/main</code> branch</td>
+</tr>
+</tbody>
+</table></div>
+
+            <footer class="handbook-footer">
+                <div>EquityOS Architecture Handbook · Rajan Babu · 2026</div>
+                <div>Repository: <a href="https://github.com/Rajan1973/ag-equity-os" target="_blank">Rajan1973/ag-equity-os</a></div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Expanded View">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Light/Dark Theme Switcher
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('equityos_handbook_theme', next);
+            document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+
+        const savedTheme = localStorage.getItem('equityos_handbook_theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Lightbox Functions
+        function openLightbox(src, caption) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCaption');
+            img.src = src;
+            cap.textContent = caption;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

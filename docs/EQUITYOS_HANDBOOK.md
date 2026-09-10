@@ -15,15 +15,15 @@
    - [2.2 Institutional Sector Research (`rajan-sector-analysis` Skill)](#22-institutional-sector-research-rajan-sector-analysis-skill)
    - [2.3 Fundamental Stock Research (`cashparency-stock-analyzer` Skill)](#23-fundamental-stock-research-cashparency-stock-analyzer-skill)
 3. [GitHub Repository Architecture & Data Topology](#3-github-repository-architecture--data-topology)
-   - [3.1 Repository Structure & Asset Map](#31-repository-structure--asset-map)
+   - [3.1 Repository Structure & Asset Map (Image 3)](#31-repository-structure--asset-map-image-3)
    - [3.2 The Flat-File Static Philosophy: Why It Empowers EquityOS](#32-the-flat-file-static-philosophy-why-it-empowers-equityos)
 4. [EquityOS Web Application Modules In-Depth](#4-equityos-web-application-modules-in-depth)
-   - [4.1 Hero Section: Daily Market Update](#41-hero-section-daily-market-update)
-   - [4.2 Weekly Wrap Module](#42-weekly-wrap-module)
-   - [4.3 Sector Research Hub](#43-sector-research-hub)
-   - [4.4 Universal Search & Discovery Engine](#44-universal-search--discovery-engine)
-   - [4.5 Relative Rotation Graph (RRG) Macro Overview](#45-relative-rotation-graph-rrg-macro-overview)
-   - [4.6 RRG Constituent Drill-Down & TradingView Technical Drawer](#46-rrg-constituent-drill-down--tradingview-technical-drawer)
+   - [4.1 Hero Section: Daily Market Update (Image 1)](#41-hero-section-daily-market-update-image-1)
+   - [4.2 Weekly Wrap Module (Image 3)](#42-weekly-wrap-module-image-3)
+   - [4.3 Sector Research Hub (Image 2)](#43-sector-research-hub-image-2)
+   - [4.4 Universal Search & Discovery Engine (Image 4)](#44-universal-search--discovery-engine-image-4)
+   - [4.5 Relative Rotation Graph (RRG) Macro Overview (Image 2 / 5)](#45-relative-rotation-graph-rrg-macro-overview-image-2--5)
+   - [4.6 RRG Constituent Drill-Down & TradingView Technical Drawer (Image 1 / 6)](#46-rrg-constituent-drill-down--tradingview-technical-drawer-image-1--6)
 5. [Settings & Dual-Mode Report Publishing Pipeline](#5-settings--dual-mode-report-publishing-pipeline)
    - [5.1 Application Settings & UI Customization](#51-application-settings--ui-customization)
    - [5.2 Publishing Method 1: In-App Admin Upload Portal](#52-publishing-method-1-in-app-admin-upload-portal)
@@ -106,7 +106,9 @@ EquityOS does not depend on a costly, fragile backend database server. Instead, 
 The entire platform is hosted publicly at:
 **[https://github.com/Rajan1973/ag-equity-os](https://github.com/Rajan1973/ag-equity-os)**
 
-### 3.1 Repository Structure & Asset Map
+### 3.1 Repository Structure & Asset Map (Image 3)
+
+![GitHub File Structure & Repository Overview](images/github_repository_structure.png)
 
 ```
 ag-equity-os/
@@ -161,7 +163,9 @@ Unlike traditional financial portals requiring database servers (PostgreSQL, Mon
 
 ## 4. EquityOS Web Application Modules In-Depth
 
-### 4.1 Hero Section: Daily Market Update
+### 4.1 Hero Section: Daily Market Update (Image 1)
+
+![EquityOS Hero Section](images/hero_section.png)
 
 The **Hero Section** (`#tab-hero`) serves as the executive cockpit, greeting the user with immediate market diagnostics from the latest session:
 
@@ -189,7 +193,9 @@ EquityOS uses **Dual-Mode Hydration**:
 
 ---
 
-### 4.2 Weekly Wrap Module
+### 4.2 Weekly Wrap Module (Image 3)
+
+![Weekly Wrap Module](images/weekly_wrap.png)
 
 Accessible via the **Weekly Wrap** tab (`#tab-weekly`), this view provides multi-day structural perspective:
 - **Weekly Executive Cockpit**: Aggregates trailing 5-session returns for Nifty 50, Sensex, Bank Nifty, trailing weekly FII/DII totals, and cumulative breadth.
@@ -198,7 +204,9 @@ Accessible via the **Weekly Wrap** tab (`#tab-weekly`), this view provides multi
 
 ---
 
-### 4.3 Sector Research Hub
+### 4.3 Sector Research Hub (Image 2)
+
+![Sector Research Hub](images/sector_research.png)
 
 The **Sector Research Hub** (`#tab-sectors`) is an institutional directory of Indian listed industries covering Q1 FY27 results:
 - **Sector Cards**:
@@ -213,7 +221,9 @@ The **Sector Research Hub** (`#tab-sectors`) is an institutional directory of In
 
 ---
 
-### 4.4 Universal Search & Discovery Engine
+### 4.4 Universal Search & Discovery Engine (Image 4)
+
+![Universal Search in Action](images/search_function.png)
 
 The Universal Search Bar (`#sector-search-input`) provides **cross-dimensional query matching**:
 - **Multi-Field Real-Time Indexing**: Matches simultaneously against:
@@ -226,7 +236,9 @@ The Universal Search Bar (`#sector-search-input`) provides **cross-dimensional q
 
 ---
 
-### 4.5 Relative Rotation Graph (RRG) Macro Overview
+### 4.5 Relative Rotation Graph (RRG) Macro Overview (Image 2 / 5)
+
+![Relative Rotation Graph Overview](images/rrg_overview_graph.png)
 
 The **RRG Graph** (`#tab-rrg`) implements Julius de Kempenaer’s Relative Rotation Graph algorithm natively in an HTML5 Canvas engine (`js/rrg-chart.js`):
 
@@ -254,7 +266,9 @@ The **RRG Graph** (`#tab-rrg`) implements Julius de Kempenaer’s Relative Rotat
 
 ---
 
-### 4.6 RRG Constituent Drill-Down & TradingView Technical Drawer
+### 4.6 RRG Constituent Drill-Down & TradingView Technical Drawer (Image 1 / 6)
+
+![RRG Drill-Down with Interactive TradingView Technical Chart Drawer](images/rrg_drilldown_chart.png)
 
 A flagship feature of EquityOS is the **Constituent Drill-Down Cockpit**:
 1. **Sectoral Basket Selector (Left Sidebar)**:
