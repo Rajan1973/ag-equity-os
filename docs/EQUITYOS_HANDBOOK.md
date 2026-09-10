@@ -15,14 +15,15 @@
    - [2.2 Institutional Sector Research (`rajan-sector-analysis` Skill)](#22-institutional-sector-research-rajan-sector-analysis-skill)
    - [2.3 Fundamental Stock Research (`cashparency-stock-analyzer` Skill)](#23-fundamental-stock-research-cashparency-stock-analyzer-skill)
 3. [GitHub Repository Architecture & Data Topology](#3-github-repository-architecture--data-topology)
-   - [3.1 Directory Structure](#31-directory-structure)
+   - [3.1 Repository Structure & Asset Map](#31-repository-structure--asset-map)
    - [3.2 The Flat-File Static Philosophy: Why It Empowers EquityOS](#32-the-flat-file-static-philosophy-why-it-empowers-equityos)
 4. [EquityOS Web Application Modules In-Depth](#4-equityos-web-application-modules-in-depth)
    - [4.1 Hero Section: Daily Market Update](#41-hero-section-daily-market-update)
    - [4.2 Weekly Wrap Module](#42-weekly-wrap-module)
    - [4.3 Sector Research Hub](#43-sector-research-hub)
    - [4.4 Universal Search & Discovery Engine](#44-universal-search--discovery-engine)
-   - [4.5 Relative Rotation Graph (RRG) & Multi-Timeframe Analytics](#45-relative-rotation-graph-rrg--multi-timeframe-analytics)
+   - [4.5 Relative Rotation Graph (RRG) Macro Overview](#45-relative-rotation-graph-rrg-macro-overview)
+   - [4.6 RRG Constituent Drill-Down & TradingView Technical Drawer](#46-rrg-constituent-drill-down--tradingview-technical-drawer)
 5. [Settings & Dual-Mode Report Publishing Pipeline](#5-settings--dual-mode-report-publishing-pipeline)
    - [5.1 Application Settings & UI Customization](#51-application-settings--ui-customization)
    - [5.2 Publishing Method 1: In-App Admin Upload Portal](#52-publishing-method-1-in-app-admin-upload-portal)
@@ -41,7 +42,34 @@ Headline indices frequently deceive: an index can rise while 70% of its constitu
 1. **Daily Market Regimes**: Composite regime scoring combining Advance/Decline breadth, distance to the 200-day moving average, realized volatility compression, and institutional cash flow absorption.
 2. **Weekly Rotation Wraps**: Comprehensive multi-session synthesis with capital flow distribution.
 3. **Sector Intelligence Hub**: In-depth quarterly earnings reviews across 20+ specialized industries, benchmarked against management guidance and raw material price cycles.
-4. **Relative Rotation Graphs (RRG)**: Dynamic 4-quadrant momentum tracking measuring relative strength (RS-Ratio) and momentum (RS-Momentum) against the Nifty 50 benchmark.
+4. **Relative Rotation Graphs (RRG)**: Dynamic 4-quadrant momentum tracking measuring relative strength (RS-Ratio) and momentum (RS-Momentum) against the Nifty 50 benchmark with interactive single-stock technical drill-downs.
+
+```mermaid
+graph LR
+    subgraph Upstream Generation
+        A1[post-market-report<br>daily-brief skill] --> B[HTML Report]
+        A2[rajan-sector-analysis<br>sector skill] --> B
+        A3[cashparency<br>stock analyzer] --> B
+    end
+
+    subgraph Publishing Engine
+        B --> C{Publishing Mode}
+        C -->|Method 1| D[In-App Admin Portal]
+        C -->|Method 2| E[update-report-to-EquityOS]
+    end
+
+    subgraph ag-equity-os Repository
+        D --> F[(data/ & js/data-loader.js)]
+        E --> F
+        F --> G[Git Commit & Push]
+    end
+
+    subgraph Edge Distribution
+        G --> H[GitHub Pages Build]
+        H --> I[Fastly/Varnish CDN Edge]
+        I --> J[Nifty & Beyond SPA]
+    end
+```
 
 ---
 
@@ -78,16 +106,16 @@ EquityOS does not depend on a costly, fragile backend database server. Instead, 
 The entire platform is hosted publicly at:
 **[https://github.com/Rajan1973/ag-equity-os](https://github.com/Rajan1973/ag-equity-os)**
 
-### 3.1 Directory Structure
+### 3.1 Repository Structure & Asset Map
 
 ```
 ag-equity-os/
 ├── .agents/
 │   └── skills/
-│       └── update-report-to-EquityOS/      # Version-controlled publishing skill
+│       └── update-report-to-EquityOS/      # Automated publishing skill
 │           ├── SKILL.md
 │           └── scripts/
-│               └── publish_to_equity_os.py  # Automated publishing pipeline script
+│               └── publish_to_equity_os.py  # End-to-end publishing script
 ├── assets/                                 # Brand assets, high-res logos
 ├── css/
 │   └── style.css                           # Unified responsive design system & themes
@@ -109,6 +137,15 @@ ag-equity-os/
 ├── index.html                              # Main SPA Shell & Scorecard Container
 └── README.md
 ```
+
+#### Language Distribution
+As reflected in the repository metadata:
+- **HTML (91.1%)**: Represents the self-contained post-market reports, sector research notes, and the main SPA container.
+- **JavaScript (4.6%)**: Modular client-side router, search engine, and RRG Canvas engine.
+- **Python (2.2%)**: Automated report ingestion and publishing pipeline scripts.
+- **CSS (2.1%)**: Custom dark/light mode tokens and typography styling.
+
+---
 
 ### 3.2 The Flat-File Static Philosophy: Why It Empowers EquityOS
 
@@ -189,7 +226,7 @@ The Universal Search Bar (`#sector-search-input`) provides **cross-dimensional q
 
 ---
 
-### 4.5 Relative Rotation Graph (RRG) & Multi-Timeframe Analytics
+### 4.5 Relative Rotation Graph (RRG) Macro Overview
 
 The **RRG Graph** (`#tab-rrg`) implements Julius de Kempenaer’s Relative Rotation Graph algorithm natively in an HTML5 Canvas engine (`js/rrg-chart.js`):
 
@@ -209,7 +246,30 @@ The **RRG Graph** (`#tab-rrg`) implements Julius de Kempenaer’s Relative Rotat
 - **Tail Length Slider**: Modulates trail history from 1 to 12 weekly nodes.
 - **8-Week History Scrubber**: Interactive timeline slider allowing users to rewind the market and replay sector rotation trajectories.
 - **Sector Multi-Select Toggles**: Instant on/off filtering of individual index trails.
-- **Constituent Drill-Down Sidebar**: Lists individual sector constituents for deep-dive tracking.
+- **Summary Intelligence Cards**: Four quick-read cards categorized as:
+  1. *Money Flowing In* (e.g. Nifty Oil & Gas)
+  2. *Building Strength* (e.g. Nifty IT)
+  3. *Losing Momentum* (e.g. Nifty Metal)
+  4. *Underperforming* (e.g. Nifty FMCG)
+
+---
+
+### 4.6 RRG Constituent Drill-Down & TradingView Technical Drawer
+
+A flagship feature of EquityOS is the **Constituent Drill-Down Cockpit**:
+1. **Sectoral Basket Selector (Left Sidebar)**:
+   - Allows users to shift focus from the broad index level (`All Nifty Indices`) down to specific industry universes such as **Nifty Bank**, **Nifty Auto**, **Nifty IT**, **Nifty Financial Services**, or **Nifty Consumer Durables**.
+2. **Individual Constituent Stock Chips (Top Ribbon)**:
+   - Selecting a sector dynamically populates all constituent stock chips (for example, in *Nifty Bank*: `AXISBANK`, `HDFCBANK`, `ICICIBANK`, `KOTAKBANK`, `SBIN`, `AUBANK`, `BANKBARODA`, `CANBK`, `FEDERALBNK`, `IDFCFIRSTB`, `INDUSINDBK`, `PNB`, `UNIONBANK`, `YESBANK`).
+   - Clicking any stock chip toggles its multi-week rotational trail on the RRG canvas.
+3. **TradingView Lite Slide-Out Technical Drawer**:
+   - Clicking a stock chip launches an integrated **TradingView Lite** drawer on the right pane (e.g. **HDFCBANK**):
+     - **Candlestick Price Action**: High-frequency intraday and daily price bars with 52-week context.
+     - **MACD Indicator (12, 26, 9)**: Real-time MACD line, signal line, and histogram divergence.
+     - **RSI-14 Momentum**: Tracks overbought/oversold boundaries (e.g. RSI 28.76 reflecting deep oversold capitulation).
+     - **Volume Dynamics**: Color-coded volume bars vs moving averages.
+     - **Multi-Timeframe Horizon**: 1m, 30m, 1h, 1D, 1W, YTD, 1Y, 5Y, All.
+   - **Strategic Synthesis**: Bridges top-down macro sector rotation with bottom-up technical execution timing.
 
 ---
 
