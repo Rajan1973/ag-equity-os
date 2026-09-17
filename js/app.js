@@ -61,6 +61,26 @@ function initData() {
     });
   }
 
+  // Populate Weekly Selector
+  const weeklySelect = document.getElementById('weekly-report-select');
+  if (weeklySelect && window.EquityData.reports.weekly) {
+    weeklySelect.innerHTML = window.EquityData.reports.weekly.map((w, idx) => `
+      <option value="${w.file}" data-period="${w.period}">${w.period} ${idx === 0 ? '(Latest)' : ''}</option>
+    `).join('');
+
+    weeklySelect.addEventListener('change', (e) => {
+      const selOpt = e.target.selectedOptions[0];
+      const file = e.target.value;
+      const period = selOpt.getAttribute('data-period');
+      const iframe = document.getElementById('weekly-report-iframe');
+      const openBtn = document.getElementById('weekly-open-standalone-btn');
+      const titleEl = document.getElementById('weekly-banner-title');
+      if (iframe) iframe.src = file;
+      if (openBtn) openBtn.href = file;
+      if (titleEl && period) titleEl.textContent = `Nifty & Beyond — Weekly Wrap (${period})`;
+    });
+  }
+
   // Render Daily EOD Archive Grid
   renderDailyReportsGrid();
 }
