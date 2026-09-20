@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
         daily: [
       {
+        "id": "2026-09-18",
+        "date": "2026-09-18",
+        "title": "Nifty & Beyond — 18 Sep 2026",
+        "file": "data/eod/daily/2026-09-18.html",
+        "nifty": "23,346.40",
+        "niftyChange": "+75.80 (+0.33%)",
+        "sensex": "74,294.96",
+        "sensexChange": "-19.63 (-0.03%)",
+        "vix": "11.39",
+        "vixChange": "-0.90",
+        "fii": "+599.54",
+        "dii": "+1,019.69",
+        "breadth": "363:136 (2.67)",
+        "brent": "$97.90 (-0.91%)",
+        "usdinr": "94.8600 (+0.05%)",
+        "regimeScore": "52.4 NEUTRAL",
+        "highlights": [
+                "📈 Index: Nifty 23,346.40 (+0.33%, +75.80 pts), Sensex 74,294.96 (-0.03%, -19.63 pts), Bank Nifty 56,358.70 (+0.54%, +302.95 pts). Nifty carved out an orderly 102.55-point Friday range (low 23,286.60 to high 23,389.15), consolidating comfortably in the middle third as banking strength counterbalanced IT softness.",
+                "🚀 Breadth: 363 advances, 136 declines in Nifty 500 (A/D 2.67). Advancers swept 73% of the universe for the second straight session, lifting momentum percentile to 85.9 (rank 211 of 245 sessions) and expanding constituents above their 20-day SMA from 21% to 38%.",
+                "🏦 Institutional Flows: FIIs snapped a heavy selling streak to turn net buyers (+₹599.54 Cr, rank 36/48), while DIIs absorbed another +₹1,019.69 Cr. Total September MTD domestic inflows climbed past ₹36,218 Cr, establishing an impenetrable structural floor.",
+                "⚡ Standout Catalyst: Adani Total Gas (ATGL) erupted +12.56% to ₹660.70 on a massive 21.99x volume (+7.3% above 20SMA, RSI 63.1), breaking out decisively on rapid CNG network expansion and regional pipeline gas commissioning."
+        ]
+},
+      {
               "id": "2026-09-17",
               "date": "2026-09-17",
               "title": "Nifty & Beyond — 17 Sep 2026",
@@ -273,7 +297,19 @@ window.EquityData = {
       }
     ],
         weekly: [
-      {
+            {
+              "id": "2026-09-18-weekly",
+              "period": "14 September – 18 September 2026",
+              "title": "Nifty & Beyond Weekly Wrap",
+              "file": "data/eod/weekly/2026-09-18-weekly.html",
+              "niftyWeekly": "23,346.40 (-0.22%)",
+              "sensexWeekly": "74,294.96 (-0.65%)",
+              "diiWeekly": "+₹11,231.72 Cr",
+              "fiiWeekly": "-₹7,619.69 Cr",
+              "vixWeekly": "11.39 (Calm)",
+              "summary": "Nifty absorbed heavy early-week foreign selling to close virtually flat at 23,346.40 (-0.22% 1W), staging a 230-pt recovery from Wednesday's low; DIIs deployed a record +₹11,232 Cr across 5 sessions (147% absorption) while FIIs flipped to net buyers on Friday."
+      },
+{
               "id": "2026-09-11-weekly",
               "period": "7 September – 11 September 2026",
               "title": "Nifty & Beyond Weekly Wrap",
