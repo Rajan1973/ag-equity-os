@@ -7,7 +7,7 @@ window.EquityData = {
   // Registry of all available reports
   reports: {
         daily: [
-      {
+            {
         "id": "2026-09-18",
         "date": "2026-09-18",
         "title": "Nifty & Beyond — 18 Sep 2026",
