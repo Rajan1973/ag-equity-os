@@ -7,6 +7,30 @@ window.EquityData = {
   // Registry of all available reports
   reports: {
         daily: [
+      {
+        "id": "2026-09-21",
+        "date": "2026-09-21",
+        "title": "Nifty & Beyond — 21 Sep 2026",
+        "file": "data/eod/daily/2026-09-21.html",
+        "nifty": "23,414.30",
+        "niftyChange": "+67.90 (+0.29%)",
+        "sensex": "74,858.99",
+        "sensexChange": "+564.03 (+0.76%)",
+        "vix": "11.25",
+        "vixChange": "-0.14",
+        "fii": "-576.20",
+        "dii": "+2,797.27",
+        "breadth": "211:286 (0.74)",
+        "brent": "$97.45 (-0.46%)",
+        "usdinr": "94.9200 (-0.06%)",
+        "regimeScore": "36.9 NEUTRAL",
+        "highlights": [
+                "📈 Index: Nifty 23,414.30 (+0.29%, +67.90 pts), Sensex 74,858.99 (+0.76%, +564.03 pts), Bank Nifty 56,470.65 (+0.20%, +111.95 pts). Nifty tested an intraday high of 23,466.80 before settling in the middle third of its 152-point Monday range, propelled by pharma, healthcare, and FMCG resilience.",
+                "⚖️ Breadth: 211 advances, 286 declines in Nifty 500 (A/D 0.74, 40.6th percentile). Participation pulled back from Friday's euphoria as constituents above their 20-day SMA moderated from 38% to 33%, highlighting large-cap index insulation amid midcap consolidation.",
+                "🏦 Institutional Flows: FIIs turned mild net sellers at -₹576.20 Cr (rank 22/49). DIIs responded with aggressive absorption of +₹2,797.27 Cr (absorbing 485.5% of foreign sales), propelling cumulative September MTD domestic equity inflows past an extraordinary ₹39,015 Cr.",
+                "⚡ Standout Catalyst: Tega Industries (TEGA) vaulted +9.57% to ₹2,129.00 on a colossal 13.89x volume (+25.7% above 20SMA, RSI 79.9), breaking out on accelerated global mining consumable replacement orders and capacity ramp-ups."
+        ]
+},
             {
         "id": "2026-09-18",
         "date": "2026-09-18",
