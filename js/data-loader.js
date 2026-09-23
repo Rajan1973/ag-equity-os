@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
         daily: [
       {
+        "id": "2026-09-23",
+        "date": "2026-09-23",
+        "title": "Nifty & Beyond — 23 Sep 2026",
+        "file": "data/eod/daily/2026-09-23.html",
+        "nifty": "23,446.80",
+        "niftyChange": "+117.80 (+0.50%)",
+        "sensex": "74,828.25",
+        "sensexChange": "+299.17 (+0.40%)",
+        "vix": "10.35",
+        "vixChange": "-0.65",
+        "fii": "+1,617.45",
+        "dii": "+2,341.46",
+        "breadth": "342:156 (2.19)",
+        "brent": "$102.45 (+3.22%)",
+        "usdinr": "95.7400 (-0.06%)",
+        "regimeScore": "56.2 CONSTRUCTIVE",
+        "highlights": [
+                "📈 Index: Nifty 23,446.80 (+0.50%, +117.80 pts), Sensex 74,828.25 (+0.40%, +299.17 pts), Bank Nifty 56,548.90 (+0.59%, +333.35 pts). Nifty opened steady at 23,352.15, established an intraday base at 23,349.55, and rallied toward 23,466.90 to close near session highs in the upper third of its 117-point range.",
+                "⚖️ Breadth: 342 advances, 156 declines in Nifty 500 (A/D 2.19, 83.5th percentile). Participation expanded sharply across midcaps and manufacturing cyclicals, lifting constituents above their 20-day SMA from 34% to 43%.",
+                "🏦 Institutional Flows: FIIs turned decisive net buyers at +₹1,617.45 Cr (rank 44/51, 85.3rd percentile). Synchronized with DII purchases of +₹2,341.46 Cr (rank 26/51), combined cash buying reached +₹3,958.91 Cr, elevating cumulative September MTD domestic deployment past an unprecedented ₹45,477 Cr.",
+                "⚡ Standout Catalyst: Whirlpool of India (WHIRLPOOL) locked at the 20.00% upper circuit at ₹865.25 on a staggering 18.67x volume (+10.6% above 20SMA, RSI 67.7), catalyzed by aggressive festive appliance pre-orders and channel inventory restocking."
+        ]
+},
+      {
         "id": "2026-09-22",
         "date": "2026-09-22",
         "title": "Nifty & Beyond — 22 Sep 2026",
