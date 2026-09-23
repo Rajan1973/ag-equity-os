@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
         daily: [
       {
+        "id": "2026-09-22",
+        "date": "2026-09-22",
+        "title": "Nifty & Beyond — 22 Sep 2026",
+        "file": "data/eod/daily/2026-09-22.html",
+        "nifty": "23,329.00",
+        "niftyChange": "-85.30 (-0.36%)",
+        "sensex": "74,529.08",
+        "sensexChange": "-329.91 (-0.44%)",
+        "vix": "11.00",
+        "vixChange": "-0.25",
+        "fii": "-3,809.99",
+        "dii": "+4,120.07",
+        "breadth": "192:306 (0.63)",
+        "brent": "$99.25 (+1.85%)",
+        "usdinr": "95.6800 (-0.80%)",
+        "regimeScore": "33.5 BEARISH",
+        "highlights": [
+                "📉 Index: Nifty 23,329.00 (-0.36%, -85.30 pts), Sensex 74,529.08 (-0.44%, -329.91 pts), Bank Nifty 56,215.55 (-0.45%, -255.10 pts). An early morning rally toward 23,489.00 was completely erased by sustained institutional selling, forcing Nifty to settle near session lows in the lower third of its 203-point range.",
+                "⚖️ Breadth: 192 advances, 306 declines in Nifty 500 (A/D 0.63, 35.3rd percentile). Participation contracted further with decliners decisively outnumbering advancers, leaving only 34% of broad market constituents above their 20-day SMA.",
+                "🏦 Institutional Flows: FII cash selling surged to -₹3,809.99 Cr (rank 5/50, 9th percentile). DIIs mounted a colossal counter-offensive of +₹4,120.07 Cr (108.1% absorption ratio, rank 40/50), pushing cumulative September MTD domestic deployment past an astounding ₹43,135 Cr.",
+                "⚡ Standout Catalyst: Gabriel India (GABRIEL) exploded +14.04% to ₹1,471.40 on an extraordinary 13.13x volume (+8.5% above 20SMA, RSI 61.6), breaking out on accelerated OEM orders for advanced electronic damping and EV suspension systems."
+        ]
+},
+      {
         "id": "2026-09-21",
         "date": "2026-09-21",
         "title": "Nifty & Beyond — 21 Sep 2026",
