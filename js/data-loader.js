@@ -8,6 +8,30 @@ window.EquityData = {
   reports: {
         daily: [
       {
+        "id": "2026-09-24",
+        "date": "2026-09-24",
+        "title": "Nifty & Beyond — 24 Sep 2026",
+        "file": "data/eod/daily/2026-09-24.html",
+        "nifty": "23,063.10",
+        "niftyChange": "-383.70 (-1.64%)",
+        "sensex": "73,580.54",
+        "sensexChange": "247.71 (-1.67%)",
+        "vix": "12.69",
+        "vixChange": "+2.34",
+        "fii": "-5,027.36",
+        "dii": "+4,301.18",
+        "breadth": "71:428 (0.17)",
+        "brent": "$103.80 (+1.32%)",
+        "usdinr": "95.9600 (-0.23%)",
+        "regimeScore": "21.1 BEARISH",
+        "highlights": [
+                "📉 Index: Nifty 23,063.10 (-1.64%, -383.70 pts), Sensex 73,580.54 (-1.67%, -1,247.71 pts), Bank Nifty 55,438.50 (-1.96%, -1,110.40 pts). Nifty gapped down at 23,221.80, printed a brief high of 23,281.95, and succumbed to aggressive expiry-day distribution to close near session lows at 23,063.10 in the lower third of its 236-point range.",
+                "⚖️ Breadth: 71 advances, 428 declines in Nifty 500 (A/D 0.17, 6.3rd percentile). Market internals collapsed as selling swept across 86% of secondary market listings, compressing constituents above their 20-day SMA from 43% to 31%.",
+                "🏦 Institutional Flows: FIIs unleashed aggressive expiry liquidation, offloading -₹5,027.36 Cr in net cash (rank 3/52, 4.8th percentile). DIIs acted as the sole shock absorber, purchasing +₹4,301.18 Cr (rank 42/52, 79.8th percentile) to lift September MTD domestic deployment to ₹49,778.54 Cr.",
+                "💥 Regulatory Catalyst: PB Fintech (POLICYBZR) crashed -36.00% to ₹1,207.20 on 12.29x volume following IRDAI's draft consultation paper proposing strict caps on insurance distribution commissions and tightening Expense of Management (EoM) limits."
+        ]
+},
+      {
         "id": "2026-09-23",
         "date": "2026-09-23",
         "title": "Nifty & Beyond — 23 Sep 2026",
