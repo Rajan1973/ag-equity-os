@@ -417,6 +417,18 @@ window.EquityData = {
       }
     ],
         weekly: [
+      {
+            "id": "2026-09-25-weekly",
+            "period": "21 September – 25 September 2026",
+            "title": "Nifty & Beyond Weekly Wrap",
+            "file": "data/eod/weekly/2026-09-25-weekly.html",
+            "niftyWeekly": "23,140.50 (-0.88%)",
+            "sensexWeekly": "73,895.74 (-0.54%)",
+            "diiWeekly": "+₹16,398.15 Cr",
+            "fiiWeekly": "-₹11,490.03 Cr",
+            "vixWeekly": "12.29 (Normalized)",
+            "summary": "Benchmark Consolidation Across Monthly Expiry: Indian equities absorbed intense monthly derivative settlement pressures across 21–25 September 2026. Nifty 50 slipped -205.90 pts (-0.88% 1W) to close at 23,140.50, successfully defending the crucial 23,000 psychological cushion despite Thursday's sharp sell-off. BSE Sensex shed -399.22 pts (-0.54% 1W) to 73,895.74, while Bank Nifty consolidated at 55,580.40 (-778.30..."
+      },
             {
               "id": "2026-09-18-weekly",
               "period": "14 September – 18 September 2026",
