@@ -7,6 +7,30 @@ window.EquityData = {
   // Registry of all available reports
   reports: {
         daily: [
+            {
+        "id": "2026-09-25",
+        "date": "2026-09-25",
+        "title": "Nifty & Beyond — 25 Sep 2026",
+        "file": "data/eod/daily/2026-09-25.html",
+        "nifty": "23,140.50",
+        "niftyChange": "+77.40 (+0.34%)",
+        "sensex": "73,895.74",
+        "sensexChange": "+315.20 (+0.43%)",
+        "vix": "12.16",
+        "vixChange": "-0.53",
+        "fii": "-3,693.93",
+        "dii": "+2,838.17",
+        "breadth": "244:255 (0.96)",
+        "brent": "$104.20 (+0.38%)",
+        "usdinr": "96.0400 (-0.08%)",
+        "regimeScore": "37.3 NEUTRAL",
+        "highlights": [
+                "📈 Index: Nifty 23,140.50 (+0.34%, +77.40 pts), Sensex 73,895.74 (+0.43%, +315.20 pts), Bank Nifty 55,580.40 (+0.26%, +141.90 pts). Nifty opened at 23,105.20, successfully held above the 23,000 support floor with an intraday low of 23,040.60, and settled in the upper half of its 130-point daily band.",
+                "⚖️ Breadth: 244 advances, 255 declines in Nifty 500 (A/D 0.96, 53.9th percentile). Market internals staged a swift recovery from Thursday's 0.17 capitulation, with constituents above their 20-day SMA improving from 31% to 33%.",
+                "🏦 Institutional Flows: FIIs offloaded -₹3,693.93 Cr in net cash equities (rank 7/53, 12.3rd percentile). DIIs provided steady domestic counter-support with +₹2,838.17 Cr in net buying (rank 32/53, 59.4th percentile), propelling cumulative September MTD domestic inflows to an all-time record ₹52,616.71 Cr.",
+                "🔄 Regime Shift: Composite regime score recovered +16.2 points from 21.1 to 37.3, transitioning out of the Bearish band into Neutral. Momentum (53.9) and Volatility (55.8) led the rebound, while long-term Trend (-5.25% vs 200D, score 23.8) remained the primary structural ceiling."
+        ]
+},
       {
         "id": "2026-09-24",
         "date": "2026-09-24",
