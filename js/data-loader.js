@@ -7,6 +7,126 @@ window.EquityData = {
   // Registry of all available reports
   reports: {
         daily: [
+      {
+        "id": "2026-10-05",
+        "date": "2026-10-05",
+        "title": "Nifty & Beyond — 5 Oct 2026",
+        "file": "data/eod/daily/2026-10-05.html",
+        "nifty": "22,555.75",
+        "niftyChange": "+133.80 (+0.60%)",
+        "sensex": "72,382.47",
+        "sensexChange": "+472.77 (+0.66%)",
+        "vix": "14.78",
+        "vixChange": "+0.32",
+        "fii": "-4,699.14",
+        "dii": "+5,181.62",
+        "breadth": "271:228 (1.19)",
+        "brent": "$100.60 (1.76%)",
+        "usdinr": "96.3500 (0.09%)",
+        "regimeScore": "38.2 NEUTRAL",
+        "highlights": [
+                "📈 Index: Nifty 22,555.75 (+0.60%, +133.80 pts), Sensex 72,382.47 (+0.66%, +472.77 pts), Bank Nifty 54,714.10 (+0.48%, +263.35 pts). Nifty gapped up at the open, reclaimed the 22,500 level with conviction, and settled comfortably in the upper half of its 145-point intraday corridor.",
+                "⚖️ Breadth: 271 advances, 228 declines in Nifty 500 (A/D 1.19, 64.9th percentile). Market internals displayed healthy broadening, with advancers outpacing decliners across IT, FMCG, and capital goods.",
+                "🏦 Institutional Flows: FIIs offloaded -₹4,699.14 Cr in cash equities (rank 8/58, 13.8th percentile). DIIs countered with +₹5,181.62 Cr in net buying (rank 52/58, 89.7th percentile), absorbing 110.3% of foreign selling and lifting cumulative October domestic deployment to ₹15,223.46 Cr.",
+                "🔄 Regime Shift: Composite regime score registered 38.2, consolidating comfortably in the Neutral band. Momentum (64.9) and Breadth (33.4) supported the recovery, while Trend (-7.15% vs 200D, score 14.8) continues to define the structural overhead ceiling."
+        ]
+},
+      {
+        "id": "2026-10-01",
+        "date": "2026-10-01",
+        "title": "Nifty & Beyond — 1 Oct 2026",
+        "file": "data/eod/daily/2026-10-01.html",
+        "nifty": "22,421.95",
+        "niftyChange": "-198.50 (-0.88%)",
+        "sensex": "71,909.70",
+        "sensexChange": "-570.59 (-0.79%)",
+        "vix": "14.46",
+        "vixChange": "+0.97",
+        "fii": "-9,484.22",
+        "dii": "+10,041.84",
+        "breadth": "111:388 (0.29)",
+        "brent": "$102.40 (+4.46%)",
+        "usdinr": "96.2600 (0.33%)",
+        "regimeScore": "18.8 BEARISH",
+        "highlights": [
+                "📉 Index: Nifty 22,421.95 (-0.88%, -198.50 pts), Sensex 71,909.70 (-0.79%, -570.59 pts), Bank Nifty 54,450.75 (-0.33%, -182.30 pts). Nifty broke below 22,500 during afternoon expiry rollovers, printing a low of 22,390.60 before settling in the lower third of its 260-point range.",
+                "⚖️ Breadth: 111 advances, 388 declines in Nifty 500 (A/D 0.29, 6.0th percentile). Broad-market internals deteriorated as selling spread across 78% of secondary listings, dragging constituents above their 20-day SMA down to 22%.",
+                "🏦 Institutional Flows: FIIs sold -₹9,484.22 Cr in cash equities (rank 2/57, 3.5th percentile). DIIs absorbed the entire outflow with +₹10,041.84 Cr in net buying (rank 56/57, 98.2nd percentile, 105.9% absorption), opening October deployment on a massively positive domestic footing.",
+                "🔄 Regime Shift: Composite regime score fell -20.0 points to 18.8, relapsing into the Bearish band. Breadth (6.0) and Trend (-7.88% vs 200D, score 13.5) drove the decline, while Volatility widened as daily ATR rose to 0.99% of price."
+        ]
+},
+      {
+        "id": "2026-09-30",
+        "date": "2026-09-30",
+        "title": "Nifty & Beyond — 30 Sep 2026",
+        "file": "data/eod/daily/2026-09-30.html",
+        "nifty": "22,620.45",
+        "niftyChange": "-95.75 (-0.42%)",
+        "sensex": "72,480.29",
+        "sensexChange": "-48.78 (-0.07%)",
+        "vix": "13.49",
+        "vixChange": "+0.08",
+        "fii": "-10,148.41",
+        "dii": "+11,271.73",
+        "breadth": "261:235 (1.11)",
+        "brent": "$98.03 (4.44%)",
+        "usdinr": "95.9400 (+0.04%)",
+        "regimeScore": "38.8 NEUTRAL",
+        "highlights": [
+                "📈 Index: Nifty 22,620.45 (-0.42%, -95.75 pts), Sensex 72,480.29 (-0.07%, -48.78 pts), Bank Nifty 54,633.05 (+0.69%, +373.10 pts). Bank Nifty decoupled from large-cap index drag, staging a sharp 373-point rally led by private sector lenders, while Nifty consolidated near its 22,600 support base.",
+                "⚖️ Breadth: 261 advances, 235 declines in Nifty 500 (A/D 1.11, 62.4th percentile). Market breadth staged a decisive turnaround, crossing into positive territory as domestic capital rotated broadly into mid-cap capital goods and railway PSUs.",
+                "🏦 Institutional Flows: FIIs sold -₹10,148.41 Cr in cash equities (rank 1/57, 1.8th percentile). DIIs countered with an all-time record purchase of +₹11,271.73 Cr (rank 57/57, 100th percentile), absorbing 111.1% of the foreign outflow and driving cumulative September domestic deployment to ₹76,030.17 Cr.",
+                "🔄 Regime Shift: Composite regime score recovered +16.2 points from 22.6 (Bearish) to 38.8 (Neutral band). Momentum (62.4) and Breadth (33.0) led the turnaround, while Trend (-7.22% vs 200D, score 14.5) remains the primary structural drag."
+        ]
+},
+      {
+        "id": "2026-09-29",
+        "date": "2026-09-29",
+        "title": "Nifty & Beyond — 29 Sep 2026",
+        "file": "data/eod/daily/2026-09-29.html",
+        "nifty": "22,716.20",
+        "niftyChange": "-64.05 (-0.28%)",
+        "sensex": "72,529.07",
+        "sensexChange": "-242.65 (-0.33%)",
+        "vix": "13.41",
+        "vixChange": "-0.23",
+        "fii": "-9,980.22",
+        "dii": "+6,952.71",
+        "breadth": "139:359 (0.39)",
+        "brent": "$102.59 (2.60%)",
+        "usdinr": "95.9800 (+0.25%)",
+        "regimeScore": "22.6 BEARISH",
+        "highlights": [
+                "📉 Index: Nifty 22,716.20 (-0.28%, -64.05 pts), Sensex 72,529.07 (-0.33%, -242.65 pts), Bank Nifty 54,259.95 (-0.39%, -211.70 pts). After an initial bounce to 22,825.40, the index drifted lower under relentless foreign selling, closing in the lower third of its 145-point intraday corridor.",
+                "⚖️ Breadth: 139 advances, 359 declines in Nifty 500 (A/D 0.39, 15.5th percentile). While improving from Monday's panic low of 0.15, decliners still outnumbered advancers by 2.6:1, keeping secondary market breadth deeply suppressed.",
+                "🏦 Institutional Flows: FIIs unleashed a massive -₹9,980.22 Cr in cash equity sales (rank 1/55, 1.8th percentile), marking the steepest single-day foreign exit of the month. DIIs absorbed +₹6,952.71 Cr (rank 54/55, 98.2nd percentile), lifting cumulative September MTD domestic inflows to an astronomical ₹64,758.44 Cr.",
+                "🔄 Regime Shift: Composite regime score inched up +3.6 points to 22.6, remaining deeply embedded in the Bearish band. Trend deficit widened to -6.86% below the 200-day moving average (score 15.7), while Breadth (9.1) and Momentum (16.9) continue to indicate persistent structural weakness."
+        ]
+},
+      {
+        "id": "2026-09-28",
+        "date": "2026-09-28",
+        "title": "Nifty & Beyond — 28 Sep 2026",
+        "file": "data/eod/daily/2026-09-28.html",
+        "nifty": "22,780.25",
+        "niftyChange": "-360.25 (-1.56%)",
+        "sensex": "72,771.72",
+        "sensexChange": "124.02 (-1.52%)",
+        "vix": "13.64",
+        "vixChange": "+1.48",
+        "fii": "-5,353.22",
+        "dii": "+5,189.02",
+        "breadth": "64:436 (0.15)",
+        "brent": "$106.50 (+2.21%)",
+        "usdinr": "96.2200 (0.19%)",
+        "regimeScore": "19.0 BEARISH",
+        "highlights": [
+                "📉 Index: Nifty 22,780.25 (-1.56%, -360.25 pts), Sensex 72,771.72 (-1.52%, -1,124.02 pts), Bank Nifty 54,471.65 (-1.99%, -1,108.75 pts). Nifty sliced through the 23,000 psychological floor in opening trade, reaching an intraday low of 22,745.20 and closing near its day's nadir.",
+                "⚖️ Breadth: 64 advances, 436 declines in Nifty 500 (A/D 0.15, 5.5th percentile). Market breadth collapsed into severe distribution, with constituents trading above their 20-day SMA plunging from 33% to 19%.",
+                "🏦 Institutional Flows: FIIs accelerated net cash liquidation to -₹5,353.22 Cr (rank 2/54, 2.8th percentile). DIIs responded with aggressive absorption of +₹5,189.02 Cr (rank 50/54, 91.7th percentile), absorbing 96.9% of foreign selling and lifting September MTD domestic buying to ₹57,805.73 Cr.",
+                "🔄 Regime Shift: Composite regime score plunged -18.3 points from 37.3 (Neutral) back into Bearish at 19.0. Breadth (4.5) and Momentum (5.5) dropped to deep oversold extremes, while Trend deepened to -6.66% below the 200-day moving average."
+        ]
+},
             {
         "id": "2026-09-25",
         "date": "2026-09-25",
