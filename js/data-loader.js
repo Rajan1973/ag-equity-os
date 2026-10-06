@@ -538,6 +538,18 @@ window.EquityData = {
     ],
         weekly: [
       {
+            "id": "2026-10-01-weekly",
+            "period": "28 September – 1 October 2026",
+            "title": "Nifty & Beyond Weekly Wrap",
+            "file": "data/eod/weekly/2026-10-01-weekly.html",
+            "niftyWeekly": "22,421.95 (-3.11%)",
+            "sensexWeekly": "71,909.70 (-2.69%)",
+            "diiWeekly": "+₹33,455.30 Cr",
+            "fiiWeekly": "-₹34,966.07 Cr",
+            "vixWeekly": "12.29 (Normalized)",
+            "summary": "Benchmark Capitulation Across 4-Day Settlement Week: Indian equities endured aggressive liquidation into the September monthly derivative settlement. Over a holiday-truncated 4-session week, Nifty 50 tumbled -718.55 pts (-3.11% 1W) to settle at 22,421.95, cleanly puncturing the 23,000 threshold and breaching key short-term exponential averages. BSE Sensex plummeted -1,986.04 pts (-2.69% 1W) to 71,909.70, while Ban..."
+      },
+      {
             "id": "2026-09-25-weekly",
             "period": "21 September – 25 September 2026",
             "title": "Nifty & Beyond Weekly Wrap",
