@@ -135,6 +135,9 @@ ag-equity-os/
 │   ├── app.js                              # Main UI controller, router, search, modals
 │   ├── data-loader.js                      # Centralized report registry & sorting service
 │   └── rrg-chart.js                        # HTML5 Canvas Relative Rotation Graph engine
+├── rrg/
+│   ├── index.html                          # Live interactive RRG web app (reads nifty500data warehouse)
+│   └── rrg-user-manual.html                # RRG user manual & calculation methodology
 ├── .nojekyll                               # Bypasses Jekyll processing for raw HTML serving
 ├── index.html                              # Main SPA Shell & Scorecard Container
 └── README.md
@@ -263,6 +266,12 @@ The **RRG Graph** (`#tab-rrg`) implements Julius de Kempenaer’s Relative Rotat
   2. *Building Strength* (e.g. Nifty IT)
   3. *Losing Momentum* (e.g. Nifty Metal)
   4. *Underperforming* (e.g. Nifty FMCG)
+
+#### Data Architecture & Canonical Warehouse
+- **Single Canonical Source**: Reads directly from the unified **nifty500data** Supabase warehouse (`wtbufledttydooazwiuw`, region `ap-south-1`).
+- **Retired Project**: The historical standalone RRG-Data Supabase instance (`lwspbnufodlvvnrokaux`) was paused on 2026-09-20 and superseded by the primary warehouse.
+- **REST Endpoints**: Real-time read-only querying of `rrg_instruments`, `rrg_benchmarks`, and `rrg_metrics_v2` via `https://wtbufledttydooazwiuw.supabase.co/rest/v1/` using client-safe publishable key (`sb_publishable__y6D6M1arQpM0ebcjlyj4A_KLwWYrkE`).
+- **Calculation Formulation**: Public V2 calculation (`v2-ema10-jdk-public`) based on weekly Friday-close data, updated automatically every Friday post-close via automation in `rajanchennai/market-data`.
 
 ---
 

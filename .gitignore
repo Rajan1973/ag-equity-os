@@ -1,0 +1,21 @@
+# Editor/agent config: machine-specific absolute PATHs and auth tokens.
+.mcp.json
+.cursor/mcp.json
+.jetro/
+
+# Jetro rewrites these on every boot ("Auto-generated on boot. Do not edit").
+# A signed-out boot replaces the full operating context with an offline stub,
+# so tracking them means committing whichever state the last boot left behind.
+AGENT.md
+CLAUDE.md
+.windsurfrules
+.github/copilot-instructions.md
+.cursor/rules/agent.mdc
+.agents/rules/agent.md
+
+# Working area, not source.
+scratch/
+
+__pycache__/
+*.pyc
+.env

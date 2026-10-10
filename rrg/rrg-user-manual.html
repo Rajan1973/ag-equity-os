@@ -34,11 +34,11 @@
 <p>Click an instrument in a quadrant card to open the right-side chart drawer. The drawer uses the instrument’s BSE code where available, because the current TradingView Lite embed does not reliably render NSE symbols. It opens with weekly candles and the configured RSI, MACD, and Volume studies. Close it with the <strong>×</strong> button at the top-left of the drawer.</p>
 <div class="tip"><strong>Important:</strong> the TradingView panel is a visual reference. The RRG positions, quadrants, and history come from the read-only RRG V2 dataset and are not calculated by TradingView.</div>
 <h2 id="method">Calculation, data, and limitations</h2>
-<p>The app reads RRG V2 records from the separate RRG-Data Supabase project. The current public formulation uses weekly Friday-close data:</p>
+<p>The app reads RRG V2 records from the Nifty500 data warehouse (nifty500data), the single canonical source for all quantitative market and RRG data. The current public formulation uses weekly Friday-close data:</p>
 <ul><li><strong>Relative strength:</strong> asset close relative to benchmark close, normalised around 100.</li><li><strong>RS-Ratio:</strong> a 10-period EMA normalisation of the relative-strength line, centred around 100.</li><li><strong>RS-Momentum:</strong> the relative rate of change of RS-Ratio, also centred around 100.</li><li><strong>Quadrants:</strong> Leading is above 100 on both axes; Improving is below ratio 100 and above momentum 100; Weakening is above ratio 100 and below momentum 100; Lagging is below 100 on both axes.</li></ul>
 <p>Availability depends on the latest completed data loaded into Supabase. Missing constituents, stale records, symbol mappings, market holidays, and incomplete history can affect what appears. The graph is descriptive and does not account for liquidity, corporate actions, risk, valuation, costs, or personal circumstances.</p>
 <div class="tip warn"><strong>Use responsibly:</strong> this app is for market research and education only. It is not investment advice or a recommendation to buy, sell, or hold any security.</div>
-<a class="back" href="rrg_app_updated.html">← Return to India RRG</a>
+<a class="back" href="index.html">← Return to India RRG</a>
 </article></main>
 </body>
 </html>

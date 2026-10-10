@@ -790,15 +790,17 @@
 <p>The entire platform is hosted publicly at:<br />
 <strong><a href="https://github.com/Rajan1973/ag-equity-os">https://github.com/Rajan1973/ag-equity-os</a></strong></p>
 <h3 id="31-repository-structure-asset-map-image-3">3.1 Repository Structure &amp; Asset Map (Image 3)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/github_repository_structure.png', 'GitHub File Structure &amp; Repository Overview')">
-            <img src="images/github_repository_structure.png" alt="GitHub File Structure &amp; Repository Overview" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/github_repository_structure.png';">
+            <img src="images/github_repository_structure.png" alt="GitHub File Structure &amp; Repository Overview" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/github_repository_structure.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> GitHub File Structure &amp; Repository Overview</figcaption>
     </figure>
+    </p>
 <pre><code>ag-equity-os/
 ├── .agents/
 │   └── skills/
@@ -823,6 +825,9 @@
 │   ├── app.js                              # Main UI controller, router, search, modals
 │   ├── data-loader.js                      # Centralized report registry &amp; sorting service
 │   └── rrg-chart.js                        # HTML5 Canvas Relative Rotation Graph engine
+├── rrg/
+│   ├── index.html                          # Live interactive RRG web app (reads nifty500data warehouse)
+│   └── rrg-user-manual.html                # RRG user manual &amp; calculation methodology
 ├── .nojekyll                               # Bypasses Jekyll processing for raw HTML serving
 ├── index.html                              # Main SPA Shell &amp; Scorecard Container
 └── README.md
@@ -846,15 +851,17 @@
 <hr />
 <h2 id="4-equityos-web-application-modules-in-depth">4. EquityOS Web Application Modules In-Depth</h2>
 <h3 id="41-hero-section-daily-market-update-image-1">4.1 Hero Section: Daily Market Update (Image 1)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/hero_section.png', 'EquityOS Hero Section')">
-            <img src="images/hero_section.png" alt="EquityOS Hero Section" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/hero_section.png';">
+            <img src="images/hero_section.png" alt="EquityOS Hero Section" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/hero_section.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> EquityOS Hero Section</figcaption>
     </figure>
+    </p>
 <p>The <strong>Hero Section</strong> (<code>#tab-hero</code>) serves as the executive cockpit, greeting the user with immediate market diagnostics from the latest session:</p>
 <ol>
 <li><strong>Eyebrow Timestamp (<code>#hero-date-tag</code>)</strong>: Displays session date (e.g. <code>AS OF 10 SEPTEMBER 2026</code>).</li>
@@ -882,30 +889,34 @@
 - <strong>Dynamic JavaScript Hydration</strong>: On <code>DOMContentLoaded</code>, <code>initData()</code> in <code>js/app.js</code> queries <code>window.EquityData.getLatestDaily()</code>. It dynamically populates the scorecards, highlights, iframe source, and date selector dropdown (<code>#report-date-select</code>).</p>
 <hr />
 <h3 id="42-weekly-wrap-module-image-3">4.2 Weekly Wrap Module (Image 3)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/weekly_wrap.png', 'Weekly Wrap Module')">
-            <img src="images/weekly_wrap.png" alt="Weekly Wrap Module" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/weekly_wrap.png';">
+            <img src="images/weekly_wrap.png" alt="Weekly Wrap Module" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/weekly_wrap.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> Weekly Wrap Module</figcaption>
     </figure>
+    </p>
 <p>Accessible via the <strong>Weekly Wrap</strong> tab (<code>#tab-weekly</code>), this view provides multi-day structural perspective:<br />
 - <strong>Weekly Executive Cockpit</strong>: Aggregates trailing 5-session returns for Nifty 50, Sensex, Bank Nifty, trailing weekly FII/DII totals, and cumulative breadth.<br />
 - <strong>Weekly Performance Visual Graphs</strong>: Cluster groupings comparing Cap-based indices (Large, Mid, Small), Banking &amp; Financials, and Cyclicals vs Defensives.<br />
 - <strong>Embedded Canvas Weekly Note</strong>: Houses the complete weekly wrap document (<code>data/eod/weekly/2026-09-05-weekly.html</code>) with interactive section jump navigation (§1 Cockpit to §8 Rotation).</p>
 <hr />
 <h3 id="43-sector-research-hub-image-2">4.3 Sector Research Hub (Image 2)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/sector_research.png', 'Sector Research Hub')">
-            <img src="images/sector_research.png" alt="Sector Research Hub" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/sector_research.png';">
+            <img src="images/sector_research.png" alt="Sector Research Hub" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/sector_research.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> Sector Research Hub</figcaption>
     </figure>
+    </p>
 <p>The <strong>Sector Research Hub</strong> (<code>#tab-sectors</code>) is an institutional directory of Indian listed industries covering Q1 FY27 results:<br />
 - <strong>Sector Cards</strong>:<br />
   - Category Badge &amp; Period (e.g. <code>Q1 FY27 · AUTOMOTIVE &amp; COMPONENTS</code>).<br />
@@ -918,15 +929,17 @@
   - <code>↗ Open in Tab</code>: Opens the raw HTML report directly in a standalone browser tab.</p>
 <hr />
 <h3 id="44-universal-search-discovery-engine-image-4">4.4 Universal Search &amp; Discovery Engine (Image 4)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/search_function.png', 'Universal Search in Action')">
-            <img src="images/search_function.png" alt="Universal Search in Action" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/search_function.png';">
+            <img src="images/search_function.png" alt="Universal Search in Action" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/search_function.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> Universal Search in Action</figcaption>
     </figure>
+    </p>
 <p>The Universal Search Bar (<code>#sector-search-input</code>) provides <strong>cross-dimensional query matching</strong>:<br />
 - <strong>Multi-Field Real-Time Indexing</strong>: Matches simultaneously against:<br />
   1. Sector Titles (e.g. <em>"Defence"</em>, <em>"Chemicals"</em>)<br />
@@ -937,15 +950,17 @@
 - <strong>Live Counter &amp; View Toggles</strong>: Displays filtered count (<code>Showing 2 of 20 Sectors</code>) with instant Grid / List layout switching.</p>
 <hr />
 <h3 id="45-relative-rotation-graph-rrg-macro-overview-image-2-5">4.5 Relative Rotation Graph (RRG) Macro Overview (Image 2 / 5)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/rrg_overview_graph.png', 'Relative Rotation Graph Overview')">
-            <img src="images/rrg_overview_graph.png" alt="Relative Rotation Graph Overview" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/rrg_overview_graph.png';">
+            <img src="images/rrg_overview_graph.png" alt="Relative Rotation Graph Overview" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/rrg_overview_graph.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> Relative Rotation Graph Overview</figcaption>
     </figure>
+    </p>
 <p>The <strong>RRG Graph</strong> (<code>#tab-rrg</code>) implements Julius de Kempenaer’s Relative Rotation Graph algorithm natively in an HTML5 Canvas engine (<code>js/rrg-chart.js</code>):</p>
 <h4 id="quadrant-mechanics">Quadrant Mechanics</h4>
 <ul>
@@ -1000,17 +1015,26 @@
 <li><em>Losing Momentum</em> (e.g. Nifty Metal)</li>
 <li><em>Underperforming</em> (e.g. Nifty FMCG)</li>
 </ul>
+<h4 id="data-architecture-canonical-warehouse">Data Architecture &amp; Canonical Warehouse</h4>
+<ul>
+<li><strong>Single Canonical Source</strong>: Reads directly from the unified <strong>nifty500data</strong> Supabase warehouse (<code>wtbufledttydooazwiuw</code>, region <code>ap-south-1</code>).</li>
+<li><strong>Retired Project</strong>: The historical standalone RRG-Data Supabase instance (<code>lwspbnufodlvvnrokaux</code>) was paused on 2026-09-20 and superseded by the primary warehouse.</li>
+<li><strong>REST Endpoints</strong>: Real-time read-only querying of <code>rrg_instruments</code>, <code>rrg_benchmarks</code>, and <code>rrg_metrics_v2</code> via <code>https://wtbufledttydooazwiuw.supabase.co/rest/v1/</code> using client-safe publishable key (<code>sb_publishable__y6D6M1arQpM0ebcjlyj4A_KLwWYrkE</code>).</li>
+<li><strong>Calculation Formulation</strong>: Public V2 calculation (<code>v2-ema10-jdk-public</code>) based on weekly Friday-close data, updated automatically every Friday post-close via automation in <code>rajanchennai/market-data</code>.</li>
+</ul>
 <hr />
 <h3 id="46-rrg-constituent-drill-down-tradingview-technical-drawer-image-1-6">4.6 RRG Constituent Drill-Down &amp; TradingView Technical Drawer (Image 1 / 6)</h3>
-<figure class="handbook-figure">
+<p>
+    <figure class="handbook-figure">
         <div class="img-wrapper" onclick="openLightbox('images/rrg_drilldown_chart.png', 'RRG Drill-Down with Interactive TradingView Technical Chart Drawer')">
-            <img src="images/rrg_drilldown_chart.png" alt="RRG Drill-Down with Interactive TradingView Technical Chart Drawer" loading="lazy" class="handbook-img" onerror="if(!this.src.includes('docs/images/')) this.src='docs/'+'images/rrg_drilldown_chart.png';">
+            <img src="images/rrg_drilldown_chart.png" alt="RRG Drill-Down with Interactive TradingView Technical Chart Drawer" loading="lazy" class="handbook-img" onerror="this.onerror=null; if(!this.src.includes('docs/')) this.src='docs/'+'images/rrg_drilldown_chart.png';">
             <div class="img-overlay">
                 <span class="zoom-badge">🔍 Click to Expand</span>
             </div>
         </div>
         <figcaption><span class="fig-label">Figure</span> RRG Drill-Down with Interactive TradingView Technical Chart Drawer</figcaption>
     </figure>
+    </p>
 <p>A flagship feature of EquityOS is the <strong>Constituent Drill-Down Cockpit</strong>:<br />
 1. <strong>Sectoral Basket Selector (Left Sidebar)</strong>:<br />
    - Allows users to shift focus from the broad index level (<code>All Nifty Indices</code>) down to specific industry universes such as <strong>Nifty Bank</strong>, <strong>Nifty Auto</strong>, <strong>Nifty IT</strong>, <strong>Nifty Financial Services</strong>, or <strong>Nifty Consumer Durables</strong>.<br />
