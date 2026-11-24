@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajan Equity Portfolio OS — Executive Cockpit & Wealth Architecture</title>
+    <title>Rajan Equity Portfolio OS — Executive Cockpit & Knowledge Architecture</title>
     <!-- Luxury Typography: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,7 @@
 
             --sky: #38bdf8;
             --sky-surface: rgba(56, 189, 248, 0.08);
+            --indigo: #818cf8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -78,7 +79,7 @@
             position: sticky;
             top: 0;
             z-index: 90;
-            background: rgba(4, 7, 13, 0.88);
+            background: rgba(4, 7, 13, 0.9);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
             padding: 0.75rem 2rem;
@@ -284,7 +285,7 @@
         .app-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 2rem 2rem 5rem;
+            padding: 1.75rem 2rem 5rem;
             position: relative;
             z-index: 10;
         }
@@ -391,6 +392,12 @@
             color: var(--amber);
         }
 
+        .hero-badge.rose {
+            background: var(--rose-surface);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            color: var(--rose);
+        }
+
         .bento-allocation {
             grid-column: span 5;
             display: flex;
@@ -475,7 +482,7 @@
             color: #fff;
         }
 
-        /* Executive Tab Navigation */
+        /* Executive 8-Tab Navigation */
         .tab-bar-wrapper {
             background: rgba(10, 15, 29, 0.7);
             border: 1px solid var(--border-subtle);
@@ -484,7 +491,7 @@
             backdrop-filter: blur(16px);
             margin-bottom: 2rem;
             display: flex;
-            gap: 0.4rem;
+            gap: 0.3rem;
             overflow-x: auto;
             scrollbar-width: none;
         }
@@ -497,16 +504,16 @@
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            padding: 0.65rem 1.25rem;
+            padding: 0.65rem 0.9rem;
             border-radius: 10px;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .tab-button:hover {
@@ -522,9 +529,9 @@
         }
 
         .tab-count {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
-            padding: 0.1rem 0.45rem;
+            padding: 0.1rem 0.4rem;
             border-radius: 9999px;
             background: rgba(255, 255, 255, 0.08);
             color: var(--text-muted);
@@ -596,6 +603,7 @@
             border-radius: 16px;
             overflow-x: auto;
             backdrop-filter: blur(24px);
+            margin-bottom: 1.5rem;
         }
 
         .table-luxury {
@@ -781,6 +789,127 @@
             margin-bottom: 0.85rem;
         }
 
+        /* 2-Col Cards & Narrative Styles */
+        .cards-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .narrative-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .narrative-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.85rem;
+        }
+
+        .narrative-card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .narrative-card ol, .narrative-card ul {
+            padding-left: 1.25rem;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .narrative-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sim-banner {
+            background: rgba(10, 15, 29, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .sim-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .text-green { color: var(--emerald) !important; }
+        .text-red { color: var(--rose) !important; }
+        .text-amber { color: var(--amber) !important; }
+        .text-indigo { color: var(--indigo) !important; }
+
+        /* Report Vault Cards */
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .vault-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .vault-card:hover {
+            border-color: var(--border-highlight);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .vault-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--emerald);
+            margin-bottom: 0.5rem;
+        }
+
+        .vault-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        .vault-desc {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+
+        .vault-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+
         /* Slide-Over Drawer */
         .drawer-overlay {
             position: fixed;
@@ -944,6 +1073,7 @@
         @media (max-width: 1024px) {
             .bento-cockpit { grid-column: span 12; }
             .bento-allocation { grid-column: span 12; }
+            .cards-2col { grid-template-columns: 1fr; }
             .hero-metric-val { font-size: 2.2rem; }
             .topbar { padding: 0.75rem 1rem; }
             .app-container { padding: 1rem 1rem 3rem; }
@@ -1073,32 +1203,44 @@
             </div>
         </section>
 
-        <!-- Executive Tab Bar -->
+        <!-- Executive 8-Tab Navigation Bar -->
         <nav class="tab-bar-wrapper">
-            <button class="tab-button active" onclick="switchTab('holdings')">
-                <span>Holdings &amp; Real-time Cockpit</span>
+            <button class="tab-button active" onclick="switchTab('cockpit')">
+                <span>📊 Cockpit &amp; Live Tracker</span>
                 <span class="tab-count mono">23</span>
             </button>
+            <button class="tab-button" onclick="switchTab('origin')">
+                <span>🏛️ Framework Origins</span>
+                <span class="tab-count mono">7 Filters</span>
+            </button>
             <button class="tab-button" onclick="switchTab('backtest')">
-                <span>Alpha &amp; Backtest Engine</span>
+                <span>🔍 Backtest &amp; Root Causes</span>
+                <span class="tab-count mono">8 Weeks</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('calibrations')">
+                <span>⚙️ Calibrations &amp; v2.0 Benefits</span>
                 <span class="tab-count mono">+13.19%</span>
             </button>
             <button class="tab-button" onclick="switchTab('analyst')">
-                <span>Analyst Intelligence &amp; Headwinds</span>
-                <span class="tab-count mono">Post-Q2</span>
+                <span>📑 Post-Q2 Analyst Consensus</span>
+                <span class="tab-count mono">All 23</span>
             </button>
-            <button class="tab-button" onclick="switchTab('execution')">
-                <span>70:30 Day-1 Execution Sheet</span>
-                <span class="tab-count mono">Ready</span>
+            <button class="tab-button" onclick="switchTab('orders')">
+                <span>🎯 70:30 Day-1 Execution Sheet</span>
+                <span class="tab-count mono">₹10L Plan</span>
             </button>
-            <button class="tab-button" onclick="switchTab('learning')">
-                <span>Master Knowledge Log</span>
-                <span class="tab-count mono">learning.md</span>
+            <button class="tab-button" onclick="switchTab('watchlists')">
+                <span>🔭 Watchlist Radar</span>
+                <span class="tab-count mono">60 Stocks</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('learnings')">
+                <span>🧠 Master Log &amp; Vault</span>
+                <span class="tab-count mono">Vault</span>
             </button>
         </nav>
 
-        <!-- TAB 1: Holdings & Real-time Cockpit -->
-        <section id="tab-holdings" class="tab-content active">
+        <!-- TAB 1: Cockpit & Live Tracker -->
+        <section id="tab-cockpit" class="tab-content active">
             <div class="filter-row">
                 <div class="filter-group">
                     <button class="filter-chip active" onclick="filterHoldings('ALL')">All 23 Positions</button>
@@ -1136,11 +1278,80 @@
             </div>
         </section>
 
-        <!-- TAB 2: Alpha & Backtest Engine -->
+        <!-- TAB 2: Framework Origins & Inputs -->
+        <section id="tab-origin" class="tab-content">
+            
+            <div class="cards-2col">
+                <div class="narrative-card">
+                    <h3>🏛️ The 7 Input Screener Filters & Consolidated Universe</h3>
+                    <p>To eliminate selection bias and emotional stock picking, our entire analysis originated from 7 rigorous fundamental screeners provided by the user:</p>
+                    <ol>
+                        <li><strong>Companies within 10% of 52W High & 100% from 52W Low:</strong> Momentum and technical strength proxy.</li>
+                        <li><strong>FII Buying:</strong> Institutional accumulation over consecutive quarters.</li>
+                        <li><strong>Growing Companies with Capacity Addition in Last 2 Years:</strong> Real capex and tangible asset creation.</li>
+                        <li><strong>Growth without Dilution:</strong> Revenue and profit expansion without equity dilution.</li>
+                        <li><strong>Increasing Quarterly Revenue, PEG & ROCE > 15%:</strong> Quality growth at reasonable price.</li>
+                        <li><strong>Quarterly Revenue & Profit Growers (PAT growth > Revenue growth):</strong> Operating leverage and gross margin expansion.</li>
+                        <li><strong>Sequential Quarters Revenue and Profit Growers:</strong> Consistent QoQ compounding.</li>
+                    </ol>
+                    <p><strong>Universe Consolidation:</strong> Merging these 7 screeners yielded <strong>495 unique Indian listed companies</strong> spanning large-caps, mid-caps, and small-caps.</p>
+                </div>
+
+                <div class="narrative-card">
+                    <h3>⚖️ The Multi-Factor Scoring Architecture (0–100 Points)</h3>
+                    <p>Every stock in the 495 universe was scored across four objective quantitative pillars:</p>
+                    <ul>
+                        <li><strong>Pillar 1: Business Quality & Efficiency (0–30 pts):</strong> RoCE > 20% (15 pts), Net Debt/Equity < 0.3 (10 pts), Promoter Holding > 50% (5 pts).</li>
+                        <li><strong>Pillar 2: Growth & Operating Momentum (0–30 pts):</strong> 3-Year PAT CAGR > 20% (10 pts), Sequential QoQ Revenue Growth (10 pts), Sequential QoQ PAT Growth (10 pts).</li>
+                        <li><strong>Pillar 3: Valuation & Margin of Safety (0–25 pts):</strong> PEG Ratio < 1.5 (15 pts), P/E vs 3-Yr Median (10 pts).</li>
+                        <li><strong>Pillar 4: Institutional Presence & Liquidity (0–15 pts):</strong> FII/DII shareholding > 15% (10 pts), Daily Trading Volume (5 pts).</li>
+                    </ul>
+                    <p><strong>The Core-Satellite Construct:</strong> Stocks scoring <strong>≥ 75 pts</strong> were nominated for Core (60%), while high-growth emerging companies scoring <strong>65–74 pts</strong> formed the Satellite tier (40%).</p>
+                </div>
+            </div>
+        
+        </section>
+
+        <!-- TAB 3: Backtest & Root Causes -->
         <section id="tab-backtest" class="tab-content">
+            <div class="sim-banner" style="background:rgba(244, 63, 94, 0.08); border-color:rgba(244, 63, 94, 0.25);">
+                <div>
+                    <div class="sim-title text-red">
+                        Audit Finding: Passive Portfolio (+1.39%) vs Benchmark Nifty 50 (+13.06%)
+                    </div>
+                    <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">
+                        Backtest Window: 01-Oct-2026 to 23-Nov-2026 (8 Weekly Waves) • Capital: ₹10,00,000
+                    </div>
+                </div>
+                <div class="mono" style="font-weight:700; color:#fff; font-size:0.95rem;">
+                    Active v2.0 Return: <span class="text-green">+13.19% (+0.13% Alpha)</span>
+                </div>
+            </div>
+
+            <div class="cards-2col" style="margin-bottom:1.5rem;">
+                <div class="narrative-card">
+                    <h3 class="text-green">What Worked Exceptionally Well</h3>
+                    <p>High-conviction compounders demonstrated remarkable earnings resiliency and pricing power throughout October and November:</p>
+                    <ul>
+                        <li><strong>Bajaj Auto (+19.4%):</strong> Sustained festive retail demand and electric 2W market share acceleration (Chetak).</li>
+                        <li><strong>GE Vernova T&D (+34.2%):</strong> Explosive grid capex, HVDC substation transmission tailwinds, and record backlog.</li>
+                        <li><strong>BSE Ltd (+28.1%):</strong> Derivatives trading market share gains and transaction volume expansion.</li>
+                        <li><strong>Sky Gold (+48.6%):</strong> Festive export volume surge and B2B jewelry manufacturing expansion.</li>
+                    </ul>
+                </div>
+                <div class="narrative-card">
+                    <h3 class="text-red">Root Causes of Passive Drag</h3>
+                    <p>The uncalibrated passive construct suffered from two structural blindspots that dragged net performance:</p>
+                    <ul>
+                        <li><strong>Root Cause 1: Metals Overconcentration:</strong> The 01-Oct screening selected 3 cyclical metal producers (Lloyds Metals, Sandur, Hind Zinc) into the Core tier, which plummeted -18.2% on Chinese demand slowdown.</li>
+                        <li><strong>Root Cause 2: Clean-Tech Price Wars:</strong> Emmvee Photovoltaic suffered aggressive solar module margin compression, turning an 80+ score into a -17.5% drawdown without an active exit rule.</li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="bento-card" style="margin-bottom: 1.5rem;">
                 <div class="bento-eyebrow">
-                    <span>●</span> 8-WEEK AUDITED PERFORMANCE WALK (01-OCT TO 22-NOV 2026)
+                    <span>●</span> 8-WEEK AUDITED PERFORMANCE WALK (01-OCT TO 23-NOV 2026)
                 </div>
                 <h3 style="font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
                     Active Weekly Action Scoring (WAS) vs Passive Buy-and-Hold
@@ -1175,14 +1386,69 @@
             </div>
         </section>
 
-        <!-- TAB 3: Analyst Intelligence & Concall Commentary -->
+        <!-- TAB 4: Calibrations & v2.0 Benefits -->
+        <section id="tab-calibrations" class="tab-content">
+            
+            <div class="cards-2col">
+                <div class="narrative-card">
+                    <h3>⚙️ The 4 Calibrated Filter Gates</h3>
+                    <ul>
+                        <li><strong>Gate 1: Gross Margin Preservation ($\Delta$ GM QoQ $\ge -150$ bps):</strong> Disqualifies commoditized clean-tech players whose gross margins are eroding, preventing solar hardware traps.</li>
+                        <li><strong>Gate 2: Cash Flow Quality ($\text{CFO} / \text{EBITDA} \ge 0.60$):</strong> Rejects companies with high accounting profit but trapped working capital in dealer inventory (e.g. Fujiyama Power).</li>
+                        <li><strong>Gate 3: Valuation / PEG Ceiling (PEG $\le 1.8$ Core / $\le 1.6$ Sat):</strong> Eliminates expensive slow-growers vulnerable to multiple compression (e.g. Kennametal @ 45x PE).</li>
+                        <li><strong>Gate 4: Thematic Sector Concentration Cap (Max 20%):</strong> Hard limit preventing commodity metals or single policies from dominating portfolio performance.</li>
+                    </ul>
+                </div>
+                <div class="narrative-card">
+                    <h3 class="text-green">🏆 Did the Framework Change Benefit? (Empirical Proof)</h3>
+                    <p>Re-running the backtest on the calibrated <strong>Fresh Portfolio v2.0</strong> proved a dramatic structural improvement across every metric:</p>
+                    <table style="margin-top:0.5rem;">
+                        <thead>
+                            <tr>
+                                <th>Portfolio Version</th>
+                                <th class="text-right">Terminal NAV (₹)</th>
+                                <th class="text-right">Return (%)</th>
+                                <th class="text-right">Alpha vs Nifty</th>
+                                <th class="text-right">Max Single DD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Original Passive (v1.0)</td>
+                                <td class="text-right font-mono">₹10,13,915</td>
+                                <td class="text-right font-mono text-muted">+1.39%</td>
+                                <td class="text-right font-mono text-red">-11.67%</td>
+                                <td class="text-right font-mono text-red">-26.50%</td>
+                            </tr>
+                            <tr>
+                                <td>Original Active (WAS)</td>
+                                <td class="text-right font-mono">₹10,25,730</td>
+                                <td class="text-right font-mono text-muted">+2.57%</td>
+                                <td class="text-right font-mono text-red">-10.48%</td>
+                                <td class="text-right font-mono text-red">-17.60%</td>
+                            </tr>
+                            <tr style="background:rgba(16, 185, 129, 0.1);">
+                                <td class="font-bold text-green">Fresh Portfolio v2.0</td>
+                                <td class="text-right font-mono font-bold text-green">₹11,31,862</td>
+                                <td class="text-right font-mono font-bold text-green">+13.19%</td>
+                                <td class="text-right font-mono font-bold text-green">+0.13% Alpha</td>
+                                <td class="text-right font-mono font-bold text-green">-4.70% (Safe)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </section>
+
+        <!-- TAB 5: Post-Q2 Analyst Consensus -->
         <section id="tab-analyst" class="tab-content">
             <div style="margin-bottom: 1.25rem;">
                 <div class="bento-eyebrow">
                     <span>●</span> POST-Q2 EARNINGS INSTITUTIONAL VERDICT
                 </div>
                 <h3 style="font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem;">
-                    Analyst Consensus, Operating Headwinds &amp; Support Zones
+                    Analyst Consensus, Operating Headwinds &amp; Support Zones (All 23 Positions)
                 </h3>
                 <p style="font-size: 0.82rem; color: var(--text-secondary);">
                     Synthesized from post-Q2 broker reports (Nuvama, Antique, Motilal Oswal, ICICI Direct) and management earnings concalls.
@@ -1194,8 +1460,8 @@
             </div>
         </section>
 
-        <!-- TAB 4: 70:30 Day-1 Execution Sheet -->
-        <section id="tab-execution" class="tab-content">
+        <!-- TAB 6: 70:30 Day-1 Execution Sheet -->
+        <section id="tab-orders" class="tab-content">
             <div class="bento-card" style="margin-bottom: 1.5rem;">
                 <div class="bento-eyebrow">
                     <span>●</span> SYSTEMATIC DAY-1 CAPITAL DEPLOYMENT ROADMAP
@@ -1205,8 +1471,8 @@
                 </h3>
                 <p style="font-size: 0.82rem; color: var(--text-secondary); max-width: 85ch; line-height: 1.6;">
                     To protect against near-term market volatility and overextended valuations post-runup, capital is strictly split:
-                    <br><strong>Tranche 1 (70% = ₹7,00,000):</strong> Deployed on Day 1 at open/CMP to establish institutional exposure.
-                    <br><strong>Tranche 2 (30% = ₹3,00,000):</strong> Held as cash buffer with staggered GTT limit buy orders set at verified technical support zones (5–12% below CMP).
+                    <br><strong>Tranche 1 (70% = ₹7,01,002):</strong> Deployed on Day 1 at open/CMP to establish institutional exposure.
+                    <br><strong>Tranche 2 (30% = ₹2,98,998):</strong> Held as cash buffer with staggered GTT limit buy orders set at verified technical support zones (5–12% below CMP).
                 </p>
             </div>
 
@@ -1222,7 +1488,7 @@
                             <th>Tranche 2 (30% Dip Buffer)</th>
                             <th>Tranche 2 Limit Price</th>
                             <th>Support Zone</th>
-                            <th>Consensus Upside</th>
+                            <th>Execution Verdict</th>
                         </tr>
                     </thead>
                     <tbody id="executionTableBody">
@@ -1232,8 +1498,133 @@
             </div>
         </section>
 
-        <!-- TAB 5: Master Knowledge Log -->
-        <section id="tab-learning" class="tab-content">
+        <!-- TAB 7: Watchlist Surveillance Radar -->
+        <section id="tab-watchlists" class="tab-content">
+            
+            <div class="cards-2col">
+                <div class="card-panel">
+                    <div class="panel-heading">Core Watchlist (20 High-Conviction Compounders)</div>
+                    <div class="text-muted text-xs" style="margin-bottom:0.75rem;">Pre-vetted candidates permitted to replace any Core position.</div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Sector</th>
+                                    <th class="text-right">RoCE</th>
+                                    <th class="text-right">P/E</th>
+                                    <th>Strategic Role & Catalyst</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="font-bold">Hero MotoCorp</td><td>Auto / 2W</td><td class="text-right font-mono text-green">35.2%</td><td class="text-right font-mono">18.2x</td><td>Rural 2W volume recovery; high dividend yield; candidate to replace Bajaj Auto.</td></tr>
+                                <tr><td class="font-bold">Multi Commodity Exchange (MCX)</td><td>Financials</td><td class="text-right font-mono text-green">71.3%</td><td class="text-right font-mono">50.8x</td><td>Commodity options volume explosion; natural hedge to equity pullbacks.</td></tr>
+                                <tr><td class="font-bold">Lumax Auto Tech</td><td>Auto Ancillary</td><td class="text-right font-mono text-green">21.2%</td><td class="text-right font-mono">42.8x</td><td>Gear shifters and lighting for passenger vehicles; Tier-1 EV supplier.</td></tr>
+                                <tr><td class="font-bold">Kanohar Electric</td><td>Power T&D</td><td class="text-right font-mono text-green">54.3%</td><td class="text-right font-mono">48.5x</td><td>High-voltage power transformer backlog; secondary candidate for T&D theme.</td></tr>
+                                <tr><td class="font-bold">Sambhv Steel</td><td>Steel Tubes</td><td class="text-right font-mono text-green">19.1%</td><td class="text-right font-mono">26.3x</td><td>Hollow sections & ERW steel pipes; infrastructure construction volume.</td></tr>
+                                <tr><td class="font-bold">Gulf Oil Lubricants</td><td>Lubricants</td><td class="text-right font-mono text-green">27.2%</td><td class="text-right font-mono">13.4x</td><td>Stable cash flows, high RoCE, low valuation, expanding EV fluids portfolio.</td></tr>
+                                <tr><td class="font-bold">Waaree Energies</td><td>Solar Modules</td><td class="text-right font-mono text-green">38.5%</td><td class="text-right font-mono">17.6x</td><td>Largest module manufacturer; ALMM domestic market share protector.</td></tr>
+                                <tr><td class="font-bold">Lloyds Metals</td><td>Mining / DRI</td><td class="text-right font-mono text-green">45.0%</td><td class="text-right font-mono">22.0x</td><td>Slurry pipeline completion in early 2027; iron ore volume inflection.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-panel">
+                    <div class="panel-heading">Satellite Watchlist (40 Growth / Catalyst Candidates)</div>
+                    <div class="text-muted text-xs" style="margin-bottom:0.75rem;">Restricted universe permitted to replace any Satellite holding.</div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Sector</th>
+                                    <th class="text-right">RoCE</th>
+                                    <th>Turnaround Catalyst / Trigger</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="font-bold">Shaily Engineering</td><td>Manufacturing</td><td class="text-right font-mono text-green">30.3%</td><td>Medical drug delivery devices & pen injectors; precision molding.</td></tr>
+                                <tr><td class="font-bold">Balmer Lawrie Investments</td><td>Holding Co</td><td class="text-right font-mono text-green">16.9%</td><td>High dividend yield; holding company discount play.</td></tr>
+                                <tr><td class="font-bold">Ceigall India</td><td>Infrastructure</td><td class="text-right font-mono text-green">21.5%</td><td>Highway & elevated corridor order book execution under NHAI.</td></tr>
+                                <tr><td class="font-bold">Goldiam International</td><td>LGD Jewellery</td><td class="text-right font-mono text-green">26.5%</td><td>US holiday season lab-grown diamond export volume pickups.</td></tr>
+                                <tr><td class="font-bold">National Aluminium (NALCO)</td><td>Alumina / Metals</td><td class="text-right font-mono text-green">18.5%</td><td>Global alumina deficit; 5th stream refinery expansion commissioning.</td></tr>
+                                <tr><td class="font-bold">Kennametal India</td><td>Industrial Tooling</td><td class="text-right font-mono text-green">32.6%</td><td>Monitored for auto machining capex recovery and tungsten price stability.</td></tr>
+                                <tr><td class="font-bold">Fujiyama Power</td><td>Solar / Battery</td><td class="text-right font-mono text-green">35.1%</td><td>Channel inventory destocking completion; battery warranty cost reduction.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+
+        <!-- TAB 8: Master Knowledge Log & Artifact Vault -->
+        <section id="tab-learnings" class="tab-content">
+            <!-- Executive Reports & Download Vault -->
+            <div style="margin-bottom:2rem;">
+                <div class="bento-eyebrow">
+                    <span>●</span> RESEARCH ARTIFACTS &amp; DOWNLOADABLE REPORTS VAULT
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
+                    Complete Research Deliverables &amp; Master Working Files
+                </h3>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                    All analytical documents, empirical backtests, analyst consensus reports, and framework calibration memos generated across our sessions:
+                </p>
+
+                <div class="vault-grid">
+                    <div class="vault-card">
+                        <div>
+                            <div class="vault-tag">Analyst Research &amp; Entry</div>
+                            <div class="vault-title">Post-Q2 Analyst Consensus &amp; Entry Strategy</div>
+                            <div class="vault-desc">Full 23-stock concall deep-dive, brokerage target prices, headwinds/tailwinds, PEG ratios, and Day-1 order sheet.</div>
+                        </div>
+                        <div class="vault-actions">
+                            <a href="reports/Post-Q2-Analyst-Consensus-Valuation-And-Entry-Strategy.html" target="_blank" class="btn-luxury accent-btn">Open Report →</a>
+                            <a href="reports/Post-Q2-Analyst-Consensus-Valuation-And-Entry-Strategy.html" download class="btn-luxury">Download</a>
+                        </div>
+                    </div>
+
+                    <div class="vault-card">
+                        <div>
+                            <div class="vault-tag">Empirical Backtest Audit</div>
+                            <div class="vault-title">Weekly Backtest &amp; Score Validation Report</div>
+                            <div class="vault-desc">Complete 8-week audit from 01-Oct to 23-Nov 2026, comparing active rotation against passive buy-and-hold and Nifty 50.</div>
+                        </div>
+                        <div class="vault-actions">
+                            <a href="reports/Weekly-Portfolio-Backtest-And-Score-Validation-Report.html" target="_blank" class="btn-luxury accent-btn">Open Report →</a>
+                            <a href="reports/Weekly-Portfolio-Backtest-And-Score-Validation-Report.html" download class="btn-luxury">Download</a>
+                        </div>
+                    </div>
+
+                    <div class="vault-card">
+                        <div>
+                            <div class="vault-tag">Calibrated Construct v2.0</div>
+                            <div class="vault-title">Fresh Portfolio Construct &amp; Calibrations</div>
+                            <div class="vault-desc">The 8 Core + 15 Satellite allocation blueprint, 4 calibrated filter gates, and 20 Core / 40 Satellite watchlists.</div>
+                        </div>
+                        <div class="vault-actions">
+                            <a href="reports/Rajan-Fresh-Equity-Portfolio-Construct-And-Framework-Calibrations.html" target="_blank" class="btn-luxury accent-btn">Open Report →</a>
+                            <a href="reports/Rajan-Fresh-Equity-Portfolio-Construct-And-Framework-Calibrations.html" download class="btn-luxury">Download</a>
+                        </div>
+                    </div>
+
+                    <div class="vault-card">
+                        <div>
+                            <div class="vault-tag">Living Memory &amp; Audit Trail</div>
+                            <div class="vault-title">Living Master Log (learning.md)</div>
+                            <div class="vault-desc">The continuous historical log documenting why decisions were made, Saturday WAS cron triggers, and action items.</div>
+                        </div>
+                        <div class="vault-actions">
+                            <a href="learning.md" target="_blank" class="btn-luxury accent-btn">View learning.md →</a>
+                            <a href="learning.md" download class="btn-luxury">Download Raw</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Living Master Log Markdown Viewer -->
             <div class="markdown-luxury-body" id="learningMdContainer">
                 <!-- Rendered via JavaScript from learning.md -->
             </div>
@@ -1268,90 +1659,95 @@
 
         // Initialize Application
         function initApp() {
-            // Map holdings combining fresh_portfolio and analyst_research
-            state.holdings = [];
+            try {
+                // Map holdings combining fresh_portfolio and analyst_research
+                state.holdings = [];
 
-            // Core stocks (60% = ₹6,00,000 / 8 = ₹75,000 each)
-            APP_DATA.fresh_portfolio.core_portfolio.forEach(s => {
-                let r = APP_DATA.analyst_research.core.find(a => a.name.includes(s.name) || s.name.includes(a.name)) || {};
-                let sym = r.symbol || getSymbolByName(s.name);
-                let quote = state.quotes[sym] || {};
-                let cmp = quote.price || r.cmp || (s.alloc / 100);
-                let basePrice = quote.basePrice || cmp;
-                let dayChg = quote.changePct || 0.0;
-                let shares = Math.round((s.alloc / basePrice) * 100) / 100;
+                // Core stocks (60% = ₹6,00,000 / 8 = ₹75,000 each)
+                APP_DATA.fresh_portfolio.core_portfolio.forEach(s => {
+                    let r = APP_DATA.analyst_research.core.find(a => a.name.includes(s.name) || s.name.includes(a.name)) || {};
+                    let sym = r.symbol || getSymbolByName(s.name);
+                    let quote = state.quotes[sym] || {};
+                    let cmp = quote.price || r.cmp || (s.alloc / 100);
+                    let basePrice = quote.basePrice || cmp;
+                    let dayChg = quote.changePct || 0.0;
+                    let shares = Math.round((s.alloc / basePrice) * 100) / 100;
 
-                state.holdings.push({
-                    name: s.name,
-                    symbol: sym,
-                    tier: 'Core',
-                    sector: s.sector,
-                    alloc: s.alloc,
-                    shares: shares,
-                    basePrice: basePrice,
-                    livePrice: cmp,
-                    dayChangePct: dayChg,
-                    roce: s.roce,
-                    pe: s.pe,
-                    peg: r.peg || 0.8,
-                    role: s.role,
-                    verdict: r.verdict || 'CORE ANCHOR',
-                    supportZone: r.support_zone || 'CMP',
-                    targets: r.broker_consensus || 'Overweight',
-                    tailwinds: r.tailwinds || s.role,
-                    headwinds: r.headwinds || 'Monitor raw material and export tariff trends.'
+                    state.holdings.push({
+                        name: s.name,
+                        symbol: sym,
+                        tier: 'Core',
+                        sector: s.sector,
+                        alloc: s.alloc,
+                        shares: shares,
+                        basePrice: basePrice,
+                        livePrice: cmp,
+                        dayChangePct: dayChg,
+                        roce: s.roce,
+                        pe: s.pe,
+                        peg: r.peg || 0.8,
+                        role: s.role,
+                        verdict: r.verdict || 'CORE ANCHOR',
+                        supportZone: r.support_zone || 'CMP',
+                        targets: r.broker_consensus || 'Overweight',
+                        tailwinds: r.tailwinds || s.role,
+                        headwinds: r.headwinds || 'Monitor raw material and export tariff trends.'
+                    });
                 });
-            });
 
-            // Satellite stocks (40% = ₹4,00,000 / 15 = ₹26,666.67 each)
-            APP_DATA.fresh_portfolio.satellite_portfolio.forEach(s => {
-                let r = APP_DATA.analyst_research.satellite.find(a => a.name.includes(s.name) || s.name.includes(a.name)) || {};
-                let sym = r.symbol || getSymbolByName(s.name);
-                let quote = state.quotes[sym] || {};
-                let cmp = quote.price || r.cmp || (s.alloc / 100);
-                let basePrice = quote.basePrice || cmp;
-                let dayChg = quote.changePct || 0.0;
-                let shares = Math.round((s.alloc / basePrice) * 100) / 100;
+                // Satellite stocks (40% = ₹4,00,000 / 15 = ₹26,666.67 each)
+                APP_DATA.fresh_portfolio.satellite_portfolio.forEach(s => {
+                    let r = APP_DATA.analyst_research.satellite.find(a => a.name.includes(s.name) || s.name.includes(a.name)) || {};
+                    let sym = r.symbol || getSymbolByName(s.name);
+                    let quote = state.quotes[sym] || {};
+                    let cmp = quote.price || r.cmp || (s.alloc / 100);
+                    let basePrice = quote.basePrice || cmp;
+                    let dayChg = quote.changePct || 0.0;
+                    let shares = Math.round((s.alloc / basePrice) * 100) / 100;
 
-                state.holdings.push({
-                    name: s.name,
-                    symbol: sym,
-                    tier: 'Satellite',
-                    sector: s.sector,
-                    alloc: s.alloc,
-                    shares: shares,
-                    basePrice: basePrice,
-                    livePrice: cmp,
-                    dayChangePct: dayChg,
-                    roce: s.roce,
-                    pe: s.pe,
-                    peg: r.peg || 1.1,
-                    role: s.role,
-                    verdict: r.verdict || 'BUY ON DIP',
-                    supportZone: r.support_zone || 'CMP',
-                    targets: r.broker_consensus || 'Positive',
-                    tailwinds: r.tailwinds || s.role,
-                    headwinds: r.headwinds || 'Monitor execution runway and quarterly margins.'
+                    state.holdings.push({
+                        name: s.name,
+                        symbol: sym,
+                        tier: 'Satellite',
+                        sector: s.sector,
+                        alloc: s.alloc,
+                        shares: shares,
+                        basePrice: basePrice,
+                        livePrice: cmp,
+                        dayChangePct: dayChg,
+                        roce: s.roce,
+                        pe: s.pe,
+                        peg: r.peg || 1.1,
+                        role: s.role,
+                        verdict: r.verdict || 'BUY ON DIP',
+                        supportZone: r.support_zone || 'CMP',
+                        targets: r.broker_consensus || 'Positive',
+                        tailwinds: r.tailwinds || s.role,
+                        headwinds: r.headwinds || 'Monitor execution runway and quarterly margins.'
+                    });
                 });
-            });
 
-            // Setup Nifty
-            if (state.quotes['^NSEI']) {
-                state.niftyCurrent = state.quotes['^NSEI'].price;
-                let nChg = state.quotes['^NSEI'].changePct;
-                document.getElementById('niftyTelemetry').innerText = `NIFTY: ${state.niftyCurrent.toFixed(2)} (${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}%)`;
+                // Setup Nifty
+                if (state.quotes['^NSEI']) {
+                    state.niftyCurrent = state.quotes['^NSEI'].price;
+                    let nChg = state.quotes['^NSEI'].changePct;
+                    document.getElementById('niftyTelemetry').innerText = `NIFTY: ${state.niftyCurrent.toFixed(2)} (${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}%)`;
+                }
+
+                document.getElementById('lastSyncTime').innerText = state.lastSync;
+
+                // Render each module wrapped safely
+                renderTickerTape();
+                recalcPortfolio();
+                renderHoldingsTable();
+                renderBacktestTable();
+                renderAnalystCards();
+                renderExecutionTable();
+                renderLearningDoc();
+                initChart();
+            } catch (err) {
+                console.error("Critical error in initApp:", err);
             }
-
-            document.getElementById('lastSyncTime').innerText = state.lastSync;
-
-            renderTickerTape();
-            recalcPortfolio();
-            renderHoldingsTable();
-            renderBacktestTable();
-            renderAnalystCards();
-            renderExecutionTable();
-            renderLearningDoc();
-            initChart();
         }
 
         function getSymbolByName(name) {
@@ -1385,150 +1781,162 @@
 
         // Real-time Recalculation Engine
         function recalcPortfolio() {
-            let totalVal = 0.0;
-            let coreVal = 0.0;
-            let satVal = 0.0;
-            let dayPnl = 0.0;
+            try {
+                let totalVal = 0.0;
+                let coreVal = 0.0;
+                let satVal = 0.0;
+                let dayPnl = 0.0;
 
-            state.holdings.forEach(h => {
-                let currentPosVal = h.shares * h.livePrice;
-                totalVal += currentPosVal;
-                if (h.tier === 'Core') coreVal += currentPosVal;
-                else satVal += currentPosVal;
+                state.holdings.forEach(h => {
+                    let currentPosVal = h.shares * h.livePrice;
+                    totalVal += currentPosVal;
+                    if (h.tier === 'Core') coreVal += currentPosVal;
+                    else satVal += currentPosVal;
 
-                let dayChangeRupees = (h.livePrice - (h.livePrice / (1 + h.dayChangePct / 100))) * h.shares;
-                dayPnl += dayChangeRupees;
-            });
+                    let dayChangeRupees = (h.livePrice - (h.livePrice / (1 + h.dayChangePct / 100))) * h.shares;
+                    dayPnl += dayChangeRupees;
+                });
 
-            let totalPnl = totalVal - state.baseCapital;
-            let totalPnlPct = (totalPnl / state.baseCapital) * 100;
-            let dayPnlPct = (dayPnl / totalVal) * 100;
+                let totalPnl = totalVal - state.baseCapital;
+                let totalPnlPct = (totalPnl / state.baseCapital) * 100;
+                let dayPnlPct = (dayPnl / totalVal) * 100;
 
-            let niftyChgPct = ((state.niftyCurrent / state.niftyBase) - 1) * 100;
-            let alphaPct = totalPnlPct - niftyChgPct;
+                let niftyChgPct = ((state.niftyCurrent / state.niftyBase) - 1) * 100;
+                let alphaPct = totalPnlPct - niftyChgPct;
 
-            // Update Cockpit UI
-            document.getElementById('heroNav').innerText = '₹' + Math.round(totalVal).toLocaleString('en-IN');
-            
-            const heroPnlEl = document.getElementById('heroPnl');
-            heroPnlEl.innerText = `${totalPnl >= 0 ? '+' : ''}₹${Math.round(totalPnl).toLocaleString('en-IN')} (${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(2)}%)`;
-            heroPnlEl.className = 'hero-badge mono ' + (totalPnl >= 0 ? 'emerald' : 'rose');
+                // Update Cockpit UI
+                document.getElementById('heroNav').innerText = '₹' + Math.round(totalVal).toLocaleString('en-IN');
+                
+                const heroPnlEl = document.getElementById('heroPnl');
+                heroPnlEl.innerText = `${totalPnl >= 0 ? '+' : ''}₹${Math.round(totalPnl).toLocaleString('en-IN')} (${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(2)}%)`;
+                heroPnlEl.className = 'hero-badge mono ' + (totalPnl >= 0 ? 'emerald' : 'rose');
 
-            const heroAlphaEl = document.getElementById('heroAlpha');
-            heroAlphaEl.innerText = `${alphaPct >= 0 ? '+' : ''}${alphaPct.toFixed(2)}% Alpha`;
+                const heroAlphaEl = document.getElementById('heroAlpha');
+                heroAlphaEl.innerText = `${alphaPct >= 0 ? '+' : ''}${alphaPct.toFixed(2)}% Alpha`;
 
-            // Update Allocation Bars
-            let corePct = (coreVal / totalVal) * 100;
-            let satPct = (satVal / totalVal) * 100;
-            document.getElementById('barCore').style.width = corePct.toFixed(1) + '%';
-            document.getElementById('barSat').style.width = satPct.toFixed(1) + '%';
-            document.getElementById('labelCore').innerText = `Core Moats: ${corePct.toFixed(1)}%`;
-            document.getElementById('labelSat').innerText = `Satellite: ${satPct.toFixed(1)}%`;
+                // Update Allocation Bars
+                let corePct = (coreVal / totalVal) * 100;
+                let satPct = (satVal / totalVal) * 100;
+                document.getElementById('barCore').style.width = corePct.toFixed(1) + '%';
+                document.getElementById('barSat').style.width = satPct.toFixed(1) + '%';
+                document.getElementById('labelCore').innerText = `Core Moats: ${corePct.toFixed(1)}%`;
+                document.getElementById('labelSat').innerText = `Satellite: ${satPct.toFixed(1)}%`;
+            } catch (e) {
+                console.error("Error in recalcPortfolio:", e);
+            }
         }
 
         // Ticker Tape Ribbon
         function renderTickerTape() {
-            const container = document.getElementById('tickerTape');
-            let items = [];
+            try {
+                const container = document.getElementById('tickerTape');
+                let items = [];
 
-            // Add Nifty 50 first
-            if (state.quotes['^NSEI']) {
-                let n = state.quotes['^NSEI'];
-                let isPos = n.changePct >= 0;
-                items.push(`
-                    <div class="ticker-item">
-                        <span class="ticker-sym">NIFTY 50</span>
-                        <span class="ticker-price">${n.price.toFixed(2)}</span>
-                        <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${n.changePct.toFixed(2)}%</span>
-                    </div>
-                `);
+                // Add Nifty 50 first
+                if (state.quotes['^NSEI']) {
+                    let n = state.quotes['^NSEI'];
+                    let isPos = n.changePct >= 0;
+                    items.push(`
+                        <div class="ticker-item">
+                            <span class="ticker-sym">NIFTY 50</span>
+                            <span class="ticker-price">${n.price.toFixed(2)}</span>
+                            <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${n.changePct.toFixed(2)}%</span>
+                        </div>
+                    `);
+                }
+
+                state.holdings.forEach(h => {
+                    let isPos = h.dayChangePct >= 0;
+                    items.push(`
+                        <div class="ticker-item" onclick="openDrawerBySymbol('${h.symbol}')">
+                            <span class="ticker-sym">${h.symbol.replace('.NS','').replace('.BO','')}</span>
+                            <span class="ticker-price">₹${h.livePrice.toFixed(1)}</span>
+                            <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${h.dayChangePct.toFixed(2)}%</span>
+                        </div>
+                    `);
+                });
+
+                // Duplicate items for continuous infinite scroll
+                container.innerHTML = items.join('') + items.join('');
+            } catch (e) {
+                console.error("Error in renderTickerTape:", e);
             }
-
-            state.holdings.forEach(h => {
-                let isPos = h.dayChangePct >= 0;
-                items.push(`
-                    <div class="ticker-item" onclick="openDrawerBySymbol('${h.symbol}')">
-                        <span class="ticker-sym">${h.symbol.replace('.NS','').replace('.BO','')}</span>
-                        <span class="ticker-price">₹${h.livePrice.toFixed(1)}</span>
-                        <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${h.dayChangePct.toFixed(2)}%</span>
-                    </div>
-                `);
-            });
-
-            // Duplicate items for continuous infinite scroll
-            container.innerHTML = items.join('') + items.join('');
         }
 
         // Render Holdings Table
         function renderHoldingsTable() {
-            const tbody = document.getElementById('holdingsTableBody');
-            let rows = [];
+            try {
+                const tbody = document.getElementById('holdingsTableBody');
+                let rows = [];
 
-            let filtered = state.holdings.filter(h => {
-                if (state.currentFilter === 'ALL') return true;
-                if (state.currentFilter === 'Core') return h.tier === 'Core';
-                if (state.currentFilter === 'Satellite') return h.tier === 'Satellite';
-                if (state.currentFilter === 'GAIN') return h.dayChangePct > 0;
-                if (state.currentFilter === 'DIP') return h.verdict.includes('DIP') || h.verdict.includes('ACCUMULATE');
-                return true;
-            });
+                let filtered = state.holdings.filter(h => {
+                    if (state.currentFilter === 'ALL') return true;
+                    if (state.currentFilter === 'Core') return h.tier === 'Core';
+                    if (state.currentFilter === 'Satellite') return h.tier === 'Satellite';
+                    if (state.currentFilter === 'GAIN') return h.dayChangePct > 0;
+                    if (state.currentFilter === 'DIP') return h.verdict.includes('DIP') || h.verdict.includes('ACCUMULATE');
+                    return true;
+                });
 
-            filtered.forEach(h => {
-                let curVal = h.shares * h.livePrice;
-                let pnl = curVal - h.alloc;
-                let pnlPct = (pnl / h.alloc) * 100;
-                let isDayPos = h.dayChangePct >= 0;
-                let isPnlPos = pnl >= 0;
+                filtered.forEach(h => {
+                    let curVal = h.shares * h.livePrice;
+                    let pnl = curVal - h.alloc;
+                    let pnlPct = (pnl / h.alloc) * 100;
+                    let isDayPos = h.dayChangePct >= 0;
+                    let isPnlPos = pnl >= 0;
 
-                rows.push(`
-                    <tr onclick="openDrawerBySymbol('${h.symbol}')" style="cursor:pointer;">
-                        <td>
-                            <div class="stock-identity">
-                                <div>
-                                    <div class="stock-sym-badge">${h.symbol.replace('.NS','')}</div>
-                                    <div class="stock-name-sub">${h.name}</div>
+                    rows.push(`
+                        <tr onclick="openDrawerBySymbol('${h.symbol}')" style="cursor:pointer;">
+                            <td>
+                                <div class="stock-identity">
+                                    <div>
+                                        <div class="stock-sym-badge">${h.symbol.replace('.NS','')}</div>
+                                        <div class="stock-name-sub">${h.name}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span>
-                        </td>
-                        <td style="color:var(--text-muted); font-size:0.75rem;">${h.sector}</td>
-                        <td class="mono">₹${Math.round(h.alloc).toLocaleString('en-IN')} <span style="font-size:0.7rem; color:var(--text-muted);">(${(h.alloc/10000).toFixed(1)}%)</span></td>
-                        <td class="price-cell" id="price-${h.symbol}">₹${h.livePrice.toLocaleString('en-IN', {minimumFractionDigits: 1, maximumFractionDigits: 2})}</td>
-                        <td>
-                            <span class="pnl-badge ${isDayPos ? 'pos' : 'neg'}">
-                                ${isDayPos ? '+' : ''}${h.dayChangePct.toFixed(2)}%
-                            </span>
-                        </td>
-                        <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(curVal).toLocaleString('en-IN')}</td>
-                        <td>
-                            <span class="mono" style="color: ${isPnlPos ? 'var(--emerald)' : 'var(--rose)'}; font-weight:600;">
-                                ${isPnlPos ? '+' : ''}₹${Math.round(pnl).toLocaleString('en-IN')} (${isPnlPos ? '+' : ''}${pnlPct.toFixed(1)}%)
-                            </span>
-                        </td>
-                        <td class="mono" style="font-size:0.75rem;">${h.roce}% / ${h.pe}x</td>
-                        <td>
-                            <span style="font-size:0.7rem; font-weight:700; padding:0.2rem 0.5rem; border-radius:4px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-subtle);">
-                                ${h.verdict}
-                            </span>
-                        </td>
-                        <td>
-                            <button class="btn-luxury" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="event.stopPropagation(); openDrawerBySymbol('${h.symbol}')">
-                                Dossier →
-                            </button>
-                        </td>
-                    </tr>
-                `);
-            });
+                            </td>
+                            <td>
+                                <span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span>
+                            </td>
+                            <td style="color:var(--text-muted); font-size:0.75rem;">${h.sector}</td>
+                            <td class="mono">₹${Math.round(h.alloc).toLocaleString('en-IN')} <span style="font-size:0.7rem; color:var(--text-muted);">(${(h.alloc/10000).toFixed(1)}%)</span></td>
+                            <td class="price-cell" id="price-${h.symbol}">₹${h.livePrice.toLocaleString('en-IN', {minimumFractionDigits: 1, maximumFractionDigits: 2})}</td>
+                            <td>
+                                <span class="pnl-badge ${isDayPos ? 'pos' : 'neg'}">
+                                    ${isDayPos ? '+' : ''}${h.dayChangePct.toFixed(2)}%
+                                </span>
+                            </td>
+                            <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(curVal).toLocaleString('en-IN')}</td>
+                            <td>
+                                <span class="mono" style="color: ${isPnlPos ? 'var(--emerald)' : 'var(--rose)'}; font-weight:600;">
+                                    ${isPnlPos ? '+' : ''}₹${Math.round(pnl).toLocaleString('en-IN')} (${isPnlPos ? '+' : ''}${pnlPct.toFixed(1)}%)
+                                </span>
+                            </td>
+                            <td class="mono" style="font-size:0.75rem;">${h.roce}% / ${h.pe}x</td>
+                            <td>
+                                <span style="font-size:0.7rem; font-weight:700; padding:0.2rem 0.5rem; border-radius:4px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-subtle);">
+                                    ${h.verdict}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-luxury" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="event.stopPropagation(); openDrawerBySymbol('${h.symbol}')">
+                                    Dossier →
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
 
-            tbody.innerHTML = rows.join('');
+                tbody.innerHTML = rows.join('');
+            } catch (e) {
+                console.error("Error in renderHoldingsTable:", e);
+            }
         }
 
         function filterHoldings(filter) {
             state.currentFilter = filter;
             document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) event.target.classList.add('active');
             renderHoldingsTable();
         }
 
@@ -1600,141 +2008,171 @@
             }, 600);
         }
 
-        // Backtest Table
+        // Backtest Table (Fixed parsing for list nifty_perf)
         function renderBacktestTable() {
-            const tbody = document.getElementById('backtestTableBody');
-            const b = APP_DATA.backtest_report;
-            let rows = [];
+            try {
+                const tbody = document.getElementById('backtestTableBody');
+                const b = APP_DATA.backtest_report;
+                let rows = [];
 
-            b.weekly_dates.forEach((d, i) => {
-                let niftyLevel = b.nifty_perf.weekly_levels[i];
-                let niftyRet = b.nifty_perf.weekly_pct[i];
-                let passVal = b.passive_total[i];
-                let passRet = b.passive_ret[i];
-                let actVal = b.active_weekly_vals[i];
-                let actRet = b.active_ret[i];
-                let alpha = actRet - niftyRet;
+                b.weekly_dates.forEach((d, i) => {
+                    let niftyRet = b.nifty_perf[i] || 0.0;
+                    let niftyLevel = state.niftyBase * (1 + niftyRet / 100);
+                    let passVal = b.passive_total[i] || state.baseCapital;
+                    let passRet = b.passive_ret[i] || 0.0;
+                    let actVal = b.active_weekly_vals[i] || state.baseCapital;
+                    let actRet = b.active_ret[i] || 0.0;
+                    let alpha = actRet - niftyRet;
 
-                let swapNote = b.swap_log.find(s => s.week === d);
-                let note = swapNote ? `Rotated ${swapNote.exited} -> ${swapNote.entered} (${swapNote.reason})` : 'Systematic Hold • Scores Stable';
+                    let swapNote = b.swap_log.find(s => s.week === d);
+                    let note = swapNote ? `Rotated ${swapNote.exited} -> ${swapNote.entered} (${swapNote.reason})` : 'Systematic Hold • Scores Stable';
 
-                rows.push(`
-                    <tr>
-                        <td class="mono" style="font-weight:700; color:#fff;">${d}</td>
-                        <td class="mono">${niftyLevel.toFixed(1)}</td>
-                        <td class="mono" style="color:${niftyRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${niftyRet >= 0 ? '+' : ''}${niftyRet.toFixed(2)}%</td>
-                        <td class="mono">₹${Math.round(passVal).toLocaleString('en-IN')}</td>
-                        <td class="mono" style="color:${passRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${passRet >= 0 ? '+' : ''}${passRet.toFixed(2)}%</td>
-                        <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(actVal).toLocaleString('en-IN')}</td>
-                        <td class="mono" style="font-weight:700; color:var(--emerald);">${actRet >= 0 ? '+' : ''}${actRet.toFixed(2)}%</td>
-                        <td class="mono" style="font-weight:700; color:var(--amber);">${alpha >= 0 ? '+' : ''}${alpha.toFixed(2)}%</td>
-                        <td style="font-size:0.75rem; color:var(--text-muted);">${note}</td>
-                    </tr>
-                `);
-            });
+                    rows.push(`
+                        <tr>
+                            <td class="mono" style="font-weight:700; color:#fff;">${d}</td>
+                            <td class="mono">${niftyLevel.toFixed(1)}</td>
+                            <td class="mono" style="color:${niftyRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${niftyRet >= 0 ? '+' : ''}${niftyRet.toFixed(2)}%</td>
+                            <td class="mono">₹${Math.round(passVal).toLocaleString('en-IN')}</td>
+                            <td class="mono" style="color:${passRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${passRet >= 0 ? '+' : ''}${passRet.toFixed(2)}%</td>
+                            <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(actVal).toLocaleString('en-IN')}</td>
+                            <td class="mono" style="font-weight:700; color:var(--emerald);">${actRet >= 0 ? '+' : ''}${actRet.toFixed(2)}%</td>
+                            <td class="mono" style="font-weight:700; color:var(--amber);">${alpha >= 0 ? '+' : ''}${alpha.toFixed(2)}%</td>
+                            <td style="font-size:0.75rem; color:var(--text-muted);">${note}</td>
+                        </tr>
+                    `);
+                });
 
-            tbody.innerHTML = rows.join('');
+                tbody.innerHTML = rows.join('');
+            } catch (e) {
+                console.error("Error in renderBacktestTable:", e);
+            }
         }
 
         // Analyst Cards Grid
         function renderAnalystCards() {
-            const container = document.getElementById('analystCardGrid');
-            let cards = [];
+            try {
+                const container = document.getElementById('analystCardGrid');
+                if (!container) return;
+                let cards = [];
 
-            state.holdings.forEach(h => {
-                cards.push(`
-                    <div class="analyst-card" onclick="openDrawerBySymbol('${h.symbol}')" style="cursor:pointer;">
-                        <div>
-                            <div class="analyst-head">
-                                <div>
-                                    <div style="font-size:1rem; font-weight:800; color:#fff;">${h.symbol.replace('.NS','')}</div>
-                                    <div style="font-size:0.75rem; color:var(--text-muted);">${h.name}</div>
+                state.holdings.forEach(h => {
+                    cards.push(`
+                        <div class="analyst-card" onclick="openDrawerBySymbol('${h.symbol}')" style="cursor:pointer;">
+                            <div>
+                                <div class="analyst-head">
+                                    <div>
+                                        <div style="font-size:1rem; font-weight:800; color:#fff;">${h.symbol.replace('.NS','')}</div>
+                                        <div style="font-size:0.75rem; color:var(--text-muted);">${h.name}</div>
+                                    </div>
+                                    <span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span>
                                 </div>
-                                <span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span>
+
+                                <div class="analyst-targets mono">
+                                    <div>
+                                        <div style="color:var(--text-muted); font-size:0.68rem;">BROKER CONSENSUS</div>
+                                        <div style="font-weight:700; color:#fff;">${h.targets}</div>
+                                    </div>
+                                    <div style="text-align:right;">
+                                        <div style="color:var(--text-muted); font-size:0.68rem;">SUPPORT ZONE</div>
+                                        <div style="font-weight:700; color:var(--amber);">${h.supportZone}</div>
+                                    </div>
+                                </div>
+
+                                <div class="analyst-section-label tailwinds">● OPERATING TAILWINDS</div>
+                                <div class="analyst-text">${h.tailwinds}</div>
+
+                                <div class="analyst-section-label headwinds">● HEADWINDS &amp; WATCHPOINTS</div>
+                                <div class="analyst-text">${h.headwinds}</div>
                             </div>
 
-                            <div class="analyst-targets mono">
-                                <div>
-                                    <div style="color:var(--text-muted); font-size:0.68rem;">BROKER CONSENSUS</div>
-                                    <div style="font-weight:700; color:#fff;">${h.targets}</div>
-                                </div>
-                                <div style="text-align:right;">
-                                    <div style="color:var(--text-muted); font-size:0.68rem;">SUPPORT ZONE</div>
-                                    <div style="font-weight:700; color:var(--amber);">${h.supportZone}</div>
-                                </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:0.75rem; margin-top:0.5rem; font-size:0.72rem;" class="mono">
+                                <span style="color:var(--text-muted);">RoCE: ${h.roce}% | PE: ${h.pe}x</span>
+                                <span style="color:var(--emerald); font-weight:700;">${h.verdict} →</span>
                             </div>
-
-                            <div class="analyst-section-label tailwinds">● OPERATING TAILWINDS</div>
-                            <div class="analyst-text">${h.tailwinds}</div>
-
-                            <div class="analyst-section-label headwinds">● HEADWINDS &amp; WATCHPOINTS</div>
-                            <div class="analyst-text">${h.headwinds}</div>
                         </div>
+                    `);
+                });
 
-                        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:0.75rem; margin-top:0.5rem; font-size:0.72rem;" class="mono">
-                            <span style="color:var(--text-muted);">RoCE: ${h.roce}% | PE: ${h.pe}x</span>
-                            <span style="color:var(--emerald); font-weight:700;">${h.verdict} →</span>
-                        </div>
-                    </div>
-                `);
-            });
-
-            container.innerHTML = cards.join('');
+                container.innerHTML = cards.join('');
+            } catch (e) {
+                console.error("Error in renderAnalystCards:", e);
+            }
         }
 
         // 70:30 Execution Table
         function renderExecutionTable() {
-            const tbody = document.getElementById('executionTableBody');
-            let rows = [];
+            try {
+                const tbody = document.getElementById('executionTableBody');
+                if (!tbody) return;
+                let rows = [];
 
-            state.holdings.forEach(h => {
-                let t1Amt = h.alloc * 0.7;
-                let t2Amt = h.alloc * 0.3;
-                let t1Shares = Math.floor(t1Amt / h.basePrice);
-                
-                // Parse support price from supportZone string
-                let supPrice = h.basePrice * 0.93;
-                let match = h.supportZone.match(/[0-9,]+/);
-                if (match) supPrice = parseFloat(match[0].replace(/,/g, ''));
+                state.holdings.forEach(h => {
+                    let isImm = h.verdict.includes('IMMEDIATE') || h.verdict.includes('ANCHOR');
+                    let isCautious = h.verdict.includes('CAUTIOUS');
+                    let t1Amt = Math.round(h.alloc * 0.70);
+                    let t2Amt = h.alloc - t1Amt;
 
-                rows.push(`
-                    <tr>
-                        <td>
-                            <div class="stock-sym-badge">${h.symbol.replace('.NS','')}</div>
-                            <div style="font-size:0.72rem; color:var(--text-muted);">${h.name}</div>
-                        </td>
-                        <td><span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span></td>
-                        <td class="mono">₹${Math.round(h.alloc).toLocaleString('en-IN')}</td>
-                        <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(t1Amt).toLocaleString('en-IN')} (70%)</td>
-                        <td class="mono" style="font-weight:700; color:var(--emerald);">${t1Shares} shares</td>
-                        <td class="mono">₹${Math.round(t2Amt).toLocaleString('en-IN')} (30%)</td>
-                        <td class="mono" style="color:var(--amber); font-weight:700;">₹${Math.round(supPrice).toLocaleString('en-IN')}</td>
-                        <td class="mono" style="font-size:0.75rem; color:var(--text-muted);">${h.supportZone}</td>
-                        <td style="font-size:0.75rem; color:var(--text-secondary);">${h.targets}</td>
-                    </tr>
-                `);
-            });
+                    if (isCautious) {
+                        t1Amt = Math.round(h.alloc * 0.30);
+                        t2Amt = h.alloc - t1Amt;
+                    }
 
-            tbody.innerHTML = rows.join('');
+                    let t1Shares = Math.floor(t1Amt / h.basePrice);
+                    
+                    // Parse support price from supportZone string
+                    let supPrice = Math.round(h.basePrice * 0.93);
+                    let match = h.supportZone.match(/[0-9,]+/);
+                    if (match) supPrice = parseFloat(match[0].replace(/,/g, ''));
+
+                    rows.push(`
+                        <tr>
+                            <td>
+                                <div class="stock-sym-badge">${h.symbol.replace('.NS','')}</div>
+                                <div style="font-size:0.72rem; color:var(--text-muted);">${h.name}</div>
+                            </td>
+                            <td><span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()}</span></td>
+                            <td class="mono">₹${Math.round(h.alloc).toLocaleString('en-IN')}</td>
+                            <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(t1Amt).toLocaleString('en-IN')} (${Math.round((t1Amt/h.alloc)*100)}%)</td>
+                            <td class="mono" style="font-weight:700; color:var(--emerald);">${t1Shares} shares</td>
+                            <td class="mono">₹${Math.round(t2Amt).toLocaleString('en-IN')} (${Math.round((t2Amt/h.alloc)*100)}%)</td>
+                            <td class="mono" style="color:var(--amber); font-weight:700;">₹${Math.round(supPrice).toLocaleString('en-IN')}</td>
+                            <td class="mono" style="font-size:0.75rem; color:var(--text-muted);">${h.supportZone}</td>
+                            <td>
+                                <span style="font-size:0.7rem; font-weight:700; padding:0.2rem 0.5rem; border-radius:4px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-subtle);">
+                                    ${h.verdict}
+                                </span>
+                            </td>
+                        </tr>
+                    `);
+                });
+
+                tbody.innerHTML = rows.join('');
+            } catch (e) {
+                console.error("Error in renderExecutionTable:", e);
+            }
         }
 
         // Render Learning Document
         function renderLearningDoc() {
-            const container = document.getElementById('learningMdContainer');
-            // Clean markdown parser for clean rendering
-            let md = APP_DATA.learning_md;
-            let html = md
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^#### (.*$)/gim, '<h4 style="color:#fff; margin-top:1rem;">$1</h4>')
-                .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-                .replace(/`([^`]+)`/gim, '<code>$1</code>')
-                .replace(/^\- (.*$)/gim, '<li>$1</li>')
-                .replace(/\n\n/gim, '</p><p>');
+            try {
+                const container = document.getElementById('learningMdContainer');
+                if (!container) return;
+                let md = APP_DATA.learning_md;
+                let html = md
+                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^#### (.*$)/gim, '<h4 style="color:#fff; margin-top:1rem;">$1</h4>')
+                    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+                    .replace(/`([^`]+)`/gim, '<code>$1</code>')
+                    .replace(/^\- (.*$)/gim, '<li>$1</li>')
+                    .replace(/\n\n/gim, '</p><p>');
 
-            container.innerHTML = '<div>' + html + '</div>';
+                container.innerHTML = '<div>' + html + '</div>';
+            } catch (e) {
+                console.error("Error in renderLearningDoc:", e);
+            }
         }
 
         // Drawer Controls
@@ -1814,108 +2252,123 @@
             document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-            event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            } else {
+                const btn = Array.from(document.querySelectorAll('.tab-button')).find(b => b.getAttribute('onclick').includes(tabId));
+                if (btn) btn.classList.add('active');
+            }
+
             const target = document.getElementById('tab-' + tabId);
             if (target) target.classList.add('active');
+
+            // Resize chart when backtest tab becomes visible
+            if (tabId === 'backtest' && chartInstance) {
+                setTimeout(() => chartInstance.resize(), 100);
+            }
         }
 
         // Performance Chart Initialization
         let chartInstance = null;
         function initChart() {
-            const ctx = document.getElementById('backtestChart');
-            if (!ctx) return;
+            try {
+                const ctx = document.getElementById('backtestChart');
+                if (!ctx) return;
 
-            const b = APP_DATA.backtest_report;
+                const b = APP_DATA.backtest_report;
 
-            chartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: b.weekly_dates,
-                    datasets: [
-                        {
-                            label: 'Calibrated v2.0 Portfolio (Active Engine)',
-                            data: b.active_weekly_vals,
-                            borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.06)',
-                            borderWidth: 2.5,
-                            fill: true,
-                            tension: 0.3,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#10b981',
-                            pointBorderColor: '#04070d',
-                            pointBorderWidth: 2
-                        },
-                        {
-                            label: 'Passive Portfolio (Buy & Hold)',
-                            data: b.passive_total,
-                            borderColor: '#94a3b8',
-                            borderWidth: 1.5,
-                            borderDash: [5, 5],
-                            fill: false,
-                            tension: 0.3,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#94a3b8'
-                        },
-                        {
-                            label: 'NIFTY 50 Benchmark (Indexed)',
-                            data: b.nifty_perf.weekly_pct.map(p => 1000000 * (1 + p / 100)),
-                            borderColor: '#f59e0b',
-                            borderWidth: 1.5,
-                            fill: false,
-                            tension: 0.3,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#f59e0b'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: b.weekly_dates,
+                        datasets: [
+                            {
+                                label: 'Calibrated v2.0 Portfolio (Active Engine)',
+                                data: b.active_weekly_vals,
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.06)',
+                                borderWidth: 2.5,
+                                fill: true,
+                                tension: 0.3,
+                                pointRadius: 4,
+                                pointBackgroundColor: '#10b981',
+                                pointBorderColor: '#04070d',
+                                pointBorderWidth: 2
+                            },
+                            {
+                                label: 'Passive Portfolio (Buy & Hold)',
+                                data: b.passive_total,
+                                borderColor: '#94a3b8',
+                                borderWidth: 1.5,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.3,
+                                pointRadius: 3,
+                                pointBackgroundColor: '#94a3b8'
+                            },
+                            {
+                                label: 'NIFTY 50 Benchmark (Indexed)',
+                                data: b.nifty_perf.map(p => 1000000 * (1 + p / 100)),
+                                borderColor: '#f59e0b',
+                                borderWidth: 1.5,
+                                fill: false,
+                                tension: 0.3,
+                                pointRadius: 3,
+                                pointBackgroundColor: '#f59e0b'
+                            }
+                        ]
                     },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                color: '#94a3b8',
-                                font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
-                                boxWidth: 12,
-                                usePointStyle: true
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: '#94a3b8',
+                                    font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+                                    boxWidth: 12,
+                                    usePointStyle: true
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#090e1a',
+                                titleColor: '#fff',
+                                bodyColor: '#cbd5e1',
+                                borderColor: 'rgba(255, 255, 255, 0.1)',
+                                borderWidth: 1,
+                                padding: 12,
+                                boxPadding: 6,
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ₹${Math.round(context.raw).toLocaleString('en-IN')}`;
+                                    }
+                                }
                             }
                         },
-                        tooltip: {
-                            backgroundColor: '#090e1a',
-                            titleColor: '#fff',
-                            bodyColor: '#cbd5e1',
-                            borderColor: 'rgba(255, 255, 255, 0.1)',
-                            borderWidth: 1,
-                            padding: 12,
-                            boxPadding: 6,
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ₹${Math.round(context.raw).toLocaleString('en-IN')}`;
+                        scales: {
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                                ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 } }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                                ticks: {
+                                    color: '#64748b',
+                                    font: { family: 'JetBrains Mono', size: 10 },
+                                    callback: val => '₹' + (val / 100000).toFixed(1) + 'L'
                                 }
                             }
                         }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: 'rgba(255, 255, 255, 0.04)' },
-                            ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 } }
-                        },
-                        y: {
-                            grid: { color: 'rgba(255, 255, 255, 0.04)' },
-                            ticks: {
-                                color: '#64748b',
-                                font: { family: 'JetBrains Mono', size: 10 },
-                                callback: val => '₹' + (val / 100000).toFixed(1) + 'L'
-                            }
-                        }
                     }
-                }
-            });
+                });
+            } catch (e) {
+                console.error("Error in initChart:", e);
+            }
         }
 
         // Run application on DOM ready

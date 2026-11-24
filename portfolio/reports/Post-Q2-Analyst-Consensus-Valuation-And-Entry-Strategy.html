@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Q2 Analyst Consensus & Day-1 Execution Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-elevated: #1f2937;
+            --surface-hover: #283548;
+            --border: #2e3b4e;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --green: #10b981;
+            --red: #ef4444;
+            --amber: #f59e0b;
+            --blue: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .brand-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2); border: 1px solid var(--accent);
+            color: var(--accent-light); font-size: 0.75rem; font-weight: 700;
+            padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.75rem;
+        }
+        h1 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+        .header-meta { color: var(--text-secondary); font-size: 0.95rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--surface-elevated); color: var(--text-primary);
+            border: 1px solid var(--border); padding: 0.65rem 1.25rem; border-radius: 8px;
+            font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .btn:hover { background: var(--surface-hover); border-color: var(--accent); color: #fff; }
+        .metrics-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem; margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.25rem;
+        }
+        .metric-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .metric-val { font-size: 1.85rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.25rem; }
+        .metric-sub { font-size: 0.85rem; color: var(--text-muted); }
+        .table-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+        .section-title { font-size: 1.3rem; font-weight: 700; color: #fff; }
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        th {
+            background: var(--surface-elevated); color: var(--text-secondary);
+            font-weight: 600; padding: 0.85rem 1rem; border-bottom: 1px solid var(--border);
+            white-space: nowrap; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;
+        }
+        td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+        tbody tr:hover { background: var(--surface-hover); }
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-bold { font-weight: 700; }
+        .text-muted { color: var(--text-secondary); }
+        .text-green { color: var(--green); }
+        .text-red { color: var(--red); }
+        .text-indigo { color: var(--accent-light); }
+        .text-xs { font-size: 0.75rem; }
+        .tag-core { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+        .tag-sat { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+        .badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 9999px; text-transform: uppercase; }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-primary { background: rgba(99, 102, 241, 0.15); color: #c7d2fe; border: 1px solid rgba(99, 102, 241, 0.4); }
+        .badge-warning { background: rgba(245, 158, 11, 0.15); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); }
+        
+        .stock-cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .stock-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;
+        }
+        .stock-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .ticker-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; background: var(--surface-elevated); color: var(--accent-light); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border); }
+        .stock-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin-top: 0.35rem; }
+        .cmp-val { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800; color: #fff; }
+        .sub-cmp { font-size: 0.75rem; }
+        .metrics-strip {
+            display: flex; gap: 1rem; background: var(--surface-elevated);
+            padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.8rem;
+        }
+        .m-lbl { color: var(--text-muted); }
+        .m-val { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #fff; }
+        .stock-body { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+        .point-row { margin-bottom: 0.25rem; }
+        .stock-footer {
+            border-top: 1px solid var(--border); padding-top: 0.85rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .verdict-col { display: flex; flex-direction: column; gap: 0.25rem; }
+        .verdict-label { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        @media print {
+            body { background: #fff; color: #000; padding: 0.5in; }
+            .btn { display: none; }
+            .stock-card, .table-card, .metric-card { background: #fff; border: 1px solid #ddd; color: #000; break-inside: avoid; }
+            th { background: #f5f5f5; color: #000; }
+            td, h1, .cmp-val, .stock-name { color: #000; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div>
+            <div class="brand-badge">Institutional Deployment Protocol • 24-Nov-2026</div>
+            <h1>Post-Q2 Analyst Consensus & Day-1 Order Sheet</h1>
+            <div class="header-meta">
+                <span><strong>Mandate:</strong> ₹10,00,000 Deployment</span>
+                <span><strong>Market Orders (CMP):</strong> ₹7,01,002 (70.1%)</span>
+                <span><strong>Limit Orders (Support Dips):</strong> ₹2,98,998 (29.9%)</span>
+                <span><strong>Coverage:</strong> All 23 Portfolio Stocks</span>
+            </div>
+        </div>
+        <div>
+            <button class="btn" onclick="window.print()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+                Print / Save PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Immediate Market Buy Tomorrow</div>
+            <div class="metric-val text-green">₹7,01,002</div>
+            <div class="metric-sub">70.1% deployed at market open (09:15–09:30)</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Staggered Dip Limit Orders</div>
+            <div class="metric-val text-indigo">₹2,98,998</div>
+            <div class="metric-sub">29.9% placed at key technical support levels</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Immediate 100% Entry Stocks</div>
+            <div class="metric-val">11 Stocks</div>
+            <div class="metric-sub">IGI, Bajaj Auto, Fiem, TVS Hold, BLS, Dynacons, etc.</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Staggered Tranche Stocks</div>
+            <div class="metric-val">12 Stocks</div>
+            <div class="metric-sub">BSE, Groww, GE Vernova, Kalyan, Coforge, TRIL, etc.</div>
+        </div>
+    </div>
+
+    <!-- Master Order Sheet -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">Master Day-1 Execution Sheet (Deploying ₹10 Lacs)</div>
+            <div class="text-sm text-muted">Execution Window: 09:15 – 09:35 IST Tomorrow</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Tier</th>
+                        <th class="text-right">CMP (₹)</th>
+                        <th class="text-right">Target (₹)</th>
+                        <th class="text-right">Market Buy Tomorrow</th>
+                        <th class="text-right">Dip Limit Order</th>
+                        <th class="text-center">Limit Price</th>
+                        <th class="text-center">Execution Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">International Gemological Instit (IGI)</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹431.10</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹75,000</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BSE Ltd</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹3,757.00</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹37,500</td>
+        <td class="text-right font-mono text-muted">₹37,500</td>
+        <td class="text-center font-mono text-indigo">₹3,550</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Billionbrains (Groww)</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹216.50</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹37,500</td>
+        <td class="text-right font-mono text-muted">₹37,500</td>
+        <td class="text-center font-mono text-indigo">₹198</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Bajaj Auto</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹10,643.00</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹75,000</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">GE Vernova T&D India</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹4,195.00</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹30,000</td>
+        <td class="text-right font-mono text-muted">₹45,000</td>
+        <td class="text-center font-mono text-indigo">₹3,850</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Krishana Phoschem</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹241.30</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹37,500</td>
+        <td class="text-right font-mono text-muted">₹37,500</td>
+        <td class="text-center font-mono text-indigo">₹225</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Fiem Industries</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹2,084.30</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹75,000</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">T R I L (TARIL)</td>
+        <td class="text-left text-muted"><span class="tag-core">Core</span></td>
+        <td class="text-right font-mono">₹289.45</td>
+        <td class="text-right font-mono">₹75,000</td>
+        <td class="text-right font-mono font-bold text-green">₹37,500</td>
+        <td class="text-right font-mono text-muted">₹37,500</td>
+        <td class="text-center font-mono text-indigo">₹268</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kalyan Jewellers</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹652.90</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹13,333</td>
+        <td class="text-right font-mono text-muted">₹13,334</td>
+        <td class="text-center font-mono text-indigo">₹610</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Coforge</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹2,142.30</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹10,667</td>
+        <td class="text-right font-mono text-muted">₹16,000</td>
+        <td class="text-center font-mono text-indigo">₹2,020</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">TVS Holdings</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹13,367.00</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Knack Packaging</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹206.30</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹13,333</td>
+        <td class="text-right font-mono text-muted">₹13,334</td>
+        <td class="text-center font-mono text-indigo">₹192</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">String Metaverse</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹9.50</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹8,000</td>
+        <td class="text-right font-mono text-muted">₹18,667</td>
+        <td class="text-center font-mono text-indigo">₹8.20</td>
+        <td class="text-center"><span class="badge badge-warning">CAUTIOUS TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Lodha Developers (Macrotech)</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹1,219.00</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹13,333</td>
+        <td class="text-right font-mono text-muted">₹13,334</td>
+        <td class="text-center font-mono text-indigo">₹1,140</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Dynacons Systems</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹1,029.20</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shringar House of Fashion</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹232.60</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BLS International</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹220.40</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sky Gold & Diamonds</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹819.45</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">V-Marc India</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹276.50</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹13,333</td>
+        <td class="text-right font-mono text-muted">₹13,334</td>
+        <td class="text-center font-mono text-indigo">₹255</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Monarch Networth</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹335.50</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Gokul Agro Resources</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹204.30</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kernex Microsystems</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹1,587.60</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹10,667</td>
+        <td class="text-right font-mono text-muted">₹16,000</td>
+        <td class="text-center font-mono text-indigo">₹1,480</td>
+        <td class="text-center"><span class="badge badge-primary">STAGGERED TRANCHE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Hindustan Zinc</td>
+        <td class="text-left text-muted"><span class="tag-sat">Satellite</span></td>
+        <td class="text-right font-mono">₹528.95</td>
+        <td class="text-right font-mono">₹26,667</td>
+        <td class="text-right font-mono font-bold text-green">₹26,667</td>
+        <td class="text-right font-mono text-muted">₹0</td>
+        <td class="text-center font-mono text-indigo">—</td>
+        <td class="text-center"><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Core Cards -->
+    <div class="section-header" style="margin-top: 1rem;">
+        <div class="section-title">Core Portfolio (8 Stocks) — Analyst Takeaways & Concall Insights</div>
+    </div>
+    <div class="stock-cards-grid">
+        
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">IGIL.NS</span>
+                <h3 class="stock-name">International Gemological Instit (IGI)</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹431.10</div>
+                <div class="sub-cmp text-green">-4.33% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">69.2%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">28.0x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">0.70</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Nuvama / Antique: Target ₹510–540 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Lab-grown diamond (LGD) certification volume jumped 45% YoY ahead of festive/wedding season; dominant global tollbooth (>65% market share in India); asset-light with >60% net margins, zero net debt.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Cyclical sluggishness in traditional mined natural diamonds (though LGD volume boom offsets this).
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹75,000)</div>
+                <div class="text-xs text-muted">Support Zone: ₹410 – ₹422</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">BSE.NS</span>
+                <h3 class="stock-name">BSE Ltd</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹3,757.00</div>
+                <div class="sub-cmp text-green">-4.59% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">60.0%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">49.7x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">0.95</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Motilal Oswal / Jefferies / HDFC Sec: Target ₹4,200–4,500 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Q2 net profit up +110% YoY; index derivatives market share in premium turnover expanded to >26%; transaction tariff hikes and smooth absorption of SEBI weekly expiry regulations boost EBITDA margins above 58%.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Potential regulatory intervention on retail derivatives; clearing corporation capital adequacy requirements.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹37,500) at CMP | 50% (₹37,500) at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹3,550 – ₹3,620</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">GROWW.NS</span>
+                <h3 class="stock-name">Billionbrains (Groww)</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹216.50</div>
+                <div class="sub-cmp text-green">+0.00% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">37.3%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">50.4x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">1.15</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Fintech Industry Review / Motilal: Strong Buy on Financialization
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Direct tollbooth on record ₹25,000+ Cr monthly SIP mutual fund inflows; active client base expanded past 1.2 Cr; operating leverage driving massive cash flow expansion; MTF and credit lending cross-sell ramping up.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Regulatory shifts on discount broker fees; SEBI circular on true-to-label retail derivative charges.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹37,500) at CMP | 50% (₹37,500) at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹198 – ₹205</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">BAJAJ-AUTO.NS</span>
+                <h3 class="stock-name">Bajaj Auto</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹10,643.00</div>
+                <div class="sub-cmp text-red">-5.66% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">28.2%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">22.3x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">1.20</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Motilal Oswal: Target ₹11,800 | ICICI Direct: Target ₹12,200 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Robust post-monsoon rural cash flows; Triumph 400cc production scaling to 10k+/month; Chetak EV consolidated as national #2 player with expanding margins; 20.2% EBITDA margin; ₹18,000 Cr surplus cash.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Red Sea export shipping disruptions impacting African and Latin American dispatches; EM EV subsidy tapering.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹75,000)</div>
+                <div class="text-xs text-muted">Support Zone: ₹10,250 – ₹10,450</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">GVT&D.NS</span>
+                <h3 class="stock-name">GE Vernova T&D India</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹4,195.00</div>
+                <div class="sub-cmp text-red">-5.09% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">77.4%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">72.3x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">1.45</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Antique Stock Broking / ICICI Sec: Target ₹4,800–5,000 (Accumulate)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Multi-year Power Grid transmission capex super-cycle; record backlog of ₹5,500+ Cr with manufacturing capacity booked out till FY28; HVDC & 765kV substation orders; phenomenal 77.4% RoCE.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Elevated P/E multiple (72.3x); near-term manufacturing capacity limits caps sudden revenue jumps.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">40% (₹30,000) at CMP | 60% (₹45,000) at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹3,850 – ₹4,000</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">KRISHANA.NS</span>
+                <h3 class="stock-name">Krishana Phoschem</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹241.30</div>
+                <div class="sub-cmp text-green">-2.60% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">27.2%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">30.9x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">0.85</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Agri Chemicals Research: Target ₹290–310 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> SSP fertilizer demand robust post-monsoon; newly commissioned plant operating at 90% utilization; Q2 PAT +48% YoY; rock phosphate raw material prices softening globally.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Government fertilizer subsidy payment disbursement cycles; monsoon seasonality.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹37,500) at CMP | 50% (₹37,500) at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹225 – ₹232</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">FIEMIND.NS</span>
+                <h3 class="stock-name">Fiem Industries</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹2,084.30</div>
+                <div class="sub-cmp text-green">-4.17% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">29.3%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">19.4x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">0.75</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Geojit Financial / Ventura Securities: Target ₹2,550–2,650 (Strong Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Dominant >70% market share in 2W LED automotive lighting; sole/primary supplier to TVS, Ola Electric, Ather Energy, and Bajaj; halogen-to-LED transition expands kit value 3x; zero debt, 29.3% RoCE.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Cyclical exposure to domestic 2W production dispatches.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹75,000)</div>
+                <div class="text-xs text-muted">Support Zone: ₹1,980 – ₹2,040</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">TARIL.NS</span>
+                <h3 class="stock-name">T R I L (TARIL)</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹289.45</div>
+                <div class="sub-cmp text-red">-5.10% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">23.3%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">28.5x</span></div>
+            <div><span class="m-lbl">PEG:</span> <span class="m-val text-indigo">0.80</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹75,000</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Consensus:</strong> Equirus / Nuvama: Target ₹350–375 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Severe global high-voltage power transformer shortage (lead times 3-4 years in US/Europe); export orders expanding with 20%+ EBITDA margins; Green Energy Corridors and renewable substations; order book >₹2,800 Cr.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Copper and CRGO electrical steel cost volatility; execution working capital requirements.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹37,500) at CMP | 50% (₹37,500) at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹268 – ₹275</div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <!-- Satellite Cards -->
+    <div class="section-header" style="margin-top: 1rem;">
+        <div class="section-title">Satellite Portfolio (15 Stocks) — Analyst Takeaways & Concall Insights</div>
+    </div>
+    <div class="stock-cards-grid">
+        
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">KALYANKJIL.NS</span>
+                <h3 class="stock-name">Kalyan Jewellers</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹652.90</div>
+                <div class="sub-cmp text-red">-8.16% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">21.1%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">42.9x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Motilal Oswal (Target ₹780) | ICICI Direct (Target ₹760) (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Dhanteras/Diwali revenue surged +35% YoY; FOCO franchise showroom expansion accelerating RoCE while de-leveraging balance sheet; non-South store sales growing >20% SSSG.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Gold price volatility affecting near-term retail volume cadence.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹13,333) at CMP | 50% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹610 – ₹625</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">COFORGE.NS</span>
+                <h3 class="stock-name">Coforge</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹2,142.30</div>
+                <div class="sub-cmp text-green">+0.00% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">23.5%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">43.7x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> HDFC Securities (Target ₹2,450) | Kotak Equities (Target ₹2,380) (Add)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Order intake >$500M for 3 consecutive quarters; Cigniti integration highly accretive in BFSI and retail; leading midcap IT growth trajectory.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Q3 seasonal furloughs; wage hikes impacting near-term margin expansion.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">40% (₹10,667) at CMP | 60% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹2,020 – ₹2,060</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">TVSHLTD.NS</span>
+                <h3 class="stock-name">TVS Holdings</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹13,367.00</div>
+                <div class="sub-cmp text-green">-1.35% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">16.9%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">12.4x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Antique Stock Broking: Target ₹15,500 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> TVS Motor subsidiary gaining rapid 2W market share; EV iQube crossing 25k/month; holding company discount narrowing from 48% to 41%.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Holding company liquidity discount.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹12,800 – ₹13,100</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">KNACK.NS</span>
+                <h3 class="stock-name">Knack Packaging</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹206.30</div>
+                <div class="sub-cmp text-green">-3.48% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">30.1%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">26.4x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Packaging Sector Coverage: Target ₹240–250
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> High-margin BOPP woven packaging expansion; industrial and agri client stickiness; solid volume growth.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Polypropylene raw material price fluctuations.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹13,333) at CMP | 50% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹192 – ₹198</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">META.BO</span>
+                <h3 class="stock-name">String Metaverse</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹9.50</div>
+                <div class="sub-cmp text-green">+0.00% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">44.0%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">8.4x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Emerging Tech Micro-cap: Speculative Buy
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> High return on equity smallcap; digital monetization momentum; extremely low P/E (8.4x).
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Micro-cap liquidity and high beta.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-warning">CAUTIOUS TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">30% (₹8,000) at CMP | 70% on Limit</div>
+                <div class="text-xs text-muted">Support Zone: ₹8.20 – ₹8.80</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">LODHA.NS</span>
+                <h3 class="stock-name">Lodha Developers (Macrotech)</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹1,219.00</div>
+                <div class="sub-cmp text-green">-0.57% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">16.4%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">28.1x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Motilal Oswal (Target ₹1,450) | Nuvama (Target ₹1,420) (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Pre-sales hit ₹4,290 Cr (+21% YoY); net debt down to ₹4,300 Cr (debt-to-equity 0.22x); luxury launches in Bengaluru/Pune expanding footprint.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Delayed RBI interest rate cuts.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹13,333) at CMP | 50% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹1,140 – ₹1,170</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">DSSL.NS</span>
+                <h3 class="stock-name">Dynacons Systems</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹1,029.20</div>
+                <div class="sub-cmp text-red">-10.50% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">29.7%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">14.2x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> IT Infrastructure Research: Target ₹1,350 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Government and enterprise cloud integration tenders; revenue up 28% YoY; net cash balance sheet; RoCE 29.7%.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Small-cap institutional ownership limits.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹980 – ₹1,010</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">SHRINGARMS.NS</span>
+                <h3 class="stock-name">Shringar House of Fashion</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹232.60</div>
+                <div class="sub-cmp text-red">-27.11% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">26.8%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">16.3x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Retail Consumer Coverage: Target ₹300+
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Ethnic festive retail footfalls strong; healthy Tier-2/3 store economics; low valuation at 16.3x PE.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Post-Diwali seasonal lull.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹218 – ₹228</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">BLS.NS</span>
+                <h3 class="stock-name">BLS International</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹220.40</div>
+                <div class="sub-cmp text-green">-3.94% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">29.8%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">12.7x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Anand Rathi / ICICI Direct: Target ₹440 (Strong Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Visa processing and citizen services revenue up 24% YoY; inorganic acquisitions integrated; net cash of >₹800 Cr; 29.8% RoCE.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Geopolitical travel policy changes.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹210 – ₹216</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">SKYGOLD.NS</span>
+                <h3 class="stock-name">Sky Gold & Diamonds</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹819.45</div>
+                <div class="sub-cmp text-red">-22.74% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">26.9%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">31.8x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Antique Stock Broking: Target ₹1,150 (Buy on Dips)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> B2B lightweight jewellery casting volumes scaling up; supplying major chains (Titan, Kalyan, Malabar); wedding season restocking demand in Nov-Dec.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Gold price volatility.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹780 – ₹805</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">VMARCIND-SM.NS</span>
+                <h3 class="stock-name">V-Marc India</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹276.50</div>
+                <div class="sub-cmp text-green">+0.00% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">41.4%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">28.9x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Power Equipment Research: Target ₹340
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> RDSS state discom power distribution cable order pipeline; high RoCE (41.4%).
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Raw material copper price fluctuations.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">50% (₹13,333) at CMP | 50% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹255 – ₹265</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">MONARCH.NS</span>
+                <h3 class="stock-name">Monarch Networth</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹335.50</div>
+                <div class="sub-cmp text-red">-7.50% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">27.6%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">13.8x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Capital Markets Coverage: Target ₹420 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Merchant banking IPO pipeline and wealth management AUM scaling; Q2 profit up 32% YoY; low PE (13.8x).
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Market turnover volatility.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹320 – ₹330</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">GOKULAGRO.NS</span>
+                <h3 class="stock-name">Gokul Agro Resources</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹204.30</div>
+                <div class="sub-cmp text-red">-10.48% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">36.7%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">13.0x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Agri Commodity Research: Target ₹250 (Buy)
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Edible oil import tariff protection aiding refining margins; revenue up 20% YoY; high RoCE (36.7%) and low PE (13.0x).
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Global palm oil spot price volatility.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹192 – ₹198</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">KERNEX.NS</span>
+                <h3 class="stock-name">Kernex Microsystems</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹1,587.60</div>
+                <div class="sub-cmp text-red">-11.72% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">47.8%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">8.5x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Railways Infrastructure Coverage: Target ₹2,000
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> Indian Railways Kavach 4.0 safety system tender rollout beneficiary; huge addressable market across 10,000+ locomotives.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Lumpy execution cycles; high price volatility.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-primary">STAGGERED TRANCHE</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">40% (₹10,667) at CMP | 60% at Support</div>
+                <div class="text-xs text-muted">Support Zone: ₹1,480 – ₹1,530</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <div>
+                <span class="ticker-pill">HINDZINC.NS</span>
+                <h3 class="stock-name">Hindustan Zinc</h3>
+            </div>
+            <div class="text-right">
+                <div class="cmp-val">₹528.95</div>
+                <div class="sub-cmp text-red">-10.19% from High</div>
+            </div>
+        </div>
+        <div class="metrics-strip">
+            <div><span class="m-lbl">RoCE:</span> <span class="m-val text-green">69.2%</span></div>
+            <div><span class="m-lbl">P/E:</span> <span class="m-val">10.8x</span></div>
+            <div><span class="m-lbl">Allocation:</span> <span class="m-val">₹26,667</span></div>
+        </div>
+        <div class="stock-body">
+            <div class="point-row">
+                <strong class="text-indigo">Broker Coverage:</strong> Motilal Oswal (Target ₹560) | Nuvama: Accumulate
+            </div>
+            <div class="point-row">
+                <strong class="text-green">Tailwinds (Post-Q2):</strong> World's 3rd largest silver producer; structural silver demand in EV/solar; 7%+ dividend yield; massive cash generation.
+            </div>
+            <div class="point-row">
+                <strong class="text-red">Headwinds & Risks:</strong> Zinc LME price fluctuations post-China stimulus consolidation.
+            </div>
+        </div>
+        <div class="stock-footer">
+            <div class="verdict-col">
+                <div class="verdict-label">ENTRY VERDICT</div>
+                <div><span class="badge badge-success">IMMEDIATE BUY AT CMP</span></div>
+            </div>
+            <div class="verdict-col text-right">
+                <div class="verdict-label">DAY-1 DEPLOYMENT</div>
+                <div class="font-mono text-green font-bold">100% (₹26,667)</div>
+                <div class="text-xs text-muted">Support Zone: ₹505 – ₹518</div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <footer style="border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+        <p>Antigravity Quantitative Execution Desk • Rajan Portfolio v2.0 • 24-Nov-2026</p>
+    </footer>
+</div>
+</body>
+</html>

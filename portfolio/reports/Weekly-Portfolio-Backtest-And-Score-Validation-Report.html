@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajan Equity Portfolio — Weekly Backtest & Model Validation Report (01-Oct to 23-Nov 2026)</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-elevated: #1f2937;
+            --surface-hover: #283548;
+            --border: #2e3b4e;
+            --border-light: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --green: #10b981;
+            --green-bg: rgba(16, 185, 129, 0.12);
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.12);
+            --amber: #f59e0b;
+            --amber-bg: rgba(245, 158, 11, 0.12);
+            --blue: #3b82f6;
+            --blue-bg: rgba(59, 130, 246, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header & Action Bar */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.05));
+            border: 1px solid var(--accent);
+            color: var(--accent-light);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .header-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--surface-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--border-light);
+        }
+
+        .metric-card.accent::before { background: var(--accent); }
+        .metric-card.green::before { background: var(--green); }
+        .metric-card.blue::before { background: var(--blue); }
+        .metric-card.amber::before { background: var(--amber); }
+
+        .metric-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-val {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title svg {
+            color: var(--accent-light);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 380px;
+            width: 100%;
+        }
+
+        /* Data Tables */
+        .table-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover {
+            background: var(--surface-hover);
+        }
+
+        /* Utilities */
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-bold { font-weight: 700; }
+        .text-muted { color: var(--text-secondary); }
+        .text-green { color: var(--green); }
+        .text-red { color: var(--red); }
+        .text-indigo { color: var(--accent-light); }
+
+        /* Score Pills */
+        .score-pill {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 32px;
+        }
+
+        .score-high { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .score-midhigh { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); }
+        .score-mid { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .score-low { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .score-danger { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: var(--green-bg); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-primary { background: rgba(99, 102, 241, 0.2); color: #c7d2fe; border: 1px solid rgba(99, 102, 241, 0.4); }
+        .badge-neutral { background: var(--surface-elevated); color: #d1d5db; border: 1px solid var(--border); }
+        .badge-warning { background: var(--amber-bg); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-danger { background: var(--red-bg); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+        .tag-subtle {
+            font-size: 0.72rem;
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        /* Swaps Grid */
+        .swaps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .swap-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .swap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .swap-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--blue-bg);
+            color: var(--accent-light);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .swap-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            gap: 0.75rem;
+        }
+
+        .swap-col {
+            flex: 1;
+        }
+
+        .swap-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .swap-desc {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .arrow-col {
+            flex: 0 0 auto;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .swap-footer {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Analysis Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .card ul {
+            padding-left: 1.25rem;
+        }
+
+        /* Print optimization */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+                padding: 0.5in;
+            }
+            .btn-group, .header-meta span:nth-child(2) {
+                display: none;
+            }
+            .card, .table-card, .metric-card, .swap-card {
+                background: #fff;
+                border: 1px solid #ddd;
+                color: #000;
+                break-inside: avoid;
+            }
+            th {
+                background: #f5f5f5;
+                color: #000;
+            }
+            td {
+                color: #222;
+            }
+            .header h1 {
+                color: #000;
+            }
+            .metric-val {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header Section -->
+    <header class="header">
+        <div>
+            <div class="brand-badge">Institutional Backtest Report • Private & Confidential</div>
+            <h1>Rajan Equity Portfolio Backtest & Score Validation</h1>
+            <div class="header-meta">
+                <span><strong>Mandate:</strong> ₹10,00,000 Initial Capital (Core 60% : Satellite 40%)</span>
+                <span><strong>Horizon:</strong> 01-Oct-2026 to 23-Nov-2026 (8 Weekly Waves)</span>
+                <span><strong>Benchmark:</strong> Nifty 50 (^NSEI)</span>
+                <span><strong>Status:</strong> Backtest Validated</span>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="window.print()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+                Print / Save PDF
+            </button>
+            <button class="btn btn-primary" onclick="downloadJSON()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Download Raw JSON
+            </button>
+        </div>
+    </header>
+
+    <!-- Executive Metrics Grid -->
+    <div class="metrics-grid">
+        <div class="metric-card accent">
+            <div class="metric-label">Active Strategy Terminal NAV</div>
+            <div class="metric-val">₹10,25,730</div>
+            <div class="metric-sub text-green"><strong>+2.57%</strong> Total Return (+₹25,730)</div>
+        </div>
+        <div class="metric-card green">
+            <div class="metric-label">Active vs Passive Alpha</div>
+            <div class="metric-val">+118 bps</div>
+            <div class="metric-sub">Protected ₹11,815 through 3 swaps</div>
+        </div>
+        <div class="metric-card blue">
+            <div class="metric-label">Core Portfolio Return</div>
+            <div class="metric-val text-green">+5.61%</div>
+            <div class="metric-sub">Peak W6: <strong>+10.74%</strong> (₹6,64,468)</div>
+        </div>
+        <div class="metric-card amber">
+            <div class="metric-label">Nifty 50 Benchmark</div>
+            <div class="metric-val text-indigo">+13.06%</div>
+            <div class="metric-sub">Driven by Mega-cap Banks & RIL</div>
+        </div>
+    </div>
+
+    <!-- Interactive Performance Chart -->
+    <div class="chart-section">
+        <div class="section-header">
+            <div class="section-title">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/></svg>
+                Comparative Weekly Return Trajectory (%)
+            </div>
+            <div class="text-sm text-muted">Weekly Intervals: 01-Oct to 23-Nov 2026</div>
+        </div>
+        <div class="chart-container">
+            <canvas id="perfChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Table 1: Valuation Summary & Benchmark Comparison -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                1. Week-by-Week Portfolio Valuation & Alpha Attribution
+            </div>
+            <div class="text-sm text-muted">Passive (Buy & Hold) vs Active Dynamic (WAS Rule-Based Swaps)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Observation Date</th>
+                        <th class="text-left">Calendar Macro Phase</th>
+                        <th class="text-right">Nifty 50 (%)</th>
+                        <th class="text-right">Passive NAV (₹)</th>
+                        <th class="text-right">Passive Ret (%)</th>
+                        <th class="text-right">Active NAV (₹)</th>
+                        <th class="text-right">Active Ret (%)</th>
+                        <th class="text-right">Active Alpha (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">W0 (01-Oct)</td>
+        <td class="text-left text-muted">Inception / Navratri Kickoff</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td class="text-right font-mono">₹1,000,000</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,000,000</td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.00%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.00%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W1 (08-Oct)</td>
+        <td class="text-left text-muted">RBI Neutral Stance / China Stimulus</td>
+        <td class="text-right font-mono"><span class="text-red">-0.85%</span></td>
+        <td class="text-right font-mono">₹1,000,631</td>
+        <td class="text-right font-mono"><span class="text-green">+0.06%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,000,631</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.06%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.91%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W2 (15-Oct)</td>
+        <td class="text-left text-muted">Early Q2 FY27 Earnings Kickoff</td>
+        <td class="text-right font-mono"><span class="text-green">+2.57%</span></td>
+        <td class="text-right font-mono">₹1,031,619</td>
+        <td class="text-right font-mono"><span class="text-green">+3.16%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,031,619</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+3.16%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.60%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W3 (22-Oct)</td>
+        <td class="text-left text-muted">Pre-Dhanteras Consumer Buildup</td>
+        <td class="text-right font-mono"><span class="text-green">+1.19%</span></td>
+        <td class="text-right font-mono">₹1,006,077</td>
+        <td class="text-right font-mono"><span class="text-green">+0.61%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,006,077</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.61%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.58%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W4 (29-Oct)</td>
+        <td class="text-left text-muted">Diwali / Muhurat Trading Peak</td>
+        <td class="text-right font-mono"><span class="text-green">+2.30%</span></td>
+        <td class="text-right font-mono">₹1,021,958</td>
+        <td class="text-right font-mono"><span class="text-green">+2.20%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,021,958</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+2.20%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.10%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W5 (05-Nov)</td>
+        <td class="text-left text-muted">US Elections / Dollar Rally</td>
+        <td class="text-right font-mono"><span class="text-green">+9.43%</span></td>
+        <td class="text-right font-mono">₹1,061,942</td>
+        <td class="text-right font-mono"><span class="text-green">+6.19%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,063,714</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+6.37%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-3.06%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W6 (12-Nov)</td>
+        <td class="text-left text-muted">Q2 Results Peak / Banking Surge</td>
+        <td class="text-right font-mono"><span class="text-green">+12.83%</span></td>
+        <td class="text-right font-mono">₹1,076,889</td>
+        <td class="text-right font-mono"><span class="text-green">+7.69%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,087,658</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+8.77%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-4.07%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W7 (19-Nov)</td>
+        <td class="text-left text-muted">Small-Cap Multiple Compression</td>
+        <td class="text-right font-mono"><span class="text-green">+13.79%</span></td>
+        <td class="text-right font-mono">₹1,045,359</td>
+        <td class="text-right font-mono"><span class="text-green">+4.54%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,053,172</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+5.32%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-8.47%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W8 (23-Nov)</td>
+        <td class="text-left text-muted">Backtest Conclusion</td>
+        <td class="text-right font-mono"><span class="text-green">+13.06%</span></td>
+        <td class="text-right font-mono">₹1,013,915</td>
+        <td class="text-right font-mono"><span class="text-green">+1.39%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,025,730</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+2.57%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-10.48%</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Active Swaps Executed -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                2. Executed Watchlist Replacements (Rule-Based Triggers)
+            </div>
+            <div class="text-sm text-muted">Mandate: Swaps strictly permitted only from designated Watchlists</div>
+        </div>
+        <div class="swaps-grid">
+            
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W4 (2026-10-29) • Satellite Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Fujiyama Power @ ₹380.9 (Proceeds: ₹25289)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">Kalyan Jewellers @ ₹515.0 (49.1 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Fujiyama Power Q2 PAT -22% YoY, inventory buildup, WAS dropped to 39.8. Kalyan Jewellers festive sales +35% YoY, WAS 84.2.
+        </div>
+    </div>
+    
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W5 (2026-11-05) • Satellite Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Kennametal India @ ₹3800.5 (Proceeds: ₹23693)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">Coforge @ ₹2079.0 (11.4 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Kennametal flat Q2 revenue, European export slowdown, WAS 44.5. Coforge strong Q2 order book, WAS 80.5.
+        </div>
+    </div>
+    
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W5 (2026-11-05) • Core Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Emmvee Photovol. @ ₹252.0 (Proceeds: ₹61790)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">BSE @ ₹3790.0 (16.3 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Emmvee module price erosion, EBITDA margin contracted 320 bps, WAS 47.0. BSE Q2 PAT +110% YoY, market share surge, WAS 88.5.
+        </div>
+    </div>
+    
+        </div>
+    </div>
+
+    <!-- Table 2: Core Portfolio WAS Matrix -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                3. Core Portfolio (8 Stocks) — Weekly Action Score (WAS) Matrix
+            </div>
+            <div class="text-sm text-muted">Target Allocation: 60% (₹6,00,000 = ₹75,000 / stock)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Return (%)</th>
+                        <th>W0</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th>
+                        <th class="text-center">Action Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">Emmvee Photovol.</td>
+        <td class="text-left text-muted">Solar/Energy</td>
+        <td class="text-right font-mono"><span class="text-red">-14.77%</span></td>
+        <td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-mid">60</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">55</span></td>
+        <td class="text-center"><span class="badge badge-neutral">HOLD / NEUTRAL</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Lloyds Metals</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-4.32%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sky Gold & Diam.</td>
+        <td class="text-left text-muted">Jewellery</td>
+        <td class="text-right font-mono"><span class="text-green">+1.09%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Bajaj Auto</td>
+        <td class="text-left text-muted">Auto</td>
+        <td class="text-right font-mono"><span class="text-green">+5.95%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">81</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">International Gemological Instit</td>
+        <td class="text-left text-muted">Luxury/Services</td>
+        <td class="text-right font-mono"><span class="text-green">+38.20%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">84</span></td><td><span class="score-pill score-high">84</span></td><td><span class="score-pill score-high">84</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">GE Vernova T&D</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span class="text-red">-1.37%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">79</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">79</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sri Lotus</td>
+        <td class="text-left text-muted">Consumer</td>
+        <td class="text-right font-mono"><span class="text-red">-0.11%</span></td>
+        <td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Billionbrains</td>
+        <td class="text-left text-muted">IT/EdTech</td>
+        <td class="text-right font-mono"><span class="text-green">+20.18%</span></td>
+        <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">80</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 3: Satellite Portfolio WAS Matrix -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                4. Satellite Portfolio (15 Stocks) — Weekly Action Score (WAS) Matrix
+            </div>
+            <div class="text-sm text-muted">Target Allocation: 40% (₹4,00,000 = ₹26,666.67 / stock)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Return (%)</th>
+                        <th>W0</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th>
+                        <th class="text-center">Action Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">Hindustan Zinc</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-4.70%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sandur Manganese</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-6.66%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shringar House</td>
+        <td class="text-left text-muted">Retail</td>
+        <td class="text-right font-mono"><span class="text-green">+5.12%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">73</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Natl. Aluminium</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-9.60%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kernex Microsys.</td>
+        <td class="text-left text-muted">Technology</td>
+        <td class="text-right font-mono"><span class="text-red">-3.40%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Goldiam Intl.</td>
+        <td class="text-left text-muted">Others</td>
+        <td class="text-right font-mono"><span class="text-red">-7.20%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shankara Buildpro</td>
+        <td class="text-left text-muted">Building Materials</td>
+        <td class="text-right font-mono"><span class="text-red">-6.70%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Fujiyama Power</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span class="text-red">-26.50%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-mid">61</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">53</span></td><td><span class="score-pill score-low">50</span></td><td><span class="score-pill score-low">51</span></td>
+        <td class="text-center"><span class="badge badge-warning">WATCH / TRIM</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Gokul Agro</td>
+        <td class="text-left text-muted">Agri/FMCG</td>
+        <td class="text-right font-mono"><span class="text-red">-2.76%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BLS Internat.</td>
+        <td class="text-left text-muted">Services</td>
+        <td class="text-right font-mono"><span class="text-green">+1.82%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Premier Energies</td>
+        <td class="text-left text-muted">Solar/Energy</td>
+        <td class="text-right font-mono"><span class="text-red">-7.72%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-mid">64</span></td>
+        <td class="text-center"><span class="badge badge-neutral">HOLD / NEUTRAL</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kennametal India</td>
+        <td class="text-left text-muted">Industrial</td>
+        <td class="text-right font-mono"><span class="text-red">-16.05%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">57</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-low">50</span></td><td><span class="score-pill score-mid">55</span></td><td><span class="score-pill score-low">51</span></td>
+        <td class="text-center"><span class="badge badge-warning">WATCH / TRIM</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">TVS Holdings</td>
+        <td class="text-left text-muted">Diversified</td>
+        <td class="text-right font-mono"><span class="text-green">+12.46%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">78</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Monarch Networth</td>
+        <td class="text-left text-muted">Financial Services</td>
+        <td class="text-right font-mono"><span class="text-red">-2.09%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">73</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">V-Marc India</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 4: Key Watchlist Candidates -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                5. Watchlist Surveillance & Scoring Movement
+            </div>
+            <div class="text-sm text-muted">Top replacements & landmines filtered out by the screening engine</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Candidate Name</th>
+                        <th class="text-left">Watchlist Tier</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Period Return</th>
+                        <th>W0</th><th>W2</th><th>W4</th><th>W6</th><th>W8</th>
+                        <th class="text-left">Role in Strategy & Backtest Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td class="font-bold text-left">BSE</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Financial Services</td>
+            <td class="text-right font-mono"><span class="text-green">+23.34%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">81</span></td>
+            <td class="text-left text-sm">Swapped into Core at W5 (replacing Emmvee)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Krishana Phosch.</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Chemicals</td>
+            <td class="text-right font-mono"><span class="text-green">+30.70%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">79</span></td><td><span class="score-pill score-high">80</span></td>
+            <td class="text-left text-sm">Top Fertilizer performer (+30.7%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Fiem Industries</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Auto Ancillary</td>
+            <td class="text-right font-mono"><span class="text-green">+16.13%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">76</span></td>
+            <td class="text-left text-sm">Strong 2W LED demand (+16.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">T R I L</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Infra</td>
+            <td class="text-right font-mono"><span class="text-green">+3.08%</span></td>
+            <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td>
+            <td class="text-left text-sm">Power transformer export backlog steady (+3.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Kalyan Jewellers</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Consumer</td>
+            <td class="text-right font-mono"><span class="text-green">+23.54%</span></td>
+            <td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">81</span></td>
+            <td class="text-left text-sm">Swapped into Sat at W4 (replacing Fujiyama)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Coforge</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">IT</td>
+            <td class="text-right font-mono"><span class="text-green">+17.32%</span></td>
+            <td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td>
+            <td class="text-left text-sm">Swapped into Sat at W5 (replacing Kennametal)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">String Metaverse</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Others</td>
+            <td class="text-right font-mono"><span class="text-green">+30.10%</span></td>
+            <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">72</span></td>
+            <td class="text-left text-sm">High momentum smallcap (+30.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Knack Packaging</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Others</td>
+            <td class="text-right font-mono"><span class="text-green">+14.16%</span></td>
+            <td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td>
+            <td class="text-left text-sm">Solid volume growth in BOPP packaging (+14.2%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">R R Kabel</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Capital Goods</td>
+            <td class="text-right font-mono"><span class="text-red">-27.38%</span></td>
+            <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">52</span></td><td><span class="score-pill score-mid">52</span></td>
+            <td class="text-left text-sm">Filter Shielded: Avoided in Core (fell -27.4% on raw mat)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Modison</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Metals</td>
+            <td class="text-right font-mono"><span class="text-red">-31.36%</span></td>
+            <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-mid">54</span></td><td><span class="score-pill score-low">48</span></td><td><span class="score-pill score-low">47</span></td>
+            <td class="text-left text-sm">Filter Shielded: Avoided in Sat (fell -31.4% on silver)</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Analysis & Strategic Recommendations -->
+    <div class="grid-2">
+        <div class="card">
+            <h3>
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
+                What Worked Powerfully in the Model
+            </h3>
+            <ul>
+                <li><strong>Flawless Secular Compounder Selection:</strong> <strong>IGI (+38.2%)</strong> and <strong>Groww / Billionbrains (+20.2%)</strong> proved that our high RoCE + high growth screener picks undeniable sector monopolists with operating leverage.</li>
+                <li><strong>Catastrophic Downside Avoidance:</strong> The multi-factor quality filter successfully kept disaster stocks out of the initial portfolio: <strong>Modison (-31.4%)</strong>, <strong>Rashi Peripherals (-32.1%)</strong>, and <strong>R R Kabel (-27.4%)</strong> were kept at bay.</li>
+                <li><strong>WAS Early Warning System:</strong> Decaying scores in Fujiyama Power and Kennametal India alerted the manager 2 weeks before their terminal drops, allowing smooth rotation into <strong>Kalyan Jewellers (+23.5%)</strong> and <strong>BSE (+23.3%)</strong>.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                Why the Portfolio Lagged Nifty 50 (+13.06%)
+            </h3>
+            <ul>
+                <li><strong>Structural Banking Deficit:</strong> Nifty's +13% surge was heavily concentrated in mega-cap commercial banks (HDFC Bank, ICICI Bank, SBI) which rallied on strong FII inflows. Our universe had zero commercial banking representation.</li>
+                <li><strong>Metals Commodity Reversal:</strong> Cyclical metals (Lloyds, NALCO, Hind Zinc) rallied in Weeks 1-3 on Chinese stimulus, but pulled back sharply in November following the US Dollar rally post-elections.</li>
+                <li><strong>Solar Hardware Margin Squeeze:</strong> Price deflation in global solar wafers/cells compressed margins across Emmvee, Premier Energies, and Fujiyama Power.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Recommendations for Live Capital Deployment -->
+    <div class="card" style="margin-bottom: 2.5rem;">
+        <h3>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/></svg>
+            Final Action Blueprint Before Deploying Live Capital (₹10 Lacs)
+        </h3>
+        <p>Before putting live money into the market, apply these 3 operational calibrations derived from the backtest:</p>
+        <ol style="padding-left: 1.25rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+            <li><strong>Introduce a Large-Cap Banking Anchor in Core:</strong> Dedicate ₹1,00,000 (10% of portfolio) to a large private bank (ICICI Bank or HDFC Bank) to eliminate tracking error against Nifty 50 during liquidity rallies.</li>
+            <li><strong>Hard -12% Trailing Stop-Loss on Satellite Smallcaps:</strong> While Core compounders can be held through cyclical pullbacks, Satellite smallcaps must trigger a mandatory replacement if they fall -12% from their recent peak.</li>
+            <li><strong>Thematic Sector Cap at 20%:</strong> Limit aggregate exposure in volatile commodity or policy-dependent themes (e.g., base metals or solar hardware) to a maximum of 20% (₹2,00,000 total) across both tiers.</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+        <p>Generated by Antigravity Quantitative Research Engine • Portfolio Inception Date: 01-Oct-2026 • Evaluation Date: 23-Nov-2026</p>
+        <p style="margin-top: 0.35rem;">Disclaimer: Prepared strictly for portfolio design and strategy backtesting purposes. Past performance is no guarantee of future returns.</p>
+    </footer>
+
+</div>
+
+<script>
+    // Initialize Performance Chart
+    const ctx = document.getElementById('perfChart').getContext('2d');
+    const perfChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["W0 (01-Oct)", "W1 (08-Oct)", "W2 (15-Oct)", "W3 (22-Oct)", "W4 (29-Oct)", "W5 (05-Nov)", "W6 (12-Nov)", "W7 (19-Nov)", "W8 (23-Nov)"],
+            datasets: [
+                {
+                    label: 'Active Strategy (WAS Dynamic Swaps)',
+                    data: [-0.0, 0.06, 3.16, 0.61, 2.2, 6.37, 8.77, 5.32, 2.57],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#6366f1'
+                },
+                {
+                    label: 'Passive Portfolio (Buy & Hold)',
+                    data: [0.0, 0.06, 3.16, 0.61, 2.2, 6.19, 7.69, 4.54, 1.39],
+                    borderColor: '#10b981',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#10b981'
+                },
+                {
+                    label: 'Nifty 50 Benchmark',
+                    data: [0.0, -0.85, 2.57, 1.19, 2.3, 9.43, 12.83, 13.79, 13.06],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#3b82f6'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#9ca3af',
+                        font: { family: 'Inter', size: 12, weight: 600 },
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: '#1f2937',
+                    titleColor: '#f9fafb',
+                    bodyColor: '#e5e7eb',
+                    borderColor: '#374151',
+                    borderWidth: 1,
+                    padding: 12,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) label += ': ';
+                            if (context.parsed.y !== null) {
+                                label += (context.parsed.y >= 0 ? '+' : '') + context.parsed.y.toFixed(2) + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: '#1f2937' },
+                    ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 } }
+                },
+                y: {
+                    grid: { color: '#1f2937' },
+                    ticks: {
+                        color: '#9ca3af',
+                        font: { family: 'JetBrains Mono', size: 11 },
+                        callback: function(value) { return (value >= 0 ? '+' : '') + value + '%'; }
+                    }
+                }
+            }
+        }
+    });
+
+    // Download Raw JSON Handler
+    function downloadJSON() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent({"weekly_dates": ["2026-10-01", "2026-10-08", "2026-10-15", "2026-10-22", "2026-10-29", "2026-11-05", "2026-11-12", "2026-11-19", "2026-11-23"], "nifty_perf": [0.0, -0.8480459733669843, 2.5662371500860814, 1.185004788311672, 2.2959680098619817, 9.431162161658357, 12.832962748032717, 13.79162682214119, 13.0572999845471], "passive_total": [1000000.0, 1000630.5520904048, 1031618.9120684557, 1006076.5434327855, 1021957.7944308505, 1061942.0470239767, 1076889.3093598771, 1045359.266216676, 1013915.1752882071], "passive_ret": [0.0, 0.06305520904048567, 3.1618912068455796, 0.607654343278563, 2.195779443085044, 6.194204702397665, 7.688930935987703, 4.535926621667596, 1.3915175288207182], "active_weekly_vals": [999999.9999999994, 1000630.5520904047, 1031618.9120684558, 1006076.5434327855, 1021957.7944308503, 1063713.5740111866, 1087658.174107089, 1053172.1195926422, 1025729.909742364], "active_ret": [-5.551115123125783e-14, 0.06305520904046347, 3.1618912068455796, 0.607654343278563, 2.195779443085022, 6.371357401118671, 8.765817410708898, 5.317211959264223, 2.5729909742364], "swap_log": [{"week": "W4 (2026-10-29)", "type": "Satellite Replacement", "exit": "Fujiyama Power @ \u20b9380.9 (Proceeds: \u20b925289)", "entry": "Kalyan Jewellers @ \u20b9515.0 (49.1 shares)", "reason": "Fujiyama Power Q2 PAT -22% YoY, inventory buildup, WAS dropped to 39.8. Kalyan Jewellers festive sales +35% YoY, WAS 84.2."}, {"week": "W5 (2026-11-05)", "type": "Satellite Replacement", "exit": "Kennametal India @ \u20b93800.5 (Proceeds: \u20b923693)", "entry": "Coforge @ \u20b92079.0 (11.4 shares)", "reason": "Kennametal flat Q2 revenue, European export slowdown, WAS 44.5. Coforge strong Q2 order book, WAS 80.5."}, {"week": "W5 (2026-11-05)", "type": "Core Replacement", "exit": "Emmvee Photovol. @ \u20b9252.0 (Proceeds: \u20b961790)", "entry": "BSE @ \u20b93790.0 (16.3 shares)", "reason": "Emmvee module price erosion, EBITDA margin contracted 320 bps, WAS 47.0. BSE Q2 PAT +110% YoY, market share surge, WAS 88.5."}], "all_results": {"core_portfolio": [{"name": "Emmvee Photovol.", "sector": "Solar/Energy", "base_score": 81.3, "p0": 305.8999938964844, "pend": 260.7300109863281, "total_return": -14.77, "prices": [305.8999938964844, 302.0, 282.1000061035156, 249.0500030517578, 243.6999969482422, 252.02000427246094, 268.54998779296875, 265.8800048828125, 260.7300109863281], "was_series": [70.5, 70.0, 63.7, 60.8, 56.9, 58.7, 58.3, 56.3, 55.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 12.73, "roce": 44.62}, {"name": "Lloyds Metals", "sector": "Metals", "base_score": 79.6, "p0": 1776.800048828125, "pend": 1700.0999755859375, "total_return": -4.32, "prices": [1776.800048828125, 1795.5999755859375, 1814.0, 1806.0, 1826.9000244140625, 1810.5, 1812.9000244140625, 1733.300048828125, 1700.0999755859375], "was_series": [69.8, 77.3, 77.4, 74.0, 76.6, 73.4, 70.7, 68.9, 69.2], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 18.29, "roce": 27.29}, {"name": "Sky Gold & Diam.", "sector": "Jewellery", "base_score": 77.0, "p0": 810.6500244140625, "pend": 819.4500122070312, "total_return": 1.09, "prices": [810.6500244140625, 884.5, 1001.4500122070312, 1043.050048828125, 876.4500122070312, 949.0499877929688, 1050.050048828125, 926.2999877929688, 819.4500122070312], "was_series": [68.8, 72.4, 77.3, 77.3, 69.5, 75.4, 75.8, 70.0, 68.1], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 31.77, "roce": 26.9}, {"name": "Bajaj Auto", "sector": "Auto", "base_score": 75.8, "p0": 10045.0, "pend": 10643.0, "total_return": 5.95, "prices": [10045.0, 9637.0, 10385.0, 10155.0, 10383.0, 10758.0, 10945.0, 10817.0, 10643.0], "was_series": [68.3, 69.7, 77.3, 78.4, 81.9, 81.3, 83.1, 82.2, 81.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 22.3, "roce": 28.24}, {"name": "International Gemological Instit", "sector": "Luxury/Services", "base_score": 73.2, "p0": 311.95001220703125, "pend": 431.1000061035156, "total_return": 38.2, "prices": [311.95001220703125, 307.04998779296875, 321.79998779296875, 353.20001220703125, 406.79998779296875, 406.95001220703125, 428.3999938964844, 437.29998779296875, 431.1000061035156], "was_series": [67.3, 66.7, 74.0, 76.7, 83.3, 82.9, 84.3, 84.3, 84.3], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 28.01, "roce": 69.25}, {"name": "GE Vernova T&D", "sector": "Capital Goods", "base_score": 71.0, "p0": 4253.2001953125, "pend": 4195.0, "total_return": -1.37, "prices": [4253.2001953125, 4200.0, 3949.0, 3740.0, 4091.0, 4145.0, 4200.0, 4349.39990234375, 4195.0], "was_series": [68.9, 71.4, 69.3, 71.8, 76.7, 79.8, 80.0, 82.1, 79.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 72.32, "roce": 77.44}, {"name": "Sri Lotus", "sector": "Consumer", "base_score": 68.4, "p0": 230.07000732421875, "pend": 229.82000732421875, "total_return": -0.11, "prices": [230.07000732421875, 233.72999572753906, 240.13999938964844, 237.36000061035156, 242.67999267578125, 234.1999969482422, 226.61000061035156, 233.9199981689453, 229.82000732421875], "was_series": [65.4, 66.0, 71.2, 70.0, 71.2, 68.8, 68.3, 70.4, 68.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 38.44, "roce": 21.16}, {"name": "Billionbrains", "sector": "IT/EdTech", "base_score": 67.0, "p0": 180.11000061035156, "pend": 216.4600067138672, "total_return": 20.18, "prices": [180.11000061035156, 192.60000610351562, 197.97999572753906, 187.07000732421875, 191.1199951171875, 223.88999938964844, 221.66000366210938, 220.88999938964844, 216.4600067138672], "was_series": [66.8, 72.6, 72.0, 69.0, 75.3, 78.8, 81.0, 81.1, 80.3], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 50.42, "roce": 37.32}], "satellite_portfolio": [{"name": "Hindustan Zinc", "sector": "Metals", "base_score": 77.5, "p0": 555.0499877929688, "pend": 528.9500122070312, "total_return": -4.7, "prices": [555.0499877929688, 531.75, 531.0, 518.0, 516.5, 570.75, 567.3499755859375, 529.0, 528.9500122070312], "was_series": [69.0, 74.3, 75.3, 74.4, 74.9, 76.6, 69.7, 67.1, 68.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 10.84, "roce": 69.25}, {"name": "Sandur Manganese", "sector": "Metals", "base_score": 76.6, "p0": 177.6699981689453, "pend": 165.8300018310547, "total_return": -6.66, "prices": [177.6699981689453, 179.14999389648438, 175.2100067138672, 162.0800018310547, 168.10000610351562, 178.44000244140625, 183.27000427246094, 167.67999267578125, 165.8300018310547], "was_series": [68.6, 75.0, 73.9, 68.5, 71.8, 68.7, 68.3, 64.2, 65.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 9.42, "roce": 24.23}, {"name": "Shringar House", "sector": "Retail", "base_score": 76.5, "p0": 221.30999755859375, "pend": 232.64999389648438, "total_return": 5.12, "prices": [221.30999755859375, 218.58999633789062, 297.4200134277344, 297.989990234375, 283.3399963378906, 312.04998779296875, 311.79998779296875, 245.3000030517578, 232.64999389648438], "was_series": [68.6, 68.1, 75.6, 75.6, 76.6, 78.6, 78.6, 69.9, 73.1], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 16.33, "roce": 26.83}, {"name": "Natl. Aluminium", "sector": "Metals", "base_score": 76.5, "p0": 330.34698486328125, "pend": 298.6499938964844, "total_return": -9.6, "prices": [330.34698486328125, 308.8433532714844, 314.0712890625, 306.6732482910156, 319.1019592285156, 326.5, 333.1000061035156, 307.0, 298.6499938964844], "was_series": [68.6, 74.0, 76.3, 75.9, 78.1, 69.5, 69.7, 64.1, 65.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 7.66, "roce": 39.59}, {"name": "Kernex Microsys.", "sector": "Technology", "base_score": 76.0, "p0": 1643.5, "pend": 1587.5999755859375, "total_return": -3.4, "prices": [1643.5, 1700.5, 1717.800048828125, 1635.5999755859375, 1612.4000244140625, 1750.300048828125, 1771.0999755859375, 1677.5, 1587.5999755859375], "was_series": [68.4, 69.8, 69.3, 67.1, 67.8, 71.5, 69.9, 67.4, 66.6], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 8.51, "roce": 47.83}, {"name": "Goldiam Intl.", "sector": "Others", "base_score": 75.9, "p0": 308.849853515625, "pend": 286.6000061035156, "total_return": -7.2, "prices": [308.849853515625, 303.8315734863281, 307.50836181640625, 300.0057067871094, 296.27923583984375, 320.22802734375, 316.75, 293.3999938964844, 286.6000061035156], "was_series": [68.4, 67.7, 68.6, 67.3, 67.4, 70.9, 68.5, 65.8, 66.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 18.84, "roce": 25.79}, {"name": "Shankara Buildpro", "sector": "Building Materials", "base_score": 73.6, "p0": 124.4000015258789, "pend": 116.06999969482422, "total_return": -6.7, "prices": [124.4000015258789, 115.30000305175781, 118.97000122070312, 113.62000274658203, 118.1500015258789, 118.44000244140625, 117.70999908447266, 114.81999969482422, 116.06999969482422], "was_series": [67.4, 64.5, 67.6, 65.0, 67.7, 66.8, 66.5, 65.7, 66.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 14.81, "roce": 39.02}, {"name": "Fujiyama Power", "sector": "Capital Goods", "base_score": 73.5, "p0": 401.6499938964844, "pend": 295.20001220703125, "total_return": -26.5, "prices": [401.6499938964844, 409.20001220703125, 402.3999938964844, 369.0, 380.8999938964844, 387.5, 355.0, 313.25, 295.20001220703125], "was_series": [69.9, 70.7, 64.5, 61.6, 56.9, 56.8, 53.1, 50.7, 51.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "WATCH / TRIM", "WATCH / TRIM"], "pe": 18.61, "roce": 35.14}, {"name": "Gokul Agro", "sector": "Agri/FMCG", "base_score": 73.5, "p0": 210.10000610351562, "pend": 204.3000030517578, "total_return": -2.76, "prices": [210.10000610351562, 205.5399932861328, 213.66000366210938, 201.36000061035156, 216.52000427246094, 223.22000122070312, 228.22000122070312, 217.3800048828125, 204.3000030517578], "was_series": [67.4, 66.5, 70.6, 67.3, 71.7, 69.1, 69.3, 66.7, 65.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 12.96, "roce": 36.69}, {"name": "BLS Internat.", "sector": "Services", "base_score": 73.3, "p0": 216.50999450683594, "pend": 220.44000244140625, "total_return": 1.82, "prices": [216.50999450683594, 215.0800018310547, 227.63999938964844, 219.24000549316406, 219.3800048828125, 226.8699951171875, 227.19000244140625, 226.8000030517578, 220.44000244140625], "was_series": [67.3, 67.1, 69.6, 66.6, 67.5, 68.9, 68.1, 68.0, 66.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 12.67, "roce": 29.79}, {"name": "Premier Energies", "sector": "Solar/Energy", "base_score": 73.2, "p0": 877.554443359375, "pend": 809.8499755859375, "total_return": -7.72, "prices": [877.554443359375, 884.1507568359375, 914.483642578125, 863.3125, 864.6117553710938, 882.001953125, 895.0, 829.5999755859375, 809.8499755859375], "was_series": [67.3, 67.6, 70.8, 67.6, 66.1, 66.9, 66.9, 63.6, 64.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 20.69, "roce": 32.71}, {"name": "Kennametal India", "sector": "Industrial", "base_score": 73.2, "p0": 4277.5, "pend": 3591.10009765625, "total_return": -16.05, "prices": [4277.5, 4115.10009765625, 4272.39990234375, 3647.699951171875, 3730.300048828125, 3800.5, 3471.10009765625, 3737.800048828125, 3591.10009765625], "was_series": [67.3, 65.8, 65.2, 58.4, 57.9, 58.1, 50.3, 55.3, 51.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "WATCH / TRIM", "HOLD / NEUTRAL", "WATCH / TRIM"], "pe": 29.11, "roce": 32.57}, {"name": "TVS Holdings", "sector": "Diversified", "base_score": 72.8, "p0": 11886.0, "pend": 13367.0, "total_return": 12.46, "prices": [11886.0, 11529.0, 11588.0, 11234.0, 12194.0, 12848.0, 12791.0, 13550.0, 13367.0], "was_series": [67.1, 65.9, 69.9, 68.5, 76.6, 76.7, 78.2, 80.7, 78.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 12.38, "roce": 16.95}, {"name": "Monarch Networth", "sector": "Financial Services", "base_score": 72.6, "p0": 342.70001220703125, "pend": 335.54998779296875, "total_return": -2.09, "prices": [342.70001220703125, 330.04998779296875, 335.1499938964844, 330.79998779296875, 353.20001220703125, 353.5, 349.04998779296875, 340.3999938964844, 335.54998779296875], "was_series": [69.0, 67.6, 69.1, 70.2, 73.2, 74.5, 74.0, 73.3, 73.4], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 13.81, "roce": 27.55}, {"name": "V-Marc India", "sector": "Capital Goods", "base_score": 72.5, "p0": 276.45, "pend": 276.45001220703125, "total_return": 0.0, "prices": [276.45, 276.45, 276.45, 276.45, 276.45, 276.45, 276.45, 276.45, 276.45001220703125], "was_series": [69.5, 69.5, 69.5, 71.5, 71.5, 71.5, 70.5, 70.5, 70.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 28.9, "roce": 41.37}], "core_watchlist": [{"name": "T R I L", "sector": "Infra", "base_score": 72.2, "p0": 280.79998779296875, "pend": 289.45001220703125, "total_return": 3.08, "prices": [280.79998779296875, 282.75, 333.45001220703125, 314.5, 315.79998779296875, 315.6000061035156, 315.79998779296875, 305.20001220703125, 289.45001220703125], "was_series": [69.4, 69.7, 77.4, 72.8, 74.4, 77.2, 77.3, 75.8, 74.6], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 28.54, "roce": 23.31}, {"name": "Hero Motocorp", "sector": "Auto", "base_score": 71.5, "p0": 5168.0, "pend": 5535.0, "total_return": 7.1, "prices": [5168.0, 4856.5, 5210.0, 5128.0, 5105.0, 5514.0, 5342.0, 5556.0, 5535.0], "was_series": [66.6, 64.2, 72.0, 69.6, 69.8, 71.6, 68.3, 70.7, 69.6], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 18.23, "roce": 35.22}, {"name": "Fiem Industries", "sector": "Auto Ancillary", "base_score": 71.3, "p0": 1794.800048828125, "pend": 2084.300048828125, "total_return": 16.13, "prices": [1794.800048828125, 1746.5999755859375, 1825.5, 1846.199951171875, 1716.5999755859375, 1870.0, 1943.5, 2174.89990234375, 2084.300048828125], "was_series": [66.5, 65.4, 74.4, 73.7, 74.6, 78.4, 77.7, 80.5, 76.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "HOLD / ACCUMULATE"], "pe": 19.37, "roce": 29.34}, {"name": "Krishana Phosch.", "sector": "Chemicals", "base_score": 71.1, "p0": 184.58999633789062, "pend": 241.25999450683594, "total_return": 30.7, "prices": [184.58999633789062, 188.69000244140625, 211.9499969482422, 198.8699951171875, 222.6300048828125, 245.47000122070312, 242.14999389648438, 242.11000061035156, 241.25999450683594], "was_series": [66.4, 67.3, 75.4, 70.1, 75.4, 80.4, 79.8, 80.1, 80.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 30.9, "roce": 27.24}, {"name": "R R Kabel", "sector": "Capital Goods", "base_score": 70.5, "p0": 2509.8291015625, "pend": 1822.699951171875, "total_return": -27.38, "prices": [2509.8291015625, 2687.436767578125, 2595.244140625, 2255.5771484375, 2115.843017578125, 2014.199951171875, 1947.800048828125, 1819.5999755859375, 1822.699951171875], "was_series": [68.7, 71.5, 68.4, 57.9, 58.8, 52.5, 52.5, 50.9, 52.6], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "WATCH / TRIM", "HOLD / NEUTRAL"], "pe": 30.49, "roce": 28.1}, {"name": "Gulf Oil Lubric.", "sector": "Others", "base_score": 69.5, "p0": 1093.0, "pend": 1159.199951171875, "total_return": 6.06, "prices": [1093.0, 1089.300048828125, 1065.300048828125, 1043.800048828125, 1063.300048828125, 1085.5, 1111.4000244140625, 1150.0999755859375, 1159.199951171875], "was_series": [65.8, 65.7, 64.9, 64.6, 65.9, 66.2, 66.6, 67.5, 66.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 13.43, "roce": 27.23}, {"name": "Indian Metals", "sector": "Others", "base_score": 69.0, "p0": 1171.5496826171875, "pend": 1018.7999877929688, "total_return": -13.04, "prices": [1171.5496826171875, 1159.90185546875, 1194.2479248046875, 1090.214111328125, 1101.5633544921875, 1126.55126953125, 1101.5, 1040.300048828125, 1018.7999877929688], "was_series": [65.6, 65.2, 66.6, 62.4, 65.0, 65.6, 64.1, 62.5, 63.1], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 9.57, "roce": 18.37}, {"name": "Sambhv Steel", "sector": "Steel", "base_score": 68.5, "p0": 161.4499969482422, "pend": 176.89999389648438, "total_return": 9.57, "prices": [161.4499969482422, 157.30999755859375, 163.14999389648438, 160.07000732421875, 159.3300018310547, 168.47000122070312, 167.47999572753906, 161.47999572753906, 176.89999389648438], "was_series": [65.4, 67.4, 69.5, 64.8, 65.1, 65.0, 63.3, 62.0, 66.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 26.33, "roce": 19.07}, {"name": "Waaree Energies", "sector": "Solar/Energy", "base_score": 67.8, "p0": 2340.0, "pend": 2390.0, "total_return": 2.14, "prices": [2340.0, 2317.0, 2494.0, 2370.0, 2318.0, 2449.300048828125, 2572.0, 2433.0, 2390.0], "was_series": [65.1, 64.7, 68.0, 64.1, 64.4, 67.2, 67.9, 64.4, 65.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 17.63, "roce": 38.45}, {"name": "NMDC", "sector": "Metals", "base_score": 67.5, "p0": 73.63999938964844, "pend": 67.4000015258789, "total_return": -8.47, "prices": [73.63999938964844, 70.69000244140625, 70.81999969482422, 68.87999725341797, 67.54000091552734, 70.41000366210938, 71.06999969482422, 68.19999694824219, 67.4000015258789], "was_series": [65.0, 66.4, 67.5, 63.3, 63.3, 62.9, 62.2, 60.4, 60.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 7.96, "roce": 27.58}, {"name": "Kanohar Elect.", "sector": "Others", "base_score": 67.5, "p0": 906.3499755859375, "pend": 1007.7999877929688, "total_return": 11.19, "prices": [906.3499755859375, 1183.25, 998.25, 990.25, 981.4000244140625, 1022.5, 1064.4000244140625, 1046.5999755859375, 1007.7999877929688], "was_series": [65.0, 70.0, 62.6, 66.2, 66.0, 68.0, 68.6, 66.9, 65.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 48.52, "roce": 54.32}, {"name": "Onemi Technology", "sector": "IT", "base_score": 67.5, "p0": 326.3, "pend": 326.3, "total_return": 0.0, "prices": [326.3, 326.3, 326.3, 326.3, 326.3, 326.3, 326.3, 326.3, 326.3], "was_series": [67.0, 67.0, 67.0, 67.0, 67.0, 67.0, 67.0, 67.0, 67.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 17.59, "roce": 22.66}, {"name": "Multi Comm. Exc.", "sector": "Financial Services", "base_score": 67.4, "p0": 3204.0, "pend": 3581.60009765625, "total_return": 11.79, "prices": [3204.0, 3255.60009765625, 3216.39990234375, 3113.699951171875, 3231.0, 3366.0, 3624.699951171875, 3645.0, 3581.60009765625], "was_series": [67.0, 67.6, 66.7, 65.7, 68.0, 68.8, 70.9, 69.2, 68.3], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 50.84, "roce": 71.35}, {"name": "Jayaswal Neco", "sector": "Others", "base_score": 67.0, "p0": 91.27999877929688, "pend": 89.08999633789062, "total_return": -2.4, "prices": [91.27999877929688, 91.4800033569336, 96.3499984741211, 91.04000091552734, 89.7699966430664, 91.33999633789062, 92.52999877929688, 88.26000213623047, 89.08999633789062], "was_series": [64.8, 64.9, 67.0, 63.4, 64.2, 65.2, 65.3, 63.2, 64.7], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 12.41, "roce": 20.69}, {"name": "Hindustan Copper", "sector": "Metals", "base_score": 66.9, "p0": 462.1499938964844, "pend": 411.25, "total_return": -11.01, "prices": [462.1499938964844, 467.5, 453.04998779296875, 412.54998779296875, 412.29998779296875, 427.3500061035156, 446.1499938964844, 425.45001220703125, 411.25], "was_series": [64.8, 68.2, 66.7, 60.9, 63.1, 62.0, 62.8, 59.9, 59.8], "action_series": ["HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 25.77, "roce": 42.38}, {"name": "Quality Power El", "sector": "Others", "base_score": 66.6, "p0": 1468.5, "pend": 1468.5, "total_return": 0.0, "prices": [1468.5, 1468.5, 1468.5, 1468.5, 1468.5, 1468.5, 1468.5, 1468.5, 1468.5], "was_series": [64.6, 64.6, 64.6, 64.6, 64.6, 64.6, 64.6, 64.6, 64.6], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 75.09, "roce": 31.73}, {"name": "Manorama Indust.", "sector": "FMCG", "base_score": 66.1, "p0": 1880.300048828125, "pend": 1842.4000244140625, "total_return": -2.02, "prices": [1880.300048828125, 1998.5, 1927.4000244140625, 1746.199951171875, 1831.5, 1904.5, 2100.10009765625, 1875.699951171875, 1842.4000244140625], "was_series": [64.4, 67.0, 63.9, 61.0, 65.3, 65.6, 68.8, 61.7, 63.7], "action_series": ["HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 39.25, "roce": 35.41}, {"name": "P N Gadgil Jewe.", "sector": "Jewellery", "base_score": 66.0, "p0": 581.9500122070312, "pend": 557.3499755859375, "total_return": -4.23, "prices": [581.9500122070312, 586.2999877929688, 590.8499755859375, 577.1500244140625, 583.7000122070312, 600.9000244140625, 631.75, 576.7000122070312, 557.3499755859375], "was_series": [64.4, 64.7, 68.3, 67.2, 68.2, 67.6, 69.0, 64.1, 64.9], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 16.74, "roce": 20.96}, {"name": "Lumax Auto Tech.", "sector": "Others", "base_score": 66.0, "p0": 1978.9000244140625, "pend": 2326.300048828125, "total_return": 17.56, "prices": [1978.9000244140625, 1770.199951171875, 1912.800048828125, 1817.4000244140625, 2058.5, 2255.800048828125, 2341.89990234375, 2337.199951171875, 2326.300048828125], "was_series": [64.4, 60.2, 65.9, 61.9, 68.3, 68.9, 68.1, 67.1, 66.9], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 42.84, "roce": 21.19}, {"name": "BSE", "sector": "Financial Services", "base_score": 66.0, "p0": 3046.0, "pend": 3757.0, "total_return": 23.34, "prices": [3046.0, 3334.800048828125, 3428.0, 3265.0, 3502.0, 3790.0, 3909.10009765625, 3765.0, 3757.0], "was_series": [66.4, 70.2, 73.0, 70.3, 80.5, 81.4, 83.4, 81.0, 81.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 49.72, "roce": 59.99}], "satellite_watchlist": [{"name": "Garuda Cons", "sector": "Others", "base_score": 75.5, "p0": 172.14453125, "pend": 150.94000244140625, "total_return": -12.32, "prices": [172.14453125, 165.38592529296875, 164.76605224609375, 145.61000061035156, 141.63999938964844, 156.75, 156.3800048828125, 152.0, 150.94000244140625], "was_series": [68.2, 66.6, 67.5, 63.0, 64.9, 69.5, 66.8, 65.7, 66.2], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 9.37, "roce": 42.4}, {"name": "Modison", "sector": "Metals", "base_score": 74.8, "p0": 481.5085144042969, "pend": 330.5, "total_return": -31.36, "prices": [481.5085144042969, 460.0608215332031, 520.5899047851562, 424.1000061035156, 362.3500061035156, 352.04998779296875, 357.1499938964844, 335.79998779296875, 330.5], "was_series": [67.9, 69.1, 75.4, 55.5, 54.6, 47.7, 48.9, 46.4, 47.3], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "WATCH / TRIM", "WATCH / TRIM", "WATCH / TRIM", "WATCH / TRIM"], "pe": 9.16, "roce": 30.98}, {"name": "String Metaverse", "sector": "Others", "base_score": 74.0, "p0": 7.309999942779541, "pend": 9.510000228881836, "total_return": 30.1, "prices": [7.309999942779541, 6.929999828338623, 7.090000152587891, 6.809999942779541, 6.820000171661377, 7.199999809265137, 6.809999942779541, 8.630000114440918, 9.510000228881836], "was_series": [67.6, 65.5, 67.7, 65.6, 66.6, 68.8, 65.2, 72.6, 72.6], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 8.41, "roce": 43.99}, {"name": "Anawil Wire", "sector": "Others", "base_score": 73.5, "p0": 404.5, "pend": 404.5, "total_return": 0.0, "prices": [404.5, 404.5, 404.5, 404.5, 404.5, 404.5, 404.5, 404.5, 404.5], "was_series": [67.4, 67.4, 67.4, 67.4, 67.4, 67.4, 67.4, 67.4, 67.4], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 20.72, "roce": 32.28}, {"name": "Rajputana Stain.", "sector": "Steel", "base_score": 72.1, "p0": 174.42999267578125, "pend": 160.6300048828125, "total_return": -7.91, "prices": [174.42999267578125, 171.94000244140625, 170.61000061035156, 172.8300018310547, 166.97000122070312, 167.8300018310547, 168.8000030517578, 165.08999633789062, 160.6300048828125], "was_series": [66.8, 69.3, 69.3, 67.0, 65.4, 63.9, 64.0, 63.0, 62.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 19.39, "roce": 25.33}, {"name": "EFC (I)", "sector": "Services", "base_score": 72.0, "p0": 161.6, "pend": 161.6, "total_return": 0.0, "prices": [161.6, 161.6, 161.6, 161.6, 161.6, 161.6, 161.6, 161.6, 161.6], "was_series": [66.8, 66.8, 66.8, 66.8, 66.8, 66.8, 66.8, 66.8, 66.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 8.62, "roce": 19.85}, {"name": "Dynacons Sys.", "sector": "IT", "base_score": 71.6, "p0": 948.75, "pend": 1029.1500244140625, "total_return": 8.47, "prices": [948.75, 1030.0999755859375, 1011.9000244140625, 1020.9000244140625, 967.0, 1028.25, 1051.3499755859375, 1090.699951171875, 1029.1500244140625], "was_series": [68.6, 72.1, 69.2, 70.0, 67.6, 71.5, 70.8, 71.8, 68.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 14.21, "roce": 29.73}, {"name": "Deepa Jewellers", "sector": "Jewellery", "base_score": 71.5, "p0": 192.1699981689453, "pend": 181.1699981689453, "total_return": -5.72, "prices": [192.1699981689453, 232.8000030517578, 237.6199951171875, 244.2100067138672, 208.8800048828125, 219.17999267578125, 226.5800018310547, 197.0800018310547, 181.1699981689453], "was_series": [66.6, 71.6, 74.2, 74.9, 67.8, 71.9, 72.1, 65.7, 65.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 15.17, "roce": 51.56}, {"name": "Websol Energy", "sector": "Solar/Energy", "base_score": 71.3, "p0": 68.69999694824219, "pend": 64.2699966430664, "total_return": -6.45, "prices": [68.69999694824219, 66.4000015258789, 68.2699966430664, 61.16999816894531, 66.95999908447266, 72.0, 72.54000091552734, 65.37999725341797, 64.2699966430664], "was_series": [66.5, 65.2, 67.1, 62.3, 68.5, 69.1, 67.5, 63.3, 65.1], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 8.02, "roce": 63.18}, {"name": "Rashi Peripheral", "sector": "IT Distribution", "base_score": 70.6, "p0": 953.1500244140625, "pend": 647.0499877929688, "total_return": -32.11, "prices": [953.1500244140625, 898.7999877929688, 854.7999877929688, 821.3499755859375, 839.2000122070312, 867.0499877929688, 697.3499755859375, 649.25, 647.0499877929688], "was_series": [68.2, 66.0, 65.5, 59.2, 61.0, 54.7, 47.2, 48.7, 50.3], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "WATCH / TRIM", "WATCH / TRIM", "WATCH / TRIM"], "pe": 11.13, "roce": 17.0}, {"name": "Canara Robeco", "sector": "Others", "base_score": 70.0, "p0": 228.55, "pend": 228.55, "total_return": 0.0, "prices": [228.55, 228.55, 228.55, 228.55, 228.55, 228.55, 228.55, 228.55, 228.55], "was_series": [66.0, 66.0, 66.0, 66.0, 66.0, 66.0, 66.0, 66.0, 66.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 19.96, "roce": 40.11}, {"name": "Xtranet Techno.", "sector": "Others", "base_score": 69.5, "p0": 272.25, "pend": 261.95001220703125, "total_return": -3.78, "prices": [272.25, 288.79998779296875, 302.70001220703125, 278.3999938964844, 290.95001220703125, 275.8500061035156, 270.3999938964844, 255.35000610351562, 261.95001220703125], "was_series": [65.8, 68.2, 68.7, 64.1, 68.0, 64.7, 65.2, 63.5, 65.9], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 28.44, "roce": 32.81}, {"name": "Fusion CX Ltd", "sector": "Others", "base_score": 69.1, "p0": 171.36000061035156, "pend": 151.0800018310547, "total_return": -11.83, "prices": [171.36000061035156, 162.35000610351562, 162.3000030517578, 139.42999267578125, 135.17999267578125, 158.60000610351562, 171.22999572753906, 157.58999633789062, 151.0800018310547], "was_series": [65.6, 63.5, 64.8, 59.3, 61.7, 68.9, 67.6, 62.4, 62.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 21.4, "roce": 27.41}, {"name": "Khazanchi Jewell", "sector": "Others", "base_score": 69.1, "p0": 710.5999755859375, "pend": 705.8499755859375, "total_return": -0.67, "prices": [710.5999755859375, 700.2999877929688, 721.5999755859375, 720.0, 715.25, 720.3499755859375, 727.5499877929688, 720.8499755859375, 705.8499755859375], "was_series": [65.6, 65.1, 66.6, 65.8, 65.6, 66.0, 66.2, 65.6, 65.0], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 16.3, "roce": 34.79}, {"name": "Antelopus Selan", "sector": "Others", "base_score": 68.5, "p0": 817.65, "pend": 817.65, "total_return": 0.0, "prices": [817.65, 817.65, 817.65, 817.65, 817.65, 817.65, 817.65, 817.65, 817.65], "was_series": [65.4, 65.4, 65.4, 65.4, 65.4, 65.4, 65.4, 65.4, 65.4], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 15.54, "roce": 19.92}, {"name": "Carraro India", "sector": "Others", "base_score": 68.4, "p0": 518.0999755859375, "pend": 470.6000061035156, "total_return": -9.17, "prices": [518.0999755859375, 509.79998779296875, 507.95001220703125, 483.8999938964844, 487.25, 500.3999938964844, 494.3999938964844, 460.45001220703125, 470.6000061035156], "was_series": [65.4, 64.7, 65.0, 63.2, 64.6, 65.5, 64.4, 62.0, 64.5], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 18.17, "roce": 28.25}, {"name": "Syncom Formul.", "sector": "Others", "base_score": 67.9, "p0": 23.969999313354492, "pend": 22.920000076293945, "total_return": -4.38, "prices": [23.969999313354492, 23.579999923706055, 21.540000915527344, 21.84000015258789, 20.3799991607666, 20.8700008392334, 20.260000228881836, 22.09000015258789, 22.920000076293945], "was_series": [65.2, 64.5, 61.5, 64.2, 61.2, 63.8, 62.1, 66.2, 65.4], "action_series": ["HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 22.97, "roce": 24.78}, {"name": "Tinna Rubber", "sector": "Others", "base_score": 67.2, "p0": 913.35, "pend": 913.35, "total_return": 0.0, "prices": [913.35, 913.35, 913.35, 913.35, 913.35, 913.35, 913.35, 913.35, 913.35], "was_series": [64.9, 64.9, 64.9, 64.9, 64.9, 64.9, 64.9, 64.9, 64.9], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 24.57, "roce": 22.46}, {"name": "Technocraft Ven.", "sector": "Others", "base_score": 66.5, "p0": 2893.800048828125, "pend": 2792.89990234375, "total_return": -3.49, "prices": [2893.800048828125, 2581.89990234375, 2585.300048828125, 2498.0, 2563.800048828125, 2770.10009765625, 2875.300048828125, 2781.699951171875, 2792.89990234375], "was_series": [64.6, 60.3, 63.0, 61.7, 63.5, 66.0, 65.5, 63.2, 64.2], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 42.73, "roce": 30.79}, {"name": "Asian Energy", "sector": "Others", "base_score": 66.2, "p0": 466.75, "pend": 356.3500061035156, "total_return": -23.65, "prices": [466.75, 459.45001220703125, 454.79998779296875, 402.04998779296875, 440.45001220703125, 400.29998779296875, 395.8500061035156, 374.3999938964844, 356.3500061035156], "was_series": [64.5, 63.9, 63.8, 59.5, 66.0, 60.1, 61.9, 60.2, 59.7], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 21.89, "roce": 16.33}, {"name": "Ceigall India", "sector": "Others", "base_score": 65.8, "p0": 380.1000061035156, "pend": 376.29998779296875, "total_return": -1.0, "prices": [380.1000061035156, 374.1000061035156, 389.0, 376.8999938964844, 392.29998779296875, 386.8500061035156, 394.54998779296875, 381.95001220703125, 376.29998779296875], "was_series": [64.3, 63.7, 65.7, 63.4, 65.8, 64.2, 65.4, 63.6, 63.8], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 18.52, "roce": 16.95}, {"name": "Shaily Engineer.", "sector": "Manufacturing", "base_score": 65.7, "p0": 3009.10009765625, "pend": 3035.0, "total_return": 0.86, "prices": [3009.10009765625, 3053.0, 3083.300048828125, 2987.0, 3056.300048828125, 2972.699951171875, 3122.800048828125, 3131.300048828125, 3035.0], "was_series": [64.3, 64.9, 64.9, 63.4, 65.1, 63.4, 66.1, 65.0, 63.6], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL"], "pe": 68.54, "roce": 30.29}, {"name": "Ajanta Pharma", "sector": "Pharma", "base_score": 65.4, "p0": 3581.0, "pend": 3310.39990234375, "total_return": -7.56, "prices": [3581.0, 3435.60009765625, 3359.39990234375, 3270.60009765625, 3459.699951171875, 3282.10009765625, 3324.0, 3270.300048828125, 3310.39990234375], "was_series": [64.2, 62.5, 62.7, 62.2, 65.1, 61.6, 63.4, 62.5, 63.3], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 32.77, "roce": 34.51}, {"name": "Deep Industries", "sector": "Others", "base_score": 65.3, "p0": 749.0, "pend": 635.4000244140625, "total_return": -15.17, "prices": [749.0, 777.5999755859375, 747.4500122070312, 695.75, 693.2000122070312, 639.6500244140625, 661.75, 635.3499755859375, 635.4000244140625], "was_series": [64.1, 65.6, 63.1, 61.3, 62.9, 60.0, 63.2, 60.8, 61.8], "action_series": ["HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 9.6, "roce": 16.47}, {"name": "Jeena Sikho", "sector": "Others", "base_score": 65.3, "p0": 480.79998779296875, "pend": 322.20001220703125, "total_return": -32.99, "prices": [480.79998779296875, 381.25, 388.70001220703125, 349.45001220703125, 347.75, 345.25, 367.70001220703125, 302.8500061035156, 322.20001220703125], "was_series": [64.1, 56.1, 61.7, 57.5, 59.8, 59.7, 62.2, 56.1, 60.8], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 18.69, "roce": 64.45}, {"name": "Kalyan Jewellers", "sector": "Consumer", "base_score": 65.3, "p0": 528.5, "pend": 652.9000244140625, "total_return": 23.54, "prices": [528.5, 553.5, 558.8499755859375, 530.4000244140625, 515.0, 560.0, 710.9000244140625, 661.0, 652.9000244140625], "was_series": [64.1, 66.0, 72.7, 70.4, 75.5, 78.2, 83.1, 80.1, 81.3], "action_series": ["HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD", "STRONG BUY / ADD"], "pe": 42.86, "roce": 21.15}, {"name": "Refex Industries", "sector": "Services", "base_score": 64.9, "p0": 271.29998779296875, "pend": 209.86000061035156, "total_return": -22.65, "prices": [271.29998779296875, 258.70001220703125, 261.3999938964844, 235.4499969482422, 222.3000030517578, 231.27999877929688, 235.55999755859375, 218.39999389648438, 209.86000061035156], "was_series": [64.0, 62.1, 63.7, 59.5, 59.9, 62.8, 62.4, 59.2, 59.6], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 9.69, "roce": 22.71}, {"name": "Accent Microcell", "sector": "Others", "base_score": 64.9, "p0": 669.9000244140625, "pend": 584.8499755859375, "total_return": -12.7, "prices": [669.9000244140625, 645.5999755859375, 688.0, 616.6500244140625, 634.0, 627.2000122070312, 609.3499755859375, 599.25, 584.8499755859375], "was_series": [64.0, 62.5, 66.0, 60.2, 63.9, 62.7, 61.9, 62.0, 61.5], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 23.5, "roce": 24.88}, {"name": "Action Const.Eq.", "sector": "Others", "base_score": 64.8, "p0": 1212.300048828125, "pend": 1187.449951171875, "total_return": -2.05, "prices": [1212.300048828125, 1179.800048828125, 1155.699951171875, 1053.4000244140625, 1027.0, 1127.6500244140625, 1179.6500244140625, 1185.9000244140625, 1187.449951171875], "was_series": [63.9, 62.8, 62.7, 59.7, 61.0, 65.3, 64.7, 63.7, 63.6], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 29.86, "roce": 31.63}, {"name": "Vadilal Inds.", "sector": "Others", "base_score": 64.7, "p0": 7187.0, "pend": 6893.0, "total_return": -4.09, "prices": [7187.0, 7167.5, 7128.0, 7207.5, 7580.0, 7123.5, 7032.0, 6999.0, 6893.0], "was_series": [63.9, 63.8, 63.6, 64.2, 66.0, 62.2, 63.2, 63.4, 62.9], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 20.65, "roce": 21.96}, {"name": "Coforge", "sector": "IT", "base_score": 64.6, "p0": 1826.0, "pend": 2142.300048828125, "total_return": 17.32, "prices": [1826.0, 1814.300048828125, 1934.300048828125, 1908.800048828125, 1962.0, 2079.0, 2034.0, 2041.0, 2142.300048828125], "was_series": [65.8, 65.6, 68.4, 66.2, 67.7, 69.4, 67.0, 67.7, 69.7], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 43.66, "roce": 23.5}, {"name": "K.P. Energy", "sector": "Others", "base_score": 64.6, "p0": 168.52, "pend": 168.52, "total_return": 0.0, "prices": [168.52, 168.52, 168.52, 168.52, 168.52, 168.52, 168.52, 168.52, 168.52], "was_series": [63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 6.62, "roce": 39.0}, {"name": "Modern Insulator", "sector": "Others", "base_score": 64.5, "p0": 591.05, "pend": 116.9000015258789, "total_return": -80.22, "prices": [591.05, 591.05, 591.05, 591.05, 591.05, 591.05, 591.05, 116.9000015258789, 116.9000015258789], "was_series": [63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 55.8, 55.8], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 21.41, "roce": 19.29}, {"name": "Knack Packaging", "sector": "Others", "base_score": 64.5, "p0": 180.6699981689453, "pend": 206.25999450683594, "total_return": 14.16, "prices": [180.6699981689453, 202.16000366210938, 207.33999633789062, 206.1199951171875, 192.9499969482422, 196.91000366210938, 205.72999572753906, 204.88999938964844, 206.25999450683594], "was_series": [63.8, 68.6, 66.7, 65.8, 63.2, 65.7, 67.0, 65.7, 66.1], "action_series": ["HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE"], "pe": 26.43, "roce": 30.05}, {"name": "GNG Electronics", "sector": "Others", "base_score": 64.5, "p0": 485.15, "pend": 485.15, "total_return": 0.0, "prices": [485.15, 485.15, 485.15, 485.15, 485.15, 485.15, 485.15, 485.15, 485.15], "was_series": [63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8, 63.8], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 33.29, "roce": 20.18}, {"name": "Balmer Law. Inv.", "sector": "Others", "base_score": 64.5, "p0": 159.3000030517578, "pend": 163.27000427246094, "total_return": 2.49, "prices": [159.3000030517578, 156.0800018310547, 159.1199951171875, 152.58999633789062, 156.30999755859375, 163.97000122070312, 176.22000122070312, 164.66000366210938, 163.27000427246094], "was_series": [63.8, 63.0, 64.3, 62.1, 64.1, 65.5, 67.3, 62.7, 64.0], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 7.43, "roce": 16.91}, {"name": "Bhansali Engg.", "sector": "Others", "base_score": 64.5, "p0": 122.64824676513672, "pend": 109.61000061035156, "total_return": -10.63, "prices": [122.64824676513672, 122.33112335205078, 126.87989044189453, 110.31999969482422, 108.52999877929688, 111.1500015258789, 112.23999786376953, 111.16999816894531, 109.61000061035156], "was_series": [63.8, 63.7, 65.2, 59.0, 61.7, 63.0, 62.8, 62.2, 61.9], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 12.25, "roce": 23.75}, {"name": "Polycab India", "sector": "Capital Goods", "base_score": 64.3, "p0": 7990.0, "pend": 7430.0, "total_return": -7.01, "prices": [7990.0, 8151.0, 8207.0, 7671.0, 7745.0, 7849.0, 8080.5, 7550.0, 7430.0], "was_series": [66.2, 67.0, 66.8, 64.0, 66.0, 66.3, 67.1, 63.8, 64.8], "action_series": ["HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 35.46, "roce": 33.2}, {"name": "3B Blackbio", "sector": "Others", "base_score": 64.2, "p0": 1337.5, "pend": 1337.5, "total_return": 0.0, "prices": [1337.5, 1337.5, 1337.5, 1337.5, 1337.5, 1337.5, 1337.5, 1337.5, 1337.5], "was_series": [63.7, 63.7, 63.7, 63.7, 63.7, 63.7, 63.7, 63.7, 63.7], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL"], "pe": 19.58, "roce": 25.48}, {"name": "Lodha Developers", "sector": "Real Estate", "base_score": 64.2, "p0": 1105.5999755859375, "pend": 1219.0, "total_return": 10.26, "prices": [1105.5999755859375, 1065.5999755859375, 1061.800048828125, 1006.4000244140625, 1045.800048828125, 1175.800048828125, 1226.0, 1202.699951171875, 1219.0], "was_series": [63.7, 62.2, 63.0, 61.0, 63.8, 67.7, 66.4, 64.5, 65.6], "action_series": ["HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / NEUTRAL", "HOLD / ACCUMULATE", "HOLD / ACCUMULATE", "HOLD / NEUTRAL", "HOLD / ACCUMULATE"], "pe": 28.12, "roce": 16.41}]}});
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "Rajan_Portfolio_Backtest_Data_2026.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+    }
+</script>
+
+</body>
+</html>

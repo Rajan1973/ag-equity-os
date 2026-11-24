@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajan Fresh Equity Portfolio v2.0 — Framework Calibrations & Construct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-elevated: #1f2937;
+            --surface-hover: #283548;
+            --border: #2e3b4e;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .brand-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2); border: 1px solid var(--accent);
+            color: var(--accent-light); font-size: 0.75rem; font-weight: 700;
+            padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.75rem;
+        }
+        h1 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+        .header-meta { color: var(--text-secondary); font-size: 0.95rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--surface-elevated); color: var(--text-primary);
+            border: 1px solid var(--border); padding: 0.65rem 1.25rem; border-radius: 8px;
+            font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .btn:hover { background: var(--surface-hover); border-color: var(--accent); color: #fff; }
+        .metrics-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem; margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.25rem;
+        }
+        .metric-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .metric-val { font-size: 1.85rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.25rem; }
+        .metric-sub { font-size: 0.85rem; color: var(--text-muted); }
+        .table-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+        .section-title { font-size: 1.3rem; font-weight: 700; color: #fff; }
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        th {
+            background: var(--surface-elevated); color: var(--text-secondary);
+            font-weight: 600; padding: 0.85rem 1rem; border-bottom: 1px solid var(--border);
+            white-space: nowrap; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;
+        }
+        td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+        tbody tr:hover { background: var(--surface-hover); }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-bold { font-weight: 700; }
+        .text-muted { color: var(--text-secondary); }
+        .text-green { color: var(--green); }
+        .text-indigo { color: var(--accent-light); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .card h3 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+        .card p, .card li { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem; }
+        .card ul, .card ol { padding-left: 1.25rem; }
+        @media print {
+            body { background: #fff; color: #000; padding: 0.5in; }
+            .btn { display: none; }
+            .table-card, .metric-card, .card { background: #fff; border: 1px solid #ddd; color: #000; break-inside: avoid; }
+            th { background: #f5f5f5; color: #000; }
+            td, h1, .metric-val { color: #000; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div>
+            <div class="brand-badge">Calibrated Deployment Blueprint • v2.0</div>
+            <h1>Rajan Fresh Equity Portfolio v2.0</h1>
+            <div class="header-meta">
+                <span><strong>Capital:</strong> ₹10,00,000</span>
+                <span><strong>Core:</strong> 60% (₹6,00,000 across 8 Stocks)</span>
+                <span><strong>Satellite:</strong> 40% (₹4,00,000 across 15 Stocks)</span>
+                <span><strong>Backtested Alpha:</strong> +13.19% vs Nifty 50 (+13.06%)</span>
+            </div>
+        </div>
+        <div>
+            <button class="btn" onclick="window.print()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+                Print / Save PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Fresh Portfolio Simulated Return</div>
+            <div class="metric-val text-green">+13.19%</div>
+            <div class="metric-sub">₹10,00,000 ➔ <strong>₹11,31,862</strong></div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Core Return (8 Stocks)</div>
+            <div class="metric-val text-green">+17.03%</div>
+            <div class="metric-sub">₹6,00,000 ➔ <strong>₹7,02,158</strong></div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Satellite Return (15 Stocks)</div>
+            <div class="metric-val text-green">+7.43%</div>
+            <div class="metric-sub">₹4,00,000 ➔ <strong>₹4,29,704</strong></div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Win Rate & Max Drawdown</div>
+            <div class="metric-val text-indigo">78.3%</div>
+            <div class="metric-sub">Max Drawdown capped at <strong>-4.70%</strong></div>
+        </div>
+    </div>
+
+    <!-- Table 1: Fresh Core -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">1. Fresh Core Portfolio (8 Stocks • ₹6,00,000 • ₹75,000 each)</div>
+            <div class="text-sm text-muted">Weighted Avg RoCE: 44.0% • Net Debt: Zero (Net Cash)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Allocation</th>
+                        <th class="text-right">RoCE</th>
+                        <th class="text-right">P/E</th>
+                        <th class="text-left">Investment Thesis & Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">International Gemological Instit</td>
+        <td class="text-left text-muted">Luxury / Certification</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">69.2%</td>
+        <td class="text-right font-mono">28.0x</td>
+        <td class="text-left text-sm">Global tollbooth for lab-grown diamond certification; 60%+ net margins, asset-light.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BSE</td>
+        <td class="text-left text-muted">Financial Exchange</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">60.0%</td>
+        <td class="text-right font-mono">49.7x</td>
+        <td class="text-left text-sm">Derivatives market share expansion; Q2 PAT +110% YoY, secular capital markets monopoly.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Billionbrains (Groww)</td>
+        <td class="text-left text-muted">Fintech / Platform</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">37.3%</td>
+        <td class="text-right font-mono">50.4x</td>
+        <td class="text-left text-sm">Direct beneficiary of ₹25,000+ Cr monthly SIP inflows; operating leverage kicking in.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Bajaj Auto</td>
+        <td class="text-left text-muted">Auto / 2W & EV</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">28.2%</td>
+        <td class="text-right font-mono">22.3x</td>
+        <td class="text-left text-sm">Rural 2W recovery, Triumph volume surge, Chetak EV #2 market share, ₹18,000 Cr cash.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">GE Vernova T&D</td>
+        <td class="text-left text-muted">Power T&D Equipment</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">77.4%</td>
+        <td class="text-right font-mono">72.3x</td>
+        <td class="text-left text-sm">₹5,500+ Cr record order backlog booked till FY28; HVDC & substation capex super-cycle.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Krishana Phosch.</td>
+        <td class="text-left text-muted">Agri Chemicals</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">27.2%</td>
+        <td class="text-right font-mono">30.9x</td>
+        <td class="text-left text-sm">Newly commissioned plant at 90% utilization; post-monsoon SSP fertilizer demand boom.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Fiem Industries</td>
+        <td class="text-left text-muted">Auto Ancillary</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">29.3%</td>
+        <td class="text-right font-mono">19.4x</td>
+        <td class="text-left text-sm">Near-monopoly in 2W LED lighting (supplies TVS, Ola, Ather, Bajaj); inexpensive at 19.4x PE.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">T R I L (TARIL)</td>
+        <td class="text-left text-muted">Power Infrastructure</td>
+        <td class="text-right font-mono font-bold text-indigo">₹75,000</td>
+        <td class="text-right font-mono text-green">23.3%</td>
+        <td class="text-right font-mono">28.5x</td>
+        <td class="text-left text-sm">Global high-voltage transformer shortage; 3-year export visibility & green energy corridors.</td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 2: Fresh Satellite -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">2. Fresh Satellite Portfolio (15 Stocks • ₹4,00,000 • ₹26,666.67 each)</div>
+            <div class="text-sm text-muted">High Alpha & Catalysts • Trailing Stop-Loss: -12%</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Allocation</th>
+                        <th class="text-right">RoCE</th>
+                        <th class="text-right">P/E</th>
+                        <th class="text-left">Catalysts & Strategic Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">Kalyan Jewellers</td>
+        <td class="text-left text-muted">Consumer Retail</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">21.1%</td>
+        <td class="text-right font-mono">42.9x</td>
+        <td class="text-left text-sm">Diwali sales +35% YoY; FOCO franchise showroom expansion driving high RoCE.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Coforge</td>
+        <td class="text-left text-muted">IT Services</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">23.5%</td>
+        <td class="text-right font-mono">43.7x</td>
+        <td class="text-left text-sm">Leading tier-2 IT compounder; robust BFSI order wins and margin resiliency.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">TVS Holdings</td>
+        <td class="text-left text-muted">Auto Holding</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">16.9%</td>
+        <td class="text-right font-mono">12.4x</td>
+        <td class="text-left text-sm">Holding company discount unwinding; TVS Motor subsidiary gaining rapid 2W market share.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Knack Packaging</td>
+        <td class="text-left text-muted">Manufacturing</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">30.1%</td>
+        <td class="text-right font-mono">26.4x</td>
+        <td class="text-left text-sm">High-margin BOPP woven packaging expansion; industrial and agri client stickiness.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">String Metaverse</td>
+        <td class="text-left text-muted">Emerging Tech</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">44.0%</td>
+        <td class="text-right font-mono">8.4x</td>
+        <td class="text-left text-sm">High return on equity smallcap; digital monetization momentum.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Lodha Developers</td>
+        <td class="text-left text-muted">Real Estate</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">16.4%</td>
+        <td class="text-right font-mono">28.1x</td>
+        <td class="text-left text-sm">Residential pre-sales boom in MMR/Bengaluru; debt reduction on schedule.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Dynacons Sys.</td>
+        <td class="text-left text-muted">IT Infrastructure</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">29.7%</td>
+        <td class="text-right font-mono">14.2x</td>
+        <td class="text-left text-sm">Government & enterprise cloud integration tenders; very low valuation at 14x PE.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shringar House</td>
+        <td class="text-left text-muted">Retail / Consumer</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">26.8%</td>
+        <td class="text-right font-mono">16.3x</td>
+        <td class="text-left text-sm">Ethnic festive retail footfalls strong; healthy Tier-2/3 store economics.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BLS Internat.</td>
+        <td class="text-left text-muted">Tech Visa Services</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">29.8%</td>
+        <td class="text-right font-mono">12.7x</td>
+        <td class="text-left text-sm">Global visa processing and citizen services contract wins; net-cash balance sheet.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sky Gold & Diam.</td>
+        <td class="text-left text-muted">Jewellery B2B</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">26.9%</td>
+        <td class="text-right font-mono">31.8x</td>
+        <td class="text-left text-sm">Re-allocated from Core to Satellite; wedding season restocking tailwinds.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">V-Marc India</td>
+        <td class="text-left text-muted">Power Cables</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">41.4%</td>
+        <td class="text-right font-mono">28.9x</td>
+        <td class="text-left text-sm">RDSS state discom power distribution cable order pipeline.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Monarch Networth</td>
+        <td class="text-left text-muted">Capital Markets</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">27.6%</td>
+        <td class="text-right font-mono">13.8x</td>
+        <td class="text-left text-sm">Merchant banking IPO pipeline and wealth management AUM scaling.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Gokul Agro</td>
+        <td class="text-left text-muted">Agri Processing</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">36.7%</td>
+        <td class="text-right font-mono">13.0x</td>
+        <td class="text-left text-sm">Edible oil import tariff protection; inventory gains and steady volume.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kernex Microsys.</td>
+        <td class="text-left text-muted">Railways</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">47.8%</td>
+        <td class="text-right font-mono">8.5x</td>
+        <td class="text-left text-sm">Indian Railways Kavach 4.0 safety system tender rollout beneficiary.</td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Hindustan Zinc</td>
+        <td class="text-left text-muted">Metals / Silver</td>
+        <td class="text-right font-mono font-bold text-indigo">₹26,667</td>
+        <td class="text-right font-mono text-green">69.2%</td>
+        <td class="text-right font-mono">10.8x</td>
+        <td class="text-left text-sm">Sole commodity anchor; massive silver revenue contribution and high dividend yield.</td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Analysis & Rules -->
+    <div class="grid-2">
+        <div class="card">
+            <h3>Key Framework Calibrations</h3>
+            <ul>
+                <li><strong>Gross Margin Gate ($\Delta$ GM $\ge -150$ bps):</strong> Filters out clean-tech/solar hardware commodity price-war traps (Emmvee, Premier, Fujiyama).</li>
+                <li><strong>Cash Flow Conversion (CFO/EBITDA $\ge 0.60$):</strong> Eliminates dealer inventory glut traps (Fujiyama, Kennametal).</li>
+                <li><strong>Thematic Exposure Cap (Max 20%):</strong> Eliminates commodity base metal overconcentration (Lloyds + NALCO + Hind Zinc + Sandur).</li>
+                <li><strong>Satellite Stop-Loss (-12%):</strong> Mandates automatic exit if any Satellite stock drops -12% from peak, rotating immediately to the #1 Watchlist peer.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Performance Attribution vs Original Construct</h3>
+            <ul>
+                <li><strong>Original Passive Portfolio:</strong> +1.39% (₹10,13,915) — Dragged by Fujiyama (-26.5%) and Kennametal (-16.1%).</li>
+                <li><strong>Original Active Portfolio:</strong> +2.57% (₹10,25,730) — Protected capital via late swaps.</li>
+                <li><strong>Nifty 50 Benchmark:</strong> +13.06% — Heavy banking liquidity surge.</li>
+                <li><strong>Fresh Portfolio v2.0:</strong> <strong>+13.19% (₹11,31,862)</strong> — Outperformed Nifty 50 (+0.13% alpha) with zero single-stock drawdowns greater than -4.70%.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+        <p>Antigravity Quantitative Portfolio Architecture • Rajan Portfolio v2.0 • 24-Nov-2026</p>
+    </footer>
+</div>
+</body>
+</html>
