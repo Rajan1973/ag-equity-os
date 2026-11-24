@@ -1,0 +1,206 @@
+{
+  "last_updated": "24-Nov-2026 15:40:27 IST",
+  "source": "Yahoo Finance / NSE Live Feed",
+  "nifty": {
+    "name": "NIFTY 50",
+    "tier": "Benchmark",
+    "price": 25349.65,
+    "prevClose": 25800.6,
+    "changePct": -1.75,
+    "basePrice": 25349.65
+  },
+  "quotes": {
+    "IGIL.NS": {
+      "name": "International Gemological Instit (IGI)",
+      "tier": "Core",
+      "price": 431.1,
+      "prevClose": 422.2,
+      "changePct": 2.11,
+      "basePrice": 431.1
+    },
+    "BSE.NS": {
+      "name": "BSE Ltd",
+      "tier": "Core",
+      "price": 3757.0,
+      "prevClose": 3781.0,
+      "changePct": -0.63,
+      "basePrice": 3757.0
+    },
+    "GROWW.NS": {
+      "name": "Billionbrains (Groww)",
+      "tier": "Core",
+      "price": 216.46,
+      "prevClose": 224.57,
+      "changePct": -3.61,
+      "basePrice": 216.5
+    },
+    "BAJAJ-AUTO.NS": {
+      "name": "Bajaj Auto",
+      "tier": "Core",
+      "price": 10643.0,
+      "prevClose": 10765.0,
+      "changePct": -1.13,
+      "basePrice": 10643.0
+    },
+    "GVT&D.NS": {
+      "name": "GE Vernova T&D India",
+      "tier": "Core",
+      "price": 4195.0,
+      "prevClose": 4235.0,
+      "changePct": -0.94,
+      "basePrice": 4195.0
+    },
+    "KRISHANA.NS": {
+      "name": "Krishana Phoschem",
+      "tier": "Core",
+      "price": 241.26,
+      "prevClose": 246.17,
+      "changePct": -1.99,
+      "basePrice": 241.3
+    },
+    "FIEMIND.NS": {
+      "name": "Fiem Industries",
+      "tier": "Core",
+      "price": 2084.3,
+      "prevClose": 2137.2,
+      "changePct": -2.48,
+      "basePrice": 2084.3
+    },
+    "TARIL.NS": {
+      "name": "T R I L (TARIL)",
+      "tier": "Core",
+      "price": 289.45,
+      "prevClose": 297.1,
+      "changePct": -2.57,
+      "basePrice": 289.45
+    },
+    "KALYANKJIL.NS": {
+      "name": "Kalyan Jewellers",
+      "tier": "Satellite",
+      "price": 652.9,
+      "prevClose": 638.7,
+      "changePct": 2.22,
+      "basePrice": 652.9
+    },
+    "COFORGE.NS": {
+      "name": "Coforge",
+      "tier": "Satellite",
+      "price": 2142.3,
+      "prevClose": 2086.7,
+      "changePct": 2.66,
+      "basePrice": 2142.3
+    },
+    "TVSHLTD.NS": {
+      "name": "TVS Holdings",
+      "tier": "Satellite",
+      "price": 13367.0,
+      "prevClose": 13491.0,
+      "changePct": -0.92,
+      "basePrice": 13367.0
+    },
+    "KNACK.NS": {
+      "name": "Knack Packaging",
+      "tier": "Satellite",
+      "price": 206.26,
+      "prevClose": 199.64,
+      "changePct": 3.32,
+      "basePrice": 206.3
+    },
+    "META.BO": {
+      "name": "String Metaverse",
+      "tier": "Satellite",
+      "price": 9.51,
+      "prevClose": 9.06,
+      "changePct": 4.97,
+      "basePrice": 9.5
+    },
+    "LODHA.NS": {
+      "name": "Lodha Developers (Macrotech)",
+      "tier": "Satellite",
+      "price": 1219.0,
+      "prevClose": 1218.7,
+      "changePct": 0.02,
+      "basePrice": 1219.0
+    },
+    "DSSL.NS": {
+      "name": "Dynacons Systems",
+      "tier": "Satellite",
+      "price": 1029.15,
+      "prevClose": 1033.75,
+      "changePct": -0.44,
+      "basePrice": 1029.2
+    },
+    "SHRINGARMS.NS": {
+      "name": "Shringar House of Fashion",
+      "tier": "Satellite",
+      "price": 232.65,
+      "prevClose": 236.25,
+      "changePct": -1.52,
+      "basePrice": 232.6
+    },
+    "BLS.NS": {
+      "name": "BLS International",
+      "tier": "Satellite",
+      "price": 220.44,
+      "prevClose": 222.78,
+      "changePct": -1.05,
+      "basePrice": 220.4
+    },
+    "SKYGOLD.NS": {
+      "name": "Sky Gold & Diamonds",
+      "tier": "Satellite",
+      "price": 819.45,
+      "prevClose": 874.9,
+      "changePct": -6.34,
+      "basePrice": 819.45
+    },
+    "VMARCIND-SM.NS": {
+      "name": "V-Marc India",
+      "tier": "Satellite",
+      "price": 276.45,
+      "prevClose": 274.95,
+      "changePct": 0.55,
+      "basePrice": 276.5
+    },
+    "MONARCH.NS": {
+      "name": "Monarch Networth",
+      "tier": "Satellite",
+      "price": 335.55,
+      "prevClose": 340.05,
+      "changePct": -1.32,
+      "basePrice": 335.5
+    },
+    "GOKULAGRO.NS": {
+      "name": "Gokul Agro Resources",
+      "tier": "Satellite",
+      "price": 204.3,
+      "prevClose": 213.45,
+      "changePct": -4.29,
+      "basePrice": 204.3
+    },
+    "KERNEX.NS": {
+      "name": "Kernex Microsystems",
+      "tier": "Satellite",
+      "price": 1587.6,
+      "prevClose": 1642.1,
+      "changePct": -3.32,
+      "basePrice": 1587.6
+    },
+    "HINDZINC.NS": {
+      "name": "Hindustan Zinc",
+      "tier": "Satellite",
+      "price": 528.95,
+      "prevClose": 521.6,
+      "changePct": 1.41,
+      "basePrice": 528.95
+    },
+    "^NSEI": {
+      "name": "NIFTY 50",
+      "tier": "Benchmark",
+      "price": 25349.65,
+      "prevClose": 25800.6,
+      "changePct": -1.75,
+      "basePrice": 25349.65
+    }
+  }
+}
