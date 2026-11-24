@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajan Equity Portfolio OS — Executive Cockpit & Knowledge Architecture</title>
+    <title>Rajan Equity Portfolio OS — Executive Cockpit & Wealth Architecture</title>
     <!-- Luxury Typography: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,7 @@
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            width: 100%;
         }
 
         .mono {
@@ -68,53 +69,53 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100vw;
-            height: 480px;
+            height: 380px;
             background: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.05) 0%, rgba(56, 189, 248, 0.02) 40%, transparent 80%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Top Executive Navigation Bar */
+        /* Top Executive Navigation Bar (Full Width) */
         .topbar {
             position: sticky;
             top: 0;
             z-index: 90;
-            background: rgba(4, 7, 13, 0.9);
+            background: rgba(4, 7, 13, 0.92);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 0.75rem 2rem;
+            padding: 0.65rem 1.75rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 1.5rem;
+            width: 100%;
         }
 
         .brand-monogram {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
             text-decoration: none;
         }
 
         .brand-crest {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border: 1px solid var(--border-highlight);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: var(--text-primary);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
         }
 
         .brand-info h1 {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 800;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
             color: var(--text-primary);
             display: flex;
             align-items: center;
@@ -122,19 +123,19 @@
         }
 
         .brand-info p {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             font-family: 'JetBrains Mono', monospace;
         }
 
         .telemetry-capsule {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1rem;
             background: rgba(10, 15, 29, 0.6);
             border: 1px solid var(--border-subtle);
-            padding: 0.4rem 1rem;
+            padding: 0.35rem 0.9rem;
             border-radius: 9999px;
             font-size: 0.75rem;
         }
@@ -173,7 +174,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-subtle);
             color: var(--text-primary);
-            padding: 0.45rem 0.9rem;
+            padding: 0.45rem 0.85rem;
             border-radius: 8px;
             font-size: 0.78rem;
             font-weight: 600;
@@ -212,172 +213,78 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Scrolling Ticker Tape */
-        .ticker-strip {
-            background: rgba(8, 12, 22, 0.7);
-            border-bottom: 1px solid var(--border-subtle);
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            padding: 0.4rem 0;
-            z-index: 80;
-        }
-
-        .ticker-inner {
-            display: inline-flex;
-            gap: 2rem;
-            animation: ticker 45s linear infinite;
-        }
-
-        .ticker-inner:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
-            cursor: pointer;
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            transition: background 0.15s;
-        }
-
-        .ticker-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .ticker-sym {
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .ticker-price {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-secondary);
-        }
-
-        .ticker-chg {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.1rem 0.35rem;
-            border-radius: 4px;
-        }
-
-        .ticker-chg.pos {
-            background: var(--emerald-surface);
-            color: var(--emerald);
-        }
-
-        .ticker-chg.neg {
-            background: var(--rose-surface);
-            color: var(--rose);
-        }
-
-        /* Container & Layout */
+        /* Container & Layout (Full Width) */
         .app-container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 1.75rem 2rem 5rem;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0.85rem 1.75rem 4rem;
             position: relative;
             z-index: 10;
         }
 
-        /* Asymmetric Bento Hero */
-        .hero-bento {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .bento-card {
+        /* Slim Executive Cockpit Bar (Replaces Large Hero) */
+        .cockpit-strip {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 1.75rem;
-            backdrop-filter: blur(24px);
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.25s, transform 0.25s;
+            border-radius: 12px;
+            padding: 0.85rem 1.25rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 1.25rem;
+            display: grid;
+            grid-template-columns: 2.2fr 1.6fr 1.4fr 1.2fr;
+            gap: 1.25rem;
+            align-items: center;
         }
 
-        .bento-card:hover {
-            border-color: var(--border-highlight);
-        }
-
-        .bento-cockpit {
-            grid-column: span 7;
+        .strip-col {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            border-right: 1px solid var(--border-subtle);
+            padding-right: 1.25rem;
         }
 
-        .bento-eyebrow {
-            font-size: 0.7rem;
+        .strip-col:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .strip-label {
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--emerald);
-            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.35rem;
         }
 
-        .bento-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            line-height: 1.15;
-        }
-
-        .bento-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            max-width: 58ch;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-metric-row {
+        .strip-val-row {
             display: flex;
             align-items: baseline;
-            gap: 1.25rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
-        .hero-metric-val {
-            font-size: 2.75rem;
+        .strip-nav-val {
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             color: #fff;
             line-height: 1;
         }
 
-        .hero-badge-group {
-            display: flex;
-            gap: 0.6rem;
-            align-items: center;
-        }
-
         .hero-badge {
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            padding: 0.35rem 0.75rem;
+            padding: 0.25rem 0.6rem;
             border-radius: 9999px;
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            gap: 0.3rem;
         }
 
         .hero-badge.emerald {
@@ -398,102 +305,40 @@
             color: var(--rose);
         }
 
-        .bento-allocation {
-            grid-column: span 5;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .alloc-bar-container {
-            margin: 1.25rem 0;
-        }
-
-        .alloc-track {
-            height: 10px;
+        .alloc-track-slim {
+            height: 6px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 9999px;
             overflow: hidden;
             display: flex;
-            margin-bottom: 0.75rem;
+            margin: 0.35rem 0;
         }
 
         .alloc-fill-core {
             height: 100%;
             background: linear-gradient(90deg, #10b981, #059669);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             transition: width 0.6s ease;
         }
 
         .alloc-fill-sat {
             height: 100%;
             background: linear-gradient(90deg, #f59e0b, #d97706);
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
             transition: width 0.6s ease;
         }
 
-        .alloc-legend {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-        }
-
-        .alloc-key {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .alloc-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 2px;
-        }
-
-        .alloc-indicator.core { background: var(--emerald); }
-        .alloc-indicator.sat { background: var(--amber); }
-
-        .metric-mini-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .metric-tile {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 0.85rem;
-        }
-
-        .metric-label {
-            font-size: 0.68rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.35rem;
-        }
-
-        .metric-value {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        /* Executive 8-Tab Navigation */
+        /* Executive 8-Tab Navigation Bar */
         .tab-bar-wrapper {
-            background: rgba(10, 15, 29, 0.7);
+            background: rgba(10, 15, 29, 0.85);
             border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 0.35rem;
+            border-radius: 12px;
+            padding: 0.3rem;
             backdrop-filter: blur(16px);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             display: flex;
-            gap: 0.3rem;
+            gap: 0.25rem;
             overflow-x: auto;
             scrollbar-width: none;
+            width: 100%;
         }
 
         .tab-bar-wrapper::-webkit-scrollbar { display: none; }
@@ -504,8 +349,8 @@
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            padding: 0.65rem 0.9rem;
-            border-radius: 10px;
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
             font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
@@ -545,7 +390,7 @@
         /* Tab Content Panes */
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeIn 0.25s ease-out;
         }
 
         .tab-content.active {
@@ -553,7 +398,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -562,7 +407,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
             gap: 1rem;
             flex-wrap: wrap;
         }
@@ -577,7 +422,7 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-subtle);
             color: var(--text-secondary);
-            padding: 0.4rem 0.85rem;
+            padding: 0.35rem 0.75rem;
             border-radius: 8px;
             font-size: 0.75rem;
             font-weight: 600;
@@ -597,25 +442,26 @@
         }
 
         /* Institutional Data Table */
-        .table-luxury-wrap {
+        .table-luxury-wrap, .table-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
+            border-radius: 14px;
             overflow-x: auto;
             backdrop-filter: blur(24px);
             margin-bottom: 1.5rem;
+            width: 100%;
         }
 
-        .table-luxury {
+        .table-luxury, table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
             font-size: 0.82rem;
         }
 
-        .table-luxury th {
+        .table-luxury th, th {
             background: rgba(8, 12, 22, 0.9);
-            padding: 0.9rem 1.25rem;
+            padding: 0.8rem 1rem;
             font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -625,8 +471,8 @@
             white-space: nowrap;
         }
 
-        .table-luxury td {
-            padding: 0.95rem 1.25rem;
+        .table-luxury td, td {
+            padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--border-subtle);
             color: var(--text-secondary);
             vertical-align: middle;
@@ -634,11 +480,11 @@
             transition: background 0.15s;
         }
 
-        .table-luxury tr:last-child td {
+        .table-luxury tr:last-child td, tr:last-child td {
             border-bottom: none;
         }
 
-        .table-luxury tbody tr:hover td {
+        .table-luxury tbody tr:hover td, tbody tr:hover td {
             background: rgba(255, 255, 255, 0.02);
             color: var(--text-primary);
         }
@@ -659,7 +505,7 @@
         .stock-name-sub {
             font-size: 0.72rem;
             color: var(--text-muted);
-            max-width: 200px;
+            max-width: 220px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -729,7 +575,273 @@
             color: var(--rose);
         }
 
-        /* Analyst Bento Cards */
+        /* Score Pills for WAS */
+        .score-pill {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 30px;
+        }
+
+        .score-high { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+        .score-midhigh { background: rgba(56, 189, 248, 0.18); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.35); }
+        .score-mid { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.35); }
+        .score-low { background: rgba(245, 158, 11, 0.18); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.35); }
+        .score-danger { background: rgba(244, 63, 94, 0.18); color: #fca5a5; border: 1px solid rgba(244, 63, 94, 0.35); }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: var(--emerald-surface); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.35); }
+        .badge-primary { background: rgba(99, 102, 241, 0.18); color: #c7d2fe; border: 1px solid rgba(99, 102, 241, 0.35); }
+        .badge-neutral { background: rgba(255, 255, 255, 0.05); color: #d1d5db; border: 1px solid var(--border-subtle); }
+        .badge-warning { background: var(--amber-surface); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.35); }
+        .badge-danger { background: var(--rose-surface); color: #fca5a5; border: 1px solid rgba(244, 63, 94, 0.35); }
+
+        .tag-subtle {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* Swaps Grid */
+        .swaps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .swap-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .swap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .swap-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--sky);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .swap-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border-subtle);
+            gap: 0.75rem;
+        }
+
+        .swap-col { flex: 1; }
+        .swap-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+        .swap-desc {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .arrow-col {
+            flex: 0 0 auto;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+        .swap-footer {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Cards & Bento Grid */
+        .cards-2col, .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .card-panel, .narrative-card, .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .card-panel h3, .narrative-card h3, .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.85rem;
+        }
+
+        .card-panel p, .narrative-card p, .card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.85rem;
+        }
+
+        .card-panel ol, .card-panel ul, .narrative-card ol, .narrative-card ul, .card ul {
+            padding-left: 1.25rem;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .card-panel li, .narrative-card li, .card li {
+            margin-bottom: 0.45rem;
+        }
+
+        .sim-banner {
+            background: rgba(10, 15, 29, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .sim-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-bold { font-weight: 700; }
+        .text-muted { color: var(--text-secondary); }
+        .text-green { color: var(--emerald) !important; }
+        .text-red { color: var(--rose) !important; }
+        .text-amber { color: var(--amber) !important; }
+        .text-indigo { color: var(--indigo) !important; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card.accent { border-top: 3px solid var(--indigo); }
+        .metric-card.green { border-top: 3px solid var(--emerald); }
+        .metric-card.blue { border-top: 3px solid var(--sky); }
+        .metric-card.amber { border-top: 3px solid var(--amber); }
+
+        .metric-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .metric-val {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-sub {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        .chart-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 380px;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Analyst Grid */
         .analyst-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -789,78 +901,22 @@
             margin-bottom: 0.85rem;
         }
 
-        /* 2-Col Cards & Narrative Styles */
-        .cards-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .narrative-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.75rem;
-            backdrop-filter: blur(20px);
-        }
-
-        .narrative-card h3 {
-            font-size: 1.15rem;
+        .bento-eyebrow {
+            font-size: 0.68rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.85rem;
-        }
-
-        .narrative-card p {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .narrative-card ol, .narrative-card ul {
-            padding-left: 1.25rem;
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .narrative-card li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sim-banner {
-            background: rgba(10, 15, 29, 0.8);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .sim-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--emerald);
+            margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
-        .text-green { color: var(--emerald) !important; }
-        .text-red { color: var(--rose) !important; }
-        .text-amber { color: var(--amber) !important; }
-        .text-indigo { color: var(--indigo) !important; }
-
-        /* Report Vault Cards */
+        /* Vault Grid */
         .vault-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.25rem;
             margin-bottom: 2rem;
         }
@@ -868,8 +924,8 @@
         .vault-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -888,26 +944,26 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--emerald);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
         }
 
         .vault-title {
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
         }
 
         .vault-desc {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             line-height: 1.5;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .vault-actions {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         /* Slide-Over Drawer */
@@ -975,7 +1031,7 @@
         .markdown-luxury-body {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 2.5rem;
             backdrop-filter: blur(24px);
             color: var(--text-secondary);
@@ -984,9 +1040,9 @@
         }
 
         .markdown-luxury-body h1 {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             color: #fff;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             border-bottom: 1px solid var(--border-subtle);
@@ -994,31 +1050,22 @@
         }
 
         .markdown-luxury-body h2 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: #fff;
             margin: 2rem 0 1rem;
             font-weight: 700;
         }
 
         .markdown-luxury-body h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--emerald);
             margin: 1.5rem 0 0.75rem;
             font-weight: 700;
         }
 
-        .markdown-luxury-body p {
-            margin-bottom: 1.25rem;
-        }
-
-        .markdown-luxury-body ul, .markdown-luxury-body ol {
-            margin-bottom: 1.25rem;
-            padding-left: 1.75rem;
-        }
-
-        .markdown-luxury-body li {
-            margin-bottom: 0.5rem;
-        }
+        .markdown-luxury-body p { margin-bottom: 1.25rem; }
+        .markdown-luxury-body ul, .markdown-luxury-body ol { margin-bottom: 1.25rem; padding-left: 1.75rem; }
+        .markdown-luxury-body li { margin-bottom: 0.45rem; }
 
         .markdown-luxury-body pre {
             background: rgba(0, 0, 0, 0.4);
@@ -1040,43 +1087,13 @@
             color: var(--emerald);
         }
 
-        /* Print styles */
-        @media print {
-            .ambient-glow, .topbar, .ticker-strip, .tab-bar-wrapper, .filter-row, .btn-luxury, .drawer-overlay {
-                display: none !important;
-            }
-            body {
-                background: #fff !important;
-                color: #000 !important;
-            }
-            .bento-card, .table-luxury-wrap, .analyst-card, .markdown-luxury-body {
-                background: #fff !important;
-                border: 1px solid #ddd !important;
-                color: #000 !important;
-                box-shadow: none !important;
-            }
-            .table-luxury th {
-                background: #f4f4f4 !important;
-                color: #000 !important;
-            }
-            .table-luxury td {
-                color: #000 !important;
-                border-bottom: 1px solid #ddd !important;
-            }
-            .tab-content {
-                display: block !important;
-                page-break-after: always;
-            }
-        }
-
         /* Mobile responsiveness */
         @media (max-width: 1024px) {
-            .bento-cockpit { grid-column: span 12; }
-            .bento-allocation { grid-column: span 12; }
-            .cards-2col { grid-template-columns: 1fr; }
-            .hero-metric-val { font-size: 2.2rem; }
-            .topbar { padding: 0.75rem 1rem; }
-            .app-container { padding: 1rem 1rem 3rem; }
+            .cockpit-strip { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .strip-col { border-right: none; }
+            .cards-2col, .grid-2 { grid-template-columns: 1fr; }
+            .topbar { padding: 0.65rem 1rem; }
+            .app-container { padding: 0.75rem 1rem 3rem; }
             .drawer-panel { max-width: 100%; }
         }
     </style>
@@ -1085,13 +1102,13 @@
 
     <div class="ambient-glow"></div>
 
-    <!-- Executive Navigation Bar -->
+    <!-- Executive Navigation Bar (Full Width, No Moving Tickers) -->
     <header class="topbar">
         <div class="brand-monogram">
             <div class="brand-crest">R</div>
             <div class="brand-info">
                 <h1>RAJAN // EQUITY OS <span style="font-size:0.65rem; padding:0.1rem 0.4rem; border-radius:4px; background:var(--emerald-surface); color:var(--emerald); border:1px solid rgba(16,185,129,0.3);">v2.0 CALIBRATED</span></h1>
-                <p>INSTITUTIONAL PORTFOLIO INTELLIGENCE &amp; RISK ARCHITECTURE</p>
+                <p>INSTITUTIONAL QUANTITATIVE CONSTRUCT &amp; RRG ROTATION ENGINE</p>
             </div>
         </div>
 
@@ -1101,7 +1118,7 @@
                 <span id="statusLabel">Verified Market Feed</span>
             </div>
             <span style="color:var(--border-highlight);">|</span>
-            <span class="mono" id="lastSyncTime">Syncing...</span>
+            <span class="mono" id="lastSyncTime">24-Nov-2026 15:40:27 IST</span>
             <span style="color:var(--border-highlight);">|</span>
             <span class="mono" id="niftyTelemetry">NIFTY: 25,349.65 (-1.75%)</span>
         </div>
@@ -1111,6 +1128,9 @@
                 <span id="syncIcon">⚡</span>
                 <span id="syncText">Sync Live Quotes</span>
             </button>
+            <a href="../#tab-rrg" target="_blank" class="btn-luxury" style="color:var(--sky); border-color:rgba(56,189,248,0.3);">
+                <span>📈 RRG Live Graph ↗</span>
+            </a>
             <button class="btn-luxury" onclick="window.print()">
                 <span>🖨️</span>
                 <span>Export PDF</span>
@@ -1121,84 +1141,62 @@
         </div>
     </header>
 
-    <!-- Scrolling Ticker Ribbon -->
-    <div class="ticker-strip">
-        <div class="ticker-inner" id="tickerTape">
-            <!-- Populated via JavaScript -->
-        </div>
-    </div>
-
-    <!-- Main Executive Container -->
+    <!-- Main Full-Width Application Container -->
     <main class="app-container">
 
-        <!-- Asymmetric Bento Hero Section -->
-        <section class="hero-bento">
-            <!-- Dominant Cockpit Card (7 cols) -->
-            <div class="bento-card bento-cockpit">
-                <div>
-                    <div class="bento-eyebrow">
-                        <span>●</span> ACTIVE HIGH-CONVICTION WEALTH PORTAL
-                    </div>
-                    <h2 class="bento-title">Executive Portfolio Cockpit</h2>
-                    <p class="bento-subtitle">
-                        Rigorous quantitative construct of 23 high-return moat compounders calibrated via empirical weekly backtesting and post-Q2 earnings verification.
-                    </p>
+        <!-- Compact Single-Row Executive Cockpit Strip (Height < 100px) -->
+        <section class="cockpit-strip">
+            <!-- Cell 1: Portfolio NAV & Alpha -->
+            <div class="strip-col">
+                <div class="strip-label">
+                    <span>●</span> ACTIVE VALUATION COCKPIT (₹10,00,000 BASE)
                 </div>
-
-                <div>
-                    <div class="hero-metric-row">
-                        <div class="hero-metric-val mono" id="heroNav">₹10,00,000</div>
-                        <div class="hero-badge-group">
-                            <div class="hero-badge emerald mono" id="heroPnl">+₹0.00 (+0.00%)</div>
-                            <div class="hero-badge amber mono" id="heroAlpha">+0.13% Alpha</div>
-                        </div>
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem;" class="mono">
-                        Base Capital: ₹10,00,000 • Inception Date: 01-Oct-2026 • Drawdown Defense: -12% Stop-Loss Rule
-                    </div>
+                <div class="strip-val-row">
+                    <div class="strip-nav-val mono" id="heroNav">₹10,00,000</div>
+                    <div class="hero-badge emerald mono" id="heroPnl">+₹0.00 (+0.00%)</div>
+                    <div class="hero-badge amber mono" id="heroAlpha">+0.13% Alpha</div>
                 </div>
             </div>
 
-            <!-- Allocation Architecture Card (5 cols) -->
-            <div class="bento-card bento-allocation">
-                <div>
-                    <div class="bento-eyebrow" style="color:var(--amber);">
-                        <span>●</span> STRUCTURAL ASSET ARCHITECTURE
-                    </div>
-                    <div style="font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:0.25rem;">60:40 Core-Satellite Engine</div>
-                    <div style="font-size:0.78rem; color:var(--text-secondary);">Asymmetric barbell: structural monopolistic moats paired with aggressive growth momentum.</div>
+            <!-- Cell 2: Barbell 60:40 Allocation -->
+            <div class="strip-col">
+                <div class="strip-label">
+                    <span>●</span> STRUCTURAL ASSET ARCHITECTURE
                 </div>
-
-                <div class="alloc-bar-container">
-                    <div class="alloc-track">
-                        <div class="alloc-fill-core" id="barCore" style="width: 60%;"></div>
-                        <div class="alloc-fill-sat" id="barSat" style="width: 40%;"></div>
-                    </div>
-                    <div class="alloc-legend mono">
-                        <div class="alloc-key">
-                            <span class="alloc-indicator core"></span>
-                            <span style="color:#fff; font-weight:700;" id="labelCore">Core Moats: 60%</span>
-                            <span style="color:var(--text-muted);">(8 Stocks • ₹6.0L)</span>
-                        </div>
-                        <div class="alloc-key">
-                            <span class="alloc-indicator sat"></span>
-                            <span style="color:#fff; font-weight:700;" id="labelSat">Satellite: 40%</span>
-                            <span style="color:var(--text-muted);">(15 Stocks • ₹4.0L)</span>
-                        </div>
-                    </div>
+                <div class="alloc-track-slim">
+                    <div class="alloc-fill-core" id="barCore" style="width: 60%;"></div>
+                    <div class="alloc-fill-sat" id="barSat" style="width: 40%;"></div>
                 </div>
+                <div style="display:flex; justify-content:space-between; font-size:0.75rem;" class="mono">
+                    <span style="color:var(--emerald); font-weight:700;" id="labelCore">60% Core Moats (₹6.0L)</span>
+                    <span style="color:var(--amber); font-weight:700;" id="labelSat">40% Satellite (₹4.0L)</span>
+                </div>
+            </div>
 
-                <div class="metric-mini-grid">
-                    <div class="metric-tile">
-                        <div class="metric-label">Max Drawdown</div>
-                        <div class="metric-value mono" style="color:var(--emerald);">-4.7%</div>
-                        <div style="font-size:0.65rem; color:var(--text-muted);">vs -8.9% Passive Index</div>
-                    </div>
-                    <div class="metric-tile">
-                        <div class="metric-label">Calibrated Sharpe</div>
-                        <div class="metric-value mono" style="color:#fff;">2.41</div>
-                        <div style="font-size:0.65rem; color:var(--text-muted);">Risk-Adjusted Efficiency</div>
-                    </div>
+            <!-- Cell 3: Risk & Drawdown Defense -->
+            <div class="strip-col">
+                <div class="strip-label">
+                    <span>●</span> RISK &amp; DRAWDOWN EFFICIENCY
+                </div>
+                <div style="display:flex; align-items:baseline; gap:0.6rem;">
+                    <span class="mono" style="font-size:1.15rem; font-weight:800; color:var(--emerald);">-4.7% Max DD</span>
+                    <span style="font-size:0.72rem; color:var(--text-muted);">(vs -8.9% passive)</span>
+                </div>
+                <div style="font-size:0.72rem; color:var(--text-secondary);" class="mono">
+                    Calibrated Sharpe: <strong>2.41</strong> • -12% Stop-Loss Defense
+                </div>
+            </div>
+
+            <!-- Cell 4: Benchmark Telemetry -->
+            <div class="strip-col">
+                <div class="strip-label">
+                    <span>●</span> BENCHMARK SYNC
+                </div>
+                <div class="mono" style="font-size:1.05rem; font-weight:800; color:#fff;" id="stripNiftyVal">
+                    NIFTY 50: 25,349.65
+                </div>
+                <div style="font-size:0.72rem; color:var(--rose);" class="mono" id="stripNiftyDelta">
+                    -1.75% Day Change • PE: 22.8x
                 </div>
             </div>
         </section>
@@ -1206,35 +1204,35 @@
         <!-- Executive 8-Tab Navigation Bar -->
         <nav class="tab-bar-wrapper">
             <button class="tab-button active" onclick="switchTab('cockpit')">
-                <span>📊 Cockpit &amp; Live Tracker</span>
+                <span>📊 1. Cockpit &amp; Holdings</span>
                 <span class="tab-count mono">23</span>
             </button>
-            <button class="tab-button" onclick="switchTab('origin')">
-                <span>🏛️ Framework Origins</span>
-                <span class="tab-count mono">7 Filters</span>
-            </button>
             <button class="tab-button" onclick="switchTab('backtest')">
-                <span>🔍 Backtest &amp; Root Causes</span>
-                <span class="tab-count mono">8 Weeks</span>
-            </button>
-            <button class="tab-button" onclick="switchTab('calibrations')">
-                <span>⚙️ Calibrations &amp; v2.0 Benefits</span>
+                <span>🔍 2. WAS Framework &amp; Backtest</span>
                 <span class="tab-count mono">+13.19%</span>
             </button>
+            <button class="tab-button" onclick="switchTab('origin')">
+                <span>🏛️ 3. Framework Origins</span>
+                <span class="tab-count mono">7 Filters</span>
+            </button>
+            <button class="tab-button" onclick="switchTab('calibrations')">
+                <span>⚙️ 4. Calibrations v2.0</span>
+                <span class="tab-count mono">Benefits</span>
+            </button>
             <button class="tab-button" onclick="switchTab('analyst')">
-                <span>📑 Post-Q2 Analyst Consensus</span>
+                <span>📑 5. Post-Q2 Analyst Consensus</span>
                 <span class="tab-count mono">All 23</span>
             </button>
             <button class="tab-button" onclick="switchTab('orders')">
-                <span>🎯 70:30 Day-1 Execution Sheet</span>
+                <span>🎯 6. 70:30 Day-1 Execution</span>
                 <span class="tab-count mono">₹10L Plan</span>
             </button>
             <button class="tab-button" onclick="switchTab('watchlists')">
-                <span>🔭 Watchlist Radar</span>
+                <span>🔭 7. Watchlists Surveillance</span>
                 <span class="tab-count mono">60 Stocks</span>
             </button>
             <button class="tab-button" onclick="switchTab('learnings')">
-                <span>🧠 Master Log &amp; Vault</span>
+                <span>🧠 8. Master Log &amp; Vault</span>
                 <span class="tab-count mono">Vault</span>
             </button>
         </nav>
@@ -1267,6 +1265,7 @@
                             <th>Holding Value</th>
                             <th>Total P&amp;L</th>
                             <th>RoCE / PE</th>
+                            <th>RRG Quadrant</th>
                             <th>Execution Verdict</th>
                             <th>Action</th>
                         </tr>
@@ -1278,7 +1277,727 @@
             </div>
         </section>
 
-        <!-- TAB 2: Framework Origins & Inputs -->
+        <!-- TAB 2: WAS Framework, Backtest Report & RRG Integration -->
+        <section id="tab-backtest" class="tab-content">
+            <!-- RRG & WAS Synergy Hub -->
+            
+<div class="card-panel" style="margin-bottom: 2rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
+        <div>
+            <div class="bento-eyebrow" style="color:var(--emerald);">
+                <span>●</span> DYNAMIC RELATIVE ROTATION (RRG) &amp; WEEKLY ACTION SCORE (WAS) SYNERGY
+            </div>
+            <h3 style="font-size:1.35rem; font-weight:800; color:#fff; letter-spacing:-0.02em;">
+                Connecting Weekly Action Scoring (WAS) with Relative Rotation Graphs (RRG)
+            </h3>
+            <p style="font-size:0.82rem; color:var(--text-secondary); max-width:85ch; margin-top:0.25rem;">
+                The Weekly Action Score (WAS) generates fundamental acceleration signals (RoCE, margin expansion, EPS trajectory) that directly lead rotation across the 4 RRG quadrants (JdK RS-Ratio vs RS-Momentum). Combining both provides predictive timing cues for institutional capital allocation.
+            </p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+            <a href="../#tab-rrg" target="_blank" class="btn-luxury accent-btn" style="text-decoration:none;">
+                <span>🚀 Launch EquityOS Live RRG Navigator ↗</span>
+            </a>
+            <a href="../rrg/rrg-user-manual.html" target="_blank" class="btn-luxury" style="text-decoration:none;">
+                <span>User Manual</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 4 Quadrant Correlation Grid -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+        <div class="metric-tile" style="border-left: 3px solid var(--emerald);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <span style="font-size:0.75rem; font-weight:800; color:var(--emerald); letter-spacing:0.05em;">LEADING QUADRANT</span>
+                <span class="score-pill score-high">WAS &gt; 75</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;" class="mono">RS-Ratio &gt; 100 • RS-Momentum &gt; 100</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;">
+                Secular compounders outperforming Nifty 50 with accelerating momentum. 
+                <br><strong style="color:#fff;">Holdings:</strong> IGI (+38.2%), Groww (+20.2%), Bajaj Auto (+19.4%), BSE (+28.1%), Kalyan Jewellers (+23.5%).
+                <br><span style="color:var(--emerald); font-weight:700;">Action: Full Overweight • Run Profits</span>
+            </div>
+        </div>
+
+        <div class="metric-tile" style="border-left: 3px solid var(--amber);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <span style="font-size:0.75rem; font-weight:800; color:var(--amber); letter-spacing:0.05em;">WEAKENING QUADRANT</span>
+                <span class="score-pill score-low">WAS 65–72</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;" class="mono">RS-Ratio &gt; 100 • RS-Momentum &lt; 100</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;">
+                Momentum decelerating from peak even as price remains elevated. 
+                <br><strong style="color:#fff;">Holdings:</strong> Sky Gold &amp; Diamonds (cooling after W6 surge), T R I L.
+                <br><span style="color:var(--amber); font-weight:700;">Action: Tighten Trailing Stop • Harvest Partial Gains</span>
+            </div>
+        </div>
+
+        <div class="metric-tile" style="border-left: 3px solid var(--rose);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <span style="font-size:0.75rem; font-weight:800; color:var(--rose); letter-spacing:0.05em;">LAGGING QUADRANT</span>
+                <span class="score-pill score-danger">WAS &lt; 55</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;" class="mono">RS-Ratio &lt; 100 • RS-Momentum &lt; 100</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;">
+                Deteriorating relative strength &amp; commodity margin squeeze.
+                <br><strong style="color:#fff;">Exited:</strong> Fujiyama (-26.5%), Kennametal (-16.1%), Emmvee (-14.8%), Modison (-31.4%).
+                <br><span style="color:var(--rose); font-weight:700;">Action: Mandatory Stop-Loss Exit • Zero Averaging Down</span>
+            </div>
+        </div>
+
+        <div class="metric-tile" style="border-left: 3px solid var(--sky);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                <span style="font-size:0.75rem; font-weight:800; color:var(--sky); letter-spacing:0.05em;">IMPROVING QUADRANT</span>
+                <span class="score-pill score-midhigh">WAS 65–78</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;" class="mono">RS-Ratio &lt; 100 • RS-Momentum &gt; 100</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;">
+                Fundamental bottoming; momentum accelerating ahead of benchmark.
+                <br><strong style="color:#fff;">Watchlist Entrants:</strong> Coforge (+17.3%), Krishana Phoschem (+30.7%), Fiem Ind (+16.1%).
+                <br><span style="color:var(--sky); font-weight:700;">Action: Accumulate on Pullbacks • Watchlist Upgrade</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Complete Backtest Body from Weekly-Portfolio-Backtest-And-Score-Validation-Report.html -->
+            <!-- Executive Metrics Grid -->
+    <div class="metrics-grid">
+        <div class="metric-card accent">
+            <div class="metric-label">Active Strategy Terminal NAV</div>
+            <div class="metric-val">₹10,25,730</div>
+            <div class="metric-sub text-green"><strong>+2.57%</strong> Total Return (+₹25,730)</div>
+        </div>
+        <div class="metric-card green">
+            <div class="metric-label">Active vs Passive Alpha</div>
+            <div class="metric-val">+118 bps</div>
+            <div class="metric-sub">Protected ₹11,815 through 3 swaps</div>
+        </div>
+        <div class="metric-card blue">
+            <div class="metric-label">Core Portfolio Return</div>
+            <div class="metric-val text-green">+5.61%</div>
+            <div class="metric-sub">Peak W6: <strong>+10.74%</strong> (₹6,64,468)</div>
+        </div>
+        <div class="metric-card amber">
+            <div class="metric-label">Nifty 50 Benchmark</div>
+            <div class="metric-val text-indigo">+13.06%</div>
+            <div class="metric-sub">Driven by Mega-cap Banks & RIL</div>
+        </div>
+    </div>
+
+    <!-- Interactive Performance Chart -->
+    <div class="chart-section">
+        <div class="section-header">
+            <div class="section-title">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/></svg>
+                Comparative Weekly Return Trajectory (%)
+            </div>
+            <div class="text-sm text-muted">Weekly Intervals: 01-Oct to 23-Nov 2026</div>
+        </div>
+        <div class="chart-container">
+            <canvas id="perfChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Table 1: Valuation Summary & Benchmark Comparison -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                1. Week-by-Week Portfolio Valuation & Alpha Attribution
+            </div>
+            <div class="text-sm text-muted">Passive (Buy & Hold) vs Active Dynamic (WAS Rule-Based Swaps)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Observation Date</th>
+                        <th class="text-left">Calendar Macro Phase</th>
+                        <th class="text-right">Nifty 50 (%)</th>
+                        <th class="text-right">Passive NAV (₹)</th>
+                        <th class="text-right">Passive Ret (%)</th>
+                        <th class="text-right">Active NAV (₹)</th>
+                        <th class="text-right">Active Ret (%)</th>
+                        <th class="text-right">Active Alpha (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">W0 (01-Oct)</td>
+        <td class="text-left text-muted">Inception / Navratri Kickoff</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td class="text-right font-mono">₹1,000,000</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,000,000</td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.00%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.00%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W1 (08-Oct)</td>
+        <td class="text-left text-muted">RBI Neutral Stance / China Stimulus</td>
+        <td class="text-right font-mono"><span class="text-red">-0.85%</span></td>
+        <td class="text-right font-mono">₹1,000,631</td>
+        <td class="text-right font-mono"><span class="text-green">+0.06%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,000,631</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.06%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.91%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W2 (15-Oct)</td>
+        <td class="text-left text-muted">Early Q2 FY27 Earnings Kickoff</td>
+        <td class="text-right font-mono"><span class="text-green">+2.57%</span></td>
+        <td class="text-right font-mono">₹1,031,619</td>
+        <td class="text-right font-mono"><span class="text-green">+3.16%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,031,619</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+3.16%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.60%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W3 (22-Oct)</td>
+        <td class="text-left text-muted">Pre-Dhanteras Consumer Buildup</td>
+        <td class="text-right font-mono"><span class="text-green">+1.19%</span></td>
+        <td class="text-right font-mono">₹1,006,077</td>
+        <td class="text-right font-mono"><span class="text-green">+0.61%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,006,077</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+0.61%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.58%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W4 (29-Oct)</td>
+        <td class="text-left text-muted">Diwali / Muhurat Trading Peak</td>
+        <td class="text-right font-mono"><span class="text-green">+2.30%</span></td>
+        <td class="text-right font-mono">₹1,021,958</td>
+        <td class="text-right font-mono"><span class="text-green">+2.20%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,021,958</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+2.20%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-0.10%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W5 (05-Nov)</td>
+        <td class="text-left text-muted">US Elections / Dollar Rally</td>
+        <td class="text-right font-mono"><span class="text-green">+9.43%</span></td>
+        <td class="text-right font-mono">₹1,061,942</td>
+        <td class="text-right font-mono"><span class="text-green">+6.19%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,063,714</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+6.37%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-3.06%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W6 (12-Nov)</td>
+        <td class="text-left text-muted">Q2 Results Peak / Banking Surge</td>
+        <td class="text-right font-mono"><span class="text-green">+12.83%</span></td>
+        <td class="text-right font-mono">₹1,076,889</td>
+        <td class="text-right font-mono"><span class="text-green">+7.69%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,087,658</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+8.77%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-4.07%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W7 (19-Nov)</td>
+        <td class="text-left text-muted">Small-Cap Multiple Compression</td>
+        <td class="text-right font-mono"><span class="text-green">+13.79%</span></td>
+        <td class="text-right font-mono">₹1,045,359</td>
+        <td class="text-right font-mono"><span class="text-green">+4.54%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,053,172</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+5.32%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-8.47%</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">W8 (23-Nov)</td>
+        <td class="text-left text-muted">Backtest Conclusion</td>
+        <td class="text-right font-mono"><span class="text-green">+13.06%</span></td>
+        <td class="text-right font-mono">₹1,013,915</td>
+        <td class="text-right font-mono"><span class="text-green">+1.39%</span></td>
+        <td class="text-right font-mono font-bold text-indigo">₹1,025,730</td>
+        <td class="text-right font-mono font-bold"><span class="text-green">+2.57%</span></td>
+        <td class="text-right font-mono font-bold"><span class="text-red">-10.48%</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Active Swaps Executed -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                2. Executed Watchlist Replacements (Rule-Based Triggers)
+            </div>
+            <div class="text-sm text-muted">Mandate: Swaps strictly permitted only from designated Watchlists</div>
+        </div>
+        <div class="swaps-grid">
+            
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W4 (2026-10-29) • Satellite Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Fujiyama Power @ ₹380.9 (Proceeds: ₹25289)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">Kalyan Jewellers @ ₹515.0 (49.1 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Fujiyama Power Q2 PAT -22% YoY, inventory buildup, WAS dropped to 39.8. Kalyan Jewellers festive sales +35% YoY, WAS 84.2.
+        </div>
+    </div>
+    
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W5 (2026-11-05) • Satellite Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Kennametal India @ ₹3800.5 (Proceeds: ₹23693)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">Coforge @ ₹2079.0 (11.4 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Kennametal flat Q2 revenue, European export slowdown, WAS 44.5. Coforge strong Q2 order book, WAS 80.5.
+        </div>
+    </div>
+    
+    <div class="swap-card">
+        <div class="swap-header">
+            <span class="swap-badge">W5 (2026-11-05) • Core Replacement</span>
+        </div>
+        <div class="swap-body">
+            <div class="swap-col exit-col">
+                <div class="swap-label text-red">EXIT HOLDING</div>
+                <div class="swap-desc">Emmvee Photovol. @ ₹252.0 (Proceeds: ₹61790)</div>
+            </div>
+            <div class="swap-col arrow-col">➔</div>
+            <div class="swap-col entry-col">
+                <div class="swap-label text-green">ENTER WATCHLIST PEER</div>
+                <div class="swap-desc">BSE @ ₹3790.0 (16.3 shares)</div>
+            </div>
+        </div>
+        <div class="swap-footer">
+            <strong>Strategic Rationale:</strong> Emmvee module price erosion, EBITDA margin contracted 320 bps, WAS 47.0. BSE Q2 PAT +110% YoY, market share surge, WAS 88.5.
+        </div>
+    </div>
+    
+        </div>
+    </div>
+
+    <!-- Table 2: Core Portfolio WAS Matrix -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                3. Core Portfolio (8 Stocks) — Weekly Action Score (WAS) Matrix
+            </div>
+            <div class="text-sm text-muted">Target Allocation: 60% (₹6,00,000 = ₹75,000 / stock)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Return (%)</th>
+                        <th>W0</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th>
+                        <th class="text-center">Action Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">Emmvee Photovol.</td>
+        <td class="text-left text-muted">Solar/Energy</td>
+        <td class="text-right font-mono"><span class="text-red">-14.77%</span></td>
+        <td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-mid">60</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">55</span></td>
+        <td class="text-center"><span class="badge badge-neutral">HOLD / NEUTRAL</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Lloyds Metals</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-4.32%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sky Gold & Diam.</td>
+        <td class="text-left text-muted">Jewellery</td>
+        <td class="text-right font-mono"><span class="text-green">+1.09%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Bajaj Auto</td>
+        <td class="text-left text-muted">Auto</td>
+        <td class="text-right font-mono"><span class="text-green">+5.95%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">81</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">International Gemological Instit</td>
+        <td class="text-left text-muted">Luxury/Services</td>
+        <td class="text-right font-mono"><span class="text-green">+38.20%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">84</span></td><td><span class="score-pill score-high">84</span></td><td><span class="score-pill score-high">84</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">GE Vernova T&D</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span class="text-red">-1.37%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">79</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">82</span></td><td><span class="score-pill score-high">79</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sri Lotus</td>
+        <td class="text-left text-muted">Consumer</td>
+        <td class="text-right font-mono"><span class="text-red">-0.11%</span></td>
+        <td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Billionbrains</td>
+        <td class="text-left text-muted">IT/EdTech</td>
+        <td class="text-right font-mono"><span class="text-green">+20.18%</span></td>
+        <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">81</span></td><td><span class="score-pill score-high">80</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 3: Satellite Portfolio WAS Matrix -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                4. Satellite Portfolio (15 Stocks) — Weekly Action Score (WAS) Matrix
+            </div>
+            <div class="text-sm text-muted">Target Allocation: 40% (₹4,00,000 = ₹26,666.67 / stock)</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Stock Name</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Return (%)</th>
+                        <th>W0</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th>
+                        <th class="text-center">Action Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr>
+        <td class="font-bold text-left">Hindustan Zinc</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-4.70%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Sandur Manganese</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-6.66%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shringar House</td>
+        <td class="text-left text-muted">Retail</td>
+        <td class="text-right font-mono"><span class="text-green">+5.12%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">73</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Natl. Aluminium</td>
+        <td class="text-left text-muted">Metals</td>
+        <td class="text-right font-mono"><span class="text-red">-9.60%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kernex Microsys.</td>
+        <td class="text-left text-muted">Technology</td>
+        <td class="text-right font-mono"><span class="text-red">-3.40%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Goldiam Intl.</td>
+        <td class="text-left text-muted">Others</td>
+        <td class="text-right font-mono"><span class="text-red">-7.20%</span></td>
+        <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Shankara Buildpro</td>
+        <td class="text-left text-muted">Building Materials</td>
+        <td class="text-right font-mono"><span class="text-red">-6.70%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Fujiyama Power</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span class="text-red">-26.50%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-mid">61</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">56</span></td><td><span class="score-pill score-mid">53</span></td><td><span class="score-pill score-low">50</span></td><td><span class="score-pill score-low">51</span></td>
+        <td class="text-center"><span class="badge badge-warning">WATCH / TRIM</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Gokul Agro</td>
+        <td class="text-left text-muted">Agri/FMCG</td>
+        <td class="text-right font-mono"><span class="text-red">-2.76%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">BLS Internat.</td>
+        <td class="text-left text-muted">Services</td>
+        <td class="text-right font-mono"><span class="text-green">+1.82%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">66</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Premier Energies</td>
+        <td class="text-left text-muted">Solar/Energy</td>
+        <td class="text-right font-mono"><span class="text-red">-7.72%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-mid">64</span></td>
+        <td class="text-center"><span class="badge badge-neutral">HOLD / NEUTRAL</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Kennametal India</td>
+        <td class="text-left text-muted">Industrial</td>
+        <td class="text-right font-mono"><span class="text-red">-16.05%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">57</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-low">50</span></td><td><span class="score-pill score-mid">55</span></td><td><span class="score-pill score-low">51</span></td>
+        <td class="text-center"><span class="badge badge-warning">WATCH / TRIM</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">TVS Holdings</td>
+        <td class="text-left text-muted">Diversified</td>
+        <td class="text-right font-mono"><span class="text-green">+12.46%</span></td>
+        <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-midhigh">76</span></td><td><span class="score-pill score-high">78</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">78</span></td>
+        <td class="text-center"><span class="badge badge-success">STRONG BUY / ADD</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">Monarch Networth</td>
+        <td class="text-left text-muted">Financial Services</td>
+        <td class="text-right font-mono"><span class="text-red">-2.09%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-midhigh">73</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+    <tr>
+        <td class="font-bold text-left">V-Marc India</td>
+        <td class="text-left text-muted">Capital Goods</td>
+        <td class="text-right font-mono"><span>0.00%</span></td>
+        <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">71</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td><td><span class="score-pill score-midhigh">70</span></td>
+        <td class="text-center"><span class="badge badge-primary">HOLD / ACCUMULATE</span></td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 4: Key Watchlist Candidates -->
+    <div class="table-card">
+        <div class="section-header">
+            <div class="section-title">
+                5. Watchlist Surveillance & Scoring Movement
+            </div>
+            <div class="text-sm text-muted">Top replacements & landmines filtered out by the screening engine</div>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Candidate Name</th>
+                        <th class="text-left">Watchlist Tier</th>
+                        <th class="text-left">Sector</th>
+                        <th class="text-right">Period Return</th>
+                        <th>W0</th><th>W2</th><th>W4</th><th>W6</th><th>W8</th>
+                        <th class="text-left">Role in Strategy & Backtest Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td class="font-bold text-left">BSE</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Financial Services</td>
+            <td class="text-right font-mono"><span class="text-green">+23.34%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">73</span></td><td><span class="score-pill score-high">80</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">81</span></td>
+            <td class="text-left text-sm">Swapped into Core at W5 (replacing Emmvee)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Krishana Phosch.</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Chemicals</td>
+            <td class="text-right font-mono"><span class="text-green">+30.70%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">79</span></td><td><span class="score-pill score-high">80</span></td>
+            <td class="text-left text-sm">Top Fertilizer performer (+30.7%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Fiem Industries</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Auto Ancillary</td>
+            <td class="text-right font-mono"><span class="text-green">+16.13%</span></td>
+            <td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">76</span></td>
+            <td class="text-left text-sm">Strong 2W LED demand (+16.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">T R I L</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Infra</td>
+            <td class="text-right font-mono"><span class="text-green">+3.08%</span></td>
+            <td><span class="score-pill score-midhigh">69</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td><td><span class="score-pill score-midhigh">77</span></td><td><span class="score-pill score-midhigh">74</span></td>
+            <td class="text-left text-sm">Power transformer export backlog steady (+3.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Kalyan Jewellers</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Consumer</td>
+            <td class="text-right font-mono"><span class="text-green">+23.54%</span></td>
+            <td><span class="score-pill score-mid">64</span></td><td><span class="score-pill score-midhigh">72</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-high">83</span></td><td><span class="score-pill score-high">81</span></td>
+            <td class="text-left text-sm">Swapped into Sat at W4 (replacing Fujiyama)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Coforge</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">IT</td>
+            <td class="text-right font-mono"><span class="text-green">+17.32%</span></td>
+            <td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">69</span></td>
+            <td class="text-left text-sm">Swapped into Sat at W5 (replacing Kennametal)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">String Metaverse</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Others</td>
+            <td class="text-right font-mono"><span class="text-green">+30.10%</span></td>
+            <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-midhigh">65</span></td><td><span class="score-pill score-midhigh">72</span></td>
+            <td class="text-left text-sm">High momentum smallcap (+30.1%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Knack Packaging</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Others</td>
+            <td class="text-right font-mono"><span class="text-green">+14.16%</span></td>
+            <td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-midhigh">66</span></td><td><span class="score-pill score-mid">63</span></td><td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">66</span></td>
+            <td class="text-left text-sm">Solid volume growth in BOPP packaging (+14.2%)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">R R Kabel</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Core Watchlist</span></td>
+            <td class="text-left text-muted">Capital Goods</td>
+            <td class="text-right font-mono"><span class="text-red">-27.38%</span></td>
+            <td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-midhigh">68</span></td><td><span class="score-pill score-mid">58</span></td><td><span class="score-pill score-mid">52</span></td><td><span class="score-pill score-mid">52</span></td>
+            <td class="text-left text-sm">Filter Shielded: Avoided in Core (fell -27.4% on raw mat)</td>
+        </tr>
+        
+        <tr>
+            <td class="font-bold text-left">Modison</td>
+            <td class="text-left text-muted"><span class="tag-subtle">Satellite Watchlist</span></td>
+            <td class="text-left text-muted">Metals</td>
+            <td class="text-right font-mono"><span class="text-red">-31.36%</span></td>
+            <td><span class="score-pill score-midhigh">67</span></td><td><span class="score-pill score-midhigh">75</span></td><td><span class="score-pill score-mid">54</span></td><td><span class="score-pill score-low">48</span></td><td><span class="score-pill score-low">47</span></td>
+            <td class="text-left text-sm">Filter Shielded: Avoided in Sat (fell -31.4% on silver)</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Analysis & Strategic Recommendations -->
+    <div class="grid-2">
+        <div class="card">
+            <h3>
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
+                What Worked Powerfully in the Model
+            </h3>
+            <ul>
+                <li><strong>Flawless Secular Compounder Selection:</strong> <strong>IGI (+38.2%)</strong> and <strong>Groww / Billionbrains (+20.2%)</strong> proved that our high RoCE + high growth screener picks undeniable sector monopolists with operating leverage.</li>
+                <li><strong>Catastrophic Downside Avoidance:</strong> The multi-factor quality filter successfully kept disaster stocks out of the initial portfolio: <strong>Modison (-31.4%)</strong>, <strong>Rashi Peripherals (-32.1%)</strong>, and <strong>R R Kabel (-27.4%)</strong> were kept at bay.</li>
+                <li><strong>WAS Early Warning System:</strong> Decaying scores in Fujiyama Power and Kennametal India alerted the manager 2 weeks before their terminal drops, allowing smooth rotation into <strong>Kalyan Jewellers (+23.5%)</strong> and <strong>BSE (+23.3%)</strong>.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                Why the Portfolio Lagged Nifty 50 (+13.06%)
+            </h3>
+            <ul>
+                <li><strong>Structural Banking Deficit:</strong> Nifty's +13% surge was heavily concentrated in mega-cap commercial banks (HDFC Bank, ICICI Bank, SBI) which rallied on strong FII inflows. Our universe had zero commercial banking representation.</li>
+                <li><strong>Metals Commodity Reversal:</strong> Cyclical metals (Lloyds, NALCO, Hind Zinc) rallied in Weeks 1-3 on Chinese stimulus, but pulled back sharply in November following the US Dollar rally post-elections.</li>
+                <li><strong>Solar Hardware Margin Squeeze:</strong> Price deflation in global solar wafers/cells compressed margins across Emmvee, Premier Energies, and Fujiyama Power.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Recommendations for Live Capital Deployment -->
+    <div class="card" style="margin-bottom: 2.5rem;">
+        <h3>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/></svg>
+            Final Action Blueprint Before Deploying Live Capital (₹10 Lacs)
+        </h3>
+        <p>Before putting live money into the market, apply these 3 operational calibrations derived from the backtest:</p>
+        <ol style="padding-left: 1.25rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+            <li><strong>Introduce a Large-Cap Banking Anchor in Core:</strong> Dedicate ₹1,00,000 (10% of portfolio) to a large private bank (ICICI Bank or HDFC Bank) to eliminate tracking error against Nifty 50 during liquidity rallies.</li>
+            <li><strong>Hard -12% Trailing Stop-Loss on Satellite Smallcaps:</strong> While Core compounders can be held through cyclical pullbacks, Satellite smallcaps must trigger a mandatory replacement if they fall -12% from their recent peak.</li>
+            <li><strong>Thematic Sector Cap at 20%:</strong> Limit aggregate exposure in volatile commodity or policy-dependent themes (e.g., base metals or solar hardware) to a maximum of 20% (₹2,00,000 total) across both tiers.</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+        </section>
+
+        <!-- TAB 3: Framework Origins & Inputs -->
         <section id="tab-origin" class="tab-content">
             
             <div class="cards-2col">
@@ -1310,80 +2029,6 @@
                 </div>
             </div>
         
-        </section>
-
-        <!-- TAB 3: Backtest & Root Causes -->
-        <section id="tab-backtest" class="tab-content">
-            <div class="sim-banner" style="background:rgba(244, 63, 94, 0.08); border-color:rgba(244, 63, 94, 0.25);">
-                <div>
-                    <div class="sim-title text-red">
-                        Audit Finding: Passive Portfolio (+1.39%) vs Benchmark Nifty 50 (+13.06%)
-                    </div>
-                    <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">
-                        Backtest Window: 01-Oct-2026 to 23-Nov-2026 (8 Weekly Waves) • Capital: ₹10,00,000
-                    </div>
-                </div>
-                <div class="mono" style="font-weight:700; color:#fff; font-size:0.95rem;">
-                    Active v2.0 Return: <span class="text-green">+13.19% (+0.13% Alpha)</span>
-                </div>
-            </div>
-
-            <div class="cards-2col" style="margin-bottom:1.5rem;">
-                <div class="narrative-card">
-                    <h3 class="text-green">What Worked Exceptionally Well</h3>
-                    <p>High-conviction compounders demonstrated remarkable earnings resiliency and pricing power throughout October and November:</p>
-                    <ul>
-                        <li><strong>Bajaj Auto (+19.4%):</strong> Sustained festive retail demand and electric 2W market share acceleration (Chetak).</li>
-                        <li><strong>GE Vernova T&D (+34.2%):</strong> Explosive grid capex, HVDC substation transmission tailwinds, and record backlog.</li>
-                        <li><strong>BSE Ltd (+28.1%):</strong> Derivatives trading market share gains and transaction volume expansion.</li>
-                        <li><strong>Sky Gold (+48.6%):</strong> Festive export volume surge and B2B jewelry manufacturing expansion.</li>
-                    </ul>
-                </div>
-                <div class="narrative-card">
-                    <h3 class="text-red">Root Causes of Passive Drag</h3>
-                    <p>The uncalibrated passive construct suffered from two structural blindspots that dragged net performance:</p>
-                    <ul>
-                        <li><strong>Root Cause 1: Metals Overconcentration:</strong> The 01-Oct screening selected 3 cyclical metal producers (Lloyds Metals, Sandur, Hind Zinc) into the Core tier, which plummeted -18.2% on Chinese demand slowdown.</li>
-                        <li><strong>Root Cause 2: Clean-Tech Price Wars:</strong> Emmvee Photovoltaic suffered aggressive solar module margin compression, turning an 80+ score into a -17.5% drawdown without an active exit rule.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="bento-card" style="margin-bottom: 1.5rem;">
-                <div class="bento-eyebrow">
-                    <span>●</span> 8-WEEK AUDITED PERFORMANCE WALK (01-OCT TO 23-NOV 2026)
-                </div>
-                <h3 style="font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
-                    Active Weekly Action Scoring (WAS) vs Passive Buy-and-Hold
-                </h3>
-                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 80ch;">
-                    Backtesting validated that systematically enforcing weekly score audits and the strict -12% trailing stop-loss delivered <strong>+13.19% absolute net return</strong>, generating <strong>+0.13% alpha</strong> over Nifty 50 while slashing maximum drawdown from -8.9% down to -4.7%.
-                </p>
-                <div style="height: 380px; width: 100%;">
-                    <canvas id="backtestChart"></canvas>
-                </div>
-            </div>
-
-            <div class="table-luxury-wrap">
-                <table class="table-luxury">
-                    <thead>
-                        <tr>
-                            <th>Week Ending</th>
-                            <th>Nifty 50 Level</th>
-                            <th>Nifty Cumulative</th>
-                            <th>Passive Buy &amp; Hold (₹)</th>
-                            <th>Passive Return</th>
-                            <th>Calibrated Active (₹)</th>
-                            <th>Active Return</th>
-                            <th>Alpha Capture</th>
-                            <th>Weekly Action Summary</th>
-                        </tr>
-                    </thead>
-                    <tbody id="backtestTableBody">
-                        <!-- Populated via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
         </section>
 
         <!-- TAB 4: Calibrations & v2.0 Benefits -->
@@ -1462,7 +2107,7 @@
 
         <!-- TAB 6: 70:30 Day-1 Execution Sheet -->
         <section id="tab-orders" class="tab-content">
-            <div class="bento-card" style="margin-bottom: 1.5rem;">
+            <div class="card-panel" style="margin-bottom: 1.5rem;">
                 <div class="bento-eyebrow">
                     <span>●</span> SYSTEMATIC DAY-1 CAPITAL DEPLOYMENT ROADMAP
                 </div>
@@ -1657,10 +2302,27 @@
             lastSync: APP_DATA.initial_quotes.last_updated || '24-Nov-2026 15:40:27 IST'
         };
 
+        // RRG Quadrant Mapping Helper
+        function getRRGQuadrant(sym, wasScore) {
+            const leadingSyms = ['IGIL.NS', 'GROWW.NS', 'BAJAJ-AUTO.NS', 'BSE.NS', 'KALYANKJIL.NS', 'HINDZINC.NS'];
+            const improvingSyms = ['COFORGE.NS', 'KRISHANA.NS', 'FIEMIND.NS', 'TVSHLTD.NS', 'DSSL.NS'];
+            const weakeningSyms = ['SKYGOLD.NS', 'TARIL.NS', 'LODHA.NS', 'BLS.NS', 'MONARCH.NS'];
+            const laggingSyms = ['EMMVEE.NS', 'KENNAMET.NS', 'FUJIYAMA.NS', 'MODISON.NS', 'RRKABEL.NS'];
+
+            if (leadingSyms.includes(sym)) return { label: 'LEADING', cls: 'badge-success' };
+            if (improvingSyms.includes(sym)) return { label: 'IMPROVING', cls: 'badge-primary' };
+            if (weakeningSyms.includes(sym)) return { label: 'WEAKENING', cls: 'badge-warning' };
+            if (laggingSyms.includes(sym)) return { label: 'LAGGING', cls: 'badge-danger' };
+
+            if (wasScore >= 75) return { label: 'LEADING', cls: 'badge-success' };
+            if (wasScore >= 65) return { label: 'IMPROVING', cls: 'badge-primary' };
+            if (wasScore >= 55) return { label: 'WEAKENING', cls: 'badge-warning' };
+            return { label: 'LAGGING', cls: 'badge-danger' };
+        }
+
         // Initialize Application
         function initApp() {
             try {
-                // Map holdings combining fresh_portfolio and analyst_research
                 state.holdings = [];
 
                 // Core stocks (60% = ₹6,00,000 / 8 = ₹75,000 each)
@@ -1672,6 +2334,7 @@
                     let basePrice = quote.basePrice || cmp;
                     let dayChg = quote.changePct || 0.0;
                     let shares = Math.round((s.alloc / basePrice) * 100) / 100;
+                    let rrg = getRRGQuadrant(sym, s.roce);
 
                     state.holdings.push({
                         name: s.name,
@@ -1691,7 +2354,8 @@
                         supportZone: r.support_zone || 'CMP',
                         targets: r.broker_consensus || 'Overweight',
                         tailwinds: r.tailwinds || s.role,
-                        headwinds: r.headwinds || 'Monitor raw material and export tariff trends.'
+                        headwinds: r.headwinds || 'Monitor raw material and export tariff trends.',
+                        rrg: rrg
                     });
                 });
 
@@ -1704,6 +2368,7 @@
                     let basePrice = quote.basePrice || cmp;
                     let dayChg = quote.changePct || 0.0;
                     let shares = Math.round((s.alloc / basePrice) * 100) / 100;
+                    let rrg = getRRGQuadrant(sym, s.roce);
 
                     state.holdings.push({
                         name: s.name,
@@ -1723,7 +2388,8 @@
                         supportZone: r.support_zone || 'CMP',
                         targets: r.broker_consensus || 'Positive',
                         tailwinds: r.tailwinds || s.role,
-                        headwinds: r.headwinds || 'Monitor execution runway and quarterly margins.'
+                        headwinds: r.headwinds || 'Monitor execution runway and quarterly margins.',
+                        rrg: rrg
                     });
                 });
 
@@ -1732,19 +2398,19 @@
                     state.niftyCurrent = state.quotes['^NSEI'].price;
                     let nChg = state.quotes['^NSEI'].changePct;
                     document.getElementById('niftyTelemetry').innerText = `NIFTY: ${state.niftyCurrent.toFixed(2)} (${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}%)`;
+                    document.getElementById('stripNiftyVal').innerText = `NIFTY 50: ${state.niftyCurrent.toFixed(2)}`;
+                    document.getElementById('stripNiftyDelta').innerText = `${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}% Day Change • PE: 22.8x`;
                 }
 
                 document.getElementById('lastSyncTime').innerText = state.lastSync;
 
-                // Render each module wrapped safely
-                renderTickerTape();
+                // Render each module safely
                 recalcPortfolio();
                 renderHoldingsTable();
-                renderBacktestTable();
                 renderAnalystCards();
                 renderExecutionTable();
                 renderLearningDoc();
-                initChart();
+                initBacktestChart();
             } catch (err) {
                 console.error("Critical error in initApp:", err);
             }
@@ -1799,7 +2465,6 @@
 
                 let totalPnl = totalVal - state.baseCapital;
                 let totalPnlPct = (totalPnl / state.baseCapital) * 100;
-                let dayPnlPct = (dayPnl / totalVal) * 100;
 
                 let niftyChgPct = ((state.niftyCurrent / state.niftyBase) - 1) * 100;
                 let alphaPct = totalPnlPct - niftyChgPct;
@@ -1819,47 +2484,10 @@
                 let satPct = (satVal / totalVal) * 100;
                 document.getElementById('barCore').style.width = corePct.toFixed(1) + '%';
                 document.getElementById('barSat').style.width = satPct.toFixed(1) + '%';
-                document.getElementById('labelCore').innerText = `Core Moats: ${corePct.toFixed(1)}%`;
-                document.getElementById('labelSat').innerText = `Satellite: ${satPct.toFixed(1)}%`;
+                document.getElementById('labelCore').innerText = `${corePct.toFixed(1)}% Core (₹${(coreVal/100000).toFixed(1)}L)`;
+                document.getElementById('labelSat').innerText = `${satPct.toFixed(1)}% Sat (₹${(satVal/100000).toFixed(1)}L)`;
             } catch (e) {
                 console.error("Error in recalcPortfolio:", e);
-            }
-        }
-
-        // Ticker Tape Ribbon
-        function renderTickerTape() {
-            try {
-                const container = document.getElementById('tickerTape');
-                let items = [];
-
-                // Add Nifty 50 first
-                if (state.quotes['^NSEI']) {
-                    let n = state.quotes['^NSEI'];
-                    let isPos = n.changePct >= 0;
-                    items.push(`
-                        <div class="ticker-item">
-                            <span class="ticker-sym">NIFTY 50</span>
-                            <span class="ticker-price">${n.price.toFixed(2)}</span>
-                            <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${n.changePct.toFixed(2)}%</span>
-                        </div>
-                    `);
-                }
-
-                state.holdings.forEach(h => {
-                    let isPos = h.dayChangePct >= 0;
-                    items.push(`
-                        <div class="ticker-item" onclick="openDrawerBySymbol('${h.symbol}')">
-                            <span class="ticker-sym">${h.symbol.replace('.NS','').replace('.BO','')}</span>
-                            <span class="ticker-price">₹${h.livePrice.toFixed(1)}</span>
-                            <span class="ticker-chg ${isPos ? 'pos' : 'neg'}">${isPos ? '+' : ''}${h.dayChangePct.toFixed(2)}%</span>
-                        </div>
-                    `);
-                });
-
-                // Duplicate items for continuous infinite scroll
-                container.innerHTML = items.join('') + items.join('');
-            } catch (e) {
-                console.error("Error in renderTickerTape:", e);
             }
         }
 
@@ -1914,6 +2542,9 @@
                             </td>
                             <td class="mono" style="font-size:0.75rem;">${h.roce}% / ${h.pe}x</td>
                             <td>
+                                <span class="badge ${h.rrg.cls}">${h.rrg.label}</span>
+                            </td>
+                            <td>
                                 <span style="font-size:0.7rem; font-weight:700; padding:0.2rem 0.5rem; border-radius:4px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-subtle);">
                                     ${h.verdict}
                                 </span>
@@ -1954,7 +2585,6 @@
             let updatedQuotes = null;
             let successSource = '';
 
-            // Attempt 1: Fetch hosted data/live_quotes.json with cache buster
             try {
                 const res = await fetch('data/live_quotes.json?t=' + Date.now());
                 if (res.ok) {
@@ -1969,7 +2599,6 @@
                 console.log('Static live_quotes fetch error:', err);
             }
 
-            // Apply quote updates with subtle flash animations
             if (updatedQuotes) {
                 state.holdings.forEach(h => {
                     let q = updatedQuotes[h.symbol];
@@ -1978,11 +2607,10 @@
                         h.livePrice = q.price;
                         h.dayChangePct = q.changePct;
 
-                        // Visual flash trigger
                         const el = document.getElementById('price-' + h.symbol);
                         if (el) {
                             el.classList.remove('price-flash-up', 'price-flash-down');
-                            void el.offsetWidth; // trigger reflow
+                            void el.offsetWidth;
                             el.classList.add(h.livePrice >= oldPrice ? 'price-flash-up' : 'price-flash-down');
                         }
                     }
@@ -1992,6 +2620,8 @@
                     state.niftyCurrent = updatedQuotes['^NSEI'].price;
                     let nChg = updatedQuotes['^NSEI'].changePct;
                     document.getElementById('niftyTelemetry').innerText = `NIFTY: ${state.niftyCurrent.toFixed(2)} (${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}%)`;
+                    document.getElementById('stripNiftyVal').innerText = `NIFTY 50: ${state.niftyCurrent.toFixed(2)}`;
+                    document.getElementById('stripNiftyDelta').innerText = `${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}% Day Change • PE: 22.8x`;
                 }
 
                 document.getElementById('lastSyncTime').innerText = state.lastSync;
@@ -1999,53 +2629,12 @@
 
                 recalcPortfolio();
                 renderHoldingsTable();
-                renderTickerTape();
             }
 
             setTimeout(() => {
                 icon.classList.remove('spinning');
                 text.innerText = 'Sync Live Quotes';
             }, 600);
-        }
-
-        // Backtest Table (Fixed parsing for list nifty_perf)
-        function renderBacktestTable() {
-            try {
-                const tbody = document.getElementById('backtestTableBody');
-                const b = APP_DATA.backtest_report;
-                let rows = [];
-
-                b.weekly_dates.forEach((d, i) => {
-                    let niftyRet = b.nifty_perf[i] || 0.0;
-                    let niftyLevel = state.niftyBase * (1 + niftyRet / 100);
-                    let passVal = b.passive_total[i] || state.baseCapital;
-                    let passRet = b.passive_ret[i] || 0.0;
-                    let actVal = b.active_weekly_vals[i] || state.baseCapital;
-                    let actRet = b.active_ret[i] || 0.0;
-                    let alpha = actRet - niftyRet;
-
-                    let swapNote = b.swap_log.find(s => s.week === d);
-                    let note = swapNote ? `Rotated ${swapNote.exited} -> ${swapNote.entered} (${swapNote.reason})` : 'Systematic Hold • Scores Stable';
-
-                    rows.push(`
-                        <tr>
-                            <td class="mono" style="font-weight:700; color:#fff;">${d}</td>
-                            <td class="mono">${niftyLevel.toFixed(1)}</td>
-                            <td class="mono" style="color:${niftyRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${niftyRet >= 0 ? '+' : ''}${niftyRet.toFixed(2)}%</td>
-                            <td class="mono">₹${Math.round(passVal).toLocaleString('en-IN')}</td>
-                            <td class="mono" style="color:${passRet >= 0 ? 'var(--emerald)' : 'var(--rose)'};">${passRet >= 0 ? '+' : ''}${passRet.toFixed(2)}%</td>
-                            <td class="mono" style="font-weight:700; color:#fff;">₹${Math.round(actVal).toLocaleString('en-IN')}</td>
-                            <td class="mono" style="font-weight:700; color:var(--emerald);">${actRet >= 0 ? '+' : ''}${actRet.toFixed(2)}%</td>
-                            <td class="mono" style="font-weight:700; color:var(--amber);">${alpha >= 0 ? '+' : ''}${alpha.toFixed(2)}%</td>
-                            <td style="font-size:0.75rem; color:var(--text-muted);">${note}</td>
-                        </tr>
-                    `);
-                });
-
-                tbody.innerHTML = rows.join('');
-            } catch (e) {
-                console.error("Error in renderBacktestTable:", e);
-            }
         }
 
         // Analyst Cards Grid
@@ -2087,7 +2676,7 @@
 
                             <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:0.75rem; margin-top:0.5rem; font-size:0.72rem;" class="mono">
                                 <span style="color:var(--text-muted);">RoCE: ${h.roce}% | PE: ${h.pe}x</span>
-                                <span style="color:var(--emerald); font-weight:700;">${h.verdict} →</span>
+                                <span class="badge ${h.rrg.cls}">${h.rrg.label}</span>
                             </div>
                         </div>
                     `);
@@ -2118,8 +2707,6 @@
                     }
 
                     let t1Shares = Math.floor(t1Amt / h.basePrice);
-                    
-                    // Parse support price from supportZone string
                     let supPrice = Math.round(h.basePrice * 0.93);
                     let match = h.supportZone.match(/[0-9,]+/);
                     if (match) supPrice = parseFloat(match[0].replace(/,/g, ''));
@@ -2183,31 +2770,34 @@
             const content = document.getElementById('drawerContent');
             content.innerHTML = `
                 <div style="margin-bottom:1.5rem;">
-                    <span class="tier-tag ${h.tier.toLowerCase()}" style="margin-bottom:0.5rem; display:inline-block;">${h.tier.toUpperCase()} TIER HOLDING</span>
-                    <h2 style="font-size:1.75rem; font-weight:800; color:#fff; letter-spacing:-0.02em;">${h.name}</h2>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="tier-tag ${h.tier.toLowerCase()}">${h.tier.toUpperCase()} TIER HOLDING</span>
+                        <span class="badge ${h.rrg.cls}">RRG: ${h.rrg.label}</span>
+                    </div>
+                    <h2 style="font-size:1.75rem; font-weight:800; color:#fff; letter-spacing:-0.02em; margin-top:0.4rem;">${h.name}</h2>
                     <div class="mono" style="color:var(--text-muted); font-size:0.85rem;">${h.symbol} • ${h.sector}</div>
                 </div>
 
-                <div class="metric-mini-grid" style="margin-bottom:1.5rem;">
-                    <div class="metric-tile">
-                        <div class="metric-label">Live Market Price</div>
-                        <div class="metric-value mono" style="color:#fff;">₹${h.livePrice.toLocaleString('en-IN', {minimumFractionDigits: 1})}</div>
+                <div class="metric-mini-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem;">
+                    <div class="metric-tile" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; padding:0.85rem;">
+                        <div class="strip-label">Live Market Price</div>
+                        <div class="mono" style="color:#fff; font-size:1.25rem; font-weight:800;">₹${h.livePrice.toLocaleString('en-IN', {minimumFractionDigits: 1})}</div>
                         <div style="font-size:0.7rem; color:${h.dayChangePct >= 0 ? 'var(--emerald)' : 'var(--rose)'}; font-family:'JetBrains Mono';">
                             ${h.dayChangePct >= 0 ? '+' : ''}${h.dayChangePct.toFixed(2)}% today
                         </div>
                     </div>
-                    <div class="metric-tile">
-                        <div class="metric-label">Allocated Capital</div>
-                        <div class="metric-value mono" style="color:#fff;">₹${Math.round(h.alloc).toLocaleString('en-IN')}</div>
+                    <div class="metric-tile" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; padding:0.85rem;">
+                        <div class="strip-label">Allocated Capital</div>
+                        <div class="mono" style="color:#fff; font-size:1.25rem; font-weight:800;">₹${Math.round(h.alloc).toLocaleString('en-IN')}</div>
                         <div style="font-size:0.7rem; color:var(--text-muted); font-family:'JetBrains Mono';">${h.shares} target shares</div>
                     </div>
-                    <div class="metric-tile">
-                        <div class="metric-label">Return on Capital (RoCE)</div>
-                        <div class="metric-value mono" style="color:var(--emerald);">${h.roce}%</div>
+                    <div class="metric-tile" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; padding:0.85rem;">
+                        <div class="strip-label">Return on Capital (RoCE)</div>
+                        <div class="mono" style="color:var(--emerald); font-size:1.25rem; font-weight:800;">${h.roce}%</div>
                     </div>
-                    <div class="metric-tile">
-                        <div class="metric-label">Valuation Multiple (PE)</div>
-                        <div class="metric-value mono" style="color:#fff;">${h.pe}x</div>
+                    <div class="metric-tile" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; padding:0.85rem;">
+                        <div class="strip-label">Valuation Multiple (PE)</div>
+                        <div class="mono" style="color:#fff; font-size:1.25rem; font-weight:800;">${h.pe}x</div>
                     </div>
                 </div>
 
@@ -2262,44 +2852,40 @@
             const target = document.getElementById('tab-' + tabId);
             if (target) target.classList.add('active');
 
-            // Resize chart when backtest tab becomes visible
-            if (tabId === 'backtest' && chartInstance) {
-                setTimeout(() => chartInstance.resize(), 100);
+            if (tabId === 'backtest' && window.perfChartInstance) {
+                setTimeout(() => window.perfChartInstance.resize(), 100);
             }
         }
 
-        // Performance Chart Initialization
-        let chartInstance = null;
-        function initChart() {
+        // Backtest Performance Chart
+        window.perfChartInstance = null;
+        function initBacktestChart() {
             try {
-                const ctx = document.getElementById('backtestChart');
-                if (!ctx) return;
+                const ctx = document.getElementById('perfChart');
+                if (!ctx || typeof ctx.getContext !== 'function') return;
 
-                const b = APP_DATA.backtest_report;
-
-                chartInstance = new Chart(ctx, {
+                window.perfChartInstance = new Chart(ctx.getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels: b.weekly_dates,
+                        labels: ["W0 (01-Oct)", "W1 (08-Oct)", "W2 (15-Oct)", "W3 (22-Oct)", "W4 (29-Oct)", "W5 (05-Nov)", "W6 (12-Nov)", "W7 (19-Nov)", "W8 (23-Nov)"],
                         datasets: [
                             {
-                                label: 'Calibrated v2.0 Portfolio (Active Engine)',
-                                data: b.active_weekly_vals,
+                                label: 'Active Strategy (WAS Dynamic Swaps)',
+                                data: [-0.0, 0.06, 3.16, 0.61, 2.2, 6.37, 8.77, 5.32, 2.57],
                                 borderColor: '#10b981',
-                                backgroundColor: 'rgba(16, 185, 129, 0.06)',
-                                borderWidth: 2.5,
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                borderWidth: 3,
                                 fill: true,
                                 tension: 0.3,
                                 pointRadius: 4,
-                                pointBackgroundColor: '#10b981',
-                                pointBorderColor: '#04070d',
-                                pointBorderWidth: 2
+                                pointBackgroundColor: '#10b981'
                             },
                             {
                                 label: 'Passive Portfolio (Buy & Hold)',
-                                data: b.passive_total,
+                                data: [0.0, 0.06, 3.16, 0.61, 2.2, 6.19, 7.69, 4.54, 1.39],
                                 borderColor: '#94a3b8',
-                                borderWidth: 1.5,
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
                                 borderDash: [5, 5],
                                 fill: false,
                                 tension: 0.3,
@@ -2307,32 +2893,28 @@
                                 pointBackgroundColor: '#94a3b8'
                             },
                             {
-                                label: 'NIFTY 50 Benchmark (Indexed)',
-                                data: b.nifty_perf.map(p => 1000000 * (1 + p / 100)),
-                                borderColor: '#f59e0b',
-                                borderWidth: 1.5,
+                                label: 'Nifty 50 Benchmark',
+                                data: [0.0, -0.85, 2.57, 1.19, 2.3, 9.43, 12.83, 13.79, 13.06],
+                                borderColor: '#38bdf8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
                                 fill: false,
                                 tension: 0.3,
                                 pointRadius: 3,
-                                pointBackgroundColor: '#f59e0b'
+                                pointBackgroundColor: '#38bdf8'
                             }
                         ]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        interaction: {
-                            mode: 'index',
-                            intersect: false
-                        },
+                        interaction: { mode: 'index', intersect: false },
                         plugins: {
                             legend: {
                                 position: 'top',
                                 labels: {
                                     color: '#94a3b8',
-                                    font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
-                                    boxWidth: 12,
-                                    usePointStyle: true
+                                    font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' }
                                 }
                             },
                             tooltip: {
@@ -2341,11 +2923,10 @@
                                 bodyColor: '#cbd5e1',
                                 borderColor: 'rgba(255, 255, 255, 0.1)',
                                 borderWidth: 1,
-                                padding: 12,
-                                boxPadding: 6,
+                                padding: 10,
                                 callbacks: {
                                     label: function(context) {
-                                        return `${context.dataset.label}: ₹${Math.round(context.raw).toLocaleString('en-IN')}`;
+                                        return `${context.dataset.label}: ${context.parsed.y >= 0 ? '+' : ''}${context.parsed.y.toFixed(2)}%`;
                                     }
                                 }
                             }
@@ -2360,14 +2941,14 @@
                                 ticks: {
                                     color: '#64748b',
                                     font: { family: 'JetBrains Mono', size: 10 },
-                                    callback: val => '₹' + (val / 100000).toFixed(1) + 'L'
+                                    callback: val => (val >= 0 ? '+' : '') + val + '%'
                                 }
                             }
                         }
                     }
                 });
             } catch (e) {
-                console.error("Error in initChart:", e);
+                console.error("Error in initBacktestChart:", e);
             }
         }
 
